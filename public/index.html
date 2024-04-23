@@ -1,17 +1,40 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js scroll-smooth" lang="">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="./css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Shoes</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-  <p class="text-5xl text-sky-500 flex justify-center">Hell Shoes</p>
-  <script src="./js/app.js"></script>
-
+<main class="flex justify-center items-center min-h-screen transition-all duration-500">
+    <section class="flex-col flex rounded-xl items-center bg-slate-200 lg:[25rem] h-full shadow mx-auto my-auto relative">
+        <h1 class="p-1 text-2xl font-bold"><span class="text-green-500">Welcome, </span>Login</h1>
+        <div class="mt-2">
+            <img src="./img/logo.jpg" alt="logo" width="100px" class="rounded-full">
+        </div>
+        <form class="flex flex-col justify-evenly p-4 gap-5 lg:w-[20rem] lg:h-[22rem]">
+            <label class="flex justify-evenly flex-col gap-1">
+                <span class="text-green-500 font-bold">Email</span>
+                <input class="rounded bg-slate-50 p-1 font-semibold hover:bg-green-100" name="email" type="email" required>
+            </label>
+            <label class="flex justify-evenly gap-1 flex-col">
+                <span class="text-green-500 font-bold">Password</span>
+                <input class="rounded bg-slate-50 p-1 font-semibold hover:bg-green-100" name="password" type="password" required>
+            </label>
+            <button type="submit" class="bg-green-500 text-slate-50 rounded p-1 font-semibold hover:bg-green-600">Login</button>
+            <div class="flex flex-col justify-between mb-2 md:flex-row">
+                <a href="" class="text-md font-light lg:hover:font-normal">Not Register?</a>
+                <a href="" class="text-md font-light lg:hover:font-normal">Forgot Password?</a>
+            </div>
+        </form>
+        <p class="absolute font-light text-sm left-0 bottom-0 p-1 m-1">V1.0.0</p>
+    </section>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="./js/app.js"></script>
 </body>
 
 </html>
