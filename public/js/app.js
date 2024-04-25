@@ -11,10 +11,10 @@ $('#loginForm').submit(function (e) {
     } else {
         $("#passwordFld").removeClass("border-2 border-red-500");
     }
-    $.ajax("http://localhost:8080/api/v1/auth/login", {
+
+    $.ajax("http://localhost:8080/api/v1/auth/users/login", {
         method:"POST",
         contentType: "application/json",
-        allowOrigin: "*",
         data: JSON.stringify({
             email:email,
             password:password

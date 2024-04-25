@@ -15,7 +15,7 @@
         <div class="mt-2">
             <img src="./img/logo.jpg" alt="logo" width="100px" class="rounded-full">
         </div>
-        <form class="flex flex-col justify-evenly p-4 gap-5 lg:w-[20rem] lg:h-[22rem]" id="loginForm">
+        <form class="flex flex-col justify-evenly p-4 gap-5 w-fit h-fit" id="loginForm">
             <label class="flex justify-evenly flex-col gap-1">
                 <span class="text-green-500 font-bold">Email</span>
                 <input id="emailFld" class="rounded bg-slate-50 p-1 font-semibold hover:bg-green-100" name="email" type="email" required>
@@ -25,9 +25,9 @@
                 <input id="passwordFld" class="rounded bg-slate-50 p-1 font-semibold hover:bg-green-100" name="password" type="password" required>
             </label>
             <button type="submit" class="bg-green-500 text-slate-50 rounded p-1 font-semibold hover:bg-green-600">Login</button>
-            <div class="flex flex-col justify-between mb-2 md:flex-row">
-                <a href="./pages/register.html" class="text-md font-light lg:hover:font-normal">Not Register?</a>
-                <a href="./pages/reset-password.html" class="text-md font-light lg:hover:font-normal">Forgot Password?</a>
+            <div class="flex gap-5 flex-col justify-between mb-2 md:flex-row">
+                <a href="./pages/register.html" class="text-md font-medium hover:text-green-300">Not Register?</a>
+                <a href="./pages/reset-password.html" class="text-md font-medium hover:text-green-300">Forgot Password?</a>
             </div>
         </form>
         <p class="absolute font-light text-sm left-0 bottom-0 p-1 m-1">V1.0.0</p>
