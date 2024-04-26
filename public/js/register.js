@@ -5,11 +5,29 @@ otpSendBtn.removeClass("hover:bg-red-500")
 
 $("#registerForm").submit(function (event) {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password1 = event.target.password1.value;
-    const password2 = event.target.password2.value;
+    const email = event.target.email.value.toString().trim().toLocaleLowerCase();
+    const password1 = event.target.password1.value.toString().trim();
+    const password2 = event.target.password2.value.toString().trim();
 
     console.log("Email: " + email, "Password1: " + password1, "Password2: " + password2);
+
+    if(isEmailVerified){
+        if((password1.length > 8) && (password2.length > 8) && (password1===password2)){
+            $.ajax("http://localhost:8080/api/v1/auth/users", {
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({email:email,password:password1}),
+                success: function (response) {
+                    console.log(response);
+                    event.target.reset();
+                    window.location.href = "http://localhost:8080/login";
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
 });
 
 $("#emailFld").keyup(function (event) {
