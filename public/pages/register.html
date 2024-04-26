@@ -14,7 +14,7 @@
     <section
             class="flex-col flex rounded-xl items-center bg-slate-200 w-fit h-fit shadow mx-auto my-auto relative">
         <h1 class="p-1 text-2xl font-bold">Register</h1>
-        <form class="flex flex-col justify-evenly p-4 gap-7">
+        <form class="flex flex-col justify-evenly p-4 gap-7" id="registerForm">
             <div class="flex lg:flex-row flex-col justify-between gap-5 lg:gap-12">
                 <div class="flex flex-col gap-8">
                     <label class="flex justify-evenly flex-col gap-1">
@@ -23,7 +23,7 @@
                     -500 font-bold">Email</span>
                         <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="email"
                                type="email"
-                               placeholder="Email" id="otpFld">
+                               placeholder="Email" id="emailFld">
                     </label>
 
                     <label class="flex justify-evenly gap-1 flex-col">
@@ -33,7 +33,9 @@
                         <div>
                             <input class="rounded bg-slate-50 w-[6rem] p-1 font-light hover:bg-green-100" name="otp"
                                    type="number"
-                                   placeholder="OTP">
+                                   placeholder="OTP"
+                                   id="otpFld"
+                            >
                             <button id="otpSendBtn"
                                     class="ml-1 p-1 rounded font-semibold bg-red-400 hover:bg-red-500 text-sm text-slate-100">
                                 Send OTP
@@ -46,18 +48,18 @@
                         <label class="flex justify-evenly gap-1 flex-col">
                     <span class="text-green
 
-                    -500 font-bold">Confirm Password</span>
-                            <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="password"
+                    -500 font-bold">New Password</span>
+                            <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="password1"
                                    type="password"
-                                   placeholder="Confirm Password">
+                                   placeholder="New Password">
                         </label>
                         <label class="flex justify-evenly gap-1 flex-col">
                     <span class="text-green
 
-                    -500 font-bold">New Password</span>
-                            <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="password"
+                    -500 font-bold">Confirm Password</span>
+                            <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="password2"
                                    type="password"
-                                   placeholder="New Password">
+                                   placeholder="Confirm Password">
                         </label>
 
                     </div>
@@ -79,6 +81,6 @@
     </section>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/js/reset_password.js"></script>
+<script src="../js/register.js"></script>
 </body>
 </html>
