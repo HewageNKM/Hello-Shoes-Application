@@ -26,7 +26,39 @@ $("#registerForm").submit(function (event) {
                     console.log(error);
                 }
             });
+        }else {
+            $("#password1Fld").addClass("border-2 border-red-500")
+            $("#password2Fld").addClass("border-2 border-red-500")
+
+            const alert = $("#alert");
+            alert.removeClass("right-[-100%]")
+            alert.addClass("right-0")
+            $("#alertDescription").text("Passwords do not match or less than 8 characters")
+
+            let countdown = 4;
+            const setAlertTimer = setInterval(function () {
+                countdown--;
+                if(countdown === 0){
+                    alert.removeClass("right-0")
+                    alert.addClass("right-[-100%]")
+                    clearInterval(setAlertTimer);
+                }
+            }, 1000);
         }
+    }else {
+        const alert = $("#alert");
+        alert.removeClass("right-[-100%]")
+        alert.addClass("right-0")
+        $("#alertDescription").text("Email not verified yet. Please verify your email first.")
+        let countdown = 4;
+        const setAlertTimer = setInterval(function () {
+            countdown--;
+            if(countdown === 0){
+                alert.removeClass("right-0")
+                alert.addClass("right-[-100%]")
+                clearInterval(setAlertTimer);
+            }
+        }, 1000);
     }
 });
 
@@ -44,6 +76,7 @@ $("#emailFld").keyup(function (event) {
 otpSendBtn.click(function (event) {
     const emailFld = $("#emailFld");
     emailFld.attr("disabled", "disabled")
+    emailFld.removeClass("hover:border-2")
     // Disable the button
     $(this).prop("disabled", true);
 
@@ -71,7 +104,7 @@ otpSendBtn.click(function (event) {
         }else if(countdown === 0 && isEmailVerified === true){
             otpSendBtn.prop("disabled", true)
             $("#otpFld").prop("disabled", true)
-            $("#otpFld").removeClass("hover:bg-green-100")
+            $("#otpFld").removeClass("hover:border-2")
             otpSendBtn.removeClass("hover:bg-red-500")
             otpSendBtn.text("Verified");
             clearInterval(interval);
@@ -83,7 +116,7 @@ otpSendBtn.click(function (event) {
         }else if(countdown > 0 && isEmailVerified === true){
             otpSendBtn.prop("disabled", true)
             $("#otpFld").prop("disabled", true)
-            $("#otpFld").removeClass("hover:bg-green-100")
+            $("#otpFld").removeClass("hover:border-2")
             otpSendBtn.removeClass("hover:bg-red-500")
             otpSendBtn.text("Verified");
             clearInterval(interval);
@@ -96,7 +129,21 @@ otpSendBtn.click(function (event) {
     $.ajax("http://localhost:8080/api/v1/auth/mail/otp/send/"+emailFld.val().trim(),{
         method: "GET",
         success: function (response) {
-            alert("OTP sent to your email")
+            $("#success").removeClass("right-[-100%]")
+            $("#success").addClass("right-0")
+            $("#successDescription").text("OTP sent to your email")
+            console.log(response)
+
+            let countdown = 4;
+            //Set the timer to hide the alert after 4 seconds
+            const setAlertTimer = setInterval(function () {
+                countdown--;
+                if(countdown === 0){
+                    $("#success").removeClass("right-0")
+                    $("#success").addClass("right-[-100%]")
+                    clearInterval(setAlertTimer);
+                }
+            }, 1000);
         },
         error: function (error) {
             console.log(error)
@@ -129,3 +176,13 @@ $("#otpFld").keyup(function (event) {
         $(this).prop("disabled", false)
     }
 });
+
+$("#alertCloseBtn").click(function () {
+    $("#alert").removeClass("right-0")
+    $("#alert").addClass("right-[-100%]")
+})
+
+$("#successCloseBtn").click(function () {
+    $("#success").removeClass("right-0")
+    $("#success").addClass("right-[-100%]")
+})

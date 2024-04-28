@@ -10,7 +10,23 @@
     />
 </head>
 <body>
-<main class="flex justify-center items-center min-h-screen transition-all duration-500">
+<main class="flex justify-center items-center min-h-screen transition-all duration-500 relative overflow-x-hidden">
+    <div id="alert" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+        <div>
+            <p class="font-bold">Be Warned</p>
+            <p id="alertDescription">Something Went Wrong</p>
+        </div>
+        <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
+    </div>
+    <div id="success" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+        <div>
+            <p class="font-bold">Successful</p>
+            <p id="successDescription">
+                You have successfully registered. Please login.
+            </p>
+        </div>
+        <button class="font-black hover:cursor-hand" id="successCloseBtn">X</button>
+    </div>
     <section
             class="flex-col flex rounded-xl items-center bg-slate-200 w-fit h-fit lg:w-[40rem] lg:h-[25rem] shadow mx-auto my-auto relative">
         <h1 class="p-1 pt-3 text-2xl font-bold">Register</h1>
