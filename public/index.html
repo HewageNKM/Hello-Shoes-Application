@@ -9,7 +9,14 @@
 </head>
 
 <body>
-<main class="flex justify-center items-center min-h-screen transition-all duration-500">
+<main class="flex justify-center items-center min-h-screen transition-all duration-500 relative overflow-x-hidden">
+    <div id="alert" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+        <div>
+            <p class="font-bold">Be Warned</p>
+            <p id="alertDescription">Something Went Wrong</p>
+        </div>
+        <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
+    </div>
     <section class="flex-col flex rounded-xl items-center bg-slate-200 shadow mx-auto my-auto relative w-fit h-fit lg:h-[35rem] justify-between">
         <h1 class="p-1 mt-3 text-4xl font-bold"><span class="text-green-500">Welcome, </span>Login</h1>
         <div class="mt-2">

@@ -3,77 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="../css/style.css" rel="stylesheet">
     <meta
-            name="viewport"
             content="width=device-width, initial-scale=1"
+            name="viewport"
     />
 </head>
 <body>
 <main class="flex justify-center items-center min-h-screen transition-all duration-500">
     <section
-            class="flex-col flex rounded-xl items-center bg-slate-200 w-fit h-fit shadow mx-auto my-auto relative">
-        <h1 class="p-1 text-2xl font-bold">Register</h1>
-        <form class="flex flex-col justify-evenly p-4 gap-7" id="registerForm">
+            class="flex-col flex rounded-xl items-center bg-slate-200 w-fit h-fit lg:w-[40rem] lg:h-[25rem] shadow mx-auto my-auto relative">
+        <h1 class="p-1 pt-3 text-2xl font-bold">Register</h1>
+        <form class="flex flex-col justify-evenly p-4 gap-10" id="registerForm">
             <div class="flex lg:flex-row flex-col justify-between gap-5 lg:gap-12">
-                <div class="flex flex-col gap-8">
-                    <label class="flex justify-evenly flex-col gap-1">
+                <div class="flex flex-col gap-8 justify-between">
+                    <label class="flex justify-between flex-col ">
                     <span class="text-green
 
                     -500 font-bold">Email</span>
-                        <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="email"
-                               type="email"
-                               placeholder="Email" id="emailFld">
+                        <input class="rounded bg-slate-50 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                               id="emailFld"
+                               name="email"
+                               placeholder="Email" type="email">
                     </label>
 
-                    <label class="flex justify-evenly gap-1 flex-col">
-                    <span class="text-green
-
-                    -500 font-bold">OTP</span>
+                    <label class="flex justify-between gap-1 flex-col">
+                        <span class="font-bold">OTP</span>
                         <div>
-                            <input class="rounded bg-slate-50 w-[6rem] p-1 font-light hover:bg-green-100" name="otp"
-                                   type="number"
-                                   placeholder="OTP"
+                            <input class="rounded bg-slate-50 w-[6rem] lg:h-[2.5rem] p-1 font-light border-green-500 hover:border-2"
                                    id="otpFld"
+                                   name="otp"
+                                   placeholder="OTP"
+                                   type="number"
                             >
-                            <button id="otpSendBtn"
-                                    class="ml-1 p-1 rounded font-semibold bg-red-400 hover:bg-red-500 text-sm text-slate-100">
+                            <button class="ml-1 p-1 rounded font-semibold bg-red-400 hover:bg-red-500 text-sm text-slate-100"
+                                    id="otpSendBtn">
                                 Send OTP
                             </button>
                         </div>
                     </label>
                 </div>
-                <div>
-                    <div class="flex flex-col gap-8">
-                        <label class="flex justify-evenly gap-1 flex-col">
-                    <span class="text-green
 
-                    -500 font-bold">New Password</span>
-                            <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="password1"
-                                   type="password"
-                                   placeholder="New Password">
-                        </label>
-                        <label class="flex justify-evenly gap-1 flex-col">
-                    <span class="text-green
+                <div class="flex flex-col justify-between">
+                    <label class="flex justify-between flex-col">
+                        <span class="font-bold">New Password</span>
+                        <input class="rounded bg-slate-50 p-1 lg:w-[16rem] lg:h-[2.5rem]  font-light border-green-500 hover:border-2"
+                               name="password1"
+                               placeholder="New Password"
+                               type="password">
+                    </label>
+                    <label class="flex justify-evenly gap-1 flex-col">
+                        <span class="font-bold">Confirm Password</span>
+                        <input class="rounded bg-slate-50 lg:w-[16rem] lg:h-[2.5rem] p-1 font-light border-green-500 hover:border-2"
+                               name="password2"
+                               placeholder="Confirm Password"
+                               type="password">
+                    </label>
 
-                    -500 font-bold">Confirm Password</span>
-                            <input class="rounded bg-slate-50 p-1 font-light hover:bg-green-100" name="password2"
-                                   type="password"
-                                   placeholder="Confirm Password">
-                        </label>
-
-                    </div>
                 </div>
             </div>
+
             <div class="flex justify-center items-center">
-                <button type="submit"
-                        class="bg-green-500 w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-green-600">
+                <button class="bg-green-500 w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-green-600"
+                        type="submit">
                     Register
                 </button>
             </div>
             <div class="flex flex-col justify-between md:flex-row mb-2">
-                <a href="../index.html" class="text-md font-light lg:hover:font-normal">Login?</a>
-                <a href="./reset-password.html" class="text-md font-light lg:hover:font-normal">Forgot Password?</a>
+                <a class="text-md font-light lg:hover:text-green-500" href="../index.html">Login?</a>
+                <a class="text-md font-light lg:hover:text-green-500" href="./reset-password.html">Forgot Password?</a>
             </div>
         </form>
 
