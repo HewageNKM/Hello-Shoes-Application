@@ -10,24 +10,24 @@
 
 <body>
 <main class="flex justify-center items-center min-h-screen transition-all duration-500">
-    <section class="flex-col flex rounded-xl items-center bg-slate-200 lg:[25rem] h-full shadow mx-auto my-auto relative">
-        <h1 class="p-1 text-2xl font-bold"><span class="text-green-500">Welcome, </span>Login</h1>
+    <section class="flex-col flex rounded-xl items-center bg-slate-200 shadow mx-auto my-auto relative w-fit h-fit lg:h-[35rem] justify-between">
+        <h1 class="p-1 mt-3 text-4xl font-bold"><span class="text-green-500">Welcome, </span>Login</h1>
         <div class="mt-2">
-            <img src="./img/logo.jpg" alt="logo" width="100px" class="rounded-full">
+            <img src="./img/logo.jpg" alt="logo" width="200px" class="rounded-full">
         </div>
-        <form class="flex flex-col justify-evenly p-4 gap-5 w-fit h-fit" id="loginForm">
+        <form class="flex flex-col justify-evenly p-4 gap-5 w-fit h-fit items-center" id="loginForm">
             <label class="flex justify-evenly flex-col gap-1">
                 <span class="text-green-500 font-bold">Email</span>
-                <input id="emailFld" class="rounded bg-slate-50 p-1 font-semibold hover:bg-green-100" name="email" type="email" required>
+                <input id="emailFld" class="rounded focus:border-2 bg-slate-50 p-1 w-fit h-fit lg:h-[2.5rem] lg:w-[25rem] font-semibold hover:border-2 border-green-500" name="email" type="email" required>
             </label>
             <label class="flex justify-evenly gap-1 flex-col">
                 <span class="text-green-500 font-bold">Password</span>
-                <input id="passwordFld" class="rounded bg-slate-50 p-1 font-semibold hover:bg-green-100" name="password" type="password" required>
+                <input id="passwordFld" class="rounded focus:border-2 bg-slate-50 p-1 w-fit h-fit lg:h-[2.5rem] lg:w-[25rem] border-green-500 font-semibold hover:border-2" name="password" type="password" required>
             </label>
-            <button type="submit" class="bg-green-500 text-slate-50 rounded p-1 font-semibold hover:bg-green-600">Login</button>
-            <div class="flex gap-5 flex-col justify-between mb-2 md:flex-row">
-                <a href="./pages/register.html" class="text-md font-medium hover:text-green-300">Not Register?</a>
-                <a href="./pages/reset-password.html" class="text-md font-medium hover:text-green-300">Forgot Password?</a>
+            <button type="submit" class="bg-green-500 text-slate-50 rounded p-1 w-fit lg:w-[16rem] font-semibold hover:bg-green-600">Login</button>
+            <div class="flex gap-10 flex-col justify-between mb-2 md:flex-row">
+                <a href="./pages/register.html" class="text-md font-medium hover:text-green-500">Not Register?</a>
+                <a href="./pages/reset-password.html" class="text-md font-medium hover:text-green-500">Forgot Password?</a>
             </div>
         </form>
         <p class="absolute font-light text-sm left-0 bottom-0 p-1 m-1">V1.0.0</p>
