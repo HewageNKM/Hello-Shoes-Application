@@ -23,6 +23,8 @@ $('#loginForm').submit(function (e) {
             console.log(data);
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
+            e.target.reset();
+            window.location.pathname = "/pages/home.html";
         },
         error: function (error) {
             console.log(error);
