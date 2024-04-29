@@ -1,0 +1,28 @@
+const role = window.localStorage.getItem("role");
+console.log("Role: " + role)
+
+const setUserAuthorization = () => {
+    $("#adminPanel").addClass("hidden")
+}
+
+const setAdminAuthorization = () => {
+
+}
+
+if (role === "USER") {
+    setUserAuthorization();
+} else if (role === "ADMIN") {
+    setAdminAuthorization();
+} else {
+    window.location.replace("/Unauthorized.html");
+}
+$("#logout").click(function (evt) {
+    window.localStorage.clear();
+    let countdown = 1;
+    setInterval(() => {
+        countdown--;
+        if (countdown === 0) {
+            window.location.replace("/");
+        }
+    }, 1000);
+});

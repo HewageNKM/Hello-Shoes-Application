@@ -3,68 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="../assets/css/style.css" rel="stylesheet">
     <meta
-            name="viewport"
             content="width=device-width, initial-scale=1"
+            name="viewport"
     />
 </head>
-<body>
-<main class="min-h-screen relative">
+<body class="min-h-screen relative">
+<header class="right-0 top-0 absolute bg-green-300 p-3 flex flex-row mx-auto m-2 rounded font-medium">
+    <nav>
+        <ol class="flex flex-row gap-8">
+            <li class="transition-all text-2xl duration-500 hover:scale-110 hover:text-slate-100" id="order">
+                <button>
+                    ORDER
+                </button>
+            </li>
+            <li class="transition-all text-2xl duration-500 hover:scale-110 hover:text-slate-100" id="adminPanel">
+                <button>
+                    ADMIN PANEL
+                </button>
+            </li>
+            <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="inventory">
+                <button>
+                    INVENTORY
+                </button>
+            </li>
+            <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="supplier">
+                <button>
+                    SUPPLIER
+                </button>
+            </li>
+            <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="employee">
+                <button>
+                    EMPLOYEE
+                </button>
+            </li>
+            <li>
+                <button class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="logout">
+                    LOGOUT
+                </button>
+            </li>
+        </ol>
+    </nav>
+</header>
 
-    <header class="right-0 top-0 absolute bg-green-300 p-3 flex flex-row mx-auto m-2 rounded font-medium">
-        <nav>
-            <ol class="flex flex-row gap-5">
-                <li class="transition-all duration-500 hover:scale-110 hover:text-slate-100" id="order">
-                    <button >
-                        ORDER
-                    </button>
-                </li>
-                <li id="adminPanel"  class="transition-all duration-500 hover:scale-110 hover:text-slate-100">
-                    <button>
-                        ADMIN PANEL
-                    </button>
-                </li>
-                <li  class="transition-all duration-500 hover:scale-110 hover:text-slate-100" id="inventory">
-                    <button>
-                        INVENTORY
-                    </button>
-                </li>
-                <li  class="transition-all duration-500 hover:scale-110 hover:text-slate-100" id="supplier">
-                    <button>
-                        SUPPLIER
-                    </button>
-                </li>
-                <li  class="transition-all duration-500 hover:scale-110 hover:text-slate-100" id="employee">
-                    <button>
-                        EMPLOYEE
-                    </button>
-                </li>
-            </ol>
-        </nav>
-    </header>
 
-
-    <section id="orderSection"  class="hidden">
-
-    </section>
-
-    <section id="employeeSection"  class="hidden">
-
-    </section>
-
-    <section id="inventorySection"  class="hidden">
+<main class="pt-28 pl-10" id="orderSection">
+    <section>
 
     </section>
 
-    <section id="supplierSection"  class="hidden">
+    <section class="flex-row flex justify-between">
+        <div class="w-full">
+            <h1 class="text-2xl font-bold">Order</h1>
+            <div class="flex w-full flex-row gap-5 overflow-auto mt-3">
+                <table class="w-full text-md text-left rtl:text-right">
+                    <thead>
+                    <tr class="table bg-green-100 rounded-md">
+                        <th class="px-6 py-3 w-fit rounded-s-lg lg:w-[5rem]">
+                            ItemCode
+                        </th>
+                        <th scope="col" class="px-6 py-3 rounded-s-lg w-fit lg:w-[40rem]">
+                            Description
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-fit lg:w-[10rem]">
+                            Quantity
+                        </th>
+                        <th class="px-6 py-3 rounded-e-lg w-fit lg:w-[12rem]">
+                            Price
+                        </th>
+                        <th class="px-6 py-3 rounded-e-lg w-fit lg:w-[10rem]">
+                            Total
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-    </section>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="absolute right-0 top-16 flex w-fit flex-col bg-green-100 min-h-screen gap-3 p-5">
+            <div class="flex-col flex w-fit pt-5 pr-5 pb-5 pl-1">
+                <h3 class="font-bold text-xl" id="userName">User:<br>Nadun Kawishika</h3>
+                <p class="font-semibold mt-3 text-md" id="dateTime">Date And Time: <br>DateTime</p>
+            </div>
+            <div class=" w-fit pt-5 pr-5 pb-5 pl-1 rounded-md">
 
-    <section id="adminSection" class="hidden">
-
+            </div>
+        </div>
     </section>
 </main>
+
+<main class="hidden" id="employeeSection">
+
+</main>
+
+<main class="hidden" id="inventorySection">
+
+</main>
+
+<main class="hidden" id="supplierSection">
+
+</main>
+
+<main class="hidden" id="adminSection">
+
+</main>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/assets/js/home.js"></script>
 </body>

@@ -27,7 +27,7 @@ $('#loginForm').submit(function (e) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
-            window.location.pathname = "../../directory/home.html";
+            window.location.replace("/directory/home.html");
         },
         error: function (xhr, status, error) {
             xhr = JSON.parse(xhr.responseText);
