@@ -9,32 +9,32 @@
             name="viewport"
     />
 </head>
-<body class="min-h-screen relative">
+<body class="min-h-screen relative overflow-hidden">
 <header class="right-0 top-0 absolute bg-green-300 p-3 flex flex-row mx-auto m-2 rounded font-medium">
     <nav>
         <ol class="flex flex-row gap-8">
             <li class="transition-all text-2xl duration-500 hover:scale-110 hover:text-slate-100" id="order">
-                <button>
+                <button onclick="navigationOnClick(this.value)" value="order">
                     ORDER
                 </button>
             </li>
             <li class="transition-all text-2xl duration-500 hover:scale-110 hover:text-slate-100" id="adminPanel">
-                <button>
+                <button onclick="navigationOnClick(this.value)" value="adminPanel">
                     ADMIN PANEL
                 </button>
             </li>
             <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="inventory">
-                <button>
+                <button onclick="navigationOnClick(this.value)" value="inventory">
                     INVENTORY
                 </button>
             </li>
             <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="supplier">
-                <button>
+                <button onclick="navigationOnClick(this.value)" value="supplier">
                     SUPPLIER
                 </button>
             </li>
             <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="employee">
-                <button>
+                <button onclick="navigationOnClick(this.value)" value="employee">
                     EMPLOYEE
                 </button>
             </li>
@@ -48,67 +48,65 @@
 </header>
 
 
-<main class="pt-28 pl-10" id="orderSection">
-    <section>
-
+<main class="relative pt-28 flex min-w-full transition-all ease-in duration-300" id="orderSection">
+    <section class="flex flex-col gap-3 pl-10 pr-10">
+        <h1 class="text-2xl font-bold">Order</h1>
+        <div class="flex flex-row gap-5 overflow-auto mt-3">
+            <table class="w-full text-md text-left rtl:text-right">
+                <thead>
+                <tr class="text-left bg-green-100">
+                    <th class="px-6 rounded-s-lg py-3w-[10vw]" scope="col">
+                        ItemCode
+                    </th>
+                    <th class="px-6 py-3  w-[60vw]" scope="col">
+                        Description
+                    </th>
+                    <th class="px-6 py-3 w-[10vw]" scope="col">
+                        Quantity
+                    </th>
+                    <th class="px-6 py-3 w-[10vw]" scope="col">
+                        Price
+                    </th>
+                    <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
+                        Total
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Table body content goes here -->
+                </tbody>
+            </table>
+        </div>
     </section>
+    <section class="w-full fixed bottom-0 h-1 bg-green-100">
 
-    <section class="flex-row flex justify-between">
-        <div class="w-full">
-            <h1 class="text-2xl font-bold">Order</h1>
-            <div class="flex w-full flex-row gap-5 overflow-auto mt-3">
-                <table class="w-full text-md text-left rtl:text-right">
-                    <thead>
-                    <tr class="table bg-green-100 rounded-md">
-                        <th class="px-6 py-3 w-fit rounded-s-lg lg:w-[5rem]">
-                            ItemCode
-                        </th>
-                        <th scope="col" class="px-6 py-3 rounded-s-lg w-fit lg:w-[40rem]">
-                            Description
-                        </th>
-                        <th scope="col" class="px-6 py-3 w-fit lg:w-[10rem]">
-                            Quantity
-                        </th>
-                        <th class="px-6 py-3 rounded-e-lg w-fit lg:w-[12rem]">
-                            Price
-                        </th>
-                        <th class="px-6 py-3 rounded-e-lg w-fit lg:w-[10rem]">
-                            Total
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="absolute right-0 top-16 flex w-fit flex-col bg-green-100 min-h-screen gap-3 p-5">
-            <div class="flex-col flex w-fit pt-5 pr-5 pb-5 pl-1">
-                <h3 class="font-bold text-xl" id="userName">User:<br>Nadun Kawishika</h3>
-                <p class="font-semibold mt-3 text-md" id="dateTime">Date And Time: <br>DateTime</p>
-            </div>
-            <div class=" w-fit pt-5 pr-5 pb-5 pl-1 rounded-md">
-
-            </div>
-        </div>
     </section>
 </main>
 
-<main class="hidden" id="employeeSection">
 
+
+<main class="hidden transition-all ease-in duration-300" id="employeeSection">
+    <h1>
+        Employee
+    </h1>
 </main>
 
-<main class="hidden" id="inventorySection">
-
+<main class="hidden transition-all ease-in duration-300" id="inventorySection">
+    <h1>
+        Inventory
+    </h1>
 </main>
 
-<main class="hidden" id="supplierSection">
-
+<main class="hidden transition-all ease-in duration-300" id="supplierSection">
+    <h1>
+        Supplier
+    </h1>
 </main>
 
-<main class="hidden" id="adminSection">
-
+<main class="hidden transition-all  ease-in duration-300" id="adminSection">
+    <h1>
+        Admin Panel
+    </h1>
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

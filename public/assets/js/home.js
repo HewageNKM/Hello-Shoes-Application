@@ -26,3 +26,38 @@ $("#logout").click(function (evt) {
         }
     }, 1000);
 });
+
+const navigationOnClick = (value) => {
+    switch (value) {
+        case "order":
+            $("#orderSection").removeClass("hidden");
+
+            $("#inventorySection").addClass("hidden");
+            $("#employeeSection").addClass("hidden");
+            $("#supplierSection").addClass("hidden");
+            break;
+        case "inventory":
+            $("#inventorySection").removeClass("hidden");
+
+            $("#orderSection").addClass("hidden");
+            $("#employeeSection").addClass("hidden");
+            $("#supplierSection").addClass("hidden");
+            break;
+        case "employee":
+            $("#employeeSection").removeClass("hidden");
+
+            $("#orderSection").addClass("hidden");
+            $("#inventorySection").addClass("hidden");
+            $("#supplierSection").addClass("hidden");
+            break;
+        case "supplier":
+            $("#supplierSection").removeClass("hidden");
+
+            $("#orderSection").addClass("hidden");
+            $("#inventorySection").addClass("hidden");
+            $("#employeeSection").addClass("hidden");
+            break;
+        default:
+            break;
+    }
+}
