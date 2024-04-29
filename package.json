@@ -9,7 +9,7 @@
   "license": "",
   "author": "Nadun Kawishika",
   "scripts": {
-    "watch-css": "sudo npx tailwindcss -i ./src/css/input.css -o ./public/css/style.css --watch",
+    "watch-css": "sudo npx tailwindcss -i ./src/css/input.css -o public/assets/css/style.css --watch",
 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
