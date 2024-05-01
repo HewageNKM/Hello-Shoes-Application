@@ -10,23 +10,35 @@
     />
 </head>
 <body class="min-h-screen relative overflow-hidden">
-    <nav>
-        <div class="flex justify-between items-center bg-green-100 p-5">
-            <div class="flex items-center gap-5">
-                <img src="../assets/img/logo.jpg" alt="logo" class="w-20 h-20 rounded-full">
-                <h1 class="text-2xl font-bold">Hello Shoes PVT LTD.</h1>
-            </div>
-            <div class="flex items-center gap-5">
-                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="orderBtn" onclick="navigationOnClick(this.value)" value="order">Order</button>
-                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="inventoryBtn" onclick="navigationOnClick(this.value)" value="inventory">Inventory</button>
-                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="supplierBtn" onclick="navigationOnClick(this.value)" value="supplier">Supplier</button>
-                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="adminBtn" onclick="navigationOnClick(this.value)" value="admin">Admin</button>
-                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="employeeBtn" onclick="navigationOnClick(this.value)" value="employee">Employee</button>
-                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="logoutBtn" onclick="navigationOnClick(this.value)" value="logout">Logout</button>
-            </div>
+<nav>
+    <div class="flex justify-between items-center bg-green-100 p-5">
+        <div class="flex items-center gap-5">
+            <img src="../assets/img/logo.jpg" alt="logo" class="w-20 h-20 rounded-full">
+            <h1 class="text-2xl font-bold">Hello Shoes PVT LTD.</h1>
         </div>
+        <div class="flex items-center gap-5">
+            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="orderBtn"
+                    onclick="navigationOnClick(this.value)" value="order">Order
+            </button>
+            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="inventoryBtn"
+                    onclick="navigationOnClick(this.value)" value="inventory">Inventory
+            </button>
+            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="supplierBtn"
+                    onclick="navigationOnClick(this.value)" value="supplier">Supplier
+            </button>
+            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="adminBtn"
+                    onclick="navigationOnClick(this.value)" value="admin">Admin
+            </button>
+            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="employeeBtn"
+                    onclick="navigationOnClick(this.value)" value="employee">Employee
+            </button>
+            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="logoutBtn"
+                    onclick="navigationOnClick(this.value)" value="logout">Logout
+            </button>
+        </div>
+    </div>
 
-    </nav>
+</nav>
 
 <main class="relative pt-5 flex min-w-full transition-all ease-in duration-300" id="orderSection">
     <section class="flex flex-col gap-3 pl-10 pr-10">
@@ -64,7 +76,6 @@
 </main>
 
 
-
 <main class="hidden transition-all ease-in duration-300" id="employeeSection">
     <h1>
         Employee
@@ -77,10 +88,144 @@
     </h1>
 </main>
 
-<main class="hidden transition-all ease-in duration-300" id="supplierSection">
-    <h1>
-        Supplier
-    </h1>
+<main class="relative pt-5 hidden transition-all ease-in duration-300" id="supplierSection">
+    <section class="flex flex-col gap-3 pl-10 pr-10">
+        <div class="flex flex-row justify-between items-center">
+            <div class="flex-col flex gap-5 items-start">
+                <h1 class="text-2xl font-bold">Suppliers</h1>
+                <div>
+                    <label class="font-semibold"> Search
+                        <input type="text" id="supplierSearchFld" class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2"
+                               placeholder="Code, Name, Address.......">
+                    </label>
+                    <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
+                            id="searchSupplierBtn" onclick="searchSupplierOnClick()">Search
+                    </button>
+                </div>
+            </div>
+            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300" id="showSupplierAddForm"
+                    type="button">Add Supplier
+            </button>
+        </div>
+        <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center" id="addSupplier">
+            <div class="fixed inset-0 bg-black bg-opacity-50" id="add-supplier-dialog">
+                <div class="flex justify-center items-center min-h-screen">
+                    <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                        <div class="justify-between items-center flex flex-row">
+                            <h1 class="text-2xl font-bold">Add Supplier</h1>
+                            <button class="bg-red-500 p-1 rounded-md font-semibold text-md hover:bg-red-600"
+                                    id="closeSupplierAddForm" type="button">Close
+                            </button>
+                        </div>
+                        <form class="flex flex-col gap-5 items-center" id="addSupplierForm">
+                            <div class="flex flex-row gap-5">
+                                <div class="flex flex-col gap-3 justify-evenly">
+                                    <label class="hidden flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Code</span>
+                                        <input class=" rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierCodeFld"
+                                               name="code"
+                                               placeholder="Code"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Name</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierNameFld"
+                                               name="name"
+                                               placeholder="Name"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Address</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierAddressFld"
+                                               name="address"
+                                               placeholder="Address"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                </div>
+                                <div class="flex flex-col gap-3">
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Contact No 1</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierContact1Fld"
+                                               name="contact1"
+                                               placeholder="Contact No 1"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Contact No 2</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierContact2Fld"
+                                               name="contact2"
+                                               placeholder="Contact No 2"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                <span class="text-green-500 font-bold">Email</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierEmailFld"
+                                               name="email"
+                                               placeholder="Email"
+                                               type="email"
+                                               required
+                                        >
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="bg-green-500 flex justify-center w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-green-600"
+                                    type="submit">
+                                Add Supplier
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-row gap-5 overflow-y-auto mt-3">
+            <table class="w-full text-md text-left rtl:text-right">
+                <thead>
+                <tr class="text-left bg-green-100">
+                    <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                        Code
+                    </th>
+                    <th class="px-6 py-3  w-[20vw]" scope="col">
+                        Name
+                    </th>
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        Address
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Contact NO 1
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Contact NO 2
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Email
+                    </th>
+                    <th class="px-6 rounded-e-lg py-3 w-[15vw]" scope="col">
+                        Action
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Table body content goes here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
 
 <main class="hidden transition-all  ease-in duration-300" id="adminSection">
