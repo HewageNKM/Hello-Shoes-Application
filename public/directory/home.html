@@ -10,48 +10,28 @@
     />
 </head>
 <body class="min-h-screen relative overflow-hidden">
-<header class="right-0 top-0 absolute bg-green-300 p-3 flex flex-row mx-auto m-2 rounded font-medium">
     <nav>
-        <ol class="flex flex-row gap-8">
-            <li class="transition-all text-2xl duration-500 hover:scale-110 hover:text-slate-100" id="order">
-                <button onclick="navigationOnClick(this.value)" value="order">
-                    ORDER
-                </button>
-            </li>
-            <li class="transition-all text-2xl duration-500 hover:scale-110 hover:text-slate-100" id="adminPanel">
-                <button onclick="navigationOnClick(this.value)" value="adminPanel">
-                    ADMIN PANEL
-                </button>
-            </li>
-            <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="inventory">
-                <button onclick="navigationOnClick(this.value)" value="inventory">
-                    INVENTORY
-                </button>
-            </li>
-            <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="supplier">
-                <button onclick="navigationOnClick(this.value)" value="supplier">
-                    SUPPLIER
-                </button>
-            </li>
-            <li class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="employee">
-                <button onclick="navigationOnClick(this.value)" value="employee">
-                    EMPLOYEE
-                </button>
-            </li>
-            <li>
-                <button class="transition-all duration-500 text-2xl hover:scale-110 hover:text-slate-100" id="logout">
-                    LOGOUT
-                </button>
-            </li>
-        </ol>
+        <div class="flex justify-between items-center bg-green-100 p-5">
+            <div class="flex items-center gap-5">
+                <img src="../assets/img/logo.jpg" alt="logo" class="w-20 h-20 rounded-full">
+                <h1 class="text-2xl font-bold">Hello Shoes PVT LTD.</h1>
+            </div>
+            <div class="flex items-center gap-5">
+                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="orderBtn" onclick="navigationOnClick(this.value)" value="order">Order</button>
+                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="inventoryBtn" onclick="navigationOnClick(this.value)" value="inventory">Inventory</button>
+                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="supplierBtn" onclick="navigationOnClick(this.value)" value="supplier">Supplier</button>
+                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="adminBtn" onclick="navigationOnClick(this.value)" value="admin">Admin</button>
+                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="employeeBtn" onclick="navigationOnClick(this.value)" value="employee">Employee</button>
+                <button class="bg-green-200 p-2 rounded-md font-semibold text-xl" id="logoutBtn" onclick="navigationOnClick(this.value)" value="logout">Logout</button>
+            </div>
+        </div>
+
     </nav>
-</header>
 
-
-<main class="relative pt-28 flex min-w-full transition-all ease-in duration-300" id="orderSection">
+<main class="relative pt-5 flex min-w-full transition-all ease-in duration-300" id="orderSection">
     <section class="flex flex-col gap-3 pl-10 pr-10">
         <h1 class="text-2xl font-bold">Order</h1>
-        <div class="flex flex-row gap-5 overflow-auto mt-3">
+        <div class="flex flex-row gap-5 overflow-y-auto mt-3">
             <table class="w-full text-md text-left rtl:text-right">
                 <thead>
                 <tr class="text-left bg-green-100">
