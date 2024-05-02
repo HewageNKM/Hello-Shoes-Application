@@ -57,18 +57,16 @@ const navigationOnClick = (value) => {
             $("#inventorySection").addClass("hidden");
             $("#employeeSection").addClass("hidden");
             break;
+        case "customer":
+            $("#customerSection").removeClass("hidden");
+
+            $("#orderSection").addClass("hidden");
+            $("#inventorySection").addClass("hidden");
+            $("#employeeSection").addClass("hidden");
+            $("#supplierSection").addClass("hidden");
+            break;
+
         default:
             break;
     }
 }
-$("#showSupplierAddForm").click(
-    function () {
-        $("#addSupplier").removeClass("hidden");
-    }
-);
-
-$("#closeSupplierAddForm").click(
-    function () {
-        $("#addSupplier").addClass("hidden");
-    }
-);
