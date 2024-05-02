@@ -42,6 +42,13 @@
     </div>
 
 </nav>
+<div id="alert" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+    <div>
+        <p class="font-bold">Be Warned</p>
+        <p id="alertDescription">Something Went Wrong</p>
+    </div>
+    <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
+</div>
 
 <!--Order Section-->
 <main class="relative pt-5 flex min-w-full transition-all ease-in duration-300" id="orderSection">
@@ -239,7 +246,7 @@
                                placeholder="Code, Name, Address.......">
                     </label>
                     <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
-                            id="searchSupplierBtn" onclick="searchSupplierOnClick()">Search
+                            id="searchSupplierBtn">Search
                     </button>
                 </div>
             </div>
@@ -267,7 +274,6 @@
                                                name="code"
                                                placeholder="Code"
                                                type="text"
-                                               required
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
