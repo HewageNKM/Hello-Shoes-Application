@@ -42,7 +42,9 @@
     </div>
 
 </nav>
-<div id="alert" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+<div id="alert"
+     class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+     role="alert">
     <div>
         <p class="font-bold">Be Warned</p>
         <p id="alertDescription">Something Went Wrong</p>
@@ -102,11 +104,13 @@
                     </button>
                 </div>
             </div>
-            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300" id="showEmployeeAddFormBtn"
+            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300"
+                    id="showEmployeeAddFormBtn"
                     type="button">Add Employee
             </button>
         </div>
-        <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center" id="addEmployee">
+        <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center"
+             id="addEmployee">
             <div class="fixed inset-0 bg-black bg-opacity-50">
                 <div class="flex justify-center items-center min-h-screen">
                     <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
@@ -122,7 +126,7 @@
                                     <label class="hidden flex-col gap-1">
                                         <span class="text-green-500 font-bold">Code</span>
                                         <input class=" rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                              id="employeeCodeFld"
+                                               id="employeeCodeFld"
                                                name="code"
                                                placeholder="Code"
                                                type="text"
@@ -142,7 +146,7 @@
                                     <label class="flex flex-col gap-1">
                                         <span class="text-green-500 font-bold">Address</span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                                  id="employeeAddressFld"
+                                               id="employeeAddressFld"
                                                name="address"
                                                placeholder="Address"
                                                type="text"
@@ -159,13 +163,24 @@
                                                required
                                         >
                                     </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Designation</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="designationFld"
+                                               name="dob"
+                                               placeholder="Designation"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
                                 </div>
                                 <div class="flex flex-col gap-3">
+
                                     <label class="flex flex-col gap-1">
                                         <span class="text-green-500 font-bold">Contact No </span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                                  id="employeeContactFld"
-                                               name="contact1"
+                                               id="employeeContactFld"
+                                               name="contact"
                                                placeholder="Contact No "
                                                type="text"
                                                required
@@ -174,10 +189,30 @@
                                     <label class="flex flex-col gap-1">
                                         <span class="text-green-500 font-bold">Email</span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-
+                                               id="employeeEmailFld"
                                                name="email"
                                                placeholder="Email"
                                                type="email"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Emergency Contact</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="employeeEmergencyContactFld"
+                                               name="employeeEmergencyContact"
+                                               placeholder="Emergency Contact"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Date of Joined</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="dateOfJoinedFld"
+                                               name="doj"
+                                               placeholder="Date of Joined"
+                                               type="date"
                                                required
                                         >
                                     </label>
@@ -250,11 +285,13 @@
                     </button>
                 </div>
             </div>
-            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300" id="showSupplierAddForm"
+            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300"
+                    id="showSupplierAddForm"
                     type="button">Add Supplier
             </button>
         </div>
-        <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center" id="addSupplier">
+        <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center"
+             id="addSupplier">
             <div class="fixed inset-0 bg-black bg-opacity-50">
                 <div class="flex justify-center items-center min-h-screen">
                     <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
@@ -319,7 +356,7 @@
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                <span class="text-green-500 font-bold">Email</span>
+                                        <span class="text-green-500 font-bold">Email</span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="supplierEmailFld"
                                                name="email"

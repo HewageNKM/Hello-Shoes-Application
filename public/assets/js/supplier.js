@@ -46,14 +46,14 @@ $("#addSupplierForm").submit(function (e) {
     if (!/^(?! )[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/.test(name)) {
         $("#supplierNameFld").addClass("border-2 border-red-500");
         isField = true;
-    }else {
+    } else {
         $("#supplierNameFld").removeClass("border-2 border-red-500");
     }
 
     if (!/^\d{10}$/.test(contact1)) {
         $("#supplierContact1Fld").addClass("border-2 border-red-500");
         isField = true;
-    }else {
+    } else {
         $("#supplierContact1Fld").removeClass("border-2 border-red-500");
         isField = false;
     }
@@ -61,7 +61,7 @@ $("#addSupplierForm").submit(function (e) {
     if (!/^\d{10}$/.test(contact2)) {
         $("#supplierContact2Fld").addClass("border-2 border-red-500");
         isField = true;
-    }else {
+    } else {
         $("#supplierContact2Fld").removeClass("border-2 border-red-500");
         isField = false;
     }
@@ -69,7 +69,7 @@ $("#addSupplierForm").submit(function (e) {
     if (address.trim().length < 5) {
         $("#supplierAddressFld").addClass("border-2 border-red-500");
         isField = true;
-    }else {
+    } else {
         $("#supplierAddressFld").removeClass("border-2 border-red-500");
         isField = false;
     }

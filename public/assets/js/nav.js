@@ -35,6 +35,7 @@ const navigationOnClick = (value) => {
             $("#inventorySection").addClass("hidden");
             $("#employeeSection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
+            $("#customerSection").addClass("hidden");
             break;
         case "inventory":
             $("#inventorySection").removeClass("hidden");
@@ -42,6 +43,7 @@ const navigationOnClick = (value) => {
             $("#orderSection").addClass("hidden");
             $("#employeeSection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
+            $("#customerSection").addClass("hidden");
             break;
         case "employee":
             $("#employeeSection").removeClass("hidden");
@@ -49,6 +51,7 @@ const navigationOnClick = (value) => {
             $("#orderSection").addClass("hidden");
             $("#inventorySection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
+            $("#customerSection").addClass("hidden");
             break;
         case "supplier":
             $("#supplierSection").removeClass("hidden");
@@ -56,6 +59,7 @@ const navigationOnClick = (value) => {
             $("#orderSection").addClass("hidden");
             $("#inventorySection").addClass("hidden");
             $("#employeeSection").addClass("hidden");
+            $("#customerSection").addClass("hidden");
             break;
         case "customer":
             $("#customerSection").removeClass("hidden");
