@@ -37,7 +37,7 @@ $("#alertCloseBtn").click(function () {
 
 $("#addSupplierForm").submit(function (e) {
     e.preventDefault();
-    let isField = true;
+
     const name = e.target.name.value.toString();
     const email = e.target.email.value.toString();
     const contact1 = e.target.contact1.value.toString();
@@ -45,45 +45,31 @@ $("#addSupplierForm").submit(function (e) {
     const address = e.target.address.value.toString();
     if (!/^(?! )[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/.test(name)) {
         $("#supplierNameFld").addClass("border-2 border-red-500");
-        isField = true;
     } else {
         $("#supplierNameFld").removeClass("border-2 border-red-500");
     }
 
     if (!/^\d{10}$/.test(contact1)) {
         $("#supplierContact1Fld").addClass("border-2 border-red-500");
-        isField = true;
     } else {
         $("#supplierContact1Fld").removeClass("border-2 border-red-500");
-        isField = false;
     }
 
     if (!/^\d{10}$/.test(contact2)) {
         $("#supplierContact2Fld").addClass("border-2 border-red-500");
-        isField = true;
     } else {
         $("#supplierContact2Fld").removeClass("border-2 border-red-500");
-        isField = false;
     }
 
     if (address.trim().length < 5) {
         $("#supplierAddressFld").addClass("border-2 border-red-500");
-        isField = true;
     } else {
         $("#supplierAddressFld").removeClass("border-2 border-red-500");
-        isField = false;
     }
 
-    if (isField) {
+    if(!/^\d{10}$/.test(contact1) || !/^\d{10}$/.test(contact2) || address.trim().length < 5 || !/^(?! )[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/.test(name)){
         return;
     }
-
-    $("#supplierNameFld").removeClass("border-2 border-red-500");
-    $("#supplierEmailFld").removeClass("border-2 border-red-500");
-    $("#supplierContact1Fld").removeClass("border-2 border-red-500");
-    $("#supplierContact2Fld").removeClass("border-2 border-red-500");
-    $("#supplierAddressFld").removeClass("border-2 border-red-500");
-
 
     let supplier = {
         name: name,
