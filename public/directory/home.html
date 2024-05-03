@@ -100,7 +100,7 @@
                                placeholder="Code, Name, Address.......">
                     </label>
                     <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
-                            id="searchEmployeeBtn" onclick="searchEmployeeOnClick()">Search
+                            id="searchEmployeeBtn">Search
                     </button>
                 </div>
             </div>
@@ -226,7 +226,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row gap-5 overflow-y-auto mt-3">
+        <div class="flex flex-row gap-5 overflow-auto mt-3">
             <table class="w-full text-md text-left rtl:text-right">
                 <thead>
                 <tr class="text-left bg-green-100">
@@ -239,14 +239,23 @@
                     <th class="px-6 py-3 w-[20vw]" scope="col">
                         Address
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
-                        Contact NO 1
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        Designation
+                    </th>
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        DOB
+                    </th>
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        DOJ
                     </th>
                     <th class="px-6 py-3 w-[15vw]" scope="col">
-                        Contact NO 2
+                        Contact No
                     </th>
                     <th class="px-6 py-3 w-[15vw]" scope="col">
                         Email
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Emergency Email
                     </th>
                     <th class="px-6 rounded-e-lg py-3 w-[15vw]" scope="col">
                         Action
@@ -419,9 +428,172 @@
 
 <!--Customer Section-->
 <main class="hidden pt-5 transition-all  ease-in duration-300" id="customerSection">
-    <h1>
-        Customer Panel
-    </h1>
+    <section class="flex flex-col gap-3 pl-10 pr-10">
+        <div class="flex flex-row justify-between items-center">
+            <div class="flex-col flex gap-5 items-start">
+                <h1 class="text-2xl font-bold">Customer</h1>
+                <div>
+                    <label class="font-semibold"> Search
+                        <input type="text" id="customerSearchFld" class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2"
+                               placeholder="Code, Name, Address.......">
+                    </label>
+                    <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
+                            id="searchCustomerBtn">Search
+                    </button>
+                </div>
+            </div>
+            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300"
+                    id="showCustomerAddFormBtn"
+                    type="button">Add Customer
+            </button>
+        </div>
+        <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center"
+             id="addCustomer">
+            <div class="fixed inset-0 bg-black bg-opacity-50">
+                <div class="flex justify-center items-center min-h-screen">
+                    <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                        <div class="justify-between items-center flex flex-row">
+                            <h1 class="text-2xl font-bold">Add Customer</h1>
+                            <button class="bg-red-500 p-1 rounded-md font-semibold text-md hover:bg-red-600"
+                                    id="closeCustomerAddFormBtn" type="button">Close
+                            </button>
+                        </div>
+                        <form class="flex flex-col gap-5 items-center" id="addCustomerForm">
+                            <div class="flex flex-row gap-5">
+                                <div class="flex flex-col gap-3 justify-evenly">
+                                    <label class="hidden flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Code</span>
+                                        <input class=" rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerCodeFld"
+                                               name="code"
+                                               placeholder="Code"
+                                               type="text"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Name</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerNameFld"
+                                               name="name"
+                                               placeholder="Name"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Address</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerAddressFld"
+                                               name="address"
+                                               placeholder="Address"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Date of Birth</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerDobFld"
+                                               name="dob"
+                                               placeholder="Date of Birth"
+                                               type="date"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">NIC</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerNicFld"
+                                               name="nic"
+                                               placeholder="NIC"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                </div>
+                                <div class="flex flex-col gap-3">
+
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Contact No </span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerContactFld"
+                                               name="contact"
+                                               placeholder="Contact No "
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Email</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerEmailFld"
+                                               name="email"
+                                               placeholder="Email"
+                                               type="email"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Points</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerPointsFld"
+                                               name="points"
+                                               placeholder="Emergency Contact"
+                                               type="number"
+                                               disabled
+                                               value="0"
+                                        >
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="bg-green-500 flex justify-center w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-green-600"
+                                    type="submit">
+                                Add Employee
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-row gap-5 overflow-auto mt-3">
+            <table class="w-full text-md text-left rtl:text-right">
+                <thead>
+                <tr class="text-left bg-green-100">
+                    <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                        Code
+                    </th>
+                    <th class="px-6 py-3  w-[20vw]" scope="col">
+                        Name
+                    </th>
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        Address
+                    </th>
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        NIC
+                    </th>
+                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                        DOB
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Contact No
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Email
+                    </th>
+                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                        Points
+                    </th>
+                    <th class="px-6 rounded-e-lg py-3 w-[15vw]" scope="col">
+                        Action
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Table body content goes here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
