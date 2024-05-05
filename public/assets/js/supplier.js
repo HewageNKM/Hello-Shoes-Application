@@ -210,7 +210,7 @@ const loadTable = () => {
             data.forEach(supplier => {
                 table.append(
                     `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light""> 
-                        <td class="m-1 p-2">${supplier.supplierId}</td>
+                        <td class="m-1 p-2">${supplier.supplierId.toUpperCase()}</td>
                         <td class="m-1 p-2">${supplier.name}</td>
                         <td class="m-1 p-2">${supplier.lane}</td>
                         <td class="m-1 p-2">${supplier.city}</td>
