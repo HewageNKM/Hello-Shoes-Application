@@ -1,6 +1,17 @@
 let suppliers = [];
 $("#showSupplierAddForm").click(
     function () {
+        const alert = $("#alert");
+        if(window.localStorage.getItem("role") === "USER"){
+            alert.removeClass("right-[-100%]")
+            alert.addClass("right-0")
+            $("#alertDescription").text("You do not have permission to add supplier")
+            setTimeout(() => {
+                alert.addClass("right-[-100%]")
+                alert.removeClass("right-0")
+            }, 3000);
+            return
+        }
         $("#addSupplier").removeClass("hidden");
     }
 );
@@ -243,6 +254,17 @@ const loadTable = () => {
     });
 };
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
+    if (window.localStorage.getItem("role") === "USER") {
+        $("#alert").removeClass("right-[-100%]")
+        $("#alert").addClass("right-0")
+        $("#alertDescription").text("You do not have permission to delete supplier")
+        setTimeout(() => {
+            $("#alert").addClass("right-[-100%]")
+            $("#alert").removeClass("right-0")
+        }, 3000);
+        return
+    }
+
     const b = confirm("Are you sure you want to delete supplier");
     if (b) {
         $.ajax("http://localhost:8080/api/v1/suppliers/" + e.target.value, {
