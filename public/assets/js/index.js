@@ -15,11 +15,8 @@ $('#loginForm').submit(function (e) {
     passwordFld.removeClass("border-2 border-red-500");
     $("#emailFld").removeClass("border-2 border-red-500");
     // Backend API call to login
-    localStorage.setItem("token", "ADMIN");
-    localStorage.setItem("role", "ADMIN");
-    window.location.replace("/directory/home.html");
 
-    /*$.ajax("http://localhost:8080/api/v1/auth/users/login", {
+    $.ajax("http://localhost:8080/api/v1/auth/users/login", {
         method:"POST",
         contentType: "application/json",
         data: JSON.stringify({
@@ -55,7 +52,7 @@ $('#loginForm').submit(function (e) {
                 }
             }, 1000);
         }
-    });*/
+    });
 
 });
 

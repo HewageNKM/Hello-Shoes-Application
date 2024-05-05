@@ -8,34 +8,37 @@
             content="width=device-width, initial-scale=1"
             name="viewport"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen relative overflow-hidden">
+<body class="min-h-screen relative overflow-hidden font-Roboto">
 <nav>
-    <div class="flex justify-between items-center bg-green-100 p-5">
+    <div class="flex justify-between items-center p-5">
         <div class="flex items-center gap-5">
             <img src="../assets/img/logo.jpg" alt="logo" class="w-20 h-20 rounded-full">
             <h1 class="text-2xl font-bold">Hello Shoes PVT LTD.</h1>
         </div>
         <div class="flex items-center gap-5">
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="orderBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="orderBtn"
                     onclick="navigationOnClick(this.value)" value="order">Order
             </button>
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="inventoryBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="inventoryBtn"
                     onclick="navigationOnClick(this.value)" value="inventory">Inventory
             </button>
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="supplierBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="supplierBtn"
                     onclick="navigationOnClick(this.value)" value="supplier">Supplier
             </button>
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="adminBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="adminBtn"
                     onclick="navigationOnClick(this.value)" value="admin">Admin
             </button>
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="employeeBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="employeeBtn"
                     onclick="navigationOnClick(this.value)" value="employee">Employee
             </button>
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="customerBtn"
+            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="customerBtn"
                     onclick="navigationOnClick(this.value)" value="customer">Customer
             </button>
-            <button class="bg-green-200 p-2 hover:bg-green-300 rounded-md font-semibold text-xl" id="logoutBtn"
+            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="logoutBtn"
                     onclick="navigationOnClick(this.value)" value="logout">Logout
             </button>
         </div>
@@ -50,6 +53,14 @@
         <p id="alertDescription">Something Went Wrong</p>
     </div>
     <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
+</div>
+
+<div id="success" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+    <div>
+        <p class="font-bold">Complete</p>
+        <p id="successDescription">Successfully</p>
+    </div>
+    <button class="font-black hover:cursor-hand" id="successCloseBtn">X</button>
 </div>
 
 <!--Order Section-->
@@ -285,15 +296,15 @@
                 <h1 class="text-2xl font-bold">Suppliers</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input type="text" id="supplierSearchFld" class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2"
+                        <input type="text" id="supplierSearchFld" class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2"
                                placeholder="Code, Name, Address.......">
                     </label>
-                    <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
+                    <button class="w-[3rem] h-[2rem] hover:text-blue-600 p-2 font-semibold text-xl"
                             id="searchSupplierBtn">Search
                     </button>
                 </div>
             </div>
-            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300"
+            <button class="bg-blue-400 p-2 rounded-md font-semibold text-xl hover:bg-blue-600"
                     id="showSupplierAddForm"
                     type="button">Add Supplier
             </button>
@@ -314,7 +325,7 @@
                                 <div class="flex flex-col gap-3 justify-evenly">
                                     <label class="hidden flex-col gap-1">
                                         <span class="text-green-500 font-bold">Code</span>
-                                        <input class=" rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="supplierCodeFld"
                                                name="code"
                                                placeholder="Code"
@@ -332,17 +343,57 @@
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Address</span>
+                                        <span class="text-green-500 font-bold">Lane</span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="supplierAddressFld"
-                                               name="address"
-                                               placeholder="Address"
+                                               id="supplierLaneFld"
+                                               name="lane"
+                                               placeholder="Lane"
                                                type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">City</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierCityFld"
+                                               name="city"
+                                               placeholder="City"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">State</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierStateFld"
+                                               name="state"
+                                               placeholder="State"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Postal Code</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierPostalCodeFld"
+                                               name="zip"
+                                               placeholder="Postal Code"
+                                               type="number"
                                                required
                                         >
                                     </label>
                                 </div>
                                 <div class="flex flex-col gap-3">
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-green-500 font-bold">Country</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="supplierCountryFld"
+                                               name="country"
+                                               placeholder="Country"
+                                               type="text"
+                                               required
+                                        >
+                                    </label>
                                     <label class="flex flex-col gap-1">
                                         <span class="text-green-500 font-bold">Contact No 1</span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
@@ -384,34 +435,46 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row gap-5 overflow-y-auto mt-3">
-            <table class="w-full text-md text-left rtl:text-right">
+        <div class="flex flex-row gap-5 overflow-auto mt-3">
+            <table class="w-full shadow-md text-md text-left rtl:text-right">
                 <thead>
-                <tr class="text-left bg-green-100">
+                <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
                     <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
                         Code
                     </th>
-                    <th class="px-6 py-3  w-[20vw]" scope="col">
+                    <th class="px-6 py-3" scope="col">
                         Name
                     </th>
-                    <th class="px-6 py-3 w-[20vw]" scope="col">
-                        Address
+                    <th class="px-6 py-3" scope="col">
+                        Lane
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
-                        Contact NO 1
+                    <th class="px-6 py-3" scope="col">
+                        City
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
-                        Contact NO 2
+                    <th class="px-6 py-3" scope="col">
+                        State
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                    <th class="px-6 py-3" scope="col">
+                        Zip
+                    </th>
+                    <th class="px-6 py-3" scope="col">
+                        Country
+                    </th>
+                    <th class="px-6 py-3" scope="col">
+                        Contact
+                    </th>
+                    <th class="px-6 py-3" scope="col">
+                        Contact
+                    </th>
+                    <th class="px-6 py-3" scope="col">
                         Email
                     </th>
-                    <th class="px-6 rounded-e-lg py-3 w-[15vw]" scope="col">
+                    <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
                         Action
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="supplierTableBody">
                 <!-- Table body content goes here -->
                 </tbody>
             </table>
