@@ -2,7 +2,7 @@ let suppliers = [];
 $("#showSupplierAddForm").click(
     function () {
         const alert = $("#alert");
-        if(window.localStorage.getItem("role") === "USER"){
+        if (window.localStorage.getItem("role") === "USER") {
             alert.removeClass("right-[-100%]")
             alert.addClass("right-0")
             $("#alertDescription").text("You do not have permission to add supplier")
@@ -37,9 +37,55 @@ $("#searchSupplierBtn").click(function () {
 
         return;
     }
+    const loadingAnimation = $("#supplierTableLoadingAnimation")
+    loadingAnimation.removeClass("hidden");
     /*Ajax call to search for supplier*/
-    console.log(val);
-})
+    $.ajax("http://localhost:8080/api/v1/suppliers?pattern=" + val, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        },
+        success: function (data) {
+            console.log(data);
+            suppliers = data;
+            const table = $("#supplierTableBody");
+            table.empty();
+            data.forEach(supplier => {
+                table.append(
+                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light""> 
+                        <td class="m-1 p-2">${supplier.supplierId.toUpperCase()}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.name}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.lane}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.city}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.state}</td>
+                        <td class="m-1 p-2">${supplier.postalCode}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.country}</t>
+                        <td class="m-1 p-2">${supplier.contactNo1}</td>
+                        <td class="m-1 p-2">${supplier.contactNo2}</td>
+                        <td class="m-1 p-2">${supplier.email}</td>
+                        <td class="m-1 p-2">
+                            <button value="${supplier.supplierId}" id="supplierEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editSupplierBtn">Edit</button>
+                            <button value="${supplier.supplierId}" id="supplierDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteSupplierBtn">Delete</button>
+                        </td>
+                    </tr>`
+                )
+            });
+            loadingAnimation.addClass("hidden");
+        },
+        error: function (error) {
+            console.log(error);
+            alert.removeClass("right-[-100%]")
+            alert.addClass("right-0")
+            $("#alertDescription").text("An error occurred while searching for supplier");
+
+            setTimeout(() => {
+                alert.addClass("right-[-100%]")
+                alert.removeClass("right-0")
+            }, 3000);
+        }
+
+    })
+});
 
 $("#alertCloseBtn").click(function () {
     const alert = $("#alert");
@@ -208,6 +254,8 @@ $("#addSupplierForm").submit(function (e) {
 })
 
 const loadTable = () => {
+    const loadingAnimation = $("#supplierTableLoadingAnimation")
+    loadingAnimation.removeClass("hidden");
     $.ajax("http://localhost:8080/api/v1/suppliers", {
         method: "GET",
         headers: {
@@ -221,14 +269,14 @@ const loadTable = () => {
             data.forEach(supplier => {
                 table.append(
                     `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light""> 
-                        <td class="m-1 p-2">${supplier.supplierId.toUpperCase()}</td>
-                        <td class="m-1 p-2">${supplier.name}</td>
-                        <td class="m-1 p-2">${supplier.lane}</td>
-                        <td class="m-1 p-2">${supplier.city}</td>
-                        <td class="m-1 p-2">${supplier.state}</td>
-                        <td class="m-1 p-2">${supplier.postalCode}</td>
-                        <td class="m-1 p-2">${supplier.country}</t>
-                        <td class="m-1 p-2">${supplier.contactNo1}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.supplierId.toUpperCase()}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.name}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.lane}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.city}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.state}</td>
+                        <td class="m-1 p-2 ">${supplier.postalCode}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.country}</t>
+                        <td class="m-1 p-2 ">${supplier.contactNo1}</td>
                         <td class="m-1 p-2">${supplier.contactNo2}</td>
                         <td class="m-1 p-2">${supplier.email}</td>
                         <td class="m-1 p-2">
@@ -238,6 +286,8 @@ const loadTable = () => {
                     </tr>`
                 )
             });
+
+            loadingAnimation.addClass("hidden");
         },
         error: function (error) {
             const alert = $("#alert")
@@ -252,7 +302,7 @@ const loadTable = () => {
             }, 3000);
         }
     });
-};
+}
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
         $("#alert").removeClass("right-[-100%]")
@@ -302,6 +352,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
         });
     }
 });
+
 $([document]).on("click", "#supplierEditBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
         $("#alert").removeClass("right-[-100%]")
@@ -333,5 +384,8 @@ $([document]).on("click", "#supplierEditBtn", function (e) {
         $("#supplierPostalCodeFld").val(supplier.postalCode);
         $("#addSupplier").removeClass("hidden");
     }
-})
+});
+$("#supplierTableRefreshBtn").click(function (){
+    loadTable();
+});
 loadTable()
