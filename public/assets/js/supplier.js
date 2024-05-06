@@ -115,43 +115,43 @@ $("#addSupplierForm").submit(function (e) {
 
     console.log(id);
 
-    if (!/^(?! )[A-Za-z0-9 ]*$/.test(name)) {
+    if (!/^(?! )[A-Za-z0-9 ]{3,50}$/.test(name)) {
         $("#supplierNameFld").addClass("border-2 border-red-500");
     } else {
         $("#supplierNameFld").removeClass("border-2 border-red-500");
     }
 
-    if (!/^\d{10}$/.test(contact1)) {
+    if (!/^\d{10,12}$/.test(contact1)) {
         $("#supplierContact1Fld").addClass("border-2 border-red-500");
     } else {
         $("#supplierContact1Fld").removeClass("border-2 border-red-500");
     }
 
-    if (!/^\d{10}$/.test(contact2)) {
+    if (!/^\d{10,12}$/.test(contact2)) {
         $("#supplierContact2Fld").addClass("border-2 border-red-500");
     } else {
         $("#supplierContact2Fld").removeClass("border-2 border-red-500");
     }
 
-    if (!/^(?! )[A-Za-z0-9 ]*$/.test(lane)) {
+    if (!/^(?! )[A-Za-z0-9 ]{3,30}$/.test(lane)) {
         $("#supplierLaneFld").addClass("border-2 border-red-500");
     } else {
         $("#supplierLaneFld").removeClass("border-2 border-red-500");
     }
 
-    if (!/^(?! )[A-Za-z ]*$/.test(city)) {
+    if (!/^(?! )[A-Za-z ]{3,30}$/.test(city)) {
         $("#supplierCityFld").addClass("border-2 border-red-500");
     } else {
         $("#supplierCityFld").removeClass("border-2 border-red-500");
     }
 
-    if (!/^(?! )[A-Za-z ]*$/.test(state)) {
+    if (!/^(?! )[A-Za-z ]{3,30}$/.test(state)) {
         $("#supplierStateFld").addClass("border-2 border-red-500");
     } else {
         $("#supplierStateFld").removeClass("border-2 border-red-500");
     }
 
-    if (!/^(?! )[A-Za-z ]*$/.test(country)) {
+    if (!/^(?! )[A-Za-z ]{3,30}$/.test(country)) {
         $("#supplierCountryFld").addClass("border-2 border-red-500");
     } else {
         $("#supplierCountryFld").removeClass("border-2 border-red-500");
@@ -162,7 +162,7 @@ $("#addSupplierForm").submit(function (e) {
     } else {
         $("#supplierZPostalCodeFld").removeClass("border-2 border-red-500");
     }
-    if (!/^(?! )[A-Za-z0-9 ]*$/.test(name) || !/^\d{10}$/.test(contact1) || !/^\d{10}$/.test(contact2) || !/^(?! )[A-Za-z0-9 ]*$/.test(lane) || !/^(?! )[A-Za-z ]*$/.test(city) || !/^(?! )[A-Za-z ]*$/.test(state) || !/^(?! )[A-Za-z ]*$/.test(country) || !/^\d{4,10}$/.test(zip)) {
+    if (!/^(?! )[A-Za-z0-9 ]{3,50}$/.test(name) || !/^\d{10,12}$/.test(contact1) || !/^\d{10,12}$/.test(contact2) || !/^(?! )[A-Za-z0-9 ]{3,30}$/.test(lane) || !/^(?! )[A-Za-z ]{3,30}$/.test(city) || !/^(?! )[A-Za-z ]{3,30}$/.test(state) || !/^(?! )[A-Za-z ]{3,30}$/.test(country) || !/^\d{4,10}$/.test(zip)) {
         return;
     }
     let supplier = {
