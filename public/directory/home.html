@@ -117,7 +117,8 @@
                 <h1 class="text-2xl font-bold">Employees</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2" id="employeeSearchFld" placeholder="Code, Name, Address......."
+                        <input class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2" id="employeeSearchFld"
+                               placeholder="Code, Name, Address......."
                                type="text">
                     </label>
                     <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
@@ -306,7 +307,8 @@
                 <h1 class="text-2xl font-bold">Suppliers</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2" id="supplierSearchFld"
+                        <input class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2"
+                               id="supplierSearchFld"
                                placeholder="Code, Name, Address......."
                                type="text">
                     </label>
@@ -449,7 +451,8 @@
         <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                  id="supplierTableLoadingAnimation">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" disabled
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                        disabled
                         type="button">
                     <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
                          role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
@@ -525,7 +528,8 @@
                 <h1 class="text-2xl font-bold">Customer</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2" id="customerSearchFld"
+                        <input class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2"
+                               id="customerSearchFld"
                                placeholder="Code, Name, Address......."
                                type="text">
                     </label>
@@ -575,10 +579,10 @@
                                     <label class="flex flex-col gap-1">
                                         <span class="text-blue-600 font-bold">Gender</span>
                                         <select class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="customerGenderSelect"
-                                               name="gender"
-                                               required
-                                               type="text"
+                                                id="customerGenderSelect"
+                                                name="gender"
+                                                required
+                                                type="text"
                                         >
                                             <option value="MALE">MALE</option>
                                             <option value="FEMALE">FEMALE</option>
@@ -660,11 +664,11 @@
                                     <label class="flex flex-col gap-1">
                                         <span class="text-blue-600 font-bold">Recent Purchase</span>
                                         <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               disabled
                                                id="customerRecentPurchaseDateAndTimeFld"
                                                name="recentPurchase"
                                                placeholder="dd/mm/yyyy hh:mm:ss"
                                                type="text"
-                                               disabled
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -703,7 +707,8 @@
         <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                  id="customerTableLoadingAnimation">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" disabled
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                        disabled
                         type="button">
                     <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
                          role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
@@ -728,6 +733,9 @@
                         Name
                     </th>
                     <th class="px-6 py-3" scope="col">
+                        Gender
+                    </th>
+                    <th class="px-6 py-3" scope="col">
                         Lane
                     </th>
                     <th class="px-6 py-3" scope="col">
@@ -740,16 +748,22 @@
                         Zip
                     </th>
                     <th class="px-6 py-3" scope="col">
-                        Country
-                    </th>
-                    <th class="px-6 py-3" scope="col">
-                        Contact
-                    </th>
-                    <th class="px-6 py-3" scope="col">
                         Contact
                     </th>
                     <th class="px-6 py-3" scope="col">
                         Email
+                    </th>
+                    <th class="px-6 py-3" scope="col">
+                        Date of Joined
+                    </th>
+                    <th class="px-6 rounded-e-lg py-3" scope="col">
+                        Total Points
+                    </th>
+                    <th class="px-6 rounded-e-lg py-3" scope="col">
+                        Level
+                    </th>
+                    <th class="px-6 rounded-e-lg py-3" scope="col">
+                        Recent Purchase
                     </th>
                     <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
                         Action

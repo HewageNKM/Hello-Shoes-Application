@@ -1,4 +1,4 @@
-let suppliers = [];
+let suppliersList = [];
 $("#showSupplierAddForm").click(
     function () {
         const alert = $("#alert");
@@ -51,19 +51,19 @@ $("#searchSupplierBtn").click(function () {
     const loadingAnimation = $("#supplierTableLoadingAnimation")
     loadingAnimation.removeClass("hidden");
     /*Ajax call to search for supplier*/
-    $.ajax(baseUrl+"/suppliers?pattern=" + val, {
+    $.ajax(baseUrl + "/suppliers?pattern=" + val, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         },
         success: function (data) {
             console.log(data);
-            suppliers = data;
+            suppliersList.push(...data);
             const table = $("#supplierTableBody");
             table.empty();
             data.forEach(supplier => {
                 table.append(
-                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light""> 
+                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light"> 
                         <td class="m-1 p-2">${supplier.supplierId.toUpperCase()}</td>
                         <td class="m-1 p-2 capitalize">${supplier.name}</td>
                         <td class="m-1 p-2 capitalize">${supplier.lane}</td>
@@ -193,7 +193,7 @@ $("#addSupplierForm").submit(function (e) {
     const alert = $("#alert");
     const successAlert = $("#success");
     if (id === null || id === "" || id === undefined) {
-        $.ajax(baseUrl+"/suppliers", {
+        $.ajax(baseUrl + "/suppliers", {
             method: "POST",
             contentType: "application/json",
             headers: {
@@ -203,7 +203,7 @@ $("#addSupplierForm").submit(function (e) {
             success: function (data) {
                 console.log(data);
                 e.target.reset();
-                loadTable();
+                loadSupplierTable();
                 $("#addSupplier").addClass("hidden");
                 $("#successDescription").text("Supplier added successfully");
                 successAlert.removeClass("right-[-100%]")
@@ -227,7 +227,7 @@ $("#addSupplierForm").submit(function (e) {
             }
         });
     } else {
-        $.ajax(baseUrl+"/suppliers/" + id.toLowerCase(), {
+        $.ajax(baseUrl + "/suppliers/" + id.toLowerCase(), {
             method: "PUT",
             contentType: "application/json",
             headers: {
@@ -238,7 +238,7 @@ $("#addSupplierForm").submit(function (e) {
                 console.log(data);
                 e.target.reset();
                 $("#addSupplier").addClass("hidden");
-                loadTable();
+                loadSupplierTable();
 
                 $("#successDescription").text("Supplier updated successfully");
                 successAlert.removeClass("right-[-100%]")
@@ -265,17 +265,17 @@ $("#addSupplierForm").submit(function (e) {
     }
 })
 
-const loadTable = () => {
+const loadSupplierTable = () => {
     const loadingAnimation = $("#supplierTableLoadingAnimation")
     loadingAnimation.removeClass("hidden");
-    $.ajax(baseUrl+"/suppliers", {
+    $.ajax(baseUrl + "/suppliers", {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         },
         success: function (data) {
             console.log(data);
-            suppliers = data;
+            suppliersList = data;
             const table = $("#supplierTableBody");
             table.empty();
             data.forEach(supplier => {
@@ -330,14 +330,14 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
 
     const b = confirm("Are you sure you want to delete supplier");
     if (b) {
-        $.ajax(baseUrl+"/suppliers/" + e.target.value, {
+        $.ajax(baseUrl + "/suppliers/" + e.target.value, {
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
             success: function (data) {
                 console.log(data);
-                loadTable();
+                loadSupplierTable();
                 const success = $("#success");
                 $("#successDescription").text("Supplier deleted successfully");
                 success.removeClass("right-[-100%]")
@@ -378,7 +378,7 @@ $([document]).on("click", "#supplierEditBtn", function (e) {
         return
     }
     let supplier;
-    suppliers.forEach(sup => {
+    suppliersList.forEach(sup => {
         if (sup.supplierId === e.target.value) {
             console.log(sup.supplierId + " " + e.target.value);
             supplier = sup;
@@ -398,7 +398,7 @@ $([document]).on("click", "#supplierEditBtn", function (e) {
         $("#addSupplier").removeClass("hidden");
     }
 });
-$("#supplierTableRefreshBtn").click(function (){
-    loadTable();
+$("#supplierTableRefreshBtn").click(function () {
+    loadSupplierTable();
 });
-loadTable()
+loadSupplierTable()

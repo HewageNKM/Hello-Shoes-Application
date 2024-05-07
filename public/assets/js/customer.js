@@ -1,3 +1,5 @@
+let customersList = [];
+
 $("#showCustomerAddForm").click(
     function () {
         $("#addCustomer").removeClass("hidden");
@@ -7,12 +9,32 @@ $("#showCustomerAddForm").click(
 $("#closeCustomerAddForm").click(
     function () {
         $("#addCustomer").addClass("hidden");
+
+        $("#customerCodeFld").val("");
+        $("#customerNameFld").val("");
+        $("#customerLaneFld").val("");
+        $("#customerCityFld").val("");
+        $("#customerStateFld").val("");
+        $("#customerPostalCodeFld").val("");
+        $("#customerContactFld").val("");
+        $("#customerEmailFld").val("");
+        $("#customerDojFld").val("");
+        $("#customerLevelFld").val("");
+        $("#customerPointsFld").val("");
+
     }
 );
+
 $("#alertCloseBtn").click(function () {
     const alert = $("#alert");
     alert.removeClass("right-0")
     alert.addClass("right-[-100%]")
+})
+
+$("#successCloseBtn").click(function () {
+    const success = $("#success");
+    success.removeClass("right-0")
+    success.addClass("right-[-100%]")
 })
 
 $("#searchCustomerBtn").click(function () {
@@ -30,8 +52,61 @@ $("#searchCustomerBtn").click(function () {
 
         return;
     }
+
     /*Ajax call to search for supplier*/
+    $("#customerTableLoadingAnimation").removeClass("hidden")
     console.log(val);
+    $.ajax({
+        url: baseUrl + "/customers?pattern=" + val,
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        success: function (response) {
+            console.log(response);
+            customersList = response;
+            $("#customerTableBody").empty();
+
+            response.forEach(customer => {
+                $("#customerTableBody").append(
+                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
+                        <td class="m-1 p-2">${customer.customerId.toUpperCase()}</td>
+                        <td class="m-1 p-2 capitalize">${customer.name}</td>
+                        <td class="m-1 p-2 capitalize">${customer.gender}</td>
+                        <td class="m-1 p-2 capitalize">${customer.lane}</td>
+                        <td class="m-1 p-2 capitalize">${customer.city}</td>
+                        <td class="m-1 p-2 capitalize">${customer.state}</td>
+                        <td class="m-1 p-2">${customer.postalCode}</td>
+                        <td class="m-1 p-2">${customer.contact}</td>
+                        <td class="m-1 p-2">${customer.email}</td>
+                        <td class="m-1 p-2">${customer.doj}</td>
+                        <td class="m-1 p-2">${customer.totalPoints}</td>
+                        <td class="m-1 p-2">${customer.level}</td>
+                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.replace("T", " ").substring(0, 19)}</td>
+                        
+                        <td class="m-1 p-2">
+                            <button value="${customer.id}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
+                            <button value="${customer.id}" id="customerDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteCustomerBtn">Delete</button>
+                        </td>
+                    </tr>`
+                );
+            })
+            $("#customerTableLoadingAnimation").addClass("hidden")
+        },
+        error: function (response) {
+            console.log(response);
+            $("#customerTableLoadingAnimation").addClass("hidden")
+
+            const alert = $("#alert");
+            alert.removeClass("right-[-100%]")
+            alert.addClass("right-0")
+            $("#alertDescription").text("Error loading customers");
+            setTimeout(() => {
+                alert.addClass("right-[-100%]")
+                alert.removeClass("right-0")
+            }, 3000);
+        }
+    });
 })
 
 $("#addCustomerForm").submit(function (e) {
@@ -109,7 +184,7 @@ $("#addCustomerForm").submit(function (e) {
     const alert = $("#alert");
 
     $.ajax({
-        url:baseUrl + "/customers",
+        url: baseUrl + "/customers",
         method: "POST",
         contentType: "application/json",
         headers: {
@@ -144,3 +219,59 @@ $("#addCustomerForm").submit(function (e) {
         }
     });
 });
+
+const loadCustomerTable = () => {
+    $("#customerTableLoadingAnimation").removeClass("hidden")
+    $.ajax({
+        url: baseUrl + "/customers",
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        success: function (response) {
+            console.log(response);
+            customersList.push(...response);
+            $("#customerTableBody").empty();
+
+            response.forEach(customer => {
+                $("#customerTableBody").append(
+                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
+                        <td class="m-1 p-2">${customer.customerId.toUpperCase()}</td>
+                        <td class="m-1 p-2 capitalize">${customer.name}</td>
+                        <td class="m-1 p-2 capitalize">${customer.gender}</td>
+                        <td class="m-1 p-2 capitalize">${customer.lane}</td>
+                        <td class="m-1 p-2 capitalize">${customer.city}</td>
+                        <td class="m-1 p-2 capitalize">${customer.state}</td>
+                        <td class="m-1 p-2">${customer.postalCode}</td>
+                        <td class="m-1 p-2">${customer.contact}</td>
+                        <td class="m-1 p-2">${customer.email}</td>
+                        <td class="m-1 p-2">${customer.doj}</td>
+                        <td class="m-1 p-2">${customer.totalPoints}</td>
+                        <td class="m-1 p-2">${customer.level}</td>
+                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.replace("T", " ").substring(0, 19)}</td>
+                        
+                        <td class="m-1 p-2">
+                            <button value="${customer.id}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
+                            <button value="${customer.id}" id="customerDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteCustomerBtn">Delete</button>
+                        </td>
+                    </tr>`
+                );
+            })
+            $("#customerTableLoadingAnimation").addClass("hidden")
+        },
+        error: function (response) {
+            console.log(response);
+            $("#customerTableLoadingAnimation").addClass("hidden")
+
+            const alert = $("#alert");
+            alert.removeClass("right-[-100%]")
+            alert.addClass("right-0")
+            $("#alertDescription").text("Error loading customers");
+            setTimeout(() => {
+                alert.addClass("right-[-100%]")
+                alert.removeClass("right-0")
+            }, 3000);
+        }
+    });
+}
+loadCustomerTable();
