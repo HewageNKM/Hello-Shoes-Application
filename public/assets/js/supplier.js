@@ -85,6 +85,7 @@ $("#searchSupplierBtn").click(function () {
         },
         error: function (error) {
             console.log(error);
+            loadingAnimation.addClass("hidden");
             alert.removeClass("right-[-100%]")
             alert.addClass("right-0")
             $("#alertDescription").text("An error occurred while searching for supplier");
@@ -301,6 +302,7 @@ const loadTable = () => {
             loadingAnimation.addClass("hidden");
         },
         error: function (error) {
+            loadingAnimation.addClass("hidden");
             const alert = $("#alert")
             console.log(error);
             alert.removeClass("right-[-100%]")
