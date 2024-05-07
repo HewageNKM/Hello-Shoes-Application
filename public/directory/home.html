@@ -8,45 +8,53 @@
             content="width=device-width, initial-scale=1"
             name="viewport"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
 </head>
 <body class="min-h-screen relative overflow-hidden font-Roboto">
 <nav>
     <div class="flex justify-between items-center p-5">
         <div class="flex items-center gap-5">
-            <img src="../assets/img/logo.jpg" alt="logo" class="w-20 h-20 rounded-full">
+            <img alt="logo" class="w-20 h-20 rounded-full" src="../assets/img/logo.jpg">
             <h1 class="text-2xl font-bold">Hello Shoes PVT LTD.</h1>
         </div>
         <div class="flex items-center gap-5">
-            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="orderBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="orderBtn"
                     onclick="navigationOnClick(this.value)" value="order">Order
             </button>
-            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="inventoryBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="inventoryBtn"
                     onclick="navigationOnClick(this.value)" value="inventory">Inventory
             </button>
-            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="supplierBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="supplierBtn"
                     onclick="navigationOnClick(this.value)" value="supplier">Supplier
             </button>
-            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="adminBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="adminBtn"
                     onclick="navigationOnClick(this.value)" value="admin">Admin
             </button>
-            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="employeeBtn"
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="employeeBtn"
                     onclick="navigationOnClick(this.value)" value="employee">Employee
             </button>
-            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="customerBtn"
+            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="customerBtn"
                     onclick="navigationOnClick(this.value)" value="customer">Customer
             </button>
-            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl" id="logoutBtn"
+            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="logoutBtn"
                     onclick="navigationOnClick(this.value)" value="logout">Logout
             </button>
         </div>
     </div>
 
 </nav>
-<div id="alert"
-     class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+<div class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+     id="alert"
      role="alert">
     <div>
         <p class="font-bold">Be Warned</p>
@@ -55,7 +63,9 @@
     <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
 </div>
 
-<div id="success" class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+<div class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
+     id="success"
+     role="alert">
     <div>
         <p class="font-bold">Complete</p>
         <p id="successDescription">Successfully</p>
@@ -107,8 +117,8 @@
                 <h1 class="text-2xl font-bold">Employees</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input type="text" id="employeeSearchFld" class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2"
-                               placeholder="Code, Name, Address.......">
+                        <input class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2" id="employeeSearchFld" placeholder="Code, Name, Address......."
+                               type="text">
                     </label>
                     <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
                             id="searchEmployeeBtn">Search
@@ -149,8 +159,8 @@
                                                id="employeeNameFld"
                                                name="name"
                                                placeholder="Name"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -159,8 +169,8 @@
                                                id="employeeAddressFld"
                                                name="address"
                                                placeholder="Address"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -169,8 +179,8 @@
                                                id="employeeDobFld"
                                                name="dob"
                                                placeholder="Date of Birth"
-                                               type="date"
                                                required
+                                               type="date"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -179,8 +189,8 @@
                                                id="designationFld"
                                                name="designation"
                                                placeholder="Designation"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                 </div>
@@ -192,8 +202,8 @@
                                                id="employeeContactFld"
                                                name="contact"
                                                placeholder="Contact No "
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -202,8 +212,8 @@
                                                id="employeeEmailFld"
                                                name="email"
                                                placeholder="Email"
-                                               type="email"
                                                required
+                                               type="email"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -212,8 +222,8 @@
                                                id="employeeEmergencyContactFld"
                                                name="emergencyContact"
                                                placeholder="Emergency Contact"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -222,8 +232,8 @@
                                                id="dateOfJoinedFld"
                                                name="doj"
                                                placeholder="Date of Joined"
-                                               type="date"
                                                required
+                                               type="date"
                                         >
                                     </label>
                                 </div>
@@ -296,8 +306,9 @@
                 <h1 class="text-2xl font-bold">Suppliers</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input type="text" id="supplierSearchFld" class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2"
-                               placeholder="Code, Name, Address.......">
+                        <input class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2" id="supplierSearchFld"
+                               placeholder="Code, Name, Address......."
+                               type="text">
                     </label>
                     <button class="w-[3rem] h-[2rem] hover:text-blue-600 p-2 font-semibold text-xl"
                             id="searchSupplierBtn">Search
@@ -338,8 +349,8 @@
                                                id="supplierNameFld"
                                                name="name"
                                                placeholder="Name"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -348,8 +359,8 @@
                                                id="supplierLaneFld"
                                                name="lane"
                                                placeholder="Lane"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -358,8 +369,8 @@
                                                id="supplierCityFld"
                                                name="city"
                                                placeholder="City"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -368,8 +379,8 @@
                                                id="supplierStateFld"
                                                name="state"
                                                placeholder="State"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -378,8 +389,8 @@
                                                id="supplierPostalCodeFld"
                                                name="zip"
                                                placeholder="Postal Code"
-                                               type="number"
                                                required
+                                               type="number"
                                         >
                                     </label>
                                 </div>
@@ -390,8 +401,8 @@
                                                id="supplierCountryFld"
                                                name="country"
                                                placeholder="Country"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -400,8 +411,8 @@
                                                id="supplierContact1Fld"
                                                name="contact1"
                                                placeholder="Contact No 1"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -410,8 +421,8 @@
                                                id="supplierContact2Fld"
                                                name="contact2"
                                                placeholder="Contact No 2"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
@@ -420,8 +431,8 @@
                                                id="supplierEmailFld"
                                                name="email"
                                                placeholder="Email"
-                                               type="email"
                                                required
+                                               type="email"
                                         >
                                     </label>
                                 </div>
@@ -436,16 +447,21 @@
             </div>
         </div>
         <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden" id="supplierTableLoadingAnimation">
-                <button disabled type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center">
-                    <svg aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
-                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
+                 id="supplierTableLoadingAnimation">
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" disabled
+                        type="button">
+                    <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
+                         role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                              fill="#E5E7EB"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                              fill="currentColor"/>
                     </svg>
                     Loading...
                 </button>
             </div>
-            <button id="supplierTableRefreshBtn" class="bg-blue-500 hover:bg-blue-600 rounded-md p-2">
+            <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="supplierTableRefreshBtn">
                 Refresh
             </button>
             <table class="w-full shadow-md text-md text-left rtl:text-right">
@@ -509,16 +525,17 @@
                 <h1 class="text-2xl font-bold">Customer</h1>
                 <div>
                     <label class="font-semibold"> Search
-                        <input type="text" id="customerSearchFld" class="w-[15rem] h-[2rem] bg-slate-200 rounded-md p-2"
-                               placeholder="Code, Name, Address.......">
+                        <input class="w-[20rem] m-1 h-[2rem] bg-slate-100 hover:border-2 focus:border-2 border-blue-600 rounded-md p-2" id="customerSearchFld"
+                               placeholder="Code, Name, Address......."
+                               type="text">
                     </label>
-                    <button class="bg-green-200 p-2 rounded-md font-semibold text-md hover:bg-green-300"
+                    <button class="w-[3rem] h-[2rem] hover:text-blue-600 p-2 font-semibold text-xl"
                             id="searchCustomerBtn">Search
                     </button>
                 </div>
             </div>
-            <button class="bg-green-200 p-2 rounded-md font-semibold text-xl hover:bg-green-300"
-                    id="showCustomerAddFormBtn"
+            <button class="bg-blue-400 p-2 rounded-md font-semibold text-xl hover:bg-blue-600"
+                    id="showCustomerAddForm"
                     type="button">Add Customer
             </button>
         </div>
@@ -530,15 +547,15 @@
                         <div class="justify-between items-center flex flex-row">
                             <h1 class="text-2xl font-bold">Add Customer</h1>
                             <button class="bg-red-500 p-1 rounded-md font-semibold text-md hover:bg-red-600"
-                                    id="closeCustomerAddFormBtn" type="button">Close
+                                    id="closeCustomerAddForm" type="button">Close
                             </button>
                         </div>
                         <form class="flex flex-col gap-5 items-center" id="addCustomerForm">
                             <div class="flex flex-row gap-5">
                                 <div class="flex flex-col gap-3 justify-evenly">
                                     <label class="hidden flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Code</span>
-                                        <input class=" rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <span class="text-blue-600 font-bold">Code</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="customerCodeFld"
                                                name="code"
                                                placeholder="Code"
@@ -546,124 +563,200 @@
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Name</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <span class="text-blue-600 font-bold">Name</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="customerNameFld"
                                                name="name"
                                                placeholder="Name"
-                                               type="text"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Address</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="customerAddressFld"
-                                               name="address"
-                                               placeholder="Address"
-                                               type="text"
+                                        <span class="text-blue-600 font-bold">Gender</span>
+                                        <select class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerGenderSelect"
+                                               name="gender"
                                                required
+                                               type="text"
+                                        >
+                                            <option value="male">MALE</option>
+                                            <option value="female">FEMALE</option>
+                                            <option value="rn">Rather Not</option>
+                                        </select>
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-blue-600 font-bold">Lane</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerLaneFld"
+                                               name="lane"
+                                               placeholder="Lane"
+                                               required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Date of Birth</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="customerDobFld"
-                                               name="dob"
-                                               placeholder="Date of Birth"
-                                               type="date"
+                                        <span class="text-blue-600 font-bold">City</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerCityFld"
+                                               name="city"
+                                               placeholder="City"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">NIC</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="customerNicFld"
-                                               name="nic"
-                                               placeholder="NIC"
-                                               type="text"
+                                        <span class="text-blue-600 font-bold">State</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerStateFld"
+                                               name="state"
+                                               placeholder="State"
                                                required
+                                               type="text"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-blue-600 font-bold">Postal Code</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerPostalCodeFld"
+                                               name="zip"
+                                               placeholder="Postal Code"
+                                               required
+                                               type="number"
                                         >
                                     </label>
                                 </div>
                                 <div class="flex flex-col gap-3">
-
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Contact No </span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="customerContactFld"
-                                               name="contact"
-                                               placeholder="Contact No "
-                                               type="text"
+                                        <span class="text-blue-600 font-bold">Date of Joined</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="dojFld"
+                                               name="doj"
+                                               placeholder="Date of Joined"
                                                required
+                                               type="date"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Email</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <span class="text-blue-600 font-bold">Contact No</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerContactFld"
+                                               name="contact"
+                                               placeholder="Contact No"
+                                               required
+                                               type="text"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-blue-600 font-bold">Email</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="customerEmailFld"
                                                name="email"
                                                placeholder="Email"
-                                               type="email"
                                                required
+                                               type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-1">
-                                        <span class="text-green-500 font-bold">Points</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-green-500 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="customerPointsFld"
-                                               name="points"
-                                               placeholder="Emergency Contact"
-                                               type="number"
+                                        <span class="text-blue-600 font-bold">Recent Purchase</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="customerRecentPurchaseDateAndTimeFld"
+                                               name="recentPurchase"
+                                               placeholder="dd/mm/yyyy hh:mm:ss"
+                                               type="text"
                                                disabled
-                                               value="0"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-blue-600 font-bold">Level</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               disabled
+                                               id="levelFld"
+                                               name="level"
+                                               placeholder="New"
+                                               type="text"
+                                               value="new"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-1">
+                                        <span class="text-blue-600 font-bold">Total Points</span>
+                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               disabled
+                                               id="pointsFld"
+                                               name="points"
+                                               placeholder="0"
+                                               type="number"
+                                               value=0
                                         >
                                     </label>
                                 </div>
                             </div>
-                            <button class="bg-green-500 flex justify-center w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-green-600"
+                            <button class="bg-blue-500 flex justify-center w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-blue-600"
                                     type="submit">
-                                Add Employee
+                                Add Customer
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="flex flex-row gap-5 overflow-auto mt-3">
-            <table class="w-full text-md text-left rtl:text-right">
+        <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
+                 id="customerTableLoadingAnimation">
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" disabled
+                        type="button">
+                    <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
+                         role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                              fill="#E5E7EB"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                              fill="currentColor"/>
+                    </svg>
+                    Loading...
+                </button>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="customerTableRefreshBtn">
+                Refresh
+            </button>
+            <table class="w-full shadow-md text-md text-left rtl:text-right">
                 <thead>
-                <tr class="text-left bg-green-100">
+                <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
                     <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
                         Code
                     </th>
-                    <th class="px-6 py-3  w-[20vw]" scope="col">
+                    <th class="px-6 py-3" scope="col">
                         Name
                     </th>
-                    <th class="px-6 py-3 w-[20vw]" scope="col">
-                        Address
+                    <th class="px-6 py-3" scope="col">
+                        Lane
                     </th>
-                    <th class="px-6 py-3 w-[20vw]" scope="col">
-                        NIC
+                    <th class="px-6 py-3" scope="col">
+                        City
                     </th>
-                    <th class="px-6 py-3 w-[20vw]" scope="col">
-                        DOB
+                    <th class="px-6 py-3" scope="col">
+                        State
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
-                        Contact No
+                    <th class="px-6 py-3" scope="col">
+                        Zip
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
+                    <th class="px-6 py-3" scope="col">
+                        Country
+                    </th>
+                    <th class="px-6 py-3" scope="col">
+                        Contact
+                    </th>
+                    <th class="px-6 py-3" scope="col">
+                        Contact
+                    </th>
+                    <th class="px-6 py-3" scope="col">
                         Email
                     </th>
-                    <th class="px-6 py-3 w-[15vw]" scope="col">
-                        Points
-                    </th>
-                    <th class="px-6 rounded-e-lg py-3 w-[15vw]" scope="col">
+                    <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
                         Action
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="customerTableBody">
                 <!-- Table body content goes here -->
                 </tbody>
             </table>

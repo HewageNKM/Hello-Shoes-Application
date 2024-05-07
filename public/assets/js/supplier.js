@@ -19,6 +19,17 @@ $("#showSupplierAddForm").click(
 $("#closeSupplierAddForm").click(
     function () {
         $("#addSupplier").addClass("hidden");
+        $("#supplierCodeFld").val("");
+        $("#supplierNameFld").val("");
+        $("#supplierEmailFld").val("");
+        $("#supplierContact1Fld").val("");
+        $("#supplierContact2Fld").val("");
+        $("#supplierLaneFld").val("");
+        $("#supplierCityFld").val("");
+        $("#supplierStateFld").val("");
+        $("#supplierCountryFld").val("");
+        $("#supplierPostalCodeFld").val("");
+
     }
 );
 
