@@ -51,7 +51,7 @@ $("#searchSupplierBtn").click(function () {
     const loadingAnimation = $("#supplierTableLoadingAnimation")
     loadingAnimation.removeClass("hidden");
     /*Ajax call to search for supplier*/
-    $.ajax("http://localhost:8080/api/v1/suppliers?pattern=" + val, {
+    $.ajax(baseUrl+"/suppliers?pattern=" + val, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -192,7 +192,7 @@ $("#addSupplierForm").submit(function (e) {
     const alert = $("#alert");
     const successAlert = $("#success");
     if (id === null || id === "" || id === undefined) {
-        $.ajax("http://localhost:8080/api/v1/suppliers", {
+        $.ajax(baseUrl+"/suppliers", {
             method: "POST",
             contentType: "application/json",
             headers: {
@@ -226,7 +226,7 @@ $("#addSupplierForm").submit(function (e) {
             }
         });
     } else {
-        $.ajax("http://localhost:8080/api/v1/suppliers/" + id.toLowerCase(), {
+        $.ajax(baseUrl+"/suppliers/" + id.toLowerCase(), {
             method: "PUT",
             contentType: "application/json",
             headers: {
@@ -267,7 +267,7 @@ $("#addSupplierForm").submit(function (e) {
 const loadTable = () => {
     const loadingAnimation = $("#supplierTableLoadingAnimation")
     loadingAnimation.removeClass("hidden");
-    $.ajax("http://localhost:8080/api/v1/suppliers", {
+    $.ajax(baseUrl+"/suppliers", {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -328,7 +328,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
 
     const b = confirm("Are you sure you want to delete supplier");
     if (b) {
-        $.ajax("http://localhost:8080/api/v1/suppliers/" + e.target.value, {
+        $.ajax(baseUrl+"/suppliers/" + e.target.value, {
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
