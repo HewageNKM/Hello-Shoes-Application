@@ -67,4 +67,16 @@ $("#addEmployeeForm").submit(function (evt) {
     }
     data = JSON.stringify(data);
     console.log(data);
+    $.ajax({
+        url: baseUrl+"/employees",
+        type: "POST",
+        data: data,
+        contentType: "application/json",
+        success: function (data) {
+            console.log(data);
+            if (data.status === "success") {
+                location.reload();
+            }
+        }
+    });
 })

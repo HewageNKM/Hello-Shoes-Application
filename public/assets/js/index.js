@@ -1,4 +1,5 @@
 const alert = $("#alert");
+const baseUrl = "http://localhost:5000/api/v1";
 $('#loginForm').submit(function (e) {
     e.preventDefault();
     const email = e.target.email.value.toString();
@@ -16,7 +17,7 @@ $('#loginForm').submit(function (e) {
     $("#emailFld").removeClass("border-2 border-red-500");
     // Backend API call to login
 
-    $.ajax("http://localhost:8080/api/v1/auth/users/login", {
+    $.ajax(baseUrl+"/auth/users/login", {
         method:"POST",
         contentType: "application/json",
         data: JSON.stringify({
