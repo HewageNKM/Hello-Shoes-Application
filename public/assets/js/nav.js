@@ -1,5 +1,3 @@
-const  baseUrl = "http://localhost:5000/api/v1";
-
 const role = window.localStorage.getItem("role");
 console.log("Role: " + role)
 

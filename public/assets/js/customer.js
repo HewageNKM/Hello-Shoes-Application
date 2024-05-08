@@ -2,6 +2,16 @@ let customersList = [];
 
 $("#showCustomerAddForm").click(
     function () {
+        if (window.localStorage.getItem("role") === "USER") {
+            $("#alertDescription").text("You are not authorized to add a customer");
+            $("#alert").removeClass("right-[-100%]")
+            $("#alert").addClass("right-0")
+            setTimeout(() => {
+                $("#alert").addClass("right-[-100%]")
+                $("#alert").removeClass("right-0")
+            }, 3000);
+            return;
+        }
         $("#addCustomer").removeClass("hidden");
     }
 );
@@ -57,7 +67,7 @@ $("#searchCustomerBtn").click(function () {
     $("#customerTableLoadingAnimation").removeClass("hidden")
     console.log(val);
     $.ajax({
-        url: baseUrl + "/customers?pattern=" + val,
+        url: BASEURL + "/customers?pattern=" + val,
         method: "GET",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
@@ -184,7 +194,7 @@ $("#addCustomerForm").submit(function (e) {
     const alert = $("#alert");
 
     $.ajax({
-        url: baseUrl + "/customers",
+        url: BASEURL + "/customers",
         method: "POST",
         contentType: "application/json",
         headers: {
@@ -223,7 +233,7 @@ $("#addCustomerForm").submit(function (e) {
 const loadCustomerTable = () => {
     $("#customerTableLoadingAnimation").removeClass("hidden")
     $.ajax({
-        url: baseUrl + "/customers",
+        url: BASEURL + "/customers",
         method: "GET",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")

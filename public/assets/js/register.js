@@ -15,7 +15,7 @@ $("#registerForm").submit(function (event) {
         if ((password1.length > 8) && (password2.length > 8) && (password1 === password2)) {
             $("#password1Fld").removeClass("border-2 border-red-500")
             $("#password2Fld").removeClass("border-2 border-red-500")
-            $.ajax("http://localhost:8080/api/v1/auth/users", {
+            $.ajax(BASEURL + "/auth/users", {
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({
@@ -176,7 +176,7 @@ otpSendBtn.click(function (event) {
         }
     }, 1000);
 
-    $.ajax("http://localhost:8080/api/v1/auth/mail/otp/send/" + emailFld.val().trim(), {
+    $.ajax(BASEURL + "/auth/mail/otp/send/" + emailFld.val().trim(), {
         method: "GET",
         success: function (response) {
             $("#success").removeClass("right-[-100%]")
@@ -223,7 +223,7 @@ $("#otpFld").keyup(function (event) {
     console.log("OTP: " + otp);
     if (/^\d{4}$/.test(otp)) {
         $(this).prop("disabled", true)
-        $.ajax("http://localhost:8080/api/v1/auth/mail/otp/verify/" + otp, {
+        $.ajax(BASEURL + "/auth/mail/otp/verify/" + otp, {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {

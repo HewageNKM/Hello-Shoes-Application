@@ -15,10 +15,10 @@ $("#registerForm").submit(function (event) {
         if ((password1.length > 8) && (password2.length > 8) && (password1 === password2)) {
             $("#password1Fld").removeClass("border-2 border-red-500")
             $("#password2Fld").removeClass("border-2 border-red-500")
-            $.ajax("http://localhost:8080/api/v1/auth/users", {
+            $.ajax(BASEURL + "/auth/users", {
                 method: "PUT",
                 contentType: "application/json",
-                data: JSON.stringify({email:email,password:password1}),
+                data: JSON.stringify({email: email, password: password1}),
                 success: function (response) {
                     console.log(response);
                     event.target.reset();
@@ -131,7 +131,7 @@ otpSendBtn.click(function (event) {
     let countdown = 60;
 
 
-    $.ajax("http://localhost:8080/api/v1/auth/users/forgot-password/" + emailFld.val().trim(), {
+    $.ajax(BASEURL+"/auth/users/forgot-password/" + emailFld.val().trim(), {
         method: "GET",
         success: function (response) {
             $("#success").removeClass("right-[-100%]")
@@ -219,7 +219,7 @@ otpSendBtn.click(function (event) {
                 //Set the timer to hide the alert after 4 seconds
                 const setAlertTimer = setInterval(function () {
                     count--;
-                    if (count=== 0) {
+                    if (count === 0) {
                         alert.removeClass("right-0")
                         alert.addClass("right-[-100%]")
                         clearInterval(setAlertTimer);
@@ -235,7 +235,7 @@ $("#otpFld").keyup(function (event) {
     console.log("OTP: " + otp);
     if (/^\d{4}$/.test(otp)) {
         $(this).prop("disabled", true)
-        $.ajax("http://localhost:8080/api/v1/auth/mail/otp/verify/" + otp, {
+        $.ajax(BASEURL+"/auth/mail/otp/verify/" + otp, {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {
