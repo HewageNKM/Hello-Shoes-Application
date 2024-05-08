@@ -1,14 +1,30 @@
-$("#showEmployeeAddFormBtn").click(
+$("#showEmployeeAddForm").click(
     function () {
         $("#addEmployee").removeClass("hidden");
     }
 );
 
-$("#closeEmployeeAddFormBtn").click(
+$("#closeEmployeeAddForm").click(
     function () {
         $("#addEmployee").addClass("hidden");
     }
 );
+
+$("#employeeImg").change(
+    function() {
+        console.log(this.files)
+        if (this.files[0].size > 3 * 1024 * 1024) {
+            alert("File size exceeds the limit of 3MB!");
+            this.value = ""
+        }
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $('#employeeImgPreview')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(this.files[0]);
+    }
+)
 
 $("#addEmployeeForm").submit(function (evt) {
     evt.preventDefault();
