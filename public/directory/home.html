@@ -53,7 +53,7 @@
     </div>
 
 </nav>
-<div class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+<div class="flex m-1 gap-5 flex-row z-10 items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
      id="alert"
      role="alert">
     <div>
@@ -63,7 +63,7 @@
     <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
 </div>
 
-<div class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
+<div class="flex m-1 z-10 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
      id="success"
      role="alert">
     <div>
@@ -222,21 +222,21 @@
                                 </div>
                                 <div class="flex flex-col gap-3">
                                     <label class="flex flex-col gap-2">
-                                        <span class="text-blue-600 font-bold">City</span>
+                                        <span class="text-blue-600 font-bold">Lane</span>
                                         <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="employeeCityFld"
-                                               name="city"
-                                               placeholder="City"
+                                               id="employeeLaneFld"
+                                               name="lane"
+                                               placeholder="Lane"
                                                required
                                                type="text"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-2">
-                                        <span class="text-blue-600 font-bold">Lane</span>
+                                        <span class="text-blue-600 font-bold">City</span>
                                         <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="employeeLaneFld"
-                                               name="lane"
-                                               placeholder="lane"
+                                               id="employeeCityFld"
+                                               name="city"
+                                               placeholder="City"
                                                required
                                                type="text"
                                         >
@@ -338,9 +338,8 @@
                                 </div>
                             </div>
                             <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
-                                    id="addEmployeeBtn"
                                     type="submit">
-                                <svg aria-hidden="true" class="mr-3 w-4 h-4 text-white animate-spin inline"
+                                <svg id="btnLoadingAnimation" aria-hidden="true" class="hidden mr-3 w-4 h-4 text-white animate-spin"
                                      fill="none" role="status"
                                      viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"

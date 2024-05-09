@@ -29,6 +29,7 @@ $("#employeeImg").change(
         reader.readAsDataURL(this.files[0]);
     }
 )
+
 $("#addEmployeeForm").submit(function (evt) {
     evt.preventDefault();
 
@@ -146,11 +147,10 @@ $("#addEmployeeForm").submit(function (evt) {
     console.log(formData.get('image'))
     console.log(formData.get('dto'))
 
-    $("#employeeFormDiv").removeClass("flex")
-    $("#employeeFormDiv").addClass("hidden")
-
-    $("#loadingAnimation").removeClass("hidden")
-    $("#loadingAnimation").addClass("flex")
+    $(".employeeFld").prop("disabled", true)
+    $(".employeeFld").removeClass("hover:border-2")
+    $("#btnLoadingAnimation").removeClass("hidden")
+    $("#btnLoadingAnimation").addClass("flex")
     $.ajax({
         url: BASEURL + '/employees',
         type: 'POST',
@@ -161,10 +161,11 @@ $("#addEmployeeForm").submit(function (evt) {
         processData: false,
         contentType: false,
         success: function (response) {
-            $("#employeeFormDiv").removeClass("hidden")
-            $("#employeeFormDiv").addClass("flex")
-            $("#loadingAnimation").removeClass("flex")
-            $("#loadingAnimation").addClass("hidden")
+            $(".employeeFld").prop("disabled", false)
+            $(".employeeFld").addClass("hover:border-2")
+            $("#btnLoadingAnimation").removeClass("flex")
+            $("#btnLoadingAnimation").addClass("hidden")
+
             evt.target.reset();
             $("#addEmployee").addClass("hidden");
             $("#successDescription").text("Employee added successfully!");
@@ -178,16 +179,21 @@ $("#addEmployeeForm").submit(function (evt) {
         },
         error: function (error) {
             console.log(error);
-            $("#employeeFormDiv").removeClass("hidden")
-            $("#loadingAnimation").removeClass("flex")
-            $("#loadingAnimation").addClass("hidden")
+            let message = "Error adding employee!"
+            if (error.responseJSON.message) {
+                message = error.responseJSON.message;
+            }
+            $(".employeeFld").prop("disabled", false)
+            $(".employeeFld").addClass("hover:border-2")
+            $("#btnLoadingAnimation").removeClass("flex")
+            $("#btnLoadingAnimation").addClass("hidden")
 
-            $("#errorDescription").text("Error adding employee!");
-            $("#error").removeClass("right-[-100%]")
-            $("#error").addClass("right-[0]")
+            $("#alertDescription").text(message);
+            $("#alert").removeClass("right-[-100%]")
+            $("#alert").addClass("right-[0]")
             setTimeout(() => {
-                $("#error").removeClass("right-[0]")
-                $("#error").addClass("right-[-100%]")
+                $("#alert").removeClass("right-[0]")
+                $("#alert").addClass("right-[-100%]")
             }, 3000)
         }
     });
