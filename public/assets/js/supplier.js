@@ -337,11 +337,11 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
             },
             success: function (data) {
                 console.log(data);
-                loadSupplierTable();
                 const success = $("#success");
                 $("#successDescription").text("Supplier deleted successfully");
                 success.removeClass("right-[-100%]")
                 success.addClass("right-0")
+                loadSupplierTable();
 
                 setTimeout(() => {
                     success.addClass("right-[-100%]")
@@ -377,13 +377,7 @@ $([document]).on("click", "#supplierEditBtn", function (e) {
         }, 3000);
         return
     }
-    let supplier;
-    suppliersList.forEach(sup => {
-        if (sup.supplierId === e.target.value) {
-            console.log(sup.supplierId + " " + e.target.value);
-            supplier = sup;
-        }
-    });
+    const supplier = suppliersList.find(supplier => supplier.supplierId === e.target.value)
     if (supplier) {
         $("#supplierCodeFld").val(supplier.supplierId);
         $("#supplierNameFld").val(supplier.name);

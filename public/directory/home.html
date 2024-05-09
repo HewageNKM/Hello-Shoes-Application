@@ -26,16 +26,16 @@
                     onclick="navigationOnClick(this.value)" value="order">Order
             </button>
             <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+                    id="adminBtn"
+                    onclick="navigationOnClick(this.value)" value="admin">Admin
+            </button>
+            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
                     id="inventoryBtn"
                     onclick="navigationOnClick(this.value)" value="inventory">Inventory
             </button>
             <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
                     id="supplierBtn"
                     onclick="navigationOnClick(this.value)" value="supplier">Supplier
-            </button>
-            <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
-                    id="adminBtn"
-                    onclick="navigationOnClick(this.value)" value="admin">Admin
             </button>
             <button class=" p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
                     id="employeeBtn"
@@ -135,7 +135,7 @@
         <div class="transition-all duration-500 hidden min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center"
              id="addEmployee">
             <div class="fixed inset-0 bg-black bg-opacity-50">
-                <div class="flex justify-center items-center min-h-screen">
+                <div class="relative flex justify-center items-center min-h-screen" id="employeeFormDiv">
                     <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
                         <div class="justify-between items-center flex flex-row">
                             <h1 class="text-2xl font-bold">Add Employee</h1>
@@ -143,25 +143,28 @@
                                     id="closeEmployeeAddForm" type="button">Close
                             </button>
                         </div>
-                        <form class="flex flex-col gap-5 items-center" id="addEmployeeForm">
-                            <div class="flex flex-col gap-5 items-center justify-center">
-                                <img alt="employeeImg" class="w-20 h-20 bg-center bg-cover rounded-full" id="employeeImgPreview" src="/assets/img/default_employee_avatar.png">
-                                <input alt="employeeImg" id="employeeImg" name="image" type="file" required class="p-2" accept="image/jpeg, imge/png">
+                        <form class="flex flex-col gap-3 items-center" id="addEmployeeForm">
+                            <div class="flex flex-col gap-3 items-center justify-center">
+                                <img alt="employeeImg" class="w-20 h-20 bg-center bg-cover rounded-full"
+                                     id="employeeImgPreview" src="/assets/img/default_employee_avatar.png">
+                                <input accept="image/jpeg" alt="employeeImg" class="p-2 employeeFld" id="employeeImg"
+                                       name="image" required
+                                       type="file">
                             </div>
                             <div class="flex flex-row gap-5">
-                                <div class="flex flex-col gap-3 justify-evenly">
-                                    <label class="hidden flex-col gap-1">
+                                <div class="flex flex-col gap-3">
+                                    <label class="hidden flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Code</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeCodeFld"
                                                name="code"
                                                placeholder="Code"
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Name</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeNameFld"
                                                name="name"
                                                placeholder="Name"
@@ -169,9 +172,9 @@
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Gender</span>
-                                        <select class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <select class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                 id="employeeGenderSelect"
                                                 name="gender"
                                                 required
@@ -182,37 +185,9 @@
                                             <option value="RN">Rather Not</option>
                                         </select>
                                     </label>
-                                    <label class="flex flex-col gap-1">
-                                        <span class="text-blue-600 font-bold">Designation</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="employeeDesignationFld"
-                                               name="designation"
-                                               required
-                                               type="text"
-                                        >
-                                    </label>
-                                    <label class="flex flex-col gap-1">
-                                        <span class="text-blue-600 font-bold">Access Role</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="employeeAccessRoleFld"
-                                               name="role"
-                                               required
-                                               type="text"
-                                        >
-                                    </label>
-                                    <label class="flex flex-col gap-1">
-                                        <span class="text-blue-600 font-bold">Status</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="employeeStatusFld"
-                                               name="status"
-                                               placeholder="Status"
-                                               required
-                                               type="text"
-                                        >
-                                    </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">DOB</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeDOBFld"
                                                name="dob"
                                                placeholder="DOB"
@@ -220,9 +195,9 @@
                                                type="date"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">DOJ</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeDateOfJoinedFld"
                                                name="doj"
                                                placeholder="DOJ"
@@ -230,11 +205,25 @@
                                                type="date"
                                         >
                                     </label>
+                                    <label class="flex flex-col gap-2">
+                                        <span class="text-blue-600 font-bold">Civil Status</span>
+                                        <select class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                                id="civilStatusSelect"
+                                                name="status"
+                                                required
+                                                type="text"
+                                        >
+                                            <option value="SINGLE">SINGLE</option>
+                                            <option value="MARRIED">MARRIED</option>
+                                            <option value="DIVORCED">DIVORCED</option>
+                                            <option class="WIDOWED">WIDOWED</option>
+                                        </select>
+                                    </label>
                                 </div>
-                                <div>
-                                    <label class="flex flex-col gap-1">
+                                <div class="flex flex-col gap-3">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">City</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeCityFld"
                                                name="city"
                                                placeholder="City"
@@ -242,9 +231,19 @@
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
+                                        <span class="text-blue-600 font-bold">Lane</span>
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="employeeLaneFld"
+                                               name="lane"
+                                               placeholder="lane"
+                                               required
+                                               type="text"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">State</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeStateFld"
                                                name="state"
                                                placeholder="State"
@@ -252,9 +251,9 @@
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Postal Code</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeePostalCodeFld"
                                                name="zip"
                                                placeholder="Postal Code"
@@ -262,9 +261,9 @@
                                                type="number"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Contact No</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeContactFld"
                                                name="contact"
                                                placeholder="Contact No"
@@ -272,9 +271,9 @@
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Email</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="employeeEmailFld"
                                                name="email"
                                                placeholder="Email"
@@ -282,22 +281,54 @@
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                </div>
+                                <div class="flex flex-col gap-3">
+                                    <label class="flex flex-col gap-2">
+                                        <span class="text-blue-600 font-bold">Designation</span>
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="employeeDesignationFld"
+                                               name="designation"
+                                               placeholder="Designation"
+                                               required
+                                               type="text"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-2">
+                                        <span class="text-blue-600 font-bold">Attach Branch</span>
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="employeeBranchFld"
+                                               name="branch"
+                                               placeholder="Attach Branch"
+                                               required
+                                               type="text"
+                                        >
+                                    </label>
+                                    <label class="flex flex-col gap-2">
+                                        <span class="text-blue-600 font-bold">Access Role</span>
+                                        <select class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                                id="employeeAccessRoleFld"
+                                                name="role"
+                                                required
+                                                type="text"
+                                        >
+                                            <option value="ADMIN">USER</option>
+                                            <option value="EMPLOYEE">ADMIN</option>
+                                        </select>
+                                    </label>
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Guardian</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               disabled
-                                               id="guardianFld"
-                                               name="guadian"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="employeeGuardianNameFld"
+                                               name="gName"
                                                placeholder="Guardian Name"
                                                required
                                                type="text"
                                         >
                                     </label>
-                                    <label class="flex flex-col gap-1">
+                                    <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Guardian Contact</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               disabled
-                                               id="guardianContactFld"
+                                        <input class="employeeFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                               id="employeeGuardianContactFld"
                                                name="gContact"
                                                placeholder="Contact"
                                                required
@@ -306,8 +337,17 @@
                                     </label>
                                 </div>
                             </div>
-                            <button class="bg-blue-500 flex justify-center w-[15rem] text-slate-50 rounded p-1 font-semibold hover:bg-blue-600"
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                                    id="addEmployeeBtn"
                                     type="submit">
+                                <svg aria-hidden="true" class="mr-3 w-4 h-4 text-white animate-spin inline"
+                                     fill="none" role="status"
+                                     viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                          fill="#E5E7EB"></path>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                          fill="currentColor"></path>
+                                </svg>
                                 Add Employee
                             </button>
                         </form>
@@ -315,22 +355,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
-                 id="employeeTableLoadingAnimation">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
-                        disabled
-                        type="button">
-                    <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
-                         role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                              fill="#E5E7EB"/>
-                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                              fill="currentColor"/>
-                    </svg>
-                    Loading...
-                </button>
-            </div>
+        <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative" id="employeeTableLoadingAnimation">
             <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="employeeTableRefreshBtn">
                 Refresh
             </button>

@@ -85,7 +85,7 @@ $("#searchCustomerBtn").click(function () {
                         <td class="m-1 p-2">${customer.doj}</td>
                         <td class="m-1 p-2">${customer.totalPoints}</td>
                         <td class="m-1 p-2">${customer.level}</td>
-                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.replace("T", " ").substring(0, 19)}</td>
+                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.toString().replace("T", " ").substring(0, 19)}</td>
                         
                         <td class="m-1 p-2">
                             <button value="${customer.customerId}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
@@ -273,7 +273,7 @@ const loadCustomerTable = () => {
                         <td class="m-1 p-2">${customer.doj}</td>
                         <td class="m-1 p-2">${customer.totalPoints}</td>
                         <td class="m-1 p-2">${customer.level}</td>
-                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.replace("T", " ").substring(0, 19)}</td>
+                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.toString().replace("T", " ").substring(0, 19)}</td>
                         
                         <td class="m-1 p-2">
                             <button value="${customer.customerId}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
@@ -310,9 +310,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
             $("#alert").addClass("right-[-100%]")
             $("#alert").removeClass("right-0")
         }, 3000);
-        alert("You do not have permission to edit customer");
         return
-
     }
     const id = e.target.value;
     console.log(id);
@@ -329,9 +327,9 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
                 $("#success").addClass("right-[-100%]")
                 $("#success").removeClass("right-0")
             }, 3000);
-            loadCustomerTable();
         }, error: function (response) {
             console.log(response);
+            loadCustomerTable();
             $("#alertDescription").text("Error deleting customer");
             $("#alert").removeClass("right-[-100%]")
             $("#alert").addClass("right-0")
@@ -352,7 +350,6 @@ $([document]).on("click", "#customerEditBtn", function (e) {
             $("#alert").addClass("right-[-100%]")
             $("#alert").removeClass("right-0")
         }, 3000);
-        alert("You do not have permission to edit customer");
         return
 
     }
@@ -374,6 +371,6 @@ $([document]).on("click", "#customerEditBtn", function (e) {
     $("#customerLevelFld").val(customer.level);
     $("#customerPointsFld").val(customer.totalPoints);
     $("#customerGenderFld").val(customer.gender);
-    $("#customerRecentPurchaseDateAndTimeFld").val(customer.recentPurchaseDateAndTime.replace("T", " ").substring(0, 19));
+    $("#customerRecentPurchaseDateAndTimeFld").val(customer.substring(0, 19));
 })
 loadCustomerTable();
