@@ -57,8 +57,11 @@ $("#registerForm").submit(function (event) {
                     }, 1000);
                 },
                 error: function (error) {
-                    console.log(error.responseJSON);
-
+                    console.log(error);
+                    let message = "Error registering user!";
+                    if (error.responseJSON.message) {
+                        message = error.responseJSON.message;
+                    }
                     const alert = $("#alert");
                     $("#btnLoadingAnimation").removeClass("flex");
                     $("#btnLoadingAnimation").addClass("hidden");
@@ -69,7 +72,7 @@ $("#registerForm").submit(function (event) {
                     if (error.responseJSON) {
                         alert.removeClass("right-[-100%]")
                         alert.addClass("right-0")
-                        $("#alertDescription").text(error.responseJSON.message)
+                        $("#alertDescription").text(message)
 
                         let countdown = 4;
                         const setAlertTimer = setInterval(function () {

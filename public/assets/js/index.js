@@ -47,11 +47,12 @@ $('#loginForm').submit(function (e) {
             e.target.reset();
             window.location.replace("/directory/home.html");
         },
-        error: function (xhr, status, error) {
-            xhr = JSON.parse(xhr.responseText);
-            const message = xhr.message;
-            console.log(xhr);
-
+        error: function (error) {
+            let message = "Error logging in!";
+            console.log(error);
+            if (error.responseJSON.message) {
+                message = error.responseJSON.message;
+            }
             $("#btnLoadingAnimation").removeClass("flex");
             $("#btnLoadingAnimation").addClass("hidden");
             $(".fld").prop("disabled", false);
@@ -60,7 +61,7 @@ $('#loginForm').submit(function (e) {
 
             alert.removeClass("right-[-100%]")
             alert.addClass("right-0")
-            document.getElementById("alertDescription").textContent = message;
+            $("#alertDescription").text(message);
             console.log(message);
 
             let countdown = 4;

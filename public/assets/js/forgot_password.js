@@ -29,7 +29,6 @@ $("#registerForm").submit(function (event) {
                 success: function (response) {
                     console.log(response);
                     event.target.reset();
-
                     $("#btnLoadingAnimation").removeClass("flex")
                     $("#btnLoadingAnimation").addClass("hidden")
                     $(".fld").prop("disabled", false)
@@ -52,7 +51,11 @@ $("#registerForm").submit(function (event) {
 
                 },
                 error: function (error) {
-                    console.log(error.responseJSON);
+                    console.log(error);
+                    let message = "Error updating password!"
+                    if (error.responseJSON.message) {
+                        message = error.responseJSON.message;
+                    }
 
                     $("#btnLoadingAnimation").removeClass("flex")
                     $("#btnLoadingAnimation").addClass("hidden")
@@ -61,35 +64,19 @@ $("#registerForm").submit(function (event) {
                     $("#registerBtn").removeClass("cursor-not-allowed")
 
                     const alert = $("#alert");
-                    if (error.responseJSON) {
-                        alert.removeClass("right-[-100%]")
-                        alert.addClass("right-0")
-                        $("#alertDescription").text(error.responseJSON.message)
+                    alert.removeClass("right-[-100%]")
+                    alert.addClass("right-0")
+                    $("#alertDescription").text(message)
 
-                        let count = 4;
-                        const setAlertTimer = setInterval(function () {
-                            count--;
-                            if (count === 0) {
-                                alert.removeClass("right-0")
-                                alert.addClass("right-[-100%]")
-                                clearInterval(setAlertTimer);
-                            }
-                        }, 1000);
-                    } else {
-                        alert.removeClass("right-[-100%]")
-                        alert.addClass("right-0")
-                        $("#alertDescription").text("Something went wrong. Please try again.")
-                        let count = 4;
-                        const setAlertTimer = setInterval(function () {
-                            count--;
-                            if (count === 0) {
-                                alert.removeClass("right-0")
-                                alert.addClass("right-[-100%]")
-                                clearInterval(setAlertTimer);
-                            }
-                        }, 1000);
-
-                    }
+                    let count = 4;
+                    const setAlertTimer = setInterval(function () {
+                        count--;
+                        if (count === 0) {
+                            alert.removeClass("right-0")
+                            alert.addClass("right-[-100%]")
+                            clearInterval(setAlertTimer);
+                        }
+                    }, 1000);
                 }
             });
         } else {
@@ -152,7 +139,7 @@ otpSendBtn.click(function (event) {
     let countdown = 60;
 
 
-    $.ajax(BASEURL+"/auth/users/forgot-password/" + emailFld.val().trim(), {
+    $.ajax(BASEURL + "/auth/users/forgot-password/" + emailFld.val().trim(), {
         method: "GET",
         success: function (response) {
             $("#success").removeClass("right-[-100%]")
@@ -256,7 +243,7 @@ $("#otpFld").keyup(function (event) {
     console.log("OTP: " + otp);
     if (/^\d{4}$/.test(otp)) {
         $(this).prop("disabled", true)
-        $.ajax(BASEURL+"/auth/mail/otp/verify/" + otp, {
+        $.ajax(BASEURL + "/auth/mail/otp/verify/" + otp, {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {
