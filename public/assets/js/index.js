@@ -12,9 +12,19 @@ $('#loginForm').submit(function (e) {
     } else {
         passwordFld.removeClass("border-2 border-red-500");
     }
+    if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+        $("#emailFld").addClass("border-2 border-red-500");
+        return;
+    }else {
+        $("#emailFld").removeClass("border-2 border-red-500");
+    }
     passwordFld.removeClass("border-2 border-red-500");
-    $("#emailFld").removeClass("border-2 border-red-500");
-
+    $("#emailFld").removeClass("hover:border-2");
+    $("#password1Fld").removeClass("hover:border-2");
+    $("#btnLoadingAnimation").removeClass("hidden");
+    $("#btnLoadingAnimation").addClass("flex");
+    $(".fld").prop("disabled", true);
+    $("#loginBtn").addClass("cursor-not-allowed");
     // Backend API call to login
     $.ajax(BASEURL+"/auth/users/login", {
         method:"POST",
@@ -25,6 +35,12 @@ $('#loginForm').submit(function (e) {
         }),
         success: function (data) {
             console.log(data);
+            $("#btnLoadingAnimation").removeClass("flex");
+            $("#btnLoadingAnimation").addClass("hidden");
+            $(".fld").prop("disabled", false);
+            $("#loginBtn").removeClass("cursor-not-allowed");
+            $("#emailFld").addClass("hover:border-2");
+            $("#passwordFld").addClass("hover:border-2");
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
@@ -34,6 +50,10 @@ $('#loginForm').submit(function (e) {
             xhr = JSON.parse(xhr.responseText);
             const message = xhr.message;
             console.log(xhr);
+            $("#btnLoadingAnimation").removeClass("flex");
+            $("#btnLoadingAnimation").addClass("hidden");
+            $(".fld").prop("disabled", false);
+            $("#loginBtn").removeClass("cursor-not-allowed");
             $('#emailFld').addClass("border-2 border-red-500");
             passwordFld.addClass("border-2 border-red-500");
             alert.removeClass("right-[-100%]")
