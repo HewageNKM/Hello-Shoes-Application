@@ -18,13 +18,15 @@ $('#loginForm').submit(function (e) {
     }else {
         $("#emailFld").removeClass("border-2 border-red-500");
     }
+
+    $(".fld").removeClass("hover:border-2");
     passwordFld.removeClass("border-2 border-red-500");
-    $("#emailFld").removeClass("hover:border-2");
-    $("#password1Fld").removeClass("hover:border-2");
     $("#btnLoadingAnimation").removeClass("hidden");
     $("#btnLoadingAnimation").addClass("flex");
     $(".fld").prop("disabled", true);
     $("#loginBtn").addClass("cursor-not-allowed");
+
+
     // Backend API call to login
     $.ajax(BASEURL+"/auth/users/login", {
         method:"POST",
@@ -39,8 +41,7 @@ $('#loginForm').submit(function (e) {
             $("#btnLoadingAnimation").addClass("hidden");
             $(".fld").prop("disabled", false);
             $("#loginBtn").removeClass("cursor-not-allowed");
-            $("#emailFld").addClass("hover:border-2");
-            $("#passwordFld").addClass("hover:border-2");
+            $(".fld").addClass("border-2");
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
@@ -50,12 +51,13 @@ $('#loginForm').submit(function (e) {
             xhr = JSON.parse(xhr.responseText);
             const message = xhr.message;
             console.log(xhr);
+
             $("#btnLoadingAnimation").removeClass("flex");
             $("#btnLoadingAnimation").addClass("hidden");
             $(".fld").prop("disabled", false);
             $("#loginBtn").removeClass("cursor-not-allowed");
-            $('#emailFld').addClass("border-2 border-red-500");
-            passwordFld.addClass("border-2 border-red-500");
+            $(".fld").addClass("border-red-500 border-2 ");
+
             alert.removeClass("right-[-100%]")
             alert.addClass("right-0")
             document.getElementById("alertDescription").textContent = message;
