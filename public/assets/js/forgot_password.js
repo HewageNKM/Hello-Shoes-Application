@@ -15,12 +15,20 @@ $("#registerForm").submit(function (event) {
         if ((password1.length > 8) && (password2.length > 8) && (password1 === password2)) {
             $("#password1Fld").removeClass("border-2 border-red-500")
             $("#password2Fld").removeClass("border-2 border-red-500")
+            $("#btnLoadingAnimation").removeClass("hidden")
+            $("#btnLoadingAnimation").addClass("flex")
+            $(".fld").prop("disabled", true)
+            $("#registerBtn").addClass("cursor-not-allowed")
             $.ajax(BASEURL + "/auth/users", {
                 method: "PUT",
                 contentType: "application/json",
                 data: JSON.stringify({email: email, password: password1}),
                 success: function (response) {
                     console.log(response);
+                    $("#btnLoadingAnimation").removeClass("flex")
+                    $("#btnLoadingAnimation").addClass("hidden")
+                    $(".fld").prop("disabled", false)
+                    $("#registerBtn").removeClass("cursor-not-allowed")
                     event.target.reset();
                     const alert = $("#success");
                     alert.removeClass("right-[-100%]")
@@ -39,6 +47,10 @@ $("#registerForm").submit(function (event) {
                 },
                 error: function (error) {
                     console.log(error.responseJSON);
+                    $("#btnLoadingAnimation").removeClass("flex")
+                    $("#btnLoadingAnimation").addClass("hidden")
+                    $(".fld").prop("disabled", false)
+                    $("#registerBtn").removeClass("cursor-not-allowed")
                     const alert = $("#alert");
                     if (error.responseJSON) {
                         alert.removeClass("right-[-100%]")
