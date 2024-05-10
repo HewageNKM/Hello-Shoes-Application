@@ -59,7 +59,7 @@ $("#registerForm").submit(function (event) {
                 error: function (error) {
                     console.log(error);
                     let message = "Error registering user!";
-                    if (error.responseJSON.message) {
+                    if (error.responseJSON) {
                         message = error.responseJSON.message;
                     }
                     const alert = $("#alert");

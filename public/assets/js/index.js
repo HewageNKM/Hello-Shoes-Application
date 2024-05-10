@@ -50,7 +50,7 @@ $('#loginForm').submit(function (e) {
         error: function (error) {
             let message = "Error logging in!";
             console.log(error);
-            if (error.responseJSON.message) {
+            if (error.responseJSON) {
                 message = error.responseJSON.message;
             }
             $("#btnLoadingAnimation").removeClass("flex");
