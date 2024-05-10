@@ -8,6 +8,7 @@ $("#registerForm").submit(function (event) {
     const email = event.target.email.value.toString().trim().toLocaleLowerCase();
     const password1 = event.target.password1.value.toString().trim();
     const password2 = event.target.password2.value.toString().trim();
+    const  role = event.target.role.value.toString().trim();
 
     console.log("Email: " + email, "Password1: " + password1, "Password2: " + password2);
 
@@ -15,17 +16,27 @@ $("#registerForm").submit(function (event) {
         if ((password1.length > 8) && (password2.length > 8) && (password1 === password2)) {
             $("#password1Fld").removeClass("border-2 border-red-500")
             $("#password2Fld").removeClass("border-2 border-red-500")
+            $("#btnLoadingAnimation").removeClass("hidden");
+            $("#btnLoadingAnimation").addClass("flex");
+            $(".fld").prop("disabled", true);
+            $("#registerBtn").addClass("cursor-not-allowed");
             $.ajax(BASEURL + "/auth/users", {
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({
                     email: email,
-                    password: password1
+                    password: password1,
+                    role: role
 
                 }),
                 success: function (response) {
                     console.log(response);
                     event.target.reset();
+                    $("#btnLoadingAnimation").removeClass("flex");
+                    $("#btnLoadingAnimation").addClass("hidden");
+                    $(".fld").prop("disabled", false);
+                    $("#registerBtn").removeClass("cursor-not-allowed");
+
                     const alert = $("#success");
                     alert.removeClass("right-[-100%]")
                     alert.addClass("right-0")
@@ -43,6 +54,10 @@ $("#registerForm").submit(function (event) {
                 error: function (error) {
                     console.log(error.responseJSON);
                     const alert = $("#alert");
+                    $("#btnLoadingAnimation").removeClass("flex");
+                    $("#btnLoadingAnimation").addClass("hidden");
+                    $(".fld").prop("disabled", false);
+                    $("#registerBtn").removeClass("cursor-not-allowed");
                     if (error.responseJSON) {
                         alert.removeClass("right-[-100%]")
                         alert.addClass("right-0")
