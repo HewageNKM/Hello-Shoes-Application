@@ -174,7 +174,6 @@ $("#addCustomerForm").submit(function (e) {
         contact: contact,
         lane: lane,
         city: city,
-        zip: zip,
         doj: doj,
         gender: gender,
         level: level,
@@ -360,6 +359,10 @@ $([document]).on("click", "#customerEditBtn", function (e) {
     const id = e.target.value;
     console.log(id);
     const customer = customersList.find(customer => customer.customerId === id);
+    let doj = customer.doj[0] +"-"+customer.doj[1]+"-"+customer.doj[2]
+    doj = new Date(doj).toISOString()
+    const recentDateAndTime = customer.recentPurchaseDateAndTime[0] +"-"+customer.recentPurchaseDateAndTime[1]+"-"+customer.recentPurchaseDateAndTime[2]+" "+customer.recentPurchaseDateAndTime[3] +":"+customer.recentPurchaseDateAndTime[4]
+
     console.log(customer);
     $("#addCustomer").removeClass("hidden");
 
@@ -371,10 +374,10 @@ $([document]).on("click", "#customerEditBtn", function (e) {
     $("#customerPostalCodeFld").val(customer.postalCode);
     $("#customerContactFld").val(customer.contact);
     $("#customerEmailFld").val(customer.email);
-    $("#customerDojFld").val(customer.doj.toString());
+    document.getElementById("dojFld").valueAsDate = new Date(doj);
     $("#customerLevelFld").val(customer.level);
     $("#customerPointsFld").val(customer.totalPoints);
     $("#customerGenderFld").val(customer.gender);
-    $("#customerRecentPurchaseDateAndTimeFld").val(customer.toString().replace("T"," ").substring(0, 19));
+    $("#customerRecentPurchaseDateAndTimeFld").val(recentDateAndTime);
 })
 loadCustomerTable();
