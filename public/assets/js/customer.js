@@ -1,19 +1,19 @@
 let customersList = [];
-const btnLoadingAnimation = $("#customerBtnLoadingAnimation");
+const customerBtnLoadingAnimation = $("#customerBtnLoadingAnimation");
 const customerAddBtn =$("#addCustomerBtn");
-const fld = $(".cFld");
-const alertMessage = $("#alert")
-const successMessage = $("#success")
+const cFld = $(".cFld");
+const customerAlertMessage = $("#alert")
+const customerSuccessMessage = $("#success")
 
 
 $("#showCustomerAddForm").click(function () {
     if (window.localStorage.getItem("role") === "USER") {
         $("#alertDescription").text("You are not authorized to add a customer");
-        alertMessage.removeClass("right-[-100%]")
-        alertMessage.addClass("right-0")
+        customerAlertMessage.removeClass("right-[-100%]")
+        customerAlertMessage.addClass("right-0")
         setTimeout(() => {
-           alertMessage.addClass("right-[-100%]")
-            alertMessage.removeClass("right-0")
+           customerAlertMessage.addClass("right-[-100%]")
+            customerAlertMessage.removeClass("right-0")
         }, 3000);
         return;
     }
@@ -39,19 +39,19 @@ $("#closeCustomerAddForm").click(function () {
 });
 
 $("#alertCloseBtn").click(function () {
-    alertMessage.removeClass("right-0")
-    alertMessage.addClass("right-[-100%]")
+    customerAlertMessage.removeClass("right-0")
+    customerAlertMessage.addClass("right-[-100%]")
 })
 
 $("#successCloseBtn").click(function () {
-    alertMessage.removeClass("right-0")
-    alertMessage.addClass("right-[-100%]")
+    customerAlertMessage.removeClass("right-0")
+    customerAlertMessage.addClass("right-[-100%]")
 })
 
 $("#searchCustomerBtn").click(function () {
     const val = $("#customerSearchFld").val();
     if (val.trim() === "") {
-        setAlertMessage("Please enter a valid search value");
+        setCustomerAlertMessage("Please enter a valid search value");
         return;
     }
 
@@ -74,7 +74,7 @@ $("#searchCustomerBtn").click(function () {
             if(response.responseJSON){
                 message = response.responseJSON.message;
             }
-            setAlertMessage(message)
+            setCustomerAlertMessage(message)
         }
     });
 })
@@ -182,10 +182,10 @@ $("#addCustomerForm").submit(function (e) {
     if (code.trim() !== "" || code.trim().length !== 0) {
 
         customerAddBtn.add("cursor-not-allowed");
-        btnLoadingAnimation.removeClass("hidden");
-        btnLoadingAnimation.addClass("flex")
-        fld.prop("disabled", true);
-        fld.removeClass("hover:border-2")
+        customerBtnLoadingAnimation.removeClass("hidden");
+        customerBtnLoadingAnimation.addClass("flex")
+        cFld.prop("disabled", true);
+        cFld.removeClass("hover:border-2")
 
         $.ajax({
             url: BASEURL + "/customers/" + code, method: "PUT", contentType: "application/json", headers: {
@@ -194,10 +194,10 @@ $("#addCustomerForm").submit(function (e) {
                 console.log(response);
 
                 customerAddBtn.removeClass("cursor-not-allowed");
-                btnLoadingAnimation.addClass("hidden");
-                btnLoadingAnimation.removeClass("flex")
-                fld.prop("disabled", false);
-                fld.addClass("hover:border-2")
+                customerBtnLoadingAnimation.addClass("hidden");
+                customerBtnLoadingAnimation.removeClass("flex")
+                cFld.prop("disabled", false);
+                cFld.addClass("hover:border-2")
                 e.target.reset();
 
 
@@ -208,25 +208,25 @@ $("#addCustomerForm").submit(function (e) {
                 console.log(response);
 
                 customerAddBtn.removeClass("cursor-not-allowed");
-                btnLoadingAnimation.addClass("hidden");
-                btnLoadingAnimation.removeClass("flex")
-                fld.prop("disabled", false);
-                fld.addClass("hover:border-2")
+                customerBtnLoadingAnimation.addClass("hidden");
+                customerBtnLoadingAnimation.removeClass("flex")
+                cFld.prop("disabled", false);
+                cFld.addClass("hover:border-2")
 
                 let message = "Error updating customer";
                 if (response.responseJSON) {
                     message = response.responseJSON.message;
                 }
-                setAlertMessage(message)
+                setCustomerAlertMessage(message)
             }
         })
     } else {
 
         customerAddBtn.add("cursor-not-allowed");
-        btnLoadingAnimation.removeClass("hidden");
-        btnLoadingAnimation.addClass("flex")
-        fld.prop("disabled", true);
-        fld.removeClass("hover:border-2")
+        customerBtnLoadingAnimation.removeClass("hidden");
+        customerBtnLoadingAnimation.addClass("flex")
+        cFld.prop("disabled", true);
+        cFld.removeClass("hover:border-2")
 
         $.ajax({
             url: BASEURL + "/customers", method: "POST", contentType: "application/json", headers: {
@@ -235,29 +235,29 @@ $("#addCustomerForm").submit(function (e) {
                 console.log(response);
 
                 customerAddBtn.removeClass("cursor-not-allowed");
-                btnLoadingAnimation.addClass("hidden");
-                btnLoadingAnimation.removeClass("flex")
-                fld.prop("disabled", false);
-                fld.addClass("hover:border-2")
+                customerBtnLoadingAnimation.addClass("hidden");
+                customerBtnLoadingAnimation.removeClass("flex")
+                cFld.prop("disabled", false);
+                cFld.addClass("hover:border-2")
 
                 e.target.reset();
                 $("#addCustomer").addClass("hidden");
                 loadCustomerTable()
-                setSuccessMessage("Customer added successfully!")
+                setCustomerSuccessMessage("Customer added successfully!")
             }, error: function (response) {
                 console.log(response);
 
                 customerAddBtn.removeClass("cursor-not-allowed");
-                btnLoadingAnimation.addClass("hidden");
-                btnLoadingAnimation.removeClass("flex")
-                fld.prop("disabled", false);
-                fld.addClass("hover:border-2")
+                customerBtnLoadingAnimation.addClass("hidden");
+                customerBtnLoadingAnimation.removeClass("flex")
+                cFld.prop("disabled", false);
+                cFld.addClass("hover:border-2")
 
                 let message = "Error adding customer";
                 if (response.responseJSON) {
                     message = response.responseJSON.message;
                 }
-                setAlertMessage(message)
+                setCustomerAlertMessage(message)
             }
         });
     }
@@ -280,7 +280,7 @@ const loadCustomerTable = () => {
                 message = response.responseJSON.message;
             }
             $("#customerTableLoadingAnimation").addClass("hidden")
-            setAlertMessage(message)
+            setCustomerAlertMessage(message)
         }
     });
 }
@@ -290,7 +290,7 @@ $("#customerTableRefreshBtn").click(function () {
 
 $([document]).on("click", "#customerDeleteBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
-        setAlertMessage("You do not have permission to delete customer")
+        setCustomerAlertMessage("You do not have permission to delete customer")
         return
     }
     const id = e.target.value;
@@ -301,7 +301,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
         }, success: function (response) {
             console.log(response);
             loadCustomerTable()
-            setSuccessMessage("Customer deleted successfully!");
+            setCustomerSuccessMessage("Customer deleted successfully!");
         }, error: function (response) {
             console.log(response);
             let message = "Error deleting customer"
@@ -309,14 +309,14 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
                 message = response.responseJSON.message;
             }
             loadCustomerTable();
-            setAlertMessage(message)
+            setCustomerAlertMessage(message)
         }
     })
 })
 
 $([document]).on("click", "#customerEditBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
-        setAlertMessage("You do not have permission to edit customer")
+        setCustomerAlertMessage("You do not have permission to edit customer")
         return
     }
 
@@ -345,22 +345,22 @@ $([document]).on("click", "#customerEditBtn", function (e) {
     $("#customerRecentPurchaseDateAndTimeFld").val(recentDateAndTime);
 })
 
-const setAlertMessage = (message) => {
+const setCustomerAlertMessage = (message) => {
     $("#alertDescription").text(message)
-    alertMessage.removeClass("right-[-100%]")
-    alertMessage.addClass("right-0")
+    customerAlertMessage.removeClass("right-[-100%]")
+    customerAlertMessage.addClass("right-0")
     setTimeout(() => {
-        alertMessage.addClass("right-[-100%]")
-        alertMessage.removeClass("right-0")
+        customerAlertMessage.addClass("right-[-100%]")
+        customerAlertMessage.removeClass("right-0")
     }, 3000);
 }
-setSuccessMessage = (message) => {
+const setCustomerSuccessMessage = (message) => {
     $("#successDescription").text(message);
-    successMessage.removeClass("right-[-100%]")
-    successMessage.addClass("right-0")
+    customerSuccessMessage.removeClass("right-[-100%]")
+    customerSuccessMessage.addClass("right-0")
     setTimeout(() => {
-        successMessage.addClass("right-[-100%]")
-        successMessage.removeClass("right-0")
+        customerSuccessMessage.addClass("right-[-100%]")
+        customerSuccessMessage.removeClass("right-0")
     }, 3000);
 }
 loadCustomerTable();

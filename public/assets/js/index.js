@@ -51,10 +51,11 @@ $('#loginForm').submit(function (e) {
             btnLoadingAnimation.addClass("hidden");
             fld.prop("disabled", false);
             fld.removeClass("cursor-not-allowed");
-            fld.addClass("border-2");
+            fld.addClass("hover:border-2");
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
+            $("#employeeImgPreview").attr("src", "./img/default_employee_avatar.png");
 
             window.location.replace("./public/directory/home.html");
         },
@@ -66,7 +67,7 @@ $('#loginForm').submit(function (e) {
             }
             btnLoadingAnimation.removeClass("flex");
             btnLoadingAnimation.addClass("hidden");
-           fld.prop("disabled", false);
+            fld.prop("disabled", false);
             $("#loginBtn").removeClass("cursor-not-allowed");
             fld.addClass("border-red-500 border-2 ");
 

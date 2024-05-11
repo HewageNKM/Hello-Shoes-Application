@@ -1,7 +1,7 @@
-const alertMessage = $("#alert")
-const successMessage = $("#success")
+const supplierAlertMessage = $("#alert")
+const supplierSuccessMessage = $("#success")
 const supplierBtnLoadingAnimation = $("#supplierBtnLoadingAnimation")
-const fld = $(".sFld")
+const sFld = $(".sFld")
 const addSupplierBtn = $("#addSupplierBtn")
 
 
@@ -10,7 +10,7 @@ let suppliersList = [];
 $("#showSupplierAddForm").click(
     function () {
         if (window.localStorage.getItem("role") === "USER") {
-            setAlertMessage("You do not have permission to add supplier")
+            setSupplierAlertMessage("You do not have permission to add supplier")
             return
         }
         $("#addSupplier").removeClass("hidden");
@@ -39,7 +39,7 @@ $("#searchSupplierBtn").click(function () {
     const alert = $("#alert");
     const tableLoadingAnimation = $("#supplierTableLoadingAnimation");
     if (val.trim() === "") {
-        setAlertMessage("Please enter a search value")
+        setSupplierAlertMessage("Please enter a search value")
         return;
     }
     $.ajax(BASEURL + "/suppliers?pattern=" + val, {
@@ -50,7 +50,7 @@ $("#searchSupplierBtn").click(function () {
         success: function (data) {
             console.log(data);
             suppliersList = data;
-            setTableContent()
+            setSupplierTableContent()
             tableLoadingAnimation.addClass("hidden");
         },
         error: function (error) {
@@ -163,8 +163,8 @@ $("#addSupplierForm").submit(function (e) {
 
     if (id === null || id === "" || id === undefined) {
 
-        fld.removeClass("hover:border-2")
-        fld.prop("disabled", true)
+        sFld.removeClass("hover:border-2")
+        sFld.prop("disabled", true)
         supplierBtnLoadingAnimation.removeClass("hidden")
         supplierBtnLoadingAnimation.addClass("flex")
         addSupplierBtn.addClass("cursor-not-allowed")
@@ -180,21 +180,21 @@ $("#addSupplierForm").submit(function (e) {
                 console.log(data);
                 e.target.reset();
                 suppliersList = data
-                fld.prop("disabled", false)
-                fld.addClass("hover:border-2")
+                sFld.prop("disabled", false)
+                sFld.addClass("hover:border-2")
                 supplierBtnLoadingAnimation.addClass("hidden")
                 supplierBtnLoadingAnimation.removeClass("flex")
                 addSupplierBtn.removeClass("cursor-not-allowed")
 
                 loadSupplierTable();
                 $("#addSupplier").addClass("hidden");
-                setSuccessMessage("Supplier added successfully")
+                setSupplierSuccessMessage("Supplier added successfully")
             },
             error: function (error) {
                 console.log(error);
 
-                fld.prop("disabled", false)
-                fld.addClass("hover:border-2")
+                sFld.prop("disabled", false)
+                sFld.addClass("hover:border-2")
                 supplierBtnLoadingAnimation.addClass("hidden")
                 supplierBtnLoadingAnimation.removeClass("flex")
                 addSupplierBtn.removeClass("cursor-not-allowed")
@@ -203,13 +203,13 @@ $("#addSupplierForm").submit(function (e) {
                 if (error.responseJSON) {
                     message = error.responseJSON.message;
                 }
-                setAlertMessage(message);
+                setSupplierAlertMessage(message);
             }
         });
     } else {
 
-        fld.removeClass("hover:border-2")
-        fld.prop("disabled", true)
+        sFld.removeClass("hover:border-2")
+        sFld.prop("disabled", true)
         supplierBtnLoadingAnimation.removeClass("hidden")
         supplierBtnLoadingAnimation.addClass("flex")
         addSupplierBtn.addClass("cursor-not-allowed")
@@ -226,7 +226,7 @@ $("#addSupplierForm").submit(function (e) {
                 e.target.reset();
                 $("#addSupplier").addClass("hidden");
                 loadSupplierTable();
-                setSuccessMessage("Supplier updated successfully")
+                setSupplierSuccessMessage("Supplier updated successfully")
             },
             error: function (error) {
                 console.log(error);
@@ -234,7 +234,7 @@ $("#addSupplierForm").submit(function (e) {
                 if (error.responseJSON) {
                     message = error.responseJSON.message;
                 }
-                setAlertMessage(message)
+                setSupplierAlertMessage(message)
             }
         });
     }
@@ -251,7 +251,7 @@ const loadSupplierTable = () => {
         success: function (data) {
             console.log(data);
             suppliersList = data;
-            setTableContent()
+            setSupplierTableContent()
             tableLoadingAnimation.addClass("hidden");
         },
         error: function (error) {
@@ -261,13 +261,13 @@ const loadSupplierTable = () => {
             if (error.responseJSON) {
                 message = error.responseJSON.message;
             }
-            setAlertMessage(message);
+            setSupplierAlertMessage(message);
         }
     });
 }
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
-        setAlertMessage("You do not have permission to delete supplier")
+        setSupplierAlertMessage("You do not have permission to delete supplier")
         return
     }
 
@@ -280,7 +280,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
             },
             success: function (data) {
                 console.log(data);
-                setSuccessMessage("Supplier deleted successfully");
+                setSupplierSuccessMessage("Supplier deleted successfully");
             },
             error: function (error) {
                 console.log(error);
@@ -288,7 +288,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
                 if (error.responseJSON) {
                     message = error.responseJSON.message;
                 }
-                setAlertMessage(message);
+                setSupplierAlertMessage(message);
             }
         });
     }
@@ -296,7 +296,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
 
 $([document]).on("click", "#supplierEditBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
-        setAlertMessage("You do not have permission to edit supplier");
+        setSupplierAlertMessage("You do not have permission to edit supplier");
         return
     }
     const supplier = suppliersList.find(supplier => supplier.supplierId === e.target.value)
@@ -315,7 +315,7 @@ $([document]).on("click", "#supplierEditBtn", function (e) {
     }
 });
 
-setTableContent = () => {
+setSupplierTableContent = () => {
     const table = $("#supplierTableBody");
     table.empty();
     suppliersList.forEach(supplier => {
@@ -339,22 +339,22 @@ setTableContent = () => {
         )
     });
 }
-const setAlertMessage = (message) => {
+const setSupplierAlertMessage = (message) => {
     $("#alertDescription").text(message)
-    alertMessage.removeClass("right-[-100%]")
-    alertMessage.addClass("right-0")
+    supplierAlertMessage.removeClass("right-[-100%]")
+    supplierAlertMessage.addClass("right-0")
     setTimeout(() => {
-        alertMessage.addClass("right-[-100%]")
-        alertMessage.removeClass("right-0")
+        supplierAlertMessage.addClass("right-[-100%]")
+        supplierAlertMessage.removeClass("right-0")
     }, 3000);
 }
-const setSuccessMessage = (message) => {
+const setSupplierSuccessMessage = (message) => {
     $("#successDescription").text(message)
-    successMessage.removeClass("right-[-100%]")
-    successMessage.addClass("right-0")
+    supplierSuccessMessage.removeClass("right-[-100%]")
+    supplierSuccessMessage.addClass("right-0")
     setTimeout(() => {
-        successMessage.addClass("right-[-100%]")
-        successMessage.removeClass("right-0")
+        supplierSuccessMessage.addClass("right-[-100%]")
+        supplierSuccessMessage.removeClass("right-0")
     }, 3000);
 }
 $("#supplierTableRefreshBtn").click(function () {
