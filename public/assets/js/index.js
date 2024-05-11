@@ -54,7 +54,7 @@ $('#loginForm').submit(function (e) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
-            window.location.replace("/directory/home.html");
+            window.location.replace("./public/directory/home.html");
         },
         error: function (error) {
             let message = "Error logging in!";
