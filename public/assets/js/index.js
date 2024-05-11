@@ -46,6 +46,7 @@ $('#loginForm').submit(function (e) {
         }),
         success: function (data) {
             console.log(data);
+            
             btnLoadingAnimation.removeClass("flex");
             btnLoadingAnimation.addClass("hidden");
             fld.prop("disabled", false);
@@ -54,6 +55,7 @@ $('#loginForm').submit(function (e) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
+
             window.location.replace("./public/directory/home.html");
         },
         error: function (error) {

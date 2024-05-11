@@ -70,7 +70,7 @@ $("#searchSupplierBtn").click(function () {
                         <td class="m-1 p-2 capitalize">${supplier.city}</td>
                         <td class="m-1 p-2 capitalize">${supplier.state}</td>
                         <td class="m-1 p-2">${supplier.postalCode}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.country}</t>
+                        <td class="m-1 p-2 ">${supplier.country.toUpperCase()}</t>
                         <td class="m-1 p-2">${supplier.contactNo1}</td>
                         <td class="m-1 p-2">${supplier.contactNo2}</td>
                         <td class="m-1 p-2">${supplier.email}</td>
@@ -287,7 +287,7 @@ const loadSupplierTable = () => {
                         <td class="m-1 p-2 capitalize">${supplier.city}</td>
                         <td class="m-1 p-2 capitalize">${supplier.state}</td>
                         <td class="m-1 p-2 ">${supplier.postalCode}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.country}</t>
+                        <td class="m-1 p-2 ">${supplier.country.toUpperCase()}</t>
                         <td class="m-1 p-2 ">${supplier.contactNo1}</td>
                         <td class="m-1 p-2">${supplier.contactNo2}</td>
                         <td class="m-1 p-2">${supplier.email}</td>
