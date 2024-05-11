@@ -1,4 +1,14 @@
-const alert = $("#alert");
+/*
+Authenticate User with Email and Password
+Get email and role to authorize user
+Set user authorization
+Set admin authorization
+Redirect to Unauthorized page
+*/
+
+const alertMessage = $("#alert");
+const btnLoadingAnimation = $("#btnLoadingAnimation");
+const fld = $(".fld");
 $('#loginForm').submit(function (e) {
     e.preventDefault();
     const email = e.target.email.value.toString();
@@ -19,15 +29,14 @@ $('#loginForm').submit(function (e) {
         $("#emailFld").removeClass("border-2 border-red-500");
     }
 
-    $(".fld").removeClass("hover:border-2");
+    fld.removeClass("hover:border-2");
     passwordFld.removeClass("border-2 border-red-500");
-    $("#btnLoadingAnimation").removeClass("hidden");
-    $("#btnLoadingAnimation").addClass("flex");
-    $(".fld").prop("disabled", true);
+    btnLoadingAnimation.removeClass("hidden");
+    btnLoadingAnimation.addClass("flex");
+    fld.prop("disabled", true);
     $("#loginBtn").addClass("cursor-not-allowed");
 
 
-    // Backend API call to login
     $.ajax(BASEURL+"/auth/users/login", {
         method:"POST",
         contentType: "application/json",
@@ -37,11 +46,11 @@ $('#loginForm').submit(function (e) {
         }),
         success: function (data) {
             console.log(data);
-            $("#btnLoadingAnimation").removeClass("flex");
-            $("#btnLoadingAnimation").addClass("hidden");
-            $(".fld").prop("disabled", false);
-            $("#loginBtn").removeClass("cursor-not-allowed");
-            $(".fld").addClass("border-2");
+            btnLoadingAnimation.removeClass("flex");
+            btnLoadingAnimation.addClass("hidden");
+            fld.prop("disabled", false);
+            fld.removeClass("cursor-not-allowed");
+            fld.addClass("border-2");
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
@@ -53,14 +62,14 @@ $('#loginForm').submit(function (e) {
             if (error.responseJSON) {
                 message = error.responseJSON.message;
             }
-            $("#btnLoadingAnimation").removeClass("flex");
-            $("#btnLoadingAnimation").addClass("hidden");
-            $(".fld").prop("disabled", false);
+            btnLoadingAnimation.removeClass("flex");
+            btnLoadingAnimation.addClass("hidden");
+           fld.prop("disabled", false);
             $("#loginBtn").removeClass("cursor-not-allowed");
-            $(".fld").addClass("border-red-500 border-2 ");
+            fld.addClass("border-red-500 border-2 ");
 
-            alert.removeClass("right-[-100%]")
-            alert.addClass("right-0")
+            alertMessage.removeClass("right-[-100%]")
+            alertMessage.addClass("right-0")
             $("#alertDescription").text(message);
             console.log(message);
 
@@ -69,8 +78,8 @@ $('#loginForm').submit(function (e) {
             const setAlertTimer = setInterval(function () {
                 countdown--;
                 if(countdown === 0){
-                    alert.removeClass("right-0")
-                    alert.addClass("right-[-100%]")
+                    alertMessage.removeClass("right-0")
+                    alertMessage.addClass("right-[-100%]")
                     clearInterval(setAlertTimer);
                 }
             }, 1000);
@@ -80,6 +89,6 @@ $('#loginForm').submit(function (e) {
 });
 
 $("#alertCloseBtn").click(function () {
-    alert.removeClass("right-0")
-    alert.addClass("right-[-100%]")
+    alertMessage.removeClass("right-0")
+    alertMessage.addClass("right-[-100%]")
 });

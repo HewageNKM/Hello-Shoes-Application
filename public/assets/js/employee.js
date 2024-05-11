@@ -18,7 +18,7 @@ $("#employeeImg").change(
     function () {
         console.log(this.files)
         if (this.files[0].size > 3 * 1024 * 1024) {
-            alert("File size exceeds the limit of 3MB!");
+            alertMessage("File size exceeds the limit of 3MB!");
             this.value = ""
         }
         const reader = new FileReader();
@@ -151,6 +151,7 @@ $("#addEmployeeForm").submit(function (evt) {
     $(".employeeFld").removeClass("hover:border-2")
     $("#btnLoadingAnimation").removeClass("hidden")
     $("#btnLoadingAnimation").addClass("flex")
+
     $.ajax({
         url: BASEURL + '/employees',
         type: 'POST',
