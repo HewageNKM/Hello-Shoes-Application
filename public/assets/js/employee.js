@@ -4,7 +4,6 @@ const eFld = $(".eFld")
 const employeeAlertMessage = $("#alert")
 const employeeSuccessMessage = $("#success")
 
-
 $("#showEmployeeAddForm").click(
     function () {
         $("#addEmployee").removeClass("hidden");
@@ -198,8 +197,9 @@ $("#addEmployeeForm").submit(function (evt) {
 
 })
 const loadEmployeeTable = () => {
-    $("#employeeBtnLoadingAnimation").removeClass("hidden")
-    $("#employeeBtnLoadingAnimation").addClass("flex")
+    const employeeTableLoadingAnimation = $("#employeeTableLoadingAnimation")
+    employeeTableLoadingAnimation.removeClass("hidden")
+    employeeTableLoadingAnimation.addClass("flex")
 
     $.ajax({
         url: BASEURL + '/employees',
@@ -211,10 +211,13 @@ const loadEmployeeTable = () => {
         success: function (response) {
             console.log(response)
             const employeeTableBody = $("#employeeTableBody")
-           employeeTableBody.empty()
+            employeeTableLoadingAnimation.removeClass("flex")
+            employeeTableLoadingAnimation.addClass("hidden")
+
+            employeeTableBody.empty()
             response.forEach((employee) => {
-                const doj = employee.doj[0] +"-"+employee.doj[1]+"-"+employee.doj[2]
-                const dob = employee.dob[0] +"-"+employee.dob[1]+"-"+employee.dob[2]
+                const doj = employee.doj[0] + "-" + employee.doj[1] + "-" + employee.doj[2]
+                const dob = employee.dob[0] + "-" + employee.dob[1] + "-" + employee.dob[2]
                 employeeTableBody.append(
                     `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
                         <td class="m-1 p-2">${employee.employeeId.toUpperCase()}</td>
@@ -241,6 +244,12 @@ const loadEmployeeTable = () => {
                     </tr>`
                 )
             })
+        },
+        error: function (error) {
+            console.log(error)
+            employeeTableLoadingAnimation.removeClass("flex")
+            employeeTableLoadingAnimation.addClass("hidden")
+            setEmployeeAlertMessage("Error loading employees!")
         }
     })
 }
