@@ -2,13 +2,18 @@ const otpSendBtn = $("#otpSendBtn");
 let isEmailVerified = false;
 otpSendBtn.prop("disabled", true)
 otpSendBtn.removeClass("hover:bg-red-500")
+const alertMessage = $("#alert");
+const successAlert = $("#success")
+const fld = $(".fld");
+const otpFld = $("#otpFld");
+const btnLoadingAnimation = $("#btnLoadingAnimation");
 
 $("#registerForm").submit(function (event) {
     event.preventDefault();
     const email = event.target.email.value.toString().trim().toLocaleLowerCase();
     const password1 = event.target.password1.value.toString().trim();
     const password2 = event.target.password2.value.toString().trim();
-    const  role = event.target.role.value.toString().trim();
+    const role = event.target.role.value.toString().trim();
 
     console.log("Email: " + email, "Password1: " + password1, "Password2: " + password2);
 
@@ -17,10 +22,12 @@ $("#registerForm").submit(function (event) {
 
             $("#password1Fld").removeClass("border-2 border-red-500")
             $("#password2Fld").removeClass("border-2 border-red-500")
-            $("#btnLoadingAnimation").removeClass("hidden");
-            $("#btnLoadingAnimation").addClass("flex");
-            $(".fld").prop("disabled", true);
-            $(".fld").removeClass("hover:border-2");
+
+            //Login Btn Animation
+            btnLoadingAnimation.removeClass("hidden");
+            btnLoadingAnimation.addClass("flex");
+            fld.prop("disabled", true);
+            fld.removeClass("hover:border-2");
             $("#registerBtn").addClass("cursor-not-allowed");
 
             $.ajax(BASEURL + "/auth/users", {
@@ -36,22 +43,29 @@ $("#registerForm").submit(function (event) {
                     console.log(response);
                     event.target.reset();
 
-                    $("#btnLoadingAnimation").removeClass("flex");
-                    $("#btnLoadingAnimation").addClass("hidden");
-                    $(".fld").prop("disabled", false);
-                    $("#registerBtn").removeClass("cursor-not-allowed");
-                    $(".fld").addClass("border-2");
+                    //Login Btn Animation
+                    btnLoadingAnimation.removeClass("flex");
+                    btnLoadingAnimation.addClass("hidden");
 
-                    const alert = $("#success");
-                    alert.removeClass("right-[-100%]")
-                    alert.addClass("right-0")
+                    fld.prop("disabled", false);
+                    $("#registerBtn").removeClass("cursor-not-allowed");
+                    fld.addClass("hover:border-2");
+                    otpFld.prop("disabled", false);
+                    otpFld.addClass("hover:border-2")
+                    otpSendBtn.prop("disabled", false)
+                    isEmailVerified = false;
+                    otpSendBtn.text("Send OTP")
+
+                    successAlert.removeClass("right-[-100%]")
+                    successAlert.addClass("right-0")
+
                     $("#successDescription").text("User registered successfully")
                     let countdown = 4;
                     const setAlertTimer = setInterval(function () {
                         countdown--;
                         if (countdown === 0) {
-                            alert.removeClass("right-0")
-                            alert.addClass("right-[-100%]")
+                            successAlert.removeClass("right-0")
+                            successAlert.addClass("right-[-100%]")
                             clearInterval(setAlertTimer);
                         }
                     }, 1000);
@@ -62,16 +76,21 @@ $("#registerForm").submit(function (event) {
                     if (error.responseJSON) {
                         message = error.responseJSON.message;
                     }
-                    const alert = $("#alert");
-                    $("#btnLoadingAnimation").removeClass("flex");
-                    $("#btnLoadingAnimation").addClass("hidden");
-                    $(".fld").prop("disabled", false);
-                    $(".fld").addClass("border-2");
+
+                    btnLoadingAnimation.removeClass("flex");
+                    btnLoadingAnimation.addClass("hidden");
+                    fld.prop("disabled", false);
+                    fld.addClass("hover:border-2");
                     $("#registerBtn").removeClass("cursor-not-allowed");
+                    otpFld.prop("disabled", false)
+                    otpFld.addClass("hover:border-2")
+                    otpSendBtn.prop("disabled", false)
+                    isEmailVerified = false;
+                    otpSendBtn.text("Send OTP")
 
                     if (error.responseJSON) {
-                        alert.removeClass("right-[-100%]")
-                        alert.addClass("right-0")
+                        alertMessage.removeClass("right-[-100%]")
+                        alertMessage.addClass("right-0")
                         $("#alertDescription").text(message)
 
                         let countdown = 4;
@@ -84,8 +103,8 @@ $("#registerForm").submit(function (event) {
                             }
                         }, 1000);
                     } else {
-                        alert.removeClass("right-[-100%]")
-                        alert.addClass("right-0")
+                        alertMessage.removeClass("right-[-100%]")
+                        alertMessage.addClass("right-0")
                         $("#alertDescription").text("Something went wrong. Please try again.")
                         let countdown = 4;
                         const setAlertTimer = setInterval(function () {
@@ -104,32 +123,31 @@ $("#registerForm").submit(function (event) {
             $("#password1Fld").addClass("border-2 border-red-500")
             $("#password2Fld").addClass("border-2 border-red-500")
 
-            const alert = $("#alert");
-            alert.removeClass("right-[-100%]")
-            alert.addClass("right-0")
+
+            alertMessage.removeClass("right-[-100%]")
+            alertMessage.addClass("right-0")
             $("#alertDescription").text("Passwords do not match or less than 8 characters")
 
             let countdown = 4;
             const setAlertTimer = setInterval(function () {
                 countdown--;
                 if (countdown === 0) {
-                    alert.removeClass("right-0")
-                    alert.addClass("right-[-100%]")
+                    alertMessage.removeClass("right-0")
+                    alertMessage.addClass("right-[-100%]")
                     clearInterval(setAlertTimer);
                 }
             }, 1000);
         }
     } else {
-        const alert = $("#alert");
-        alert.removeClass("right-[-100%]")
-        alert.addClass("right-0")
+        alertMessage.removeClass("right-[-100%]")
+        alertMessage.addClass("right-0")
         $("#alertDescription").text("Email not verified yet. Please verify your email first.")
         let countdown = 4;
         const setAlertTimer = setInterval(function () {
             countdown--;
             if (countdown === 0) {
-                alert.removeClass("right-0")
-                alert.addClass("right-[-100%]")
+                alertMessage.removeClass("right-0")
+                alertMessage.addClass("right-[-100%]")
                 clearInterval(setAlertTimer);
             }
         }, 1000);
@@ -147,96 +165,92 @@ $("#emailFld").keyup(function (event) {
     }
 });
 
-otpSendBtn.click(function (event) {
+otpSendBtn.click(function () {
     const emailFld = $("#emailFld");
     if (!/^[\w-.]+@([\w-]+\.)+[\w-]+$/.test(emailFld.val().trim())) {
         return;
     }
     emailFld.attr("disabled", "disabled")
     emailFld.removeClass("hover:border-2")
+    otpSendBtn.prop("disabled", true)
+    otpSendBtn.removeClass("hover:bg-red-500")
     // Disable the button
     $(this).prop("disabled", true);
 
 
-    let countdown = 60;
-
-    // Remove hover effect
-    $(this).removeClass("hover:bg-red-500")
-    // Update the button text with the remaining time
-    $("#otpSendBtn").text("Wait " + countdown + " seconds");
-
-
-    const interval = setInterval(function () {
-        countdown--;
-
-        // Update the button text
-
-        // Check if countdown is finished
-        if (countdown === 0 && isEmailVerified === false) {
-            otpSendBtn.prop("disabled", false);
-            $("#otpFld").prop("disabled", false)
-            otpSendBtn.text("Resend OTP");
-            otpSendBtn.addClass("hover:bg-red-500")
-            clearInterval(interval);
-        } else if (countdown === 0 && isEmailVerified === true) {
-            otpSendBtn.prop("disabled", true)
-            $("#otpFld").prop("disabled", true)
-            $("#otpFld").removeClass("hover:border-2")
-            otpSendBtn.removeClass("hover:bg-red-500")
-            otpSendBtn.text("Verified");
-            clearInterval(interval);
-        } else if (countdown > 0 && isEmailVerified === false) {
-            $("#otpFld").prop("disabled", false)
-            otpSendBtn.prop("disabled", false);
-            otpSendBtn.text("Wait " + countdown + " seconds");
-        } else if (countdown > 0 && isEmailVerified === true) {
-            otpSendBtn.prop("disabled", true)
-            $("#otpFld").prop("disabled", true)
-            $("#otpFld").removeClass("hover:border-2")
-            otpSendBtn.removeClass("hover:bg-red-500")
-            otpSendBtn.text("Verified");
-            clearInterval(interval);
-        } else if (countdown > 0) {
-            otpSendBtn.prop("disabled", false);
-            otpSendBtn.text("Wait " + countdown + " seconds");
-        }
-    }, 1000);
-
     $.ajax(BASEURL + "/auth/mail/otp/send/" + emailFld.val().trim(), {
         method: "GET",
         success: function (response) {
-            $("#success").removeClass("right-[-100%]")
-            $("#success").addClass("right-0")
+            let count = 60;
+            // Update the button text with the remaining time
+            $("#otpSendBtn").text("Wait " + count + " seconds");
+            const interval = setInterval(function () {
+                count--;
+
+                // Update the button text
+
+                // Check if countdown is finished
+                if (count === 0 && isEmailVerified === false) {
+                    otpSendBtn.prop("disabled", false);
+                    $("#otpFld").prop("disabled", false)
+                    otpSendBtn.text("Resend OTP");
+                    otpSendBtn.addClass("hover:bg-red-500")
+                    clearInterval(interval);
+                } else if (count === 0 && isEmailVerified === true) {
+                    otpSendBtn.prop("disabled", true)
+                    otpFld.prop("disabled", true)
+                    otpFld.removeClass("hover:border-2")
+                    otpSendBtn.removeClass("hover:bg-red-500")
+                    otpSendBtn.text("Verified");
+                    clearInterval(interval);
+                } else if (count > 0 && isEmailVerified === false) {
+                    $("#otpFld").prop("disabled", false)
+                    otpSendBtn.prop("disabled", false);
+                    otpSendBtn.text("Wait " + count + " seconds");
+                } else if (count > 0 && isEmailVerified === true) {
+                    otpSendBtn.prop("disabled", true);
+                    otpFld.prop("disabled", true);
+                    otpFld.removeClass("hover:border-2")
+                    otpSendBtn.removeClass("hover:bg-red-500")
+                    otpSendBtn.text("Verified");
+                    clearInterval(interval);
+                } else if (count > 0) {
+                    otpSendBtn.prop("disabled", false);
+                    otpSendBtn.text("Wait " + count + " seconds");
+                }
+            }, 1000);
+
+            successAlert.removeClass("right-[-100%]")
+            successAlert.addClass("right-0")
             $("#successDescription").text("OTP sent to your email")
             console.log(response)
 
             let countdown = 4;
-            //Set the timer to hide the alert after 4 seconds
+
             const setAlertTimer = setInterval(function () {
                 countdown--;
                 if (countdown === 0) {
-                    $("#success").removeClass("right-0")
-                    $("#success").addClass("right-[-100%]")
+                    successAlert.removeClass("right-0")
+                    successAlert.addClass("right-[-100%]")
                     clearInterval(setAlertTimer);
                 }
             }, 1000);
         },
         error: function (error) {
             console.log(error)
-            const alert = $("#alert");
+
             $(this).prop("disabled", false);
-            // Remove hover effect
             $(this).addClass("hover:bg-red-500")
-            alert.removeClass("right-[-100%]")
-            alert.addClass("right-0")
+            alertMessage.removeClass("right-[-100%]")
+            alertMessage.addClass("right-0")
             $("#alertDescription").text("Something went wrong. Please try again.")
+
             let countdown = 4;
-            //Set the timer to hide the alert after 4 seconds
             const setAlertTimer = setInterval(function () {
                 countdown--;
                 if (countdown === 0) {
-                    alert.removeClass("right-0")
-                    alert.addClass("right-[-100%]")
+                    alertMessage.removeClass("right-0")
+                    alertMessage.addClass("right-[-100%]")
                     clearInterval(setAlertTimer);
                 }
             }, 1000);
@@ -244,7 +258,7 @@ otpSendBtn.click(function (event) {
     })
 });
 
-$("#otpFld").keyup(function (event) {
+otpFld.keyup(function (event) {
     const otp = event.target.value.toString().trim();
     console.log("OTP: " + otp);
     if (/^\d{4}$/.test(otp)) {
@@ -261,19 +275,19 @@ $("#otpFld").keyup(function (event) {
                 }
             },
             error: function (error) {
+
                 $(this).prop("disabled", false)
                 console.log(error)
-                const alert = $("#alert");
-                alert.removeClass("right-[-100%]")
-                alert.addClass("right-0")
+                alertMessage.removeClass("right-[-100%]")
+                alertMessage.addClass("right-0")
                 $("#alertDescription").text("Something went wrong. Please try again.")
+
                 let countdown = 4;
-                //Set the timer to hide the alert after 4 seconds
                 const setAlertTimer = setInterval(function () {
                     countdown--;
                     if (countdown === 0) {
-                        alert.removeClass("right-0")
-                        alert.addClass("right-[-100%]")
+                        alertMessage.removeClass("right-0")
+                        alertMessage.addClass("right-[-100%]")
                         clearInterval(setAlertTimer);
                     }
                 }, 1000);
@@ -285,11 +299,11 @@ $("#otpFld").keyup(function (event) {
 });
 
 $("#alertCloseBtn").click(function () {
-    $("#alert").removeClass("right-0")
-    $("#alert").addClass("right-[-100%]")
+    alertMessage.removeClass("right-0")
+    alertMessage.addClass("right-[-100%]")
 })
 
 $("#successCloseBtn").click(function () {
-    $("#success").removeClass("right-0")
-    $("#success").addClass("right-[-100%]")
+    successAlert.removeClass("right-0")
+    successAlert.addClass("right-[-100%]")
 })

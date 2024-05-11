@@ -72,6 +72,8 @@ $("#searchCustomerBtn").click(function () {
             $("#customerTableBody").empty();
 
             response.forEach(customer => {
+                const doj = customer.doj[0] +"-"+customer.doj[1]+"-"+customer.doj[2]
+                const recentDateAndTime = customer.recentPurchaseDateAndTime[0] +"-"+customer.recentPurchaseDateAndTime[1]+"-"+customer.recentPurchaseDateAndTime[2]+" "+customer.recentPurchaseDateAndTime[3] +":"+customer.recentPurchaseDateAndTime[4]
                 $("#customerTableBody").append(`<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
                         <td class="m-1 p-2">${customer.customerId.toUpperCase()}</td>
                         <td class="m-1 p-2 capitalize">${customer.name}</td>
@@ -82,10 +84,10 @@ $("#searchCustomerBtn").click(function () {
                         <td class="m-1 p-2">${customer.postalCode}</td>
                         <td class="m-1 p-2">${customer.contact}</td>
                         <td class="m-1 p-2">${customer.email}</td>
-                        <td class="m-1 p-2">${customer.doj}</td>
+                        <td class="m-1 p-2">${doj}</td>
                         <td class="m-1 p-2">${customer.totalPoints}</td>
                         <td class="m-1 p-2">${customer.level}</td>
-                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.toString().replace("T", " ").substring(0, 19)}</td>
+                        <td class="m-1 p-2">${recentDateAndTime}</td>
                         
                         <td class="m-1 p-2">
                             <button value="${customer.customerId}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
@@ -260,6 +262,8 @@ const loadCustomerTable = () => {
             $("#customerTableBody").empty();
             console.log(customersList);
             response.forEach(customer => {
+                const doj = customer.doj[0] +"-"+customer.doj[1]+"-"+customer.doj[2]
+                const recentDateAndTime = customer.recentPurchaseDateAndTime[0] +"-"+customer.recentPurchaseDateAndTime[1]+"-"+customer.recentPurchaseDateAndTime[2]+" "+customer.recentPurchaseDateAndTime[3] +":"+customer.recentPurchaseDateAndTime[4]
                 $("#customerTableBody").append(`<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
                         <td class="m-1 p-2">${customer.customerId.toUpperCase()}</td>
                         <td class="m-1 p-2 capitalize">${customer.name}</td>
@@ -270,10 +274,10 @@ const loadCustomerTable = () => {
                         <td class="m-1 p-2">${customer.postalCode}</td>
                         <td class="m-1 p-2">${customer.contact}</td>
                         <td class="m-1 p-2">${customer.email}</td>
-                        <td class="m-1 p-2">${customer.doj}</td>
+                        <td class="m-1 p-2">${doj}</td>
                         <td class="m-1 p-2">${customer.totalPoints}</td>
                         <td class="m-1 p-2">${customer.level}</td>
-                        <td class="m-1 p-2">${customer.recentPurchaseDateAndTime.toString().replace("T", " ").substring(0, 19)}</td>
+                        <td class="m-1 p-2">${recentDateAndTime}</td>
                         
                         <td class="m-1 p-2">
                             <button value="${customer.customerId}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
@@ -371,6 +375,6 @@ $([document]).on("click", "#customerEditBtn", function (e) {
     $("#customerLevelFld").val(customer.level);
     $("#customerPointsFld").val(customer.totalPoints);
     $("#customerGenderFld").val(customer.gender);
-    $("#customerRecentPurchaseDateAndTimeFld").val(customer.substring(0, 19));
+    $("#customerRecentPurchaseDateAndTimeFld").val(customer.toString().replace("T"," ").substring(0, 19));
 })
 loadCustomerTable();

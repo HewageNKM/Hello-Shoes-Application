@@ -151,6 +151,7 @@ $("#addEmployeeForm").submit(function (evt) {
     $(".employeeFld").removeClass("hover:border-2")
     $("#btnLoadingAnimation").removeClass("hidden")
     $("#btnLoadingAnimation").addClass("flex")
+
     $.ajax({
         url: BASEURL + '/employees',
         type: 'POST',
