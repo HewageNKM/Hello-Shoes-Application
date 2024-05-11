@@ -1,4 +1,10 @@
-$("#employeeA")
+const btnLoadingAnimation = $("#employeeBtnLoadingAnimation")
+const addEmployeeBtn = $("#addEmployeeBtn")
+const fld = $(".eFld")
+const alertMessage = $("#alert")
+const successMessage = $("#success")
+
+
 $("#showEmployeeAddForm").click(
     function () {
         $("#addEmployee").removeClass("hidden");

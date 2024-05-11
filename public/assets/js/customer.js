@@ -1,7 +1,7 @@
 let customersList = [];
 const btnLoadingAnimation = $("#customerBtnLoadingAnimation");
 const customerAddBtn =$("#addCustomerBtn");
-const fld = $(".fld");
+const fld = $(".cFld");
 const alertMessage = $("#alert")
 const successMessage = $("#success")
 
