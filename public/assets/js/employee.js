@@ -193,45 +193,85 @@ $("#addEmployeeForm").submit(function (evt) {
     employeeBtnLoadingAnimation.removeClass("hidden")
     employeeBtnLoadingAnimation.addClass("flex")
     addEmployeeBtn.addClass("cursor-not-allowed")
+    if(code === ""){
+        $.ajax({
+            url: BASEURL + '/employees',
+            type: 'POST',
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response)
 
-    $.ajax({
-        url: BASEURL + '/employees',
-        type: 'POST',
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("token"),
-        },
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            console.log(response)
+                $("#employeeImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+                evt.target.reset();
+                loadEmployeeTable()
+                setEmployeeSuccessMessage("Employee added successfully!")
+            },
+            error: function (error) {
 
-            $("#employeeImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
-            eFld.prop("disabled", false)
-            eFld.addClass("hover:border-2")
-            employeeBtnLoadingAnimation.removeClass("flex")
-            employeeBtnLoadingAnimation.addClass("hidden")
-            addEmployeeBtn.removeClass("cursor-not-allowed")
-            evt.target.reset();
-            loadEmployeeTable()
-            setEmployeeSuccessMessage("Employee added successfully!")
-        },
-        error: function (error) {
+                console.log(error);
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
 
-            console.log(error);
-            eFld.prop("disabled", false)
-            eFld.addClass("hover:border-2")
-            employeeBtnLoadingAnimation.removeClass("flex")
-            employeeBtnLoadingAnimation.addClass("hidden")
-            addEmployeeBtn.removeClass("cursor-not-allowed")
-
-            let message = "Error adding employee!"
-            if (error.responseJSON) {
-                message = error.responseJSON.message;
+                let message = "Error adding employee!"
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setEmployeeAlertMessage(message);
             }
-            setEmployeeAlertMessage(message);
-        }
-    });
+        });
+    }else {
+        $.ajax({
+            url: BASEURL + '/employees/'+code.toLowerCase(),
+            type: 'PUT',
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response)
+
+                $("#employeeImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+                evt.target.reset();
+                loadEmployeeTable()
+                setEmployeeSuccessMessage("Employee added successfully!")
+            },
+            error: function (error) {
+
+                console.log(error);
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+
+                let message = "Error adding employee!"
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setEmployeeAlertMessage(message);
+            }
+        });
+    }
 
 })
 const loadEmployeeTable = () => {
@@ -342,7 +382,7 @@ $([document]).on("click", "#employeeEditBtn", function (e) {
     console.log(employee);
     $("#addEmployee").removeClass("hidden");
 
-    $("#employeeCodeFld").val(employee.customerId);
+    $("#employeeCodeFld").val(employee.employeeId);
     $("#employeeNameFld").val(employee.name);
     $("#employeeLaneFld").val(employee.lane);
     $("#employeeCityFld").val(employee.city);
