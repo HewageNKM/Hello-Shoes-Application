@@ -1,15 +1,16 @@
+const supplierAlertMessage = $("#alert")
+const supplierSuccessMessage = $("#success")
+const supplierBtnLoadingAnimation = $("#supplierBtnLoadingAnimation")
+const sFld = $(".sFld")
+const addSupplierBtn = $("#addSupplierBtn")
+
+
 let suppliersList = [];
+
 $("#showSupplierAddForm").click(
     function () {
-        const alert = $("#alert");
         if (window.localStorage.getItem("role") === "USER") {
-            alert.removeClass("right-[-100%]")
-            alert.addClass("right-0")
-            $("#alertDescription").text("You do not have permission to add supplier")
-            setTimeout(() => {
-                alert.addClass("right-[-100%]")
-                alert.removeClass("right-0")
-            }, 3000);
+            setSupplierAlertMessage("You do not have permission to add supplier")
             return
         }
         $("#addSupplier").removeClass("hidden");
@@ -36,21 +37,11 @@ $("#closeSupplierAddForm").click(
 $("#searchSupplierBtn").click(function () {
     const val = $("#supplierSearchFld").val();
     const alert = $("#alert");
+    const tableLoadingAnimation = $("#supplierTableLoadingAnimation");
     if (val.trim() === "") {
-        $("#alertDescription").text("Please enter a valid detail to search for supplier");
-        alert.removeClass("right-[-100%]")
-        alert.addClass("right-0")
-
-        setTimeout(() => {
-            alert.addClass("right-[-100%]")
-            alert.removeClass("right-0")
-        }, 3000);
-
+        setSupplierAlertMessage("Please enter a search value")
         return;
     }
-    const loadingAnimation = $("#supplierTableLoadingAnimation")
-    loadingAnimation.removeClass("hidden");
-    /*Ajax call to search for supplier*/
     $.ajax(BASEURL + "/suppliers?pattern=" + val, {
         method: "GET",
         headers: {
@@ -58,34 +49,13 @@ $("#searchSupplierBtn").click(function () {
         },
         success: function (data) {
             console.log(data);
-            suppliersList.push(...data);
-            const table = $("#supplierTableBody");
-            table.empty();
-            data.forEach(supplier => {
-                table.append(
-                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light"> 
-                        <td class="m-1 p-2">${supplier.supplierId.toUpperCase()}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.name}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.lane}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.city}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.state}</td>
-                        <td class="m-1 p-2">${supplier.postalCode}</td>
-                        <td class="m-1 p-2 ">${supplier.country.toUpperCase()}</t>
-                        <td class="m-1 p-2">${supplier.contactNo1}</td>
-                        <td class="m-1 p-2">${supplier.contactNo2}</td>
-                        <td class="m-1 p-2">${supplier.email}</td>
-                        <td class="m-1 p-2">
-                            <button value="${supplier.supplierId}" id="supplierEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editSupplierBtn">Edit</button>
-                            <button value="${supplier.supplierId}" id="supplierDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteSupplierBtn">Delete</button>
-                        </td>
-                    </tr>`
-                )
-            });
-            loadingAnimation.addClass("hidden");
+            suppliersList = data;
+            setSupplierTableContent()
+            tableLoadingAnimation.addClass("hidden");
         },
         error: function (error) {
             console.log(error);
-            loadingAnimation.addClass("hidden");
+            tableLoadingAnimation.addClass("hidden");
             alert.removeClass("right-[-100%]")
             alert.addClass("right-0")
             $("#alertDescription").text("An error occurred while searching for supplier");
@@ -190,9 +160,15 @@ $("#addSupplierForm").submit(function (e) {
     }
     supplier = JSON.stringify(supplier);
     console.log(supplier);
-    const alert = $("#alert");
-    const successAlert = $("#success");
+
     if (id === null || id === "" || id === undefined) {
+
+        sFld.removeClass("hover:border-2")
+        sFld.prop("disabled", true)
+        supplierBtnLoadingAnimation.removeClass("hidden")
+        supplierBtnLoadingAnimation.addClass("flex")
+        addSupplierBtn.addClass("cursor-not-allowed")
+
         $.ajax(BASEURL + "/suppliers", {
             method: "POST",
             contentType: "application/json",
@@ -203,30 +179,40 @@ $("#addSupplierForm").submit(function (e) {
             success: function (data) {
                 console.log(data);
                 e.target.reset();
-                loadSupplierTable();
-                $("#addSupplier").addClass("hidden");
-                $("#successDescription").text("Supplier added successfully");
-                successAlert.removeClass("right-[-100%]")
-                successAlert.addClass("right-0")
+                suppliersList = data
+                sFld.prop("disabled", false)
+                sFld.addClass("hover:border-2")
+                supplierBtnLoadingAnimation.addClass("hidden")
+                supplierBtnLoadingAnimation.removeClass("flex")
+                addSupplierBtn.removeClass("cursor-not-allowed")
 
-                setTimeout(() => {
-                    successAlert.addClass("right-[-100%]")
-                    successAlert.removeClass("right-0")
-                }, 3000);
+                loadSupplierTable();
+                setSupplierSuccessMessage("Supplier added successfully")
             },
             error: function (error) {
                 console.log(error);
-                alert.removeClass("right-[-100%]")
-                alert.addClass("right-0")
-                document.getElementById("alertDescription").textContent = "An error occurred while adding supplier";
 
-                setTimeout(() => {
-                    alert.addClass("right-[-100%]")
-                    alert.removeClass("right-0")
-                }, 3000);
+                sFld.prop("disabled", false)
+                sFld.addClass("hover:border-2")
+                supplierBtnLoadingAnimation.addClass("hidden")
+                supplierBtnLoadingAnimation.removeClass("flex")
+                addSupplierBtn.removeClass("cursor-not-allowed")
+
+                let message = "Error adding supplier";
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setSupplierAlertMessage(message);
             }
         });
     } else {
+
+        sFld.removeClass("hover:border-2")
+        sFld.prop("disabled", true)
+        supplierBtnLoadingAnimation.removeClass("hidden")
+        supplierBtnLoadingAnimation.addClass("flex")
+        addSupplierBtn.addClass("cursor-not-allowed")
+
         $.ajax(BASEURL + "/suppliers/" + id.toLowerCase(), {
             method: "PUT",
             contentType: "application/json",
@@ -239,35 +225,23 @@ $("#addSupplierForm").submit(function (e) {
                 e.target.reset();
                 $("#addSupplier").addClass("hidden");
                 loadSupplierTable();
-
-                $("#successDescription").text("Supplier updated successfully");
-                successAlert.removeClass("right-[-100%]")
-                successAlert.addClass("right-0")
-
-                setTimeout(() => {
-                    successAlert.addClass("right-[-100%]")
-                    successAlert.removeClass("right-0")
-                }, 3000);
+                setSupplierSuccessMessage("Supplier updated successfully")
             },
             error: function (error) {
                 console.log(error);
-
-                alert.removeClass("right-[-100%]")
-                alert.addClass("right-0")
-                $("#alertDescription").text("An error occurred while updating supplier");
-
-                setTimeout(() => {
-                    alert.addClass("right-[-100%]")
-                    alert.removeClass("right-0")
-                }, 3000);
+                let message = "Error updating supplier";
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setSupplierAlertMessage(message)
             }
         });
     }
 })
 
 const loadSupplierTable = () => {
-    const loadingAnimation = $("#supplierTableLoadingAnimation")
-    loadingAnimation.removeClass("hidden");
+    const tableLoadingAnimation = $("#supplierTableLoadingAnimation")
+    tableLoadingAnimation.removeClass("hidden");
     $.ajax(BASEURL + "/suppliers", {
         method: "GET",
         headers: {
@@ -276,55 +250,28 @@ const loadSupplierTable = () => {
         success: function (data) {
             console.log(data);
             suppliersList = data;
-            const table = $("#supplierTableBody");
-            table.empty();
-            data.forEach(supplier => {
-                table.append(
-                    `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light""> 
-                        <td class="m-1 p-2 capitalize">${supplier.supplierId.toUpperCase()}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.name}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.lane}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.city}</td>
-                        <td class="m-1 p-2 capitalize">${supplier.state}</td>
-                        <td class="m-1 p-2 ">${supplier.postalCode}</td>
-                        <td class="m-1 p-2 ">${supplier.country.toUpperCase()}</t>
-                        <td class="m-1 p-2 ">${supplier.contactNo1}</td>
-                        <td class="m-1 p-2">${supplier.contactNo2}</td>
-                        <td class="m-1 p-2">${supplier.email}</td>
-                        <td class="m-1 p-2">
-                            <button value="${supplier.supplierId}" id="supplierEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editSupplierBtn">Edit</button>
-                            <button value="${supplier.supplierId}" id="supplierDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteSupplierBtn">Delete</button>
-                        </td>
-                    </tr>`
-                )
-            });
-
-            loadingAnimation.addClass("hidden");
+            setSupplierTableContent()
+            tableLoadingAnimation.addClass("hidden");
         },
         error: function (error) {
-            loadingAnimation.addClass("hidden");
-            const alert = $("#alert")
+            tableLoadingAnimation.addClass("hidden");
             console.log(error);
-            alert.removeClass("right-[-100%]")
-            alert.addClass("right-0")
-            document.getElementById("alertDescription").textContent = "An error occurred while fetching suppliers";
-
-            setTimeout(() => {
-                alert.addClass("right-[-100%]")
-                alert.removeClass("right-0")
-            }, 3000);
+            let message = "Error loading suppliers";
+            if (error.responseJSON) {
+                message = error.responseJSON.message;
+            }
+            setSupplierAlertMessage(message);
         }
     });
 }
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
+    const deleteSup = confirm("Are you sure you want to delete supplier?");
+    if (!deleteSup) {
+        return
+    }
+
     if (window.localStorage.getItem("role") === "USER") {
-        $("#alert").removeClass("right-[-100%]")
-        $("#alert").addClass("right-0")
-        $("#alertDescription").text("You do not have permission to delete supplier")
-        setTimeout(() => {
-            $("#alert").addClass("right-[-100%]")
-            $("#alert").removeClass("right-0")
-        }, 3000);
+        setSupplierAlertMessage("You do not have permission to delete supplier")
         return
     }
 
@@ -337,30 +284,15 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
             },
             success: function (data) {
                 console.log(data);
-                const success = $("#success");
-                $("#successDescription").text("Supplier deleted successfully");
-                success.removeClass("right-[-100%]")
-                success.addClass("right-0")
-                loadSupplierTable();
-
-                setTimeout(() => {
-                    success.addClass("right-[-100%]")
-                    success.removeClass("right-0")
-
-                })
+                setSupplierSuccessMessage("Supplier deleted successfully");
             },
             error: function (error) {
                 console.log(error);
-                const alert = $("#alert");
-                alert.removeClass("right-[-100%]")
-                alert.addClass("right-0")
-                $("#alertDescription").text("An error occurred while deleting supplier");
-
-                setTimeout(() => {
-                    alert.addClass("right-[-100%]")
-                    alert.removeClass("right-0")
-
-                });
+                let message = "Error deleting supplier";
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setSupplierAlertMessage(message);
             }
         });
     }
@@ -368,13 +300,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
 
 $([document]).on("click", "#supplierEditBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
-        $("#alert").removeClass("right-[-100%]")
-        $("#alert").addClass("right-0")
-        $("#alertDescription").text("You do not have permission to edit supplier")
-        setTimeout(() => {
-            $("#alert").addClass("right-[-100%]")
-            $("#alert").removeClass("right-0")
-        }, 3000);
+        setSupplierAlertMessage("You do not have permission to edit supplier");
         return
     }
     const supplier = suppliersList.find(supplier => supplier.supplierId === e.target.value)
@@ -392,6 +318,49 @@ $([document]).on("click", "#supplierEditBtn", function (e) {
         $("#addSupplier").removeClass("hidden");
     }
 });
+
+setSupplierTableContent = () => {
+    const table = $("#supplierTableBody");
+    table.empty();
+    suppliersList.forEach(supplier => {
+        table.append(
+            `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light""> 
+                        <td class="m-1 p-2 capitalize">${supplier.supplierId.toUpperCase()}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.name}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.lane}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.city}</td>
+                        <td class="m-1 p-2 capitalize">${supplier.state}</td>
+                        <td class="m-1 p-2 ">${supplier.postalCode}</td>
+                        <td class="m-1 p-2 ">${supplier.country.toUpperCase()}</t>
+                        <td class="m-1 p-2 ">${supplier.contactNo1}</td>
+                        <td class="m-1 p-2">${supplier.contactNo2}</td>
+                        <td class="m-1 p-2">${supplier.email}</td>
+                        <td class="m-1 p-2">
+                            <button value="${supplier.supplierId}" id="supplierEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editSupplierBtn">Edit</button>
+                            <button value="${supplier.supplierId}" id="supplierDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteSupplierBtn">Delete</button>
+                        </td>
+                    </tr>`
+        )
+    });
+}
+const setSupplierAlertMessage = (message) => {
+    $("#alertDescription").text(message)
+    supplierAlertMessage.removeClass("right-[-100%]")
+    supplierAlertMessage.addClass("right-0")
+    setTimeout(() => {
+        supplierAlertMessage.addClass("right-[-100%]")
+        supplierAlertMessage.removeClass("right-0")
+    }, 3000);
+}
+const setSupplierSuccessMessage = (message) => {
+    $("#successDescription").text(message)
+    supplierSuccessMessage.removeClass("right-[-100%]")
+    supplierSuccessMessage.addClass("right-0")
+    setTimeout(() => {
+        supplierSuccessMessage.addClass("right-[-100%]")
+        supplierSuccessMessage.removeClass("right-0")
+    }, 3000);
+}
 $("#supplierTableRefreshBtn").click(function () {
     loadSupplierTable();
 });

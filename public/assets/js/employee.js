@@ -1,4 +1,11 @@
-$("#employeeA")
+const employeeBtnLoadingAnimation = $("#employeeBtnLoadingAnimation")
+const addEmployeeBtn = $("#addEmployeeBtn")
+const eFld = $(".eFld")
+const employeeAlertMessage = $("#alert")
+const employeeSuccessMessage = $("#success")
+const employeeTableLoadingAnimation = $("#employeeTableLoadingAnimation")
+let employeeList = []
+
 $("#showEmployeeAddForm").click(
     function () {
         $("#addEmployee").removeClass("hidden");
@@ -8,17 +15,51 @@ $("#showEmployeeAddForm").click(
 $("#closeEmployeeAddForm").click(
     function () {
         $("#addEmployee").addClass("hidden");
-        $(".employeeFld").val("");
-
-        $("#employeeImgPreview").attr("src", "/assets/img/default_employee_avatar.png");
+        eFld.val("");
+        $("#employeeImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
     }
 );
 
+$("#searchEmployeeBtn").click(function () {
+    const searchEmployeeFld = $("#employeeSearchFld")
+    const searchEmployeeValue = searchEmployeeFld.val().toString().trim()
+
+    if (searchEmployeeValue.trim() === "") {
+        loadEmployeeTable()
+        return
+    }
+    employeeTableLoadingAnimation.removeClass("hidden")
+    employeeTableLoadingAnimation.addClass("flex")
+    $.ajax({
+        url: BASEURL + '/employees?pattern=' + searchEmployeeValue,
+        type: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token"),
+        },
+        success: function (response) {
+            employeeList = response
+            console.log(response)
+            employeeTableLoadingAnimation.removeClass("flex")
+            employeeTableLoadingAnimation.addClass("hidden")
+            setEmployeeTableContent()
+        },
+        error(error) {
+            console.log(error)
+            employeeTableLoadingAnimation.removeClass("flex")
+            employeeTableLoadingAnimation.addClass("hidden")
+            let message = "Employee not found!"
+            if (error.responseJSON) {
+                message = error.responseJSON.message
+            }
+            setEmployeeAlertMessage(message)
+        }
+    })
+})
 $("#employeeImg").change(
     function () {
         console.log(this.files)
         if (this.files[0].size > 3 * 1024 * 1024) {
-            alertMessage("File size exceeds the limit of 3MB!");
+            employeeAlertMessage("File size exceeds the limit of 3MB!");
             this.value = ""
         }
         const reader = new FileReader();
@@ -147,56 +188,239 @@ $("#addEmployeeForm").submit(function (evt) {
     console.log(formData.get('image'))
     console.log(formData.get('dto'))
 
-    $(".employeeFld").prop("disabled", true)
-    $(".employeeFld").removeClass("hover:border-2")
-    $("#btnLoadingAnimation").removeClass("hidden")
-    $("#btnLoadingAnimation").addClass("flex")
+    eFld.prop("disabled", true)
+    eFld.removeClass("hover:border-2")
+    employeeBtnLoadingAnimation.removeClass("hidden")
+    employeeBtnLoadingAnimation.addClass("flex")
+    addEmployeeBtn.addClass("cursor-not-allowed")
+    if(code === ""){
+        $.ajax({
+            url: BASEURL + '/employees',
+            type: 'POST',
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response)
+
+                $("#employeeImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+                evt.target.reset();
+                loadEmployeeTable()
+                setEmployeeSuccessMessage("Employee added successfully!")
+            },
+            error: function (error) {
+
+                console.log(error);
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+
+                let message = "Error adding employee!"
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setEmployeeAlertMessage(message);
+            }
+        });
+    }else {
+        $.ajax({
+            url: BASEURL + '/employees/'+code.toLowerCase(),
+            type: 'PUT',
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response)
+
+                $("#employeeImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+                evt.target.reset();
+                loadEmployeeTable()
+                setEmployeeSuccessMessage("Employee added successfully!")
+            },
+            error: function (error) {
+
+                console.log(error);
+                eFld.prop("disabled", false)
+                eFld.addClass("hover:border-2")
+                employeeBtnLoadingAnimation.removeClass("flex")
+                employeeBtnLoadingAnimation.addClass("hidden")
+                addEmployeeBtn.removeClass("cursor-not-allowed")
+
+                let message = "Error adding employee!"
+                if (error.responseJSON) {
+                    message = error.responseJSON.message;
+                }
+                setEmployeeAlertMessage(message);
+            }
+        });
+    }
+
+})
+const loadEmployeeTable = () => {
+    employeeTableLoadingAnimation.removeClass("hidden")
+    employeeTableLoadingAnimation.addClass("flex")
 
     $.ajax({
         url: BASEURL + '/employees',
-        type: 'POST',
+        type: 'GET',
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token"),
-        },
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            $(".employeeFld").prop("disabled", false)
-            $(".employeeFld").addClass("hover:border-2")
-            $("#btnLoadingAnimation").removeClass("flex")
-            $("#btnLoadingAnimation").addClass("hidden")
 
-            evt.target.reset();
-            $("#addEmployee").addClass("hidden");
-            $("#successDescription").text("Employee added successfully!");
-            $("#success").removeClass("right-[-100%]")
-            $("#success").addClass("right-[0]")
-            setTimeout(() => {
-                $("#success").removeClass("right-[0]")
-                $("#success").addClass("right-[-100%]")
-            }, 3000)
-            console.log(response);
+        },
+        success: function (response) {
+            console.log(response)
+            employeeList = response
+            employeeTableLoadingAnimation.removeClass("flex")
+            employeeTableLoadingAnimation.addClass("hidden")
+            setEmployeeTableContent()
         },
         error: function (error) {
-            console.log(error);
-            let message = "Error adding employee!"
-            if (error.responseJSON.message) {
-                message = error.responseJSON.message;
-            }
-            $(".employeeFld").prop("disabled", false)
-            $(".employeeFld").addClass("hover:border-2")
-            $("#btnLoadingAnimation").removeClass("flex")
-            $("#btnLoadingAnimation").addClass("hidden")
-
-            $("#alertDescription").text(message);
-            $("#alert").removeClass("right-[-100%]")
-            $("#alert").addClass("right-[0]")
-            setTimeout(() => {
-                $("#alert").removeClass("right-[0]")
-                $("#alert").addClass("right-[-100%]")
-            }, 3000)
+            console.log(error)
+            employeeTableLoadingAnimation.removeClass("flex")
+            employeeTableLoadingAnimation.addClass("hidden")
+            setEmployeeAlertMessage("Error loading employees!")
         }
-    });
+    })
+}
+const setEmployeeTableContent = () => {
+    const employeeTableBody = $("#employeeTableBody")
+    employeeTableBody.empty()
+    employeeList.forEach((employee) => {
+        const doj = employee.doj[0] + "-" + employee.doj[1] + "-" + employee.doj[2]
+        const dob = employee.dob[0] + "-" + employee.dob[1] + "-" + employee.dob[2]
+        employeeTableBody.append(
+            `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
+                        <td class="m-1 p-2">${employee.employeeId.toUpperCase()}</td>
+                        <td class="m-1 p-2 capitalize">${employee.name}</td>
+                        <td class="m-1 p-2 capitalize">${employee.status}</td>
+                        <td class="m-1 p-2 capitalize">${employee.gender}</td>
+                        <td class="m-1 p-2 capitalize">${dob}</td>
+                        <td class="m-1 p-2 capitalize">${employee.lane}</td>
+                        <td class="m-1 p-2 capitalize">${employee.city}</td>
+                        <td class="m-1 p-2 capitalize">${employee.state}</td>
+                        <td class="m-1 p-2">${employee.postalCode}</td>
+                        <td class="m-1 p-2">${employee.contact}</td>
+                        <td class="m-1 p-2">${employee.email}</td>
+                        <td class="m-1 p-2 capitalize">${employee.attachBranch}</td>
+                        <td class="m-1 p-2">${doj}</td>
+                        <td class="m-1 p-2 capitalize">${employee.designation}</td>
+                        <td class="m-1 p-2">${employee.role}</td>
+                         <td class="m-1 p-2 capitalize">${employee.guardianName}</td>
+                        <td class="m-1 p-2">${employee.guardianContact}</td>
+                        <td class="m-1 p-2">
+                            <button value="${employee.employeeId}" id="employeeEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
+                            <button value="${employee.employeeId}" id="emloyeeDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteCustomerBtn">Delete</button>
+                        </td>
+                    </tr>`
+        )
+    })
+}
+$([document]).on("click", "#emloyeeDeleteBtn", function (e) {
+    const deleteEm = confirm("Are you sure you want to delete employee?");
+    if (!deleteEm) {
+        return
+    }
 
+    if (window.localStorage.getItem("role") === "USER") {
+        setCustomerAlertMessage("You do not have permission to delete employee")
+        return
+    }
+    const id = e.target.value;
+    console.log(id);
+    $.ajax({
+        url: BASEURL + "/employees/" + id, method: "DELETE", headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }, success: function (response) {
+            console.log(response);
+            loadEmployeeTable()
+            setEmployeeSuccessMessage("Employee deleted successfully!");
+        }, error: function (response) {
+            console.log(response);
+            let message = "Error deleting employees"
+            if (response.responseJSON) {
+                message = response.responseJSON.message;
+            }
+            loadCustomerTable();
+            setCustomerAlertMessage(message)
+        }
+    })
 })
+
+
+$([document]).on("click", "#employeeEditBtn", function (e) {
+    if (window.localStorage.getItem("role") === "USER") {
+        setCustomerAlertMessage("You do not have permission to edit employee")
+        return
+    }
+
+    const id = e.target.value;
+    console.log(id);
+    const employee = employeeList.find(employee => employee.employeeId === id);
+    let doj = employee.doj[0] + "-" + employee.doj[1] + "-" + employee.doj[2]
+    doj = new Date(doj).toISOString()
+    let dob = employee.dob[0] + "-" + employee.dob[1] + "-" + employee.dob[2]
+    dob = new Date(dob).toISOString()
+
+    console.log(employee);
+    $("#addEmployee").removeClass("hidden");
+
+    $("#employeeCodeFld").val(employee.employeeId);
+    $("#employeeNameFld").val(employee.name);
+    $("#employeeLaneFld").val(employee.lane);
+    $("#employeeCityFld").val(employee.city);
+    $("#employeeStateFld").val(employee.state);
+    $("#employeePostalCodeFld").val(employee.postalCode);
+    $("#employeeContactFld").val(employee.contact);
+    $("#employeeEmailFld").val(employee.email);
+    document.getElementById("employeeDateOfJoinedFld").valueAsDate = new Date(doj);
+    document.getElementById("employeeDOBFld").valueAsDate = new Date(dob);
+    $("#employeeAccessRoleFld").val(employee.role);
+    $("#civilStatusSelect").val(employee.status);
+    $("#employeeGenderSelect").val(employee.gender);
+    $("#employeeGuardianContactFld").val(employee.guardianContact);
+    $("#employeeGuardianNameFld").val(employee.guardianName);
+    $("#employeeBranchFld").val(employee.attachBranch);
+    $("#employeeDesignationFld").val(employee.designation);
+    $("#employeeImgPreview").attr("src", "data:image/jpeg;base64," + employee.image);
+})
+const setEmployeeSuccessMessage = (message) => {
+    $("#successDescription").text(message)
+    employeeSuccessMessage.removeClass("right-[-100]")
+    employeeSuccessMessage.addClass("right-[0]")
+    setTimeout(() => {
+        employeeSuccessMessage.addClass("right-[-100]")
+        employeeSuccessMessage.removeClass("right-[0]")
+    }, 5000)
+}
+
+const setEmployeeAlertMessage = (message) => {
+    $("#alertDescription").text(message)
+    employeeAlertMessage.removeClass("right-[-100]")
+    employeeAlertMessage.addClass("right-[0]")
+    setTimeout(() => {
+        employeeAlertMessage.addClass("right-[-100]")
+        employeeAlertMessage.removeClass("right-[0]")
+    }, 5000)
+}
+$("#employeeTableRefreshBtn").click(() => {
+    loadEmployeeTable()
+})
+loadEmployeeTable()
