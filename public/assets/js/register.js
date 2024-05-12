@@ -13,7 +13,6 @@ $("#registerForm").submit(function (event) {
     const email = event.target.email.value.toString().trim().toLocaleLowerCase();
     const password1 = event.target.password1.value.toString().trim();
     const password2 = event.target.password2.value.toString().trim();
-    const role = event.target.role.value.toString().trim();
 
     console.log("Email: " + email, "Password1: " + password1, "Password2: " + password2);
 
@@ -36,8 +35,6 @@ $("#registerForm").submit(function (event) {
                 data: JSON.stringify({
                     email: email,
                     password: password1,
-                    role: role
-
                 }),
                 success: function (response) {
                     console.log(response);

@@ -187,7 +187,6 @@ $("#addSupplierForm").submit(function (e) {
                 addSupplierBtn.removeClass("cursor-not-allowed")
 
                 loadSupplierTable();
-                $("#addSupplier").addClass("hidden");
                 setSupplierSuccessMessage("Supplier added successfully")
             },
             error: function (error) {
@@ -266,6 +265,11 @@ const loadSupplierTable = () => {
     });
 }
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
+    const deleteSup = confirm("Are you sure you want to delete supplier?");
+    if (!deleteSup) {
+        return
+    }
+
     if (window.localStorage.getItem("role") === "USER") {
         setSupplierAlertMessage("You do not have permission to delete supplier")
         return

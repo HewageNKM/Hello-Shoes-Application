@@ -1,6 +1,6 @@
 let customersList = [];
 const customerBtnLoadingAnimation = $("#customerBtnLoadingAnimation");
-const customerAddBtn =$("#addCustomerBtn");
+const customerAddBtn = $("#addCustomerBtn");
 const cFld = $(".cFld");
 const customerAlertMessage = $("#alert")
 const customerSuccessMessage = $("#success")
@@ -12,7 +12,7 @@ $("#showCustomerAddForm").click(function () {
         customerAlertMessage.removeClass("right-[-100%]")
         customerAlertMessage.addClass("right-0")
         setTimeout(() => {
-           customerAlertMessage.addClass("right-[-100%]")
+            customerAlertMessage.addClass("right-[-100%]")
             customerAlertMessage.removeClass("right-0")
         }, 3000);
         return;
@@ -71,7 +71,7 @@ $("#searchCustomerBtn").click(function () {
             $("#customerTableLoadingAnimation").addClass("hidden")
 
             let message = "Error searching for customer"
-            if(response.responseJSON){
+            if (response.responseJSON) {
                 message = response.responseJSON.message;
             }
             setCustomerAlertMessage(message)
@@ -82,8 +82,8 @@ $("#searchCustomerBtn").click(function () {
 const setCustomerTable = () => {
     $("#customerTableBody").empty();
     customersList.forEach(customer => {
-        const doj = customer.doj[0] +"-"+customer.doj[1]+"-"+customer.doj[2]
-        const recentDateAndTime = customer.recentPurchaseDateAndTime[0] +"-"+customer.recentPurchaseDateAndTime[1]+"-"+customer.recentPurchaseDateAndTime[2]+" "+customer.recentPurchaseDateAndTime[3] +":"+customer.recentPurchaseDateAndTime[4]
+        const doj = customer.doj[0] + "-" + customer.doj[1] + "-" + customer.doj[2]
+        const recentDateAndTime = customer.recentPurchaseDateAndTime[0] + "-" + customer.recentPurchaseDateAndTime[1] + "-" + customer.recentPurchaseDateAndTime[2] + " " + customer.recentPurchaseDateAndTime[3] + ":" + customer.recentPurchaseDateAndTime[4]
         $("#customerTableBody").append(`<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
                         <td class="m-1 p-2">${customer.customerId.toUpperCase()}</td>
                         <td class="m-1 p-2 capitalize">${customer.name}</td>
@@ -201,9 +201,8 @@ $("#addCustomerForm").submit(function (e) {
                 e.target.reset();
 
 
-                $("#addCustomer").addClass("hidden");
                 loadCustomerTable();
-                setSuccessMessage("Customer updated successfully!")
+                setCustomerSuccessMessage("Customer updated successfully!")
             }, error: function (response) {
                 console.log(response);
 
@@ -276,7 +275,7 @@ const loadCustomerTable = () => {
         }, error: function (response) {
             console.log(response);
             let message = "Error loading customers"
-            if(response.responseJSON){
+            if (response.responseJSON) {
                 message = response.responseJSON.message;
             }
             $("#customerTableLoadingAnimation").addClass("hidden")
@@ -289,6 +288,10 @@ $("#customerTableRefreshBtn").click(function () {
 })
 
 $([document]).on("click", "#customerDeleteBtn", function (e) {
+    const deleteCus = confirm("Are you sure you want to delete customer?");
+    if (!deleteCus) {
+        return
+    }
     if (window.localStorage.getItem("role") === "USER") {
         setCustomerAlertMessage("You do not have permission to delete customer")
         return
@@ -305,7 +308,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
         }, error: function (response) {
             console.log(response);
             let message = "Error deleting customer"
-            if(response.responseJSON){
+            if (response.responseJSON) {
                 message = response.responseJSON.message;
             }
             loadCustomerTable();
@@ -323,9 +326,9 @@ $([document]).on("click", "#customerEditBtn", function (e) {
     const id = e.target.value;
     console.log(id);
     const customer = customersList.find(customer => customer.customerId === id);
-    let doj = customer.doj[0] +"-"+customer.doj[1]+"-"+customer.doj[2]
+    let doj = customer.doj[0] + "-" + customer.doj[1] + "-" + customer.doj[2]
     doj = new Date(doj).toISOString()
-    const recentDateAndTime = customer.recentPurchaseDateAndTime[0] +"-"+customer.recentPurchaseDateAndTime[1]+"-"+customer.recentPurchaseDateAndTime[2]+" "+customer.recentPurchaseDateAndTime[3] +":"+customer.recentPurchaseDateAndTime[4]
+    const recentDateAndTime = customer.recentPurchaseDateAndTime[0] + "-" + customer.recentPurchaseDateAndTime[1] + "-" + customer.recentPurchaseDateAndTime[2] + " " + customer.recentPurchaseDateAndTime[3] + ":" + customer.recentPurchaseDateAndTime[4]
 
     console.log(customer);
     $("#addCustomer").removeClass("hidden");

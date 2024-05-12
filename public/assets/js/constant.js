@@ -1,2 +1,1 @@
-const aws = "http://hello-shoes-server-env.eba-w8vxsc3k.us-east-1.elasticbeanstalk.com"
-const BASEURL = "http://localhost:5000/api/v1"
+const BASEURL = "http://hello-shoe-server-env.eba-gnv57unx.us-east-1.elasticbeanstalk.com/api/v1"

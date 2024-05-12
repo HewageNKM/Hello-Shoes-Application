@@ -52,6 +52,7 @@ $('#loginForm').submit(function (e) {
             fld.prop("disabled", false);
             fld.removeClass("cursor-not-allowed");
             fld.addClass("hover:border-2");
+            console.log(data.token)
             localStorage.setItem("token", data.token);
             localStorage.setItem("role", data.role[0].authority);
             e.target.reset();
