@@ -1,12 +1,14 @@
 const otpSendBtn = $("#otpSendBtn");
 let isEmailVerified = false;
-otpSendBtn.prop("disabled", true)
-otpSendBtn.removeClass("hover:bg-red-500")
 const alertMessage = $("#alert");
 const successAlert = $("#success")
 const fld = $(".fld");
 const otpFld = $("#otpFld");
 const btnLoadingAnimation = $("#btnLoadingAnimation");
+
+otpSendBtn.prop("disabled", true)
+otpSendBtn.removeClass("hover:bg-red-500")
+otpFld.prop("disabled", true)
 
 $("#registerForm").submit(function (event) {
     event.preventDefault();
@@ -47,9 +49,7 @@ $("#registerForm").submit(function (event) {
                     fld.prop("disabled", false);
                     $("#registerBtn").removeClass("cursor-not-allowed");
                     fld.addClass("hover:border-2");
-                    otpFld.prop("disabled", false);
                     otpFld.addClass("hover:border-2")
-                    otpSendBtn.prop("disabled", false)
                     isEmailVerified = false;
                     otpSendBtn.text("Send OTP")
 
@@ -172,8 +172,7 @@ otpSendBtn.click(function () {
     otpSendBtn.prop("disabled", true)
     otpSendBtn.removeClass("hover:bg-red-500")
     // Disable the button
-    $(this).prop("disabled", true);
-
+    otpFld.prop("disabled", false)
 
     $.ajax(BASEURL + "/auth/mail/otp/send/" + emailFld.val().trim(), {
         method: "GET",
