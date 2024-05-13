@@ -1,6 +1,6 @@
 const role = window.localStorage.getItem("role");
 console.log("Role: " + role)
-
+console.log("Token: " + window.localStorage.getItem("token"))
 const setUserAuthorization = () => {
     $("#adminBtn").addClass("hidden")
 }
