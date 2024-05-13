@@ -53,26 +53,10 @@ $("#registerForm").submit(function (event) {
                     isEmailVerified = false;
                     otpSendBtn.text("Send OTP")
 
-                    successAlert.removeClass("right-[-100%]")
-                    successAlert.addClass("right-0")
-
-                    $("#successDescription").text("User registered successfully")
-                    let countdown = 4;
-                    const setAlertTimer = setInterval(function () {
-                        countdown--;
-                        if (countdown === 0) {
-                            successAlert.removeClass("right-0")
-                            successAlert.addClass("right-[-100%]")
-                            clearInterval(setAlertTimer);
-                        }
-                    }, 1000);
+                    setSuccessMessage("User registered successfully")
                 },
                 error: function (error) {
                     console.log(error);
-                    let message = "Error registering user!";
-                    if (error.responseJSON) {
-                        message = error.responseJSON.message;
-                    }
 
                     btnLoadingAnimation.removeClass("flex");
                     btnLoadingAnimation.addClass("hidden");
@@ -85,69 +69,22 @@ $("#registerForm").submit(function (event) {
                     isEmailVerified = false;
                     otpSendBtn.text("Send OTP")
 
+                    let message = "Error registering user!"
+
                     if (error.responseJSON) {
-                        alertMessage.removeClass("right-[-100%]")
-                        alertMessage.addClass("right-0")
-                        $("#alertDescription").text(message)
-
-                        let countdown = 4;
-                        const setAlertTimer = setInterval(function () {
-                            countdown--;
-                            if (countdown === 0) {
-                                alertMessage.removeClass("right-0")
-                                alertMessage.addClass("right-[-100%]")
-                                clearInterval(setAlertTimer);
-                            }
-                        }, 1000);
-                    } else {
-                        alertMessage.removeClass("right-[-100%]")
-                        alertMessage.addClass("right-0")
-                        $("#alertDescription").text("Something went wrong. Please try again.")
-                        let countdown = 4;
-                        const setAlertTimer = setInterval(function () {
-                            countdown--;
-                            if (countdown === 0) {
-                                alertMessage.removeClass("right-0")
-                                alertMessage.addClass("right-[-100%]")
-                                clearInterval(setAlertTimer);
-                            }
-                        }, 1000);
-
+                        message = error.responseJSON.message
                     }
+                    setAlertMessage(message)
                 }
             });
         } else {
             $("#password1Fld").addClass("border-2 border-red-500")
             $("#password2Fld").addClass("border-2 border-red-500")
 
-
-            alertMessage.removeClass("right-[-100%]")
-            alertMessage.addClass("right-0")
-            $("#alertDescription").text("Passwords do not match or less than 8 characters")
-
-            let countdown = 4;
-            const setAlertTimer = setInterval(function () {
-                countdown--;
-                if (countdown === 0) {
-                    alertMessage.removeClass("right-0")
-                    alertMessage.addClass("right-[-100%]")
-                    clearInterval(setAlertTimer);
-                }
-            }, 1000);
+            setAlertMessage("Password must be at least 8 characters long and must match")
         }
     } else {
-        alertMessage.removeClass("right-[-100%]")
-        alertMessage.addClass("right-0")
-        $("#alertDescription").text("Email not verified yet. Please verify your email first.")
-        let countdown = 4;
-        const setAlertTimer = setInterval(function () {
-            countdown--;
-            if (countdown === 0) {
-                alertMessage.removeClass("right-0")
-                alertMessage.addClass("right-[-100%]")
-                clearInterval(setAlertTimer);
-            }
-        }, 1000);
+        setAlertMessage("Email not verified")
     }
 });
 
@@ -215,41 +152,16 @@ otpSendBtn.click(function () {
                     otpSendBtn.text("Wait " + count + " seconds");
                 }
             }, 1000);
-
-            successAlert.removeClass("right-[-100%]")
-            successAlert.addClass("right-0")
-            $("#successDescription").text("OTP sent to your email")
             console.log(response)
-
-            let countdown = 4;
-
-            const setAlertTimer = setInterval(function () {
-                countdown--;
-                if (countdown === 0) {
-                    successAlert.removeClass("right-0")
-                    successAlert.addClass("right-[-100%]")
-                    clearInterval(setAlertTimer);
-                }
-            }, 1000);
+            setSuccessMessage("OTP sent successfully")
         },
         error: function (error) {
             console.log(error)
 
             $(this).prop("disabled", false);
             $(this).addClass("hover:bg-red-500")
-            alertMessage.removeClass("right-[-100%]")
-            alertMessage.addClass("right-0")
-            $("#alertDescription").text("Something went wrong. Please try again.")
 
-            let countdown = 4;
-            const setAlertTimer = setInterval(function () {
-                countdown--;
-                if (countdown === 0) {
-                    alertMessage.removeClass("right-0")
-                    alertMessage.addClass("right-[-100%]")
-                    clearInterval(setAlertTimer);
-                }
-            }, 1000);
+            setAlertMessage("Error sending OTP")
         }
     })
 });
@@ -274,25 +186,47 @@ otpFld.keyup(function (event) {
 
                 $(this).prop("disabled", false)
                 console.log(error)
-                alertMessage.removeClass("right-[-100%]")
-                alertMessage.addClass("right-0")
-                $("#alertDescription").text("Something went wrong. Please try again.")
-
-                let countdown = 4;
-                const setAlertTimer = setInterval(function () {
-                    countdown--;
-                    if (countdown === 0) {
-                        alertMessage.removeClass("right-0")
-                        alertMessage.addClass("right-[-100%]")
-                        clearInterval(setAlertTimer);
-                    }
-                }, 1000);
+                let message = "Error verifying OTP"
+                if (error.responseJSON) {
+                    message = error.responseJSON.message
+                }
+                setAlertMessage(message)
             }
         })
     } else {
         $(this).prop("disabled", false)
     }
 });
+const setSuccessMessage = (message) => {
+    $("#successDescription").text(message)
+    successAlert.removeClass("right-[-100%]")
+    successAlert.addClass("right-0")
+    let count = 4;
+    const setAlertTimer = setInterval(function () {
+        count--;
+        if (count === 0) {
+            successAlert.removeClass("right-0")
+            successAlert.addClass("right-[-100%]")
+            clearInterval(setAlertTimer);
+        }
+    }, 1000);
+}
+
+const setAlertMessage = (message) => {
+    $("#alertDescription").text(message)
+    alertMessage.removeClass("right-[-100%]")
+    alertMessage.addClass("right-0")
+
+    let count = 4;
+    const setAlertTimer = setInterval(function () {
+        count--;
+        if (count === 0) {
+            alertMessage.removeClass("right-0")
+            alertMessage.addClass("right-[-100%]")
+            clearInterval(setAlertTimer);
+        }
+    }, 1000);
+}
 
 $("#alertCloseBtn").click(function () {
     alertMessage.removeClass("right-0")
