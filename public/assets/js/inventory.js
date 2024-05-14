@@ -228,21 +228,21 @@ const setItemsTableContent = () => {
 };
 const setInventorySuccessMessage = (message) => {
     $("#successDescription").text(message)
-    employeeSuccessMessage.removeClass("right-[-100]")
-    employeeSuccessMessage.addClass("right-[0]")
+    inventorySuccessMessage.removeClass("right-[-100]")
+    inventorySuccessMessage.addClass("right-[0]")
     setTimeout(() => {
-        employeeSuccessMessage.addClass("right-[-100]")
-        employeeSuccessMessage.removeClass("right-[0]")
+        inventorySuccessMessage.addClass("right-[-100]")
+        inventorySuccessMessage.removeClass("right-[0]")
     }, 5000)
 }
 
 const setInventoryAlertMessage = (message) => {
     $("#alertDescription").text(message)
-    employeeAlertMessage.removeClass("right-[-100]")
-    employeeAlertMessage.addClass("right-[0]")
+    inventoryAlertMessage.removeClass("right-[-100]")
+    inventoryAlertMessage.addClass("right-[0]")
     setTimeout(() => {
-        employeeAlertMessage.addClass("right-[-100]")
-        employeeAlertMessage.removeClass("right-[0]")
+        inventoryAlertMessage.addClass("right-[-100]")
+        inventoryAlertMessage.removeClass("right-[0]")
     }, 5000)
 }
 
