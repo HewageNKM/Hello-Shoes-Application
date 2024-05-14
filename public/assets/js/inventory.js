@@ -19,16 +19,44 @@ $("#closeInventoryAddForm").click(
         $("#inventoryImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
     }
 );
-
+$("#inventoryTableRefreshBtn").click(function () {
+    loadItemsTable()
+})
 $("#inventorySearchBtn").click(function () {
     const inventorySearchFld = $("#inventorySearchFld")
     const value = inventorySearchFld.val().toString().trim()
 
     if (value.trim() === "") {
         setInventoryAlertMessage("Please enter a valid search value")
-
+        return
     }
+    inventoryTableLoadingAnimation.removeClass("hidden")
+    inventoryTableLoadingAnimation.addClass("flex")
 
+    $.ajax({
+        url: BASEURL + "/inventory/items/filter/" + value,
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + window.localStorage.getItem("token")
+        },
+        success: function (response) {
+            console.log(response)
+            itemsList = response
+            setItemsTableContent()
+            inventoryTableLoadingAnimation.removeClass("flex")
+            inventoryTableLoadingAnimation.addClass("hidden")
+        },
+        error: function (error) {
+            console.log(error)
+            let message = "Error loading items!"
+            if (error.responseJSON) {
+                message = error.responseJSON.message
+            }
+            inventoryTableLoadingAnimation.removeClass("flex")
+            inventoryTableLoadingAnimation.addClass("hidden")
+            setInventoryAlertMessage(message)
+        }
+    })
 })
 $("#inventoryImg").change(
     function () {
@@ -113,6 +141,7 @@ $("#addInventoryForm").submit(function (e) {
             data: formData,
             success: function (response) {
                 console.log(response)
+                loadItemsTable()
                 e.target.reset()
                 inventoryBtnLoadingAnimation.removeClass("flex")
                 inventoryBtnLoadingAnimation.addClass("hidden")
@@ -173,7 +202,7 @@ const setItemsTableContent = () => {
     itemsList.forEach(item => {
         $("#inventoryTableBody").append(
             `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light" id="${item.itemId}">
-                        <td class="m-1 p-2">${item.itemId.toUpperCase()}</td>
+                        <td class="m-1 p-2 uppercase">${item.itemId}</td>
                         <td class="m-1 p-2 capitalize">${item.description}</td>
                         <td class="m-1 p-2 capitalize">${item.category}</td>
                         <td class="m-1 p-2 ">${item.buyingPrice}</td>
@@ -181,7 +210,7 @@ const setItemsTableContent = () => {
                         <td class="m-1 p-2 ">${item.expectedProfit}</td>
                         <td class="m-1 p-2 ">${item.profitMargin}</td>
                         <td class="m-1 p-2 ">${item.quantity}</td>
-                        <td class="m-1 p-2 capitalize">${item.supplierId}</td>
+                        <td class="m-1 p-2 uppercase">${item.supplierId}</td>
                         <td class="m-1 p-2 capitalize">${item.supplierName}</td>
                         <td class="m1- p-2">
                             <button value="${item.itemId}" id="itemEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
@@ -189,10 +218,10 @@ const setItemsTableContent = () => {
                         </td>
             </tr>`
         )
-        if(item.quantity < 10){
+        if (item.quantity < 10) {
             $(`#${item.itemId}`).removeClass("odd:bg-white even:bg-gray-50")
             $(`#${item.itemId}`).addClass("bg-red-200")
-        }else {
+        } else {
 
         }
     })
