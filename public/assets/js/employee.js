@@ -25,7 +25,7 @@ $("#searchEmployeeBtn").click(function () {
     const searchEmployeeValue = searchEmployeeFld.val().toString().trim()
 
     if (searchEmployeeValue.trim() === "") {
-        loadEmployeeTable()
+        setAlertMessage("Please enter a search value!")
         return
     }
     employeeTableLoadingAnimation.removeClass("hidden")
