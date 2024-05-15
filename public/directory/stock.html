@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stocks</title>
+    <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <meta
+            content="width=device-width, initial-scale=1"
+            name="viewport"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<main class="min-h-screen relative flex flex-col gap-3">
+    <section class="flex flex-col gap-8  min-w-full justify-center items-center">
+        <h1 class="text-5xl font-bold mt-3">Stocks</h1>
+        <label class="flex flex-col gap-1">
+            <span class="font-bold">Search</span>
+            <div class="flex flex-row gap-3">
+                <input class="p-2 font-medium bg-slate-100 rounded h-[2.5rem] w-[20rem] hover:border-2 border-blue-500" placeholder="Stock ID, Item ID, Name and ETC ......" id="stockSearch">
+                <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2 font-medium">Search</button>
+            </div>
+        </label>
+    </section>
+    <section class="overflow-auto p-2 m-2">
+        <table class="w-full shadow-md text-md text-left rtl:text-right">
+            <thead>
+            <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                    Stock ID
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Supplier ID
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Supplier Name
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Item ID
+                </th>
+                <th class="px-6 rounded-e-lg py-3" scope="col">
+                    Item Name
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Size 40
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Size 41
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Size 42
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Size 43
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Size 44
+                </th>
+                <th class="px-6 rounded-e-lg py-3" scope="col">
+                    Size 45
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody id="stockTableBody">
+            <!-- Table body content goes here -->
+            </tbody>
+        </table>
+    </section>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="../assets/js/constant.js"></script>
+<script src="../assets/js/stock.js"></script>
+</body>
+</html>
