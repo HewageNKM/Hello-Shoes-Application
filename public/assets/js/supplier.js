@@ -336,8 +336,8 @@ setSupplierTableContent = () => {
                         <td class="m-1 p-2">${supplier.contactNo2}</td>
                         <td class="m-1 p-2">${supplier.email}</td>
                         <td class="m-1 p-2">
-                            <button value="${supplier.supplierId}" id="supplierEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editSupplierBtn">Edit</button>
-                            <button value="${supplier.supplierId}" id="supplierDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteSupplierBtn">Delete</button>
+                            <button value="${supplier.supplierId}" id="supplierEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600">Edit</button>
+                            <button value="${supplier.supplierId}" id="supplierDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600">Delete</button>
                         </td>
                     </tr>`
         )

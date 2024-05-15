@@ -326,8 +326,8 @@ const setEmployeeTableContent = () => {
                          <td class="m-1 p-2 capitalize">${employee.guardianName}</td>
                         <td class="m-1 p-2">${employee.guardianContact}</td>
                         <td class="m-1 p-2">
-                            <button value="${employee.employeeId}" id="employeeEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
-                            <button value="${employee.employeeId}" id="emloyeeDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteCustomerBtn">Delete</button>
+                            <button value="${employee.employeeId}" id="employeeEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600">Edit</button>
+                            <button value="${employee.employeeId}" id="emloyeeDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600">Delete</button>
                         </td>
                     </tr>`
         )

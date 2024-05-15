@@ -478,9 +478,9 @@
                         </div>
                         <form class="flex flex-col gap-3 items-center" id="addInventoryForm">
                             <div class="flex flex-col gap-3 items-center justify-center">
-                                <img alt="employeeImg" class="w-[120px] h-[120px] bg-center bg-cover rounded-full"
+                                <img alt="itemImg" class="w-[120px] h-[120px] bg-center bg-cover rounded-full"
                                      id="inventoryImgPreview" src="../assets/img/default_employee_avatar.png">
-                                <input accept="image/jpeg" alt="employeeImg" class="p-2 eFld" id="inventoryImg"
+                                <input accept="image/jpeg" alt="itemImg" class="p-2 eFld" id="inventoryImg"
                                        name="image"
                                        type="file">
                             </div>
@@ -497,7 +497,7 @@
                                     </label>
                                     <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Name</span>
-                                        <input class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="capitalize eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="inventoryNameFld"
                                                name="name"
                                                placeholder="Name"
@@ -507,7 +507,7 @@
                                     </label>
                                     <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Supplier ID</span>
-                                        <input class="iFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="iFld uppercase rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="inventorySupplierIDFld"
                                                name="sId"
                                                placeholder="Supplier ID"
@@ -517,7 +517,7 @@
                                     </label>
                                     <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Supplier Name</span>
-                                        <input class="rounded bg-slate-100 p-1 font-light lg:h-[2.5rem]  lg:w-[16rem]"
+                                        <input class="capitalize rounded bg-slate-100 p-1 font-light lg:h-[2.5rem]  lg:w-[16rem]"
                                                disabled
                                                id="inventorySupplierNameFld"
                                                name="sName"
@@ -528,27 +528,29 @@
                                 </div>
                                 <div class="flex flex-col gap-3">
                                     <label class="flex flex-col gap-2">
-                                        <span class="text-blue-600 font-bold">Buying Price</span>
+                                        <span class="text-blue-600 font-bold">Buying Price(Rs)</span>
                                         <input class="iFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="buyingPriceFld"
                                                name="bPrice"
                                                placeholder="0.0"
                                                required
                                                type="number"
+                                               onchange="calculateValues()"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-2">
-                                        <span class="text-blue-600 font-bold">Selling Price</span>
+                                        <span class="text-blue-600 font-bold">Selling Price(Rs)</span>
                                         <input class="iFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
                                                id="sellingPriceFld"
                                                name="sPrice"
                                                placeholder="0.0"
                                                required
                                                type="number"
+                                               onchange="calculateValues()"
                                         >
                                     </label>
                                     <label class="flex flex-col gap-2">
-                                        <span class="text-blue-600 font-bold">Expected Profit</span>
+                                        <span class="text-blue-600 font-bold">Expected Profit(Rs)</span>
                                         <input class="rounded bg-slate-100 p-1 font-light lg:h-[2.5rem]  lg:w-[16rem]"
                                                disabled
                                                id="expectedProfitFld"
@@ -558,7 +560,7 @@
                                         >
                                     </label>
                                     <label class="flex flex-col gap-2">
-                                        <span class="text-blue-600 font-bold">Profit Margin</span>
+                                        <span class="text-blue-600 font-bold" onchange="">Profit Margin(%)</span>
                                         <input class="rounded bg-slate-100 p-1 font-light  lg:h-[2.5rem]  lg:w-[16rem]"
                                                disabled
                                                id="pMarginFld"
@@ -665,16 +667,16 @@
                         Category
                     </th>
                     <th class="px-6 py-3" scope="col">
-                        Buying Price
+                        Buying Price(Rs)
                     </th>
                     <th class="px-6 rounded-e-lg py-3" scope="col">
-                        Selling Price
+                        Selling Price(Rs)
                     </th>
                     <th class="px-6 py-3" scope="col">
-                        Expected Profit
+                        Expected Profit(Rs)
                     </th>
                     <th class="px-6 py-3" scope="col">
-                        Profit Margin
+                        Profit Margin(%)
                     </th>
                     <th class="px-6 py-3" scope="col">
                         Quantity
