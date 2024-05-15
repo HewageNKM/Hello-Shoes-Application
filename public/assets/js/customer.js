@@ -100,8 +100,8 @@ const setCustomerTable = () => {
                         <td class="m-1 p-2">${recentDateAndTime}</td>
                         
                         <td class="m-1 p-2">
-                            <button value="${customer.customerId}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600" id="editCustomerBtn">Edit</button>
-                            <button value="${customer.customerId}" id="customerDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600" id="deleteCustomerBtn">Delete</button>
+                            <button value="${customer.customerId}" id="customerEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600">Edit</button>
+                            <button value="${customer.customerId}" id="customerDeleteBtn" class="duration-300 text-red-600 font-bold m-1 p-1 hover:border-b-2 border-red-600">Delete</button>
                         </td>
                     </tr>`);
     })
