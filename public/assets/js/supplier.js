@@ -223,7 +223,6 @@ $("#addSupplierForm").submit(function (e) {
             success: function (data) {
                 console.log(data);
                 e.target.reset();
-                $("#addSupplier").addClass("hidden");
                 loadSupplierTable();
                 setSupplierSuccessMessage("Supplier updated successfully")
             },
