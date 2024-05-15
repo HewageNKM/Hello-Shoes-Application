@@ -3,7 +3,7 @@ const stockSuccessMessage = $("#success");
 const stockAlertMessage = $("#alert");
 
 let stocksList = [];
-
+console.log(window.localStorage.getItem("token"))
 $("#stockSearchBtn").click(function (e) {
     searchStocks()
 })
@@ -71,19 +71,80 @@ const setStockTableContent = () => {
                         <td class="m-1 p-2 capitalize">${stock.supplierName}</td>
                         <td class="m-1 p-2 uppercase">${stock.itemId}</td>
                         <td class="m-1 p-2 capitalize">${stock.description}</td>
-                        <td class="m-1 p-2 "><input class="w-[5rem] bg-slate-100 p-2 rounded-md" type="number" value="${stock.size40}"></td>
-                        <td class="m-1 p-2 "><input class="w-[5rem] bg-slate-100 p-2 rounded-md" type="number" value="${stock.size41}"></td>
-                        <td class="m-1 p-2 "><input class="w-[5rem] bg-slate-100 p-2 rounded-md" type="number" value="${stock.size42}"></td>
-                        <td class="m-1 p-2 "><input class="w-[5rem] bg-slate-100 p-2 rounded-md" type="number" value="${stock.size43}"></td>
-                        <td class="m-1 p-2 "><input class="w-[5rem] bg-slate-100 p-2 rounded-md" type="number" value="${stock.size44}"></td>
-                        <td class="m-1 p-2 "><input class="w-[5rem] bg-slate-100 p-2 rounded-md" type="number" value="${stock.size45}"></td>
+                        <td class="m-1 p-2 "><input class="w-[5rem] sizeFld bg-slate-100 p-2 rounded-md" type="number" value="${stock.size40}" id="size40Fld${stock.stockId}"} ></td>
+                        <td class="m-1 p-2 "><input class="w-[5rem] sizeFld bg-slate-100 p-2 rounded-md" type="number" value="${stock.size41}" id="size41Fld${stock.stockId}"></td>
+                        <td class="m-1 p-2 "><input class="w-[5rem] sizeFld bg-slate-100 p-2 rounded-md" type="number" value="${stock.size42}" id="size42Fld${stock.stockId}"></td>
+                        <td class="m-1 p-2 "><input class="w-[5rem] sizeFld bg-slate-100 p-2 rounded-md" type="number" value="${stock.size43}" id="size43Fld${stock.stockId}"></td>
+                        <td class="m-1 p-2 "><input class="w-[5rem] sizeFld bg-slate-100 p-2 rounded-md" type="number" value="${stock.size44}" id="size44Fld${stock.stockId}"></td>
+                        <td class="m-1 p-2 "><input class="w-[5rem] sizeFld bg-slate-100 p-2 rounded-md" type="number" value="${stock.size45}" id="size45Fld${stock.stockId}"></td>
                         <td class="m1- p-2">
                             <button value="${stock.stockId}" id="stockEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600">Update</button>
                         </td>
             </tr>`
+
         )
+        if(window.localStorage.getItem("role") === "USER"){
+            $("#sizeFld").attr("disabled", "disabled")
+        }
     })
 }
+$([document]).on("click", "#stockEditBtn", function (e) {
+    if (window.localStorage.getItem("role") === "USER") {
+        setCustomerAlertMessage("You do not have permission to update stocks")
+        return
+    }
+
+    const stockId = e.target.value;
+    const size40 = Number.parseInt($("#size40Fld" + stockId).val());
+    const size41 = Number.parseInt($("#size41Fld" + stockId).val());
+    const size42 = Number.parseInt($("#size42Fld" + stockId).val());
+    const size43 = Number.parseInt($("#size43Fld" + stockId).val());
+    const size44 = Number.parseInt($("#size44Fld" + stockId).val());
+    const size45 = Number.parseInt($("#size45Fld" + stockId).val());
+
+
+    let data = {
+        stockId: stockId,
+        size40: size40,
+        size41: size41,
+        size42: size42,
+        size43: size43,
+        size44: size44,
+        size45: size45
+    }
+
+    data = JSON.stringify(data)
+    console.log(data)
+
+    $.ajax({
+        url: BASEURL + "/inventory/items/stocks/" + e.target.value.toLowerCase(),
+        method: "PUT",
+        contentType: "application/json",
+        processData: false,
+        headers: {
+            "Authorization": "Bearer " + window.localStorage.getItem("token")
+        },
+        data: data,
+        success: function (response) {
+            console.log(response)
+            loadItemsTable()
+            loadStockTable()
+            stockTableLoadingAnimation.removeClass("flex")
+            stockTableLoadingAnimation.addClass("hidden")
+            setStockSuccessMessage("Stock updated successfully")
+        },
+        error: function (error) {
+            console.log(error)
+            let message = "Error updating Stock!"
+            if (error.responseJSON) {
+                message = error.responseJSON.message
+            }
+            stockTableLoadingAnimation.removeClass("flex")
+            stockTableLoadingAnimation.addClass("hidden")
+            setStockAlertMessage(message)
+        }
+    })
+})
 const setStockSuccessMessage = (message) => {
     $("#successDescription").text(message)
     stockSuccessMessage.removeClass("right-[-100]")
