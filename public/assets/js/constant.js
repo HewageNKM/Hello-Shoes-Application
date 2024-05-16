@@ -1,1 +1,1 @@
-const BASEURL = "http://shoe-app.us-east-1.elasticbeanstalk.com/api/v1"
+const BASEURL = "http://hello-shoe-server.us-east-1.elasticbeanstalk.com/api/v1"
