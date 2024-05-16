@@ -127,7 +127,6 @@ $([document]).on("click", "#stockEditBtn", function (e) {
         data: data,
         success: function (response) {
             console.log(response)
-            loadItemsTable()
             loadStockTable()
             stockTableLoadingAnimation.removeClass("flex")
             stockTableLoadingAnimation.addClass("hidden")

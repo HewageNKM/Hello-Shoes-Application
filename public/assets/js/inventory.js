@@ -186,6 +186,7 @@ $("#addInventoryForm").submit(function (e) {
                 iFld.addClass("hover:border-2")
                 addInventoryBtn.removeClass("cursor-not-allowed")
                 setInventorySuccessMessage("Item updated successfully")
+                loadItemsTable()
             },
             error: function (error) {
                 console.log(error)

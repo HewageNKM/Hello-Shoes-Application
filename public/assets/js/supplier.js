@@ -284,6 +284,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
             success: function (data) {
                 console.log(data);
                 setSupplierSuccessMessage("Supplier deleted successfully");
+                loadSupplierTable()
             },
             error: function (error) {
                 console.log(error);
