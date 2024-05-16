@@ -243,20 +243,20 @@
             <label class="flex flex-col gap-1">
                 <span class="font-bold">Customer ID</span>
                 <input class="font-bold p-2 bg-slate-200 rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
-                       id="customerIdFld"
+                       id="orderCustomerIdFld"
                        type="text">
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-bold">Item ID</span>
                 <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
-                       id="itemIdFld"
+                       id="orderItemIdFld"
                        type="text">
             </label>
-            <div class="flex-col gap-5 justify-between items-center hidden" id="optionFld">
+            <div class="flex-col gap-5 justify-between items-center hidden" id="orderOptionFld">
                 <div class="flex-row gap-3 flex">
                     <label class="flex flex-col gap-1">
                         <span class="font-bold">Size</span>
-                        <select class="h-[2rem] bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2">
+                        <select class="h-[2rem] bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2" id="sizeSelect">
                             <option>SIZE 40</option>
                             <option>SIZE 40</option>
                             <option>SIZE 40</option>
@@ -283,7 +283,7 @@
                     <span class="font-bold">Sub Total(Rs)</span>
                     <input class="bg-slate-200 p-2 font-bold rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
                            disabled
-                           id="totalFld"
+                           id=orderTotalFld"
                            type="text"
                     >
                 </label>
