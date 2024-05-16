@@ -45,9 +45,9 @@
                     id="customerBtn"
                     onclick="navigationOnClick(this.value)" value="customer">Customer
             </button>
-            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+            <button class="p-2 hover:border-b-2 border-red-500 hover:scale-110 hover:text-red-500 transition-all duration-300 font-semibold text-xl"
                     id="logoutBtn"
-                    onclick="navigationOnClick(this.value)" value="logout">Logout
+                    onclick="navigationOnClick(this.value)" value="logout">LOGOUT
             </button>
         </div>
     </div>
@@ -72,6 +72,28 @@
     </div>
     <button class="font-black hover:cursor-hand" id="successCloseBtn">X</button>
 </div>
+
+<div class="transition-all hidden z-50 duration-500 min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 justify-center items-center" id="logOutDialog">
+    <div class="fixed inset-0 bg-black opacity-50">
+        <div class="relative flex justify-center items-center min-h-screen shadow-xl rounded-md">
+            <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                <div class="justify-between items-center flex flex-row">
+                    <h1 class="text-2xl font-bold">Logout</h1>
+                </div>
+                <p class="text-lg font-semibold">Are you sure you want to LOGOUT?</p>
+                <div class="flex gap-5 justify-between items-center">
+                    <button class="bg-red-500 p-2 rounded-md font-semibold text-xl hover:bg-red-600"
+                            id="logoutConfirmBtn" type="button">Yes
+                    </button>
+                    <button class="bg-blue-400 p-2 rounded-md font-semibold text-xl hover:bg-blue-600"
+                            id="logoutCancelBtn" type="button">No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Order Section-->
 <main class="min-h-screen relative flex flex-col gap-3 transition-all ease-in duration-300" id="orderSection">
     <section class="overflow-auto p-2 m-2 relative">
@@ -90,7 +112,7 @@
                 Loading...
             </button>
         </div>
-        <table class="w-full shadow-md text-md text-left rtl:text-right">
+        <table class="w-full -z-10 shadow-md text-md text-left rtl:text-right">
             <thead>
             <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
                 <th class="px-6 rounded-s-lg py-3w-[15vw] w-[20vw]" scope="col">
@@ -115,8 +137,7 @@
             </tbody>
         </table>
     </section>
-    <section
-            class="w-full mx-auto pl-10 p-5 pb-6 pr-10 flex flex-row justify-between items-center transition-all duration-300 fixed bottom-0 bg-blue-50 shadow-md">
+    <section class="w-full z-10 mx-auto pl-10 p-5 pb-6 pr-10 flex flex-row justify-between items-center transition-all duration-300 fixed bottom-0 bg-blue-50 shadow-md">
         <div class="flex-col flex justify-between gap-10">
             <label class="flex flex-col gap-1">
                 <span class="text-blue-600 font-bold">Customer ID</span>
@@ -538,7 +559,8 @@
                         id="showInventoryAddForm"
                         type="button">Add Item
                 </button>
-                <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0" href="./stock.html"
+                <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0"
+                   href="./stock.html"
                    id="showInventoryStockForm"
                    target="_blank"
                    type="button">Stocks →
