@@ -4,18 +4,27 @@ const stockAlertMessage = $("#alert");
 
 let stocksList = [];
 console.log(window.localStorage.getItem("token"))
+
+$('#stockSearchFld').on('keypress', function (e) {
+    if(e.which === 13){
+        searchStocks()
+    }
+});
 $("#stockSearchBtn").click(function (e) {
     searchStocks()
 })
+
 $("#stocksRefreshBtn").click(function (e) {
     loadStockTable()
 })
+
 const searchStocks = () => {
     const value = $("#stockSearchFld").val();
     if (value === "") {
         setStockAlertMessage("Please enter a value to search")
         return;
     }
+
     stockTableLoadingAnimation.removeClass("hidden");
     stockTableLoadingAnimation.addClass("flex");
     $.ajax({
@@ -88,6 +97,7 @@ const setStockTableContent = () => {
         }
     })
 }
+
 $([document]).on("click", "#stockEditBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
         setCustomerAlertMessage("You do not have permission to update stocks")
@@ -144,6 +154,7 @@ $([document]).on("click", "#stockEditBtn", function (e) {
         }
     })
 })
+
 const setStockSuccessMessage = (message) => {
     $("#successDescription").text(message)
     stockSuccessMessage.removeClass("right-[-100]")
@@ -163,4 +174,5 @@ const setStockAlertMessage = (message) => {
         stockAlertMessage.removeClass("right-[0]")
     }, 5000)
 }
+
 loadStockTable();

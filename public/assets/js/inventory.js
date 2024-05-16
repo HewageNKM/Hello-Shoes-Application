@@ -351,29 +351,32 @@ const calculateValues = (evt) => {
     $("#pMarginFld").val(pMargin.toFixed(2))
 }
 
-$("#inventorySupplierIDFld").change(function (e) {
-    const sId = e.target.value
-    if (/^sup\d{8}/.test(sId)) {
-        $.ajax({
-            url: BASEURL + "/suppliers/" + sId,
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + window.localStorage.getItem("token")
-            },
-            success: function (response) {
-                console.log(response)
-                $("#inventorySupplierNameFld").val(response.name)
-            },
-            error: function (error) {
-                console.log(error)
-                let message = "Error loading supplier!"
-                if (error.responseJSON) {
-                    message = error.responseJSON.message
-                }
-                setInventoryAlertMessage(message)
-            }
-        })
-    }
-})
+$('#inventorySupplierFindBtn').click(function (e) {
 
+    const value = $("#inventorySupplierIDFld").val().toString().toLowerCase();
+    if (!/^sup\d{8}$/.test(value)) {
+        setInventoryAlertMessage("Please enter a valid supplier ID")
+        return
+    }
+
+    $.ajax({
+        url: BASEURL + "/suppliers/" + value,
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + window.localStorage.getItem("token")
+        },
+        success: function (response) {
+            console.log(response)
+            $("#inventorySupplierNameFld").val(response.name)
+        },
+        error: function (error) {
+            console.log(error)
+            let message = "Error loading supplier!"
+            if (error.responseJSON) {
+                message = error.responseJSON.message
+            }
+            setInventoryAlertMessage(message)
+        }
+    })
+});
 loadItemsTable()
