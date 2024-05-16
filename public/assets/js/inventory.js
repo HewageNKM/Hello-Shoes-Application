@@ -267,7 +267,7 @@ $([document]).on("click", "#itemEditBtn", function (e) {
     }
     const item = itemsList.find(item => item.itemId === e.target.value)
     console.log(item)
-    const [occasions,verities,gender] = item.category.split("/")
+    const [occasions, verities, gender] = item.category.split("/")
     $("#addInventory").removeClass("hidden")
     $("#inventoryNameFld").val(item.description)
     $("#buyingPriceFld").val(item.buyingPrice)
@@ -342,7 +342,7 @@ $("#buyingPriceFld").keyup(function (e) {
     calculateValues()
 })
 const calculateValues = (evt) => {
- console.log("Calculating")
+    console.log("Calculating")
     const bPrice = $("#buyingPriceFld").val()
     const sPrice = $("#sellingPriceFld").val()
     const eProfit = sPrice - bPrice
@@ -350,4 +350,30 @@ const calculateValues = (evt) => {
     $("#expectedProfitFld").val(eProfit)
     $("#pMarginFld").val(pMargin.toFixed(2))
 }
+
+$("#inventorySupplierIDFld").change(function (e) {
+    const sId = e.target.value
+    if (/^sup\d{8}/.test(sId)) {
+        $.ajax({
+            url: BASEURL + "/suppliers/" + sId,
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem("token")
+            },
+            success: function (response) {
+                console.log(response)
+                $("#inventorySupplierNameFld").val(response.name)
+            },
+            error: function (error) {
+                console.log(error)
+                let message = "Error loading supplier!"
+                if (error.responseJSON) {
+                    message = error.responseJSON.message
+                }
+                setInventoryAlertMessage(message)
+            }
+        })
+    }
+})
+
 loadItemsTable()
