@@ -226,6 +226,9 @@
                     QTY
                 </th>
                 <th class="px-6 py-3 w-[20vw]" scope="col">
+                    Price
+                </th>
+                <th class="px-6 py-3 w-[20vw]" scope="col">
                     Total
                 </th>
                 <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
@@ -248,24 +251,27 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-bold">Item ID</span>
-                <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
-                       id="orderItemIdFld"
-                       type="text">
+                <div class="flex flex-row">
+                    <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
+                           id="orderItemIdFld"
+                           type="text">
+                    <div id="itemLoadingAnimation" class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold">
+                        <svg width="20" height="20" fill="currentColor" class="mr-2 animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
             </label>
             <div class="flex-col gap-5 justify-between items-center hidden" id="orderOptionFld">
                 <div class="flex-row gap-3 flex">
                     <label class="flex flex-col gap-1">
                         <span class="font-bold">Size</span>
                         <select class="h-[2rem] bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2" id="sizeSelect">
-                            <option>SIZE 40</option>
-                            <option>SIZE 40</option>
-                            <option>SIZE 40</option>
-                            <option>SIZE 40</option>
-                            <option>SIZE 40</option>
                         </select>
                     </label>
                     <label class="flex flex-col gap-1">
-                        <span class="text-blue-600 font-bold">QTY</span>
+                        <span class="font-bold">QTY</span>
                         <input class="w-[5rem] h-[2rem] bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2"
                                id="qtyFld"
                                type="number">
@@ -283,7 +289,7 @@
                     <span class="font-bold">Sub Total(Rs)</span>
                     <input class="bg-slate-200 p-2 font-bold rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
                            disabled
-                           id=orderTotalFld"
+                           id="orderTotalFld"
                            type="text"
                     >
                 </label>
