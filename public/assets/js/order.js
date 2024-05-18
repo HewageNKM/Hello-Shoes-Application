@@ -4,8 +4,9 @@ const orderCustomerIdFld = $("#orderCustomerIdFld");
 const quantityFld = $("#qtyFld");
 const itemBtnLoadingAnimation = $("#itemLoadingAnimation");
 const sizeSelect = $("#sizeSelect");
-const orderSubTotal = $("#orderTotalFld");
+const orderSubTotalFld = $("#orderTotalFld");
 const orderCustomerIdFldAnimation = $("#customerIdFldLoadingAnimation")
+const cardNumberFld = $("#cardNumberFld");
 
 let orderCart = [];
 let items = [];
@@ -15,7 +16,7 @@ let orderTotal = 0;
 $('#orderCustomerIdFld').on('keypress', function (e) {
     const val = orderCustomerIdFld.val().toLowerCase();
     if (e.which === 13) {
-        if (val.trim().length>8) {
+        if (val.trim().length > 8) {
             orderCustomerIdFldAnimation.removeClass("hidden")
             orderCustomerIdFldAnimation.addClass("flex")
             $.ajax({
@@ -201,7 +202,7 @@ $("#addOrderBtn").click(function (e) {
 
     addToCartTable(orderCartItem);
 
-    orderSubTotal.val(orderTotal);
+    orderSubTotalFld.val(orderTotal);
     orderItemIdFld.addClass("hover:border-2")
     orderItemIdFld.prop("disabled", false)
     quantityFld.val("");
@@ -284,7 +285,7 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
         method: "POST",
         processData: false,
         contentType: "application/json",
-        data:order,
+        data: order,
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
@@ -297,9 +298,11 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
             orderTotal = 0;
             $("#orderTableBody").empty();
             $("#orderTotalFld").val("");
-            $("#orderCustomerIdFld").val("");
-            $("#orderCustomerIdFld").prop("disabled", false)
-            $("#orderCustomerIdFld").addClass("hover:border-2")
+            orderCustomerIdFld.val("");
+            orderCustomerIdFld.prop("disabled", false)
+            orderCustomerIdFld.addClass("hover:border-2")
+            $("#cashCheckoutSubTotalFld").val("")
+            orderSubTotalFld.val("")
             $("#cashFld").prop("disabled", false)
             $("#cashFld").val("")
             $("#balanceFld").val("")
@@ -310,5 +313,56 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
             console.log(error);
         }
     })
+})
 
+$("#cardCheckoutConfirmBtn").click(function (e) {
+    const cardNumber = Number.parseInt(cardNumberFld.val());
+    if (!/^\d{4}$/.test(cardNumber) || isNaN(cardNumber)) {
+        setInventoryAlertMessage("Invalid card number")
+        return;
+    }
+
+    let order = {
+        customerId: orderCustomerIdFld.val(),
+        saleDetailsList: orderCart,
+        total: orderTotal,
+        paymentDescription: "CARD-" + cardNumber,
+    }
+    order = JSON.stringify(order);
+
+    cardNumberFld.prop("disabled", true)
+    $.ajax({
+        url: BASEURL + "/sales",
+        method: "POST",
+        processData: false,
+        contentType: "application/json",
+        data: order,
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        success: function (res) {
+            console.log(res);
+            setInventorySuccessMessage("Order placed successfully")
+            orderCart = [];
+            items = [];
+            stocks = [];
+            orderTotal = 0;
+            $("#orderTableBody").empty();
+            $("#orderTotalFld").val("");
+            orderCustomerIdFld.val("");
+            orderCustomerIdFld.prop("disabled", false)
+            orderCustomerIdFld.addClass("hover:border-2")
+            orderSubTotalFld.val("")
+            $("#cardCheckoutSubTotalFld").val("")
+            cardNumberFld.prop("disabled", false)
+            cardNumberFld.val("")
+            orderItemIdFld.prop("disabled", false)
+            orderItemIdFld.addClass("hover:border-2")
+            setInventoryAlertMessage("Order placed successfully")
+        },
+        error: function (error) {
+            $("#cardNumberFld").prop("disabled", false)
+            console.log(error);
+        }
+    })
 })
