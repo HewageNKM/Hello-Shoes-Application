@@ -288,12 +288,12 @@ $("#customerTableRefreshBtn").click(function () {
 })
 
 $([document]).on("click", "#customerDeleteBtn", function (e) {
-    const deleteCus = confirm("Are you sure you want to delete customer?");
-    if (!deleteCus) {
-        return
-    }
     if (window.localStorage.getItem("role") === "USER") {
         setCustomerAlertMessage("You do not have permission to delete customer")
+        return
+    }
+    const deleteCus = confirm("Are you sure you want to delete customer?");
+    if (!deleteCus) {
         return
     }
     const id = e.target.value;

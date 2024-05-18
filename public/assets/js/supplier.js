@@ -95,8 +95,6 @@ $("#addSupplierForm").submit(function (e) {
     const country = e.target.country.value.toString();
     let zip = e.target.zip.value.toString()
 
-    console.log(id);
-
     if (!/^(?! )[A-Za-z0-9 ]{3,50}$/.test(name)) {
         $("#supplierNameFld").addClass("border-2 border-red-500");
     } else {
@@ -264,13 +262,13 @@ const loadSupplierTable = () => {
     });
 }
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
-    const deleteSup = confirm("Are you sure you want to delete supplier?");
-    if (!deleteSup) {
+    if (window.localStorage.getItem("role") === "USER") {
+        setSupplierAlertMessage("You do not have permission to delete supplier")
         return
     }
 
-    if (window.localStorage.getItem("role") === "USER") {
-        setSupplierAlertMessage("You do not have permission to delete supplier")
+    const deleteSup = confirm("Are you sure you want to delete supplier?");
+    if (!deleteSup) {
         return
     }
 

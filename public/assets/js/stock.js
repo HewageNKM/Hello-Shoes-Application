@@ -92,15 +92,13 @@ const setStockTableContent = () => {
             </tr>`
 
         )
-        if(window.localStorage.getItem("role") === "USER"){
-            $("#sizeFld").attr("disabled", "disabled")
-        }
     })
+
 }
 
 $([document]).on("click", "#stockEditBtn", function (e) {
     if (window.localStorage.getItem("role") === "USER") {
-        setCustomerAlertMessage("You do not have permission to update stocks")
+        setStockAlertMessage("You do not have permission to update stocks")
         return
     }
 
