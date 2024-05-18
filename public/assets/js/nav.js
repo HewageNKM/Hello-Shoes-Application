@@ -78,7 +78,6 @@ const setLiveDateAndTime = ()=>{
     const date = new Date();
     document.querySelector("#dateFld").textContent = date.toLocaleDateString();
     document.querySelector("#timeFld").textContent = date.toLocaleTimeString();
-    console.log(date.toDateString());
 };
 
 setInterval(setLiveDateAndTime, 1000);
