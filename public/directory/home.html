@@ -113,7 +113,7 @@
                 <form class="flex flex-col gap-3 items-center" id="cardCheckoutForm">
                     <div class="flex-col flex gap-7">
                         <label class="flex flex-col gap-1">
-                            <span class="font-bold">Sub Total</span>
+                            <span class="font-bold">Sub Total(Rs)</span>
                             <input type="number" disabled id="cardCheckoutSubTotalFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]">
                         </label>
                         <label class="flex flex-col gap-1">
@@ -161,19 +161,19 @@
                     <h1 class="text-2xl font-bold">Checkout</h1>
                     <button class="font-black hover:cursor-hand text-red-500" id="cashCheckoutCloseBtn">X</button>
                 </div>
-                <form class="flex flex-col gap-3 items-center" id="cashCheckoutForm">
+                <div class="flex flex-col gap-3 items-center" id="cashCheckoutForm">
                     <div class="flex-col flex gap-7">
                         <label class="flex flex-col gap-1">
-                            <span class="font-bold">Sub Total</span>
+                            <span class="font-bold">Sub Total(Rs)</span>
                             <input type="number" disabled id="cashCheckoutSubTotalFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]">
                         </label>
                         <label class="flex flex-col gap-1">
-                            <span class="font-bold">Cash</span>
+                            <span class="font-bold">Cash(Rs)</span>
                             <input type="number" id="cashFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem] hover:border-2 border-blue-500">
                         </label>
                         <label class="flex flex-col gap-1">
-                            <span class="font-bold">Balance</span>
-                            <input type="number" disabled class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]">
+                            <span class="font-bold">Balance(Rs)</span>
+                            <input type="number" disabled class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]" id="balanceFld">
                         </label>
                     </div>
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
@@ -189,7 +189,7 @@
                         </svg>
                         Confirm
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -245,16 +245,28 @@
         <div class="flex-col flex justify-between gap-10">
             <label class="flex flex-col gap-1">
                 <span class="font-bold">Customer ID</span>
-                <input class="font-bold p-2 bg-slate-200 rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
-                       id="orderCustomerIdFld"
-                       type="text">
+                <div class="flex flex-row">
+                    <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2 h-[2.5rem] w-[13rem]"
+                           id="orderCustomerIdFld"
+                           type="text"
+                           placeholder="ID,Email or Mobile"
+                    >
+                    <div id="customerIdFldLoadingAnimation" class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold">
+                        <svg width="20" height="20" fill="currentColor" class="mr-2 animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-bold">Item ID</span>
                 <div class="flex flex-row">
-                    <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
+                    <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2  h-[2.5rem] w-[13rem]"
                            id="orderItemIdFld"
-                           type="text">
+                           type="text"
+                           placeholder="XXXXXXXX"
+                    >
                     <div id="itemLoadingAnimation" class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold">
                         <svg width="20" height="20" fill="currentColor" class="mr-2 animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                             <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
@@ -287,15 +299,16 @@
             <div class="flex flex-row gap-5">
                 <label class="flex flex-col gap-1">
                     <span class="font-bold">Sub Total(Rs)</span>
-                    <input class="bg-slate-200 p-2 font-bold rounded-md border-blue-600 hover:border-2 h-[2rem] w-[12rem]"
+                    <input class="bg-slate-200 p-2 font-bold rounded-md border-blue-600  h-[2.5rem] w-[13rem]"
                            disabled
                            id="orderTotalFld"
                            type="text"
+                           placeholder="0.0"
                     >
                 </label>
                 <label class="flex flex-col gap-1">
                     <span class="font-bold">Pay</span>
-                    <select class="p-2 rounded-md font-semibold h-[2rem] w-[12rem] bg-slate-200">
+                    <select class="p-2 rounded-md font-semibold h-[2.5rem] w-[13rem] hover:border-2 border-blue-500 bg-slate-200" id="paymentTypeSelect">
                         <option class="p-1" value="CASH">Cash</option>
                         <option class="p-1" value="CARD">Card</option>
                     </select>

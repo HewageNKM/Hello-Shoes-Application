@@ -5,18 +5,21 @@ const quantityFld = $("#qtyFld");
 const itemBtnLoadingAnimation = $("#itemLoadingAnimation");
 const sizeSelect = $("#sizeSelect");
 const orderSubTotal = $("#orderTotalFld");
+const orderCustomerIdFldAnimation = $("#customerIdFldLoadingAnimation")
 
-const orderCart = [];
+let orderCart = [];
 let items = [];
 let stocks = [];
 let orderTotal = 0;
 
 $('#orderCustomerIdFld').on('keypress', function (e) {
+    const val = orderCustomerIdFld.val().toLowerCase();
     if (e.which === 13) {
-        orderCustomerIdFld.prop("disabled", true)
-        if (/^cust\d{8}$/) {
+        if (val.trim().length>8) {
+            orderCustomerIdFldAnimation.removeClass("hidden")
+            orderCustomerIdFldAnimation.addClass("flex")
             $.ajax({
-                url: BASEURL + "/customers/" + orderCustomerIdFld.val(),
+                url: BASEURL + "/customers/" + val,
                 method: "GET",
                 processData: false,
                 contentType: false,
@@ -24,11 +27,17 @@ $('#orderCustomerIdFld').on('keypress', function (e) {
                     "Authorization": "Bearer " + localStorage.getItem("token")
                 },
                 success: function (res) {
+                    orderCustomerIdFld.prop("disabled", true)
+                    orderCustomerIdFld.removeClass("hover:border-2")
+                    orderCustomerIdFldAnimation.removeClass("flex")
+                    orderCustomerIdFldAnimation.addClass("hidden")
                     console.log(res);
                 },
                 error: function (error) {
                     console.log(error);
-                    $("#orderCustomerIdFld").prop("disabled", false)
+                    orderCustomerIdFld.prop("disabled", false)
+                    orderCustomerIdFldAnimation.removeClass("flex")
+                    orderCustomerIdFldAnimation.addClass("hidden")
                     setInventoryAlertMessage("Customer not found")
                 }
             })
@@ -180,11 +189,12 @@ $("#addOrderBtn").click(function (e) {
     stock[size] -= quantity;
 
     const orderCartItem = {
-        code: itemId,
+        itemId: itemId,
         description: description,
+        size: size,
         quantity: quantity,
         price: item.sellingPrice,
-        total: total
+        total: total,
     };
 
     orderCart.push(orderCartItem);
@@ -204,12 +214,101 @@ const addToCartTable = (orderCartItem) => {
     const table = $("#orderTableBody");
     table.append
     (
-        `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
-            <td class="m-1 p-2 uppercase">${orderCartItem.code}</td>
+        `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light" id="">
+            <td class="m-1 p-2 uppercase">${orderCartItem.itemId}</td>
             <td class="m-1 p-2 capitalize">${orderCartItem.description}</td>
             <td>${orderCartItem.quantity}</td>
             <td>${orderCartItem.price}</td>
             <td>${orderCartItem.total}</td>
+            <td><button id="" class="text-red-500 hover:text-red-600 font-medium hover:border-b-2 border-red-500">Remove</button></td>
         </tr>`
     );
 }
+
+$("#checkoutBtn").click(function (e) {
+    const cashCheckoutForm = $("#cashCheckoutFormDiv");
+    const cardCheckoutForm = $("#cardCheckoutFormDiv");
+    const payment = $("#paymentTypeSelect").val();
+
+    console.log(payment)
+    if (orderCart.length === 0) {
+        setInventoryAlertMessage("Cart is empty")
+        return;
+    }
+
+    if (payment === "CASH") {
+        $("#cashCheckoutSubTotalFld").val(orderTotal)
+        cashCheckoutForm.removeClass("hidden")
+    } else if (payment === "CARD") {
+        $("#cardCheckoutSubTotalFld").val(orderTotal)
+        cardCheckoutForm.removeClass("hidden")
+    }
+})
+
+$("#cashCheckoutCloseBtn").click(function (e) {
+    $("#cashCheckoutSubTotalFld").val("")
+    $("#cashFld").val("")
+    $("#balanceFld").val("")
+    $("#cashCheckoutFormDiv").addClass("hidden")
+})
+$("#cardCheckoutCloseBtn").click(function (e) {
+    $("#cardCheckoutSubTotalFld").val("")
+    $("#cardNumberFld").val("")
+    $("#cardCheckoutFormDiv").addClass("hidden")
+})
+
+$("#cashFld").keyup(function (e) {
+    const cash = Number.parseFloat(e.target.value);
+    const balance = cash - orderTotal;
+    $("#balanceFld").val(balance)
+})
+
+$("#cashCheckoutConfirmBtn").click(function (e) {
+    const balance = Number.parseInt($("#balanceFld").val());
+    if (balance < 0 || balance == null || isNaN(balance)) {
+        setInventoryAlertMessage("Insufficient cash")
+        return;
+    }
+
+    let order = {
+        customerId: orderCustomerIdFld.val(),
+        saleDetailsList: orderCart,
+        total: orderTotal,
+        paymentDescription: "CASH",
+    }
+    order = JSON.stringify(order);
+
+    $("#cashFld").prop("disabled", true)
+    $.ajax({
+        url: BASEURL + "/sales",
+        method: "POST",
+        processData: false,
+        contentType: "application/json",
+        data:order,
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        success: function (res) {
+            console.log(res);
+            setInventorySuccessMessage("Order placed successfully")
+            orderCart = [];
+            items = [];
+            stocks = [];
+            orderTotal = 0;
+            $("#orderTableBody").empty();
+            $("#orderTotalFld").val("");
+            $("#orderCustomerIdFld").val("");
+            $("#orderCustomerIdFld").prop("disabled", false)
+            $("#orderCustomerIdFld").addClass("hover:border-2")
+            $("#cashFld").prop("disabled", false)
+            $("#cashFld").val("")
+            $("#balanceFld").val("")
+            setInventoryAlertMessage("Order placed successfully")
+        },
+        error: function (error) {
+            $("#cashFld").prop("disabled", false)
+            console.log(error);
+        }
+    })
+
+})
