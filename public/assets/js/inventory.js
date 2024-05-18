@@ -8,6 +8,11 @@ let itemsList = []
 
 $("#showInventoryAddForm").click(
     function () {
+        if (window.localStorage.getItem("role") === "USER") {
+            setCustomerAlertMessage("You do not have permission to add item")
+            return
+        }
+
         $("#addInventory").removeClass("hidden");
     }
 );

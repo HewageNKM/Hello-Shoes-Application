@@ -264,13 +264,13 @@ const loadSupplierTable = () => {
     });
 }
 $([document]).on("click", "#supplierDeleteBtn", function (e) {
-    const deleteSup = confirm("Are you sure you want to delete supplier?");
-    if (!deleteSup) {
+    if (window.localStorage.getItem("role") === "USER") {
+        setSupplierAlertMessage("You do not have permission to delete supplier")
         return
     }
 
-    if (window.localStorage.getItem("role") === "USER") {
-        setSupplierAlertMessage("You do not have permission to delete supplier")
+    const deleteSup = confirm("Are you sure you want to delete supplier?");
+    if (!deleteSup) {
         return
     }
 

@@ -334,13 +334,12 @@ const setEmployeeTableContent = () => {
     })
 }
 $([document]).on("click", "#emloyeeDeleteBtn", function (e) {
-    const deleteEm = confirm("Are you sure you want to delete employee?");
-    if (!deleteEm) {
-        return
-    }
-
     if (window.localStorage.getItem("role") === "USER") {
         setCustomerAlertMessage("You do not have permission to delete employee")
+        return
+    }
+    const deleteEm = confirm("Are you sure you want to delete employee?");
+    if (!deleteEm) {
         return
     }
     const id = e.target.value;
