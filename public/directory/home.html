@@ -129,14 +129,14 @@
                         </label>
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Last 4 Digit of the Card</span>
-                            <input type="number" class="bg-slate-200 rounded-md p-2 h-[2.3rem] w-[15rem] hover:border-2 border-blue-500" required id="cardNumberFld">
+                            <input placeholder="XXXX" type="number" class="bg-slate-200 rounded-md p-2 h-[2.3rem] w-[15rem] hover:border-2 border-blue-500" required id="cardNumberFld">
                         </label>
                     </div>
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
                             id="cardCheckoutConfirmBtn" type="submit">
                         <svg aria-hidden="true" class="hidden mr-3 w-4 h-4 text-white animate-spin"
                              fill="none"
-                             id="checkoutConfirmBtnLoadingAnimation" role="status"
+                             id="checkoutConfirmBtnLoadingAnimationCard" role="status"
                              viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                                   fill="#E5E7EB"></path>
@@ -169,7 +169,7 @@
                         </label>
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Cash(Rs)</span>
-                            <input type="number" id="cashFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem] hover:border-2 border-blue-500">
+                            <input placeholder="0.0" type="number" id="cashFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem] hover:border-2 border-blue-500">
                         </label>
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Balance(Rs)</span>
@@ -180,7 +180,7 @@
                             id="cashCheckoutConfirmBtn" type="submit">
                         <svg aria-hidden="true" class="hidden mr-3 w-4 h-4 text-white animate-spin"
                              fill="none"
-                             id="checkoutConfirmBtnLoadingAnimation" role="status"
+                             id="checkoutConfirmBtnLoadingAnimationCash" role="status"
                              viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                                   fill="#E5E7EB"></path>
@@ -256,6 +256,9 @@
                             <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
                             </path>
                         </svg>
+                    </div>
+                    <div id="customerConfirmMark" class="hidden justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="32px" height="32px"><path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/><path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"/></svg>
                     </div>
                 </div>
             </label>

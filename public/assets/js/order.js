@@ -7,11 +7,13 @@ const sizeSelect = $("#sizeSelect");
 const orderSubTotalFld = $("#orderTotalFld");
 const orderCustomerIdFldAnimation = $("#customerIdFldLoadingAnimation")
 const cardNumberFld = $("#cardNumberFld");
+const customerConfirmMark = $("#customerConfirmMark");
 
 let orderCart = [];
 let items = [];
 let stocks = [];
 let orderTotal = 0;
+let customer = null;
 
 $('#orderCustomerIdFld').on('keypress', function (e) {
     const val = orderCustomerIdFld.val().toLowerCase();
@@ -28,11 +30,15 @@ $('#orderCustomerIdFld').on('keypress', function (e) {
                     "Authorization": "Bearer " + localStorage.getItem("token")
                 },
                 success: function (res) {
+                    const confirmMark = $("#customerConfirmMark");
                     orderCustomerIdFld.prop("disabled", true)
                     orderCustomerIdFld.removeClass("hover:border-2")
                     orderCustomerIdFldAnimation.removeClass("flex")
                     orderCustomerIdFldAnimation.addClass("hidden")
+                    confirmMark.removeClass("hidden")
+                    confirmMark.addClass("flex")
                     console.log(res);
+                    customer = res;
                 },
                 error: function (error) {
                     console.log(error);
@@ -272,13 +278,15 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
     }
 
     let order = {
-        customerId: orderCustomerIdFld.val(),
+        customerId: customer? customer.customerId :null,
         saleDetailsList: orderCart,
         total: orderTotal,
         paymentDescription: "CASH",
     }
     order = JSON.stringify(order);
-
+    const btnLoadingAnimation = $("#checkoutConfirmBtnLoadingAnimationCash")
+    btnLoadingAnimation.removeClass("hidden")
+    btnLoadingAnimation.addClass("flex")
     $("#cashFld").prop("disabled", true)
     $.ajax({
         url: BASEURL + "/sales",
@@ -291,6 +299,8 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
         },
         success: function (res) {
             console.log(res);
+            btnLoadingAnimation.removeClass("flex")
+            btnLoadingAnimation.addClass("hidden")
             setInventorySuccessMessage("Order placed successfully")
             orderCart = [];
             items = [];
@@ -299,17 +309,23 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
             $("#orderTableBody").empty();
             $("#orderTotalFld").val("");
             orderCustomerIdFld.val("");
+            orderItemIdFld.val("")
+            orderItemIdFld.addClass("hover:border-2")
             orderCustomerIdFld.prop("disabled", false)
             orderCustomerIdFld.addClass("hover:border-2")
             $("#cashCheckoutSubTotalFld").val("")
             orderSubTotalFld.val("")
             $("#cashFld").prop("disabled", false)
             $("#cashFld").val("")
+            customerConfirmMark.removeClass("flex")
+            customerConfirmMark.addClass("hidden")
             $("#balanceFld").val("")
             setInventoryAlertMessage("Order placed successfully")
         },
         error: function (error) {
             $("#cashFld").prop("disabled", false)
+            btnLoadingAnimation.removeClass("flex")
+            btnLoadingAnimation.addClass("hidden")
             console.log(error);
         }
     })
@@ -317,20 +333,24 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
 
 $("#cardCheckoutConfirmBtn").click(function (e) {
     const cardNumber = Number.parseInt(cardNumberFld.val());
+    const bank = $("#bankSelectFld").val()
     if (!/^\d{4}$/.test(cardNumber) || isNaN(cardNumber)) {
         setInventoryAlertMessage("Invalid card number")
         return;
     }
 
     let order = {
-        customerId: orderCustomerIdFld.val(),
+        customerId: customer? customer.customerId :null,
         saleDetailsList: orderCart,
         total: orderTotal,
-        paymentDescription: "CARD-" + cardNumber,
+        paymentDescription: bank.toLowerCase()+"/card- "+cardNumber,
     }
     order = JSON.stringify(order);
 
     cardNumberFld.prop("disabled", true)
+    const btnLoadingAnimation  =  $("#checkoutConfirmBtnLoadingAnimationCard")
+    btnLoadingAnimation.removeClass("hidden")
+    btnLoadingAnimation.addClass("flex")
     $.ajax({
         url: BASEURL + "/sales",
         method: "POST",
@@ -342,11 +362,15 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
         },
         success: function (res) {
             console.log(res);
+            btnLoadingAnimation.removeClass("flex")
+            btnLoadingAnimation.addClass("hidden")
             setInventorySuccessMessage("Order placed successfully")
             orderCart = [];
             items = [];
             stocks = [];
             orderTotal = 0;
+            customerConfirmMark.removeClass("flex")
+            customerConfirmMark.addClass("hidden")
             $("#orderTableBody").empty();
             $("#orderTotalFld").val("");
             orderCustomerIdFld.val("");
@@ -356,12 +380,15 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
             $("#cardCheckoutSubTotalFld").val("")
             cardNumberFld.prop("disabled", false)
             cardNumberFld.val("")
+            orderItemIdFld.val("")
             orderItemIdFld.prop("disabled", false)
             orderItemIdFld.addClass("hover:border-2")
             setInventoryAlertMessage("Order placed successfully")
         },
         error: function (error) {
             $("#cardNumberFld").prop("disabled", false)
+            btnLoadingAnimation.removeClass("flex")
+            btnLoadingAnimation.addClass("hidden")
             console.log(error);
         }
     })
