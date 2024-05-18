@@ -95,8 +95,6 @@ $("#addSupplierForm").submit(function (e) {
     const country = e.target.country.value.toString();
     let zip = e.target.zip.value.toString()
 
-    console.log(id);
-
     if (!/^(?! )[A-Za-z0-9 ]{3,50}$/.test(name)) {
         $("#supplierNameFld").addClass("border-2 border-red-500");
     } else {
