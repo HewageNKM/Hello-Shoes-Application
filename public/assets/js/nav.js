@@ -1,6 +1,5 @@
 const role = window.localStorage.getItem("role");
-console.log("Role: " + role)
-console.log("Token: " + window.localStorage.getItem("token"))
+
 const setUserAuthorization = () => {
     $("#adminBtn").addClass("hidden")
 }
@@ -8,7 +7,17 @@ const setUserAuthorization = () => {
 const setAdminAuthorization = () => {
 
 }
-
+$("#logoutBtn").click(function (evt) {
+    $("#logOutDialog").removeClass("hidden");
+});
+$("#logoutConfirmBtn").click(function (evt) {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("role");
+    window.location.href = "/Hello-Shoes-Application"
+})
+$("#logoutCancelBtn").click(function (evt) {
+    $("#logOutDialog").addClass("hidden");
+});
 if (role === "USER") {
     setUserAuthorization();
 } else if (role === "ADMIN") {
@@ -16,16 +25,6 @@ if (role === "USER") {
 } else {
     window.location.replace("/Unauthorized.html");
 }
-$("#logoutBtn").click(function (evt) {
-    window.localStorage.clear();
-    let countdown = 1;
-    setInterval(() => {
-        countdown--;
-        if (countdown === 0) {
-            window.location.replace("/");
-        }
-    }, 1000);
-});
 
 const navigationOnClick = (value) => {
     switch (value) {

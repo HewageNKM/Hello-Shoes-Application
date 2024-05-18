@@ -45,15 +45,17 @@
                     id="customerBtn"
                     onclick="navigationOnClick(this.value)" value="customer">Customer
             </button>
-            <button class="p-2 hover:border-b-2 border-blue-600 hover:scale-110 hover:text-blue-600 transition-all duration-300 font-semibold text-xl"
+            <button class="p-2 hover:border-b-2 border-red-500 hover:scale-110 hover:text-red-500 transition-all duration-300 font-semibold text-xl"
                     id="logoutBtn"
-                    onclick="navigationOnClick(this.value)" value="logout">Logout
+                    onclick="navigationOnClick(this.value)" value="logout">LOGOUT
             </button>
         </div>
     </div>
 
 </nav>
-<div class="flex m-1 gap-5 flex-row z-10 items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+
+<!--Alert Dialog-->
+<div class="flex m-1 z-50 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
      id="alert"
      role="alert">
     <div>
@@ -63,7 +65,8 @@
     <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
 </div>
 
-<div class="flex m-1 z-10 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
+<!--Success Dialog-->
+<div class="flex z-50 m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
      id="success"
      role="alert">
     <div>
@@ -73,39 +76,251 @@
     <button class="font-black hover:cursor-hand" id="successCloseBtn">X</button>
 </div>
 
-<!--Order Section-->
-<main class="relative pt-5 flex min-w-full transition-all ease-in duration-300" id="orderSection">
-    <section class="flex flex-col gap-3 pl-10 pr-10">
-        <h1 class="text-2xl font-bold">Order</h1>
-        <div class="flex flex-row gap-5 overflow-y-auto mt-3">
-            <table class="w-full text-md text-left rtl:text-right">
-                <thead>
-                <tr class="text-left bg-green-100">
-                    <th class="px-6 rounded-s-lg py-3w-[10vw]" scope="col">
-                        ItemCode
-                    </th>
-                    <th class="px-6 py-3  w-[60vw]" scope="col">
-                        Description
-                    </th>
-                    <th class="px-6 py-3 w-[10vw]" scope="col">
-                        Quantity
-                    </th>
-                    <th class="px-6 py-3 w-[10vw]" scope="col">
-                        Price
-                    </th>
-                    <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
-                        Total
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Table body content goes here -->
-                </tbody>
-            </table>
+<!--Logout Dialog-->
+<div class="transition-all hidden z-50 duration-500 min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 justify-center items-center" id="logOutDialog">
+    <div class="fixed inset-0 bg-black bg-opacity-50">
+        <div class="relative flex justify-center items-center min-h-screen">
+            <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                <div class="justify-between items-center flex flex-row">
+                    <h1 class="text-2xl font-bold">LOGOUT</h1>
+                </div>
+                <form class="flex flex-col gap-3 items-center">
+                    <p class="text-slate-500 text-xsl">Are you sure want to logout?</p>
+                    <div class="flex flex-row justify-between gap-16">
+                        <button class="bg-red-500 p-2 rounded-md" id="logoutConfirmBtn">
+                            Yes
+                        </button>
+                        <button class="bg-blue-500 p-2 rounded-md" id="logoutCancelBtn">
+                            No
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </section>
-    <section class="w-full fixed bottom-0 h-1 bg-green-100">
+    </div>
+</div>
 
+<!--Card Checkout Section-->
+<div class="transition-all hidden duration-500 min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center"
+     id="cardCheckoutFormDiv">
+    <div class="fixed inset-0 bg-black bg-opacity-50">
+        <div class="relative flex justify-center items-center min-h-screen">
+            <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                <div class="justify-between items-center flex flex-row">
+                    <h1 class="text-2xl font-bold">Checkout</h1>
+                    <button class="font-black hover:cursor-hand text-red-500" id="cardCheckoutCloseBtn">X</button>
+                </div>
+                <div class="flex flex-col gap-3 items-center">
+                    <div class="flex-col flex gap-7">
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Sub Total(Rs)</span>
+                            <input type="number" disabled id="cardCheckoutSubTotalFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]">
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Bank</span>
+                            <select class="bg-slate-200 rounded-md p-2 h-[2.3rem] w-[15rem] hover:border-2 border-blue-500" id="bankSelectFld">
+                                <option value="BOC">BOC Bank</option>
+                                <option value="COMMERCIAL">Commercial Bank</option>
+                                <option value="PEOPLES">Peoples Bank</option>
+                                <option value="SAMPATH">Sampath Bank</option>
+                                <option value="HNB">HNB Bank</option>
+                                <option value="NSB">NSB Bank</option>
+                            </select>
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Last 4 Digit of the Card</span>
+                            <input type="number" class="bg-slate-200 rounded-md p-2 h-[2.3rem] w-[15rem] hover:border-2 border-blue-500" required id="cardNumberFld">
+                        </label>
+                    </div>
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                            id="cardCheckoutConfirmBtn" type="submit">
+                        <svg aria-hidden="true" class="hidden mr-3 w-4 h-4 text-white animate-spin"
+                             fill="none"
+                             id="checkoutConfirmBtnLoadingAnimation" role="status"
+                             viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                  fill="#E5E7EB"></path>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                  fill="currentColor"></path>
+                        </svg>
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Cash Checkout Section-->
+<div class="transition-all hidden duration-500 min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 z-50 justify-center items-center"
+     id="cashCheckoutFormDiv">
+    <div class="fixed inset-0 bg-black bg-opacity-50">
+        <div class="relative flex justify-center items-center min-h-screen">
+            <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                <div class="justify-between items-center flex flex-row">
+                    <h1 class="text-2xl font-bold">Checkout</h1>
+                    <button class="font-black hover:cursor-hand text-red-500" id="cashCheckoutCloseBtn">X</button>
+                </div>
+                <div class="flex flex-col gap-3 items-center">
+                    <div class="flex-col flex gap-7">
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Sub Total(Rs)</span>
+                            <input type="number" disabled id="cashCheckoutSubTotalFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]">
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Cash(Rs)</span>
+                            <input type="number" id="cashFld" class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem] hover:border-2 border-blue-500">
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Balance(Rs)</span>
+                            <input type="number" disabled class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]" id="balanceFld">
+                        </label>
+                    </div>
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                            id="cashCheckoutConfirmBtn" type="submit">
+                        <svg aria-hidden="true" class="hidden mr-3 w-4 h-4 text-white animate-spin"
+                             fill="none"
+                             id="checkoutConfirmBtnLoadingAnimation" role="status"
+                             viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                  fill="#E5E7EB"></path>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                  fill="currentColor"></path>
+                        </svg>
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Order Section-->
+<main class="min-h-screen relative flex flex-col gap-3 transition-all ease-in duration-300" id="orderSection">
+    <section class="overflow-auto p-2 m-2 relative">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
+             id="stockTableLoadingAnimation">
+            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                    disabled
+                    type="button">
+                <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
+                     role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                          fill="#E5E7EB"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                          fill="currentColor"/>
+                </svg>
+                Loading...
+            </button>
+        </div>
+        <table class="w-full -z-10 shadow-md text-md text-left rtl:text-right">
+            <thead>
+            <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                <th class="px-6 rounded-s-lg py-3w-[15vw] w-[20vw]" scope="col">
+                    Code
+                </th>
+                <th class="px-6 py-3 w-[40vw]" scope="col">
+                    Description
+                </th>
+                <th class="px-6 py-3 w-[20vw]" scope="col">
+                    QTY
+                </th>
+                <th class="px-6 py-3 w-[20vw]" scope="col">
+                    Price
+                </th>
+                <th class="px-6 py-3 w-[20vw]" scope="col">
+                    Total
+                </th>
+                <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody id="orderTableBody">
+            <!-- Table body content goes here -->
+            </tbody>
+        </table>
+    </section>
+    <section class="w-full z-10 mx-auto pl-10 p-5 pb-6 pr-10 flex flex-row justify-between items-center transition-all duration-300 fixed bottom-0 shadow-md border-t-2 border-black">
+        <div class="flex-col flex justify-between gap-10">
+            <label class="flex flex-col gap-1">
+                <span class="font-bold">Customer ID</span>
+                <div class="flex flex-row">
+                    <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2 h-[2.5rem] w-[13rem]"
+                           id="orderCustomerIdFld"
+                           type="text"
+                           placeholder="ID,Email or Mobile"
+                    >
+                    <div id="customerIdFldLoadingAnimation" class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold">
+                        <svg width="20" height="20" fill="currentColor" class="mr-2 animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </label>
+            <label class="flex flex-col gap-1">
+                <span class="font-bold">Item ID</span>
+                <div class="flex flex-row">
+                    <input class="bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2  h-[2.5rem] w-[13rem]"
+                           id="orderItemIdFld"
+                           type="text"
+                           placeholder="XXXXXXXX"
+                    >
+                    <div id="itemLoadingAnimation" class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold">
+                        <svg width="20" height="20" fill="currentColor" class="mr-2 animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </label>
+            <div class="flex-col gap-5 justify-between items-center hidden" id="orderOptionFld">
+                <div class="flex-row gap-3 flex">
+                    <label class="flex flex-col gap-1">
+                        <span class="font-bold">Size</span>
+                        <select class="h-[2rem] bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2" id="sizeSelect">
+                        </select>
+                    </label>
+                    <label class="flex flex-col gap-1">
+                        <span class="font-bold">QTY</span>
+                        <input class="w-[5rem] h-[2rem] bg-slate-200 font-bold p-1 rounded-md border-blue-600 hover:border-2"
+                               id="qtyFld"
+                               type="number">
+                    </label>
+                </div>
+                <button class="bg-blue-400 p-2 rounded-md font-semibold text-xl hover:bg-blue-600"
+                        id="addOrderBtn"
+                        type="button">Add Order
+                </button>
+            </div>
+        </div>
+        <div class="flex-col flex gap-5">
+            <div class="flex flex-row gap-5">
+                <label class="flex flex-col gap-1">
+                    <span class="font-bold">Sub Total(Rs)</span>
+                    <input class="bg-slate-200 p-2 font-bold rounded-md border-blue-600  h-[2.5rem] w-[13rem]"
+                           disabled
+                           id="orderTotalFld"
+                           type="text"
+                           placeholder="0.0"
+                    >
+                </label>
+                <label class="flex flex-col gap-1">
+                    <span class="font-bold">Pay</span>
+                    <select class="p-2 rounded-md font-semibold h-[2.5rem] w-[13rem] hover:border-2 border-blue-500 bg-slate-200" id="paymentTypeSelect">
+                        <option class="p-1" value="CASH">Cash</option>
+                        <option class="p-1" value="CARD">Card</option>
+                    </select>
+                </label>
+            </div>
+            <div class="flex items-center justify-center">
+                <button class="rounded-md font-semibold text-xl h-[2rem] w-[12rem] bg-blue-500 hover:bg-blue-600"
+                        id="checkoutBtn"
+                        type="button">Checkout
+                </button>
+            </div>
+        </div>
     </section>
 </main>
 
@@ -459,14 +674,16 @@
                     </button>
                 </div>
             </div>
-            <div class="flex flex-col gap-3 items-center justify-center">
+            <div class="flex flex-col gap-10 items-center justify-center">
                 <button class="bg-blue-400 p-2 rounded-md font-semibold text-xl hover:bg-blue-600"
                         id="showInventoryAddForm"
                         type="button">Add Item
                 </button>
-                <a href="./stock.html" target="_blank" class="p-2 rounded-md font-semibold text-xl border-blue-600 border-2 hover:bg-blue-500"
-                        id="showInventoryStockForm"
-                        type="button">Stocks
+                <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0"
+                   href="./stock.html"
+                   id="showInventoryStockForm"
+                   target="_blank"
+                   type="button">Stocks →
                 </a>
             </div>
         </div>
@@ -512,13 +729,16 @@
                                     </label>
                                     <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Supplier ID</span>
-                                        <input class="iFld uppercase rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                               id="inventorySupplierIDFld"
-                                               name="sId"
-                                               placeholder="Supplier ID"
-                                               required
-                                               type="text"
-                                        >
+                                        <div class="flex flex-row gap-3">
+                                            <input class="iFld uppercase rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                                   id="inventorySupplierIDFld"
+                                                   name="sId"
+                                                   placeholder="Supplier ID"
+                                                   required
+                                                   type="text"
+                                            >
+                                            <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600" id="inventorySupplierFindBtn" type="button">Find</button>
+                                        </div>
                                     </label>
                                     <label class="flex flex-col gap-2">
                                         <span class="text-blue-600 font-bold">Supplier Name</span>
