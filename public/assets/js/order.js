@@ -83,6 +83,8 @@ orderItemIdFld.on('keypress', function (e) {
                     error: function (error) {
                         console.log(error);
                         orderItemIdFld.prop("disabled", false)
+                        itemBtnLoadingAnimation.removeClass("flex")
+                        itemBtnLoadingAnimation.addClass("hidden")
                         setInventoryAlertMessage("Item not found")
                     }
                 })
@@ -162,25 +164,13 @@ $("#addOrderBtn").click(function (e) {
     const stock = stocks.find(stock => stock.itemId === itemId);
     const description = item.description + ", " + size;
 
-    console.log(quantity, itemId, description, size, item, stock)
-    console.log(stock[size])
 
-
-    if (quantity === 0 || quantity == null || itemId.trim() === "") {
-
+    if (quantity <= 0 || isNaN(quantity)) {
         quantityFld.addClass("border-2 border-red-500")
-        orderItemIdFld.addClass("border-2 border-red-500")
-
-        setInventoryAlertMessage("Please fill all fields")
-
-    } else {
-        quantityFld.removeClass("border-2 border-red-500")
-        orderItemIdFld.removeClass("border-2 border-red-500")
-    }
-
-    if (quantity <= 0) {
         setInventoryAlertMessage("Quantity must be greater than 0")
         return;
+    }else {
+        quantityFld.removeClass("border-2 border-red-500")
     }
 
     if (quantity > stock[size]) {
@@ -194,8 +184,9 @@ $("#addOrderBtn").click(function (e) {
     const total = item.sellingPrice * quantity;
     orderTotal += total;
     stock[size] -= quantity;
-
+    const number = Math.round(orderTotal * 100) / 100;
     const orderCartItem = {
+        id: number,
         itemId: itemId,
         description: description,
         size: size,
@@ -227,11 +218,20 @@ const addToCartTable = (orderCartItem) => {
             <td>${orderCartItem.quantity}</td>
             <td>${orderCartItem.price}</td>
             <td>${orderCartItem.total}</td>
-            <td><button id="" class="text-red-500 hover:text-red-600 font-medium hover:border-b-2 border-red-500">Remove</button></td>
+            <td><button value="${orderCartItem.id}" id="cartRemoveBtn" class="text-red-500 hover:text-red-600 font-medium hover:border-b-2 border-red-500">Remove</button></td>
         </tr>`
     );
 }
-
+$([document]).on("click", "#cartRemoveBtn", function (e) {
+    const id = Number.parseInt( e.target.value);
+    const orderItem = orderCart.find(item => item.id === id);
+    const stock = stocks.find(stock => stock.itemId === orderItem.itemId);
+    orderTotal -= orderItem.total;
+    orderCart = orderCart.filter(item => item.id !== id);
+    orderSubTotalFld.val(orderTotal);
+    stock[orderItem.size] += orderItem.quantity;
+   $(this).closest("tr").remove();
+})
 $("#checkoutBtn").click(function (e) {
     const cashCheckoutForm = $("#cashCheckoutFormDiv");
     const cardCheckoutForm = $("#cardCheckoutFormDiv");
@@ -278,7 +278,7 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
     }
 
     let order = {
-        customerId: customer? customer.customerId :null,
+        customerId: customer ? customer.customerId : null,
         saleDetailsList: orderCart,
         total: orderTotal,
         paymentDescription: "CASH",
@@ -340,15 +340,15 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
     }
 
     let order = {
-        customerId: customer? customer.customerId :null,
+        customerId: customer ? customer.customerId : null,
         saleDetailsList: orderCart,
         total: orderTotal,
-        paymentDescription: bank.toLowerCase()+"/card- "+cardNumber,
+        paymentDescription: bank.toLowerCase() + "/card- " + cardNumber,
     }
     order = JSON.stringify(order);
 
     cardNumberFld.prop("disabled", true)
-    const btnLoadingAnimation  =  $("#checkoutConfirmBtnLoadingAnimationCard")
+    const btnLoadingAnimation = $("#checkoutConfirmBtnLoadingAnimationCard")
     btnLoadingAnimation.removeClass("hidden")
     btnLoadingAnimation.addClass("flex")
     $.ajax({
