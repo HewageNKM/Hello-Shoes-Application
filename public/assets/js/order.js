@@ -124,27 +124,27 @@ const setSizes = (stock) => {
 
     if (stock.size40 > 0) {
         totalStocks += stock.size40
-        sizeSelect.append(`<option value="size40">Size 40</option>`)
+        sizeSelect.append(`<option value="40">Size 40</option>`)
     }
     if (stock.size41 > 0) {
         totalStocks += stock.size41
-        sizeSelect.append(`<option value="size41">Size 41</option>`)
+        sizeSelect.append(`<option value="41">Size 41</option>`)
     }
     if (stock.size42 > 0) {
         totalStocks += stock.size42
-        sizeSelect.append(`<option value="size42">Size 42</option>`)
+        sizeSelect.append(`<option value="42">Size 42</option>`)
     }
     if (stock.size43 > 0) {
         totalStocks += stock.size43
-        sizeSelect.append(`<option value="size43">Size 43</option>`)
+        sizeSelect.append(`<option value="43">Size 43</option>`)
     }
     if (stock.size44 > 0) {
         totalStocks += stock.size44
-        sizeSelect.append(`<option value="size44">Size 44</option>`)
+        sizeSelect.append(`<option value="44">Size 44</option>`)
     }
     if (stock.size45 > 0) {
         totalStocks += stock.size45
-        sizeSelect.append(`<option value="size45">Size 45</option>`)
+        sizeSelect.append(`<option value="45">Size 45</option>`)
     }
     if (totalStocks === 0) {
         setInventoryAlertMessage("Item out of stock")
@@ -162,7 +162,7 @@ $("#addOrderBtn").click(function (e) {
     const itemId = orderItemIdFld.val().toLowerCase();
     const item = items.find(item => item.itemId === itemId);
     const stock = stocks.find(stock => stock.itemId === itemId);
-    const description = item.description + ", " + size;
+    const description = item.description
 
 
     if (quantity <= 0 || isNaN(quantity)) {
@@ -215,6 +215,7 @@ const addToCartTable = (orderCartItem) => {
         `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light" id="">
             <td class="m-1 p-2 uppercase">${orderCartItem.itemId}</td>
             <td class="m-1 p-2 capitalize">${orderCartItem.description}</td>
+            <td class="m-1 p-2 capitalize">${orderCartItem.size}</td>
             <td>${orderCartItem.quantity}</td>
             <td>${orderCartItem.price}</td>
             <td>${orderCartItem.total}</td>

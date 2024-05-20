@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Refund</title>
+    <link href="../assets/img/logo.ico" rel="icon" type="image/x-icon">
+
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <meta
+            content="width=device-width, initial-scale=1"
+            name="viewport"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+<body class="min-h-screen min-w-screen flex justify-center items-center">
+<main class="rounded-xl shadow-custom p-10 w-[20rem]">
+    <h1 class="text-2xl font-bold pb-6">Refund</h1>
+    <div class="flex-col flex gap-5">
+        <label class="flex flex-col gap-1 font-bold">
+            <span class="flex flex-col gap-1 font-bold">Order ID</span>
+            <input type="text" name="order_id" class="border-blue-500 p-2 hover:border-2 rounded-md bg-slate-200 h-[2rem] w-[15rem]" id="orderId" placeholder="XXXXXXX">
+        </label>
+        <label class="flex flex-col gap-1 font-bold">
+            <span class="flex flex-col gap-1 font-bold">Item ID</span>
+            <input type="text" class="rounded-md bg-slate-200 h-[2rem] border-blue-500 p-2 w-[15rem]" id="itemId" placeholder="XXXXXXX">
+        </label>
+        <label class="flex flex-col gap-1">
+            <span class="flex flex-col gap-1 font-bold">Size</span>
+            <select class="rounded-md bg-slate-200 h-fit font-medium w-[15rem] p-2 border-blue-500 " id="sizeSelect">
+                <option value="40" class="font-medium p-2">Size 40</option>
+                <option value="41" class="font-medium p-2">Size 41</option>
+                <option value="42" class="font-medium p-2">Size 42</option>
+                <option value="43" class="font-medium p-2">Size 43</option>
+                <option value="44" class="font-medium p-2">Size 44</option>
+                <option value="45" class="font-medium p-2">Size 45</option>
+            </select>
+        </label>
+        <label class="flex flex-col gap-1 font-bold">
+            <span class="flex flex-col gap-1 font-bold">Quantity</span>
+            <input type="number" class="rounded-md p-2 border-blue-500 bg-slate-200 h-[2rem] w-[15rem]" placeholder="0.0" id="qtyFld">
+        </label>
+    </div>
+    <button class="bg-blue-500 text-black hover:bg-blue-600 font-medium p-2 rounded-md w-[15rem] mt-5" id="refundBtn">Proceed</button>
+</main>
+</body>
+</html>

@@ -292,19 +292,21 @@ $([document]).on("click", "#itemEditBtn", function (e) {
 })
 
 $([document]).on("click", "#itemDeleteBtn", function (e) {
+    const itemId = e.target.value
     if (window.localStorage.getItem("role") === "USER") {
         setCustomerAlertMessage("You do not have permission to delete item")
         return
     }
+    const  b = confirm("Are you sure you want to delete this item?");
+    if(!b){
+        return
+    }
     $.ajax({
-        url: BASEURL + "/inventory/items/" + e.target.value,
-        contentType: false,
-        processData: false,
-        header: {
-            "Authorization": "Bearer " + window.localStorage.getItem("token")
-
-        },
+        url: BASEURL + "/inventory/items/" + itemId.toLowerCase(),
         method: "DELETE",
+        headers: {
+            "Authorization": "Bearer " + window.localStorage.getItem("token")
+        },
         success: function (response) {
             console.log(response)
             setInventorySuccessMessage("Item deleted successfully")

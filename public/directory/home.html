@@ -217,7 +217,10 @@
 
 <!--Order Section-->
 <main class="min-h-screen relative flex flex-col gap-3 transition-all ease-in duration-300" id="orderSection">
-    <section class="overflow-auto p-2 m-2 relative">
+    <section class="overflow-auto flex flex-col p-2 m-2 relative gap-5">
+        <div>
+            <a href="../directory/refund.html" target="_blank" class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md">Refund</a>
+        </div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
              id="stockTableLoadingAnimation">
             <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
@@ -242,14 +245,17 @@
                 <th class="px-6 py-3 w-[40vw]" scope="col">
                     Description
                 </th>
+                <th class="px-6 py-3 w-[40vw]" scope="col">
+                    Size(UK)
+                </th>
                 <th class="px-6 py-3 w-[20vw]" scope="col">
                     QTY
                 </th>
                 <th class="px-6 py-3 w-[20vw]" scope="col">
-                    Price
+                    Price(Rs)
                 </th>
                 <th class="px-6 py-3 w-[20vw]" scope="col">
-                    Total
+                    Total(Rs)
                 </th>
                 <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
                     Action
