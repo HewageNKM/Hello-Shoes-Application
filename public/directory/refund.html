@@ -14,17 +14,82 @@
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet">
-<body class="min-h-screen min-w-screen flex justify-center items-center">
+<body class="min-h-screen min-w-screen flex justify-center items-center font-Roboto relative">
+
+<!--Credentials Verify-->
+<div class="transition-all hidden z-50 duration-500 min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 justify-center items-center"
+     id="adminVerifyDiv">
+    <div class="fixed inset-0 bg-black bg-opacity-50">
+        <div class="relative flex justify-center items-center min-h-screen">
+            <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
+                <div class="justify-between items-center flex flex-row">
+                    <h1 class="text-2xl font-bold">User</h1>
+                </div>
+                <form class="flex flex-col gap-3 items-center" id="userVerifyForm">
+                    <div class="flex flex-col justify-between gap-5">
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Email</span>
+                            <input name="email" required id="emailFld" type="email" class="fld bg-slate-200 p-2 font-medium rounded-md h-[2.5rem] w-[15rem]" placeholder="Email">
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            <span class="font-bold">Password</span>
+                            <input name="password" required id="passwordFld" type="password" class="fld bg-slate-200 p-2 font-medium rounded-md h-[2.5rem] w-[15rem]" placeholder="Password">
+                        </label>
+                        <button type="submit" class="p-2 bg-blue-500 rounded-md">Confirm</button>
+                        <button type="reset" class="bg-red-500 rounded-md p-2">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <main class="rounded-xl shadow-custom p-10 w-[20rem]">
     <h1 class="text-2xl font-bold pb-6">Refund</h1>
     <div class="flex-col flex gap-5">
         <label class="flex flex-col gap-1 font-bold">
             <span class="flex flex-col gap-1 font-bold">Order ID</span>
-            <input type="text" name="order_id" class="border-blue-500 p-2 hover:border-2 rounded-md bg-slate-200 h-[2rem] w-[15rem]" id="orderId" placeholder="XXXXXXX">
+            <div class="flex flex-row">
+                <input type="text" class="rounded-md bg-slate-200 h-[2.5rem] border-blue-500 p-2 w-[15rem]" id="orderIdFld" placeholder="XXXXXXX">
+                <div class="py-2 hidden px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold"
+                     id="orderIdLoadingAnimation">
+                    <svg class="mr-2 animate-spin" fill="currentColor" height="20" viewBox="0 0 1792 1792"
+                         width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="hidden justify-center items-center" id="orderIdConfirmMark">
+                    <svg height="32px" viewBox="0 0 48 48" width="32px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                              fill="#c8e6c9"/>
+                        <path d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"
+                              fill="#4caf50"/>
+                    </svg>
+                </div>
+            </div>
         </label>
         <label class="flex flex-col gap-1 font-bold">
             <span class="flex flex-col gap-1 font-bold">Item ID</span>
-            <input type="text" class="rounded-md bg-slate-200 h-[2rem] border-blue-500 p-2 w-[15rem]" id="itemId" placeholder="XXXXXXX">
+            <div class="flex flex-row">
+                <input type="text" class="rounded-md bg-slate-200 h-[2.5rem] border-blue-500 p-2 w-[15rem]" id="itemIdFld" placeholder="XXXXXXX">
+                <div class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold"
+                     id="itemIdLoadingAnimation">
+                    <svg class="mr-2 animate-spin" fill="currentColor" height="20" viewBox="0 0 1792 1792"
+                         width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="hidden justify-center items-center" id="itemIdConfirmMark">
+                    <svg height="32px" viewBox="0 0 48 48" width="32px" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                              fill="#c8e6c9"/>
+                        <path d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"
+                              fill="#4caf50"/>
+                    </svg>
+                </div>
+            </div>
         </label>
         <label class="flex flex-col gap-1">
             <span class="flex flex-col gap-1 font-bold">Size</span>
@@ -39,10 +104,13 @@
         </label>
         <label class="flex flex-col gap-1 font-bold">
             <span class="flex flex-col gap-1 font-bold">Quantity</span>
-            <input type="number" class="rounded-md p-2 border-blue-500 bg-slate-200 h-[2rem] w-[15rem]" placeholder="0.0" id="qtyFld">
+            <input type="number" class="rounded-md p-2 border-blue-500 bg-slate-200 h-[2.5rem] w-[15rem]" placeholder="0.0" id="qtyFld">
         </label>
     </div>
-    <button class="bg-blue-500 text-black hover:bg-blue-600 font-medium p-2 rounded-md w-[15rem] mt-5" id="refundBtn">Proceed</button>
+    <button class="bg-blue-500 text-black hover:bg-blue-600 font-medium p-2 rounded-md w-[15rem] mt-5" id="proceedBtn">Proceed</button>
 </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="../assets/js/constant.js"></script>
+<script src="../assets/js/order.js"></script>
 </body>
 </html>
