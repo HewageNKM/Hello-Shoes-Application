@@ -15,7 +15,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet">
 <body class="min-h-screen min-w-screen flex justify-center items-center font-Roboto relative">
-
+<!--Success Alert-->
+<div class="flex z-50 m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
+     id="success"
+     role="alert">
+    <div>
+        <p class="font-bold">Complete</p>
+        <p id="successDescription">Successfully</p>
+    </div>
+    <button class="font-black hover:cursor-hand" id="successCloseBtn">X</button>
+</div>
+<!--Alert Dialog-->
+<div class="flex m-1 z-50 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+     id="alert"
+     role="alert">
+    <div>
+        <p class="font-bold">Be Warned</p>
+        <p id="alertDescription">Something Went Wrong</p>
+    </div>
+    <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
+</div>
 <!--Credentials Verify-->
 <div class="transition-all hidden z-50 duration-500 min-h-screen min-w-full overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 justify-center items-center"
      id="adminVerifyDiv">
@@ -24,6 +43,7 @@
             <div class="bg-white p-5 rounded-lg w-fit h-fit flex-col flex gap-4">
                 <div class="justify-between items-center flex flex-row">
                     <h1 class="text-2xl font-bold">User</h1>
+                    <button class="p-2 text-red-500 font-bold" id="closeAdminVerifyDiv">X</button>
                 </div>
                 <form class="flex flex-col gap-3 items-center" id="userVerifyForm">
                     <div class="flex flex-col justify-between gap-5">
@@ -50,7 +70,7 @@
         <label class="flex flex-col gap-1 font-bold">
             <span class="flex flex-col gap-1 font-bold">Order ID</span>
             <div class="flex flex-row">
-                <input type="text" class="rounded-md bg-slate-200 h-[2.5rem] border-blue-500 p-2 w-[15rem]" id="orderIdFld" placeholder="XXXXXXX">
+                <input type="text" class="rounded-md uppercase hover:border-2  bg-slate-200 h-[2.5rem] border-blue-500 p-2 w-[15rem]" id="refundOrderIdFld" placeholder="XXXXXXX">
                 <div class="py-2 hidden px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold"
                      id="orderIdLoadingAnimation">
                     <svg class="mr-2 animate-spin" fill="currentColor" height="20" viewBox="0 0 1792 1792"
@@ -72,7 +92,7 @@
         <label class="flex flex-col gap-1 font-bold">
             <span class="flex flex-col gap-1 font-bold">Item ID</span>
             <div class="flex flex-row">
-                <input type="text" class="rounded-md bg-slate-200 h-[2.5rem] border-blue-500 p-2 w-[15rem]" id="itemIdFld" placeholder="XXXXXXX">
+                <input type="text" disabled class="dFld uppercase rounded-md  bg-slate-200 h-[2.5rem] border-blue-500 p-2 w-[15rem]" id="itemIdFld" placeholder="XXXXXXX">
                 <div class="hidden py-2 px-4 justify-center items-center text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold"
                      id="itemIdLoadingAnimation">
                     <svg class="mr-2 animate-spin" fill="currentColor" height="20" viewBox="0 0 1792 1792"
@@ -93,7 +113,7 @@
         </label>
         <label class="flex flex-col gap-1">
             <span class="flex flex-col gap-1 font-bold">Size</span>
-            <select class="rounded-md bg-slate-200 h-fit font-medium w-[15rem] p-2 border-blue-500 " id="sizeSelect">
+            <select class="dFld rounded-md bg-slate-200 h-fit font-medium  border-blue-500  w-[15rem] p-2 " id="sizeSelect" disabled required>
                 <option value="40" class="font-medium p-2">Size 40</option>
                 <option value="41" class="font-medium p-2">Size 41</option>
                 <option value="42" class="font-medium p-2">Size 42</option>
@@ -104,13 +124,13 @@
         </label>
         <label class="flex flex-col gap-1 font-bold">
             <span class="flex flex-col gap-1 font-bold">Quantity</span>
-            <input type="number" class="rounded-md p-2 border-blue-500 bg-slate-200 h-[2.5rem] w-[15rem]" placeholder="0.0" id="qtyFld">
+            <input type="number" disabled class="dFld border-blue-500  rounded-md p-2 bg-slate-200 h-[2.5rem] w-[15rem]" placeholder="0.0" id="qtyFld">
         </label>
     </div>
     <button class="bg-blue-500 text-black hover:bg-blue-600 font-medium p-2 rounded-md w-[15rem] mt-5" id="proceedBtn">Proceed</button>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../assets/js/constant.js"></script>
-<script src="../assets/js/order.js"></script>
+<script src="../assets/js/refund.js"></script>
 </body>
 </html>
