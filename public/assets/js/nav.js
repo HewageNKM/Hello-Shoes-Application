@@ -4,24 +4,22 @@ const setUserAuthorization = () => {
     $("#adminBtn").addClass("hidden")
 }
 
-const setAdminAuthorization = () => {
-
-}
 $("#logoutBtn").click(function (evt) {
     $("#logOutDialog").removeClass("hidden");
 });
 $("#logoutConfirmBtn").click(function (evt) {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("role");
-    window.location.href = "/Hello-Shoes-Application"
+    window.location.replace("/Hello-Shoes-Application");
 })
 $("#logoutCancelBtn").click(function (evt) {
     $("#logOutDialog").addClass("hidden");
 });
+
 if (role === "USER") {
     setUserAuthorization();
 } else if (role === "ADMIN") {
-    setAdminAuthorization();
+
 } else {
     window.location.replace("/Unauthorized.html");
 }
