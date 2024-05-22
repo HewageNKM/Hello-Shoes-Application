@@ -342,7 +342,6 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
     let order = {
         customerId: customer ? customer.customerId : null,
         saleDetailsList: orderCart,
-        total: orderTotal,
         paymentDescription: bank.toLowerCase() + "/card- " + cardNumber,
     }
     order = JSON.stringify(order);
