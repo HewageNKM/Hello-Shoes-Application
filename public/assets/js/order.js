@@ -169,7 +169,7 @@ $("#addOrderBtn").click(function (e) {
         quantityFld.addClass("border-2 border-red-500")
         setInventoryAlertMessage("Quantity must be greater than 0")
         return;
-    }else {
+    } else {
         quantityFld.removeClass("border-2 border-red-500")
     }
 
@@ -224,14 +224,14 @@ const addToCartTable = (orderCartItem) => {
     );
 }
 $([document]).on("click", "#cartRemoveBtn", function (e) {
-    const id = Number.parseInt( e.target.value);
+    const id = Number.parseInt(e.target.value);
     const orderItem = orderCart.find(item => item.id === id);
     const stock = stocks.find(stock => stock.itemId === orderItem.itemId);
     orderTotal -= orderItem.total;
     orderCart = orderCart.filter(item => item.id !== id);
     orderSubTotalFld.val(orderTotal);
     stock[orderItem.size] += orderItem.quantity;
-   $(this).closest("tr").remove();
+    $(this).closest("tr").remove();
 })
 $("#checkoutBtn").click(function (e) {
     const cashCheckoutForm = $("#cashCheckoutFormDiv");
@@ -281,7 +281,6 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
     let order = {
         customerId: customer ? customer.customerId : null,
         saleDetailsList: orderCart,
-        total: orderTotal,
         paymentDescription: "CASH",
     }
     order = JSON.stringify(order);

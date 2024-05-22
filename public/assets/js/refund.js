@@ -24,8 +24,7 @@ $("#refundOrderIdFld").on('keypress', function (e) {
                 isOrderIdVerified = true;
                 console.log(e);
                 $("#refundOrderIdFld").attr("disabled", true);
-                $(".dFld").attr("disabled", false)
-                $(".dFld").addClass("hover:border-2")
+                $("#itemIdFld").attr("disabled", false);
 
             },
             error: function (e) {
@@ -54,6 +53,12 @@ $("#itemIdFld").on('keypress', function (e) {
             },
             success: function (data) {
                 console.log(data);
+                $("#sizeSelect").val(data.size);
+                $("#qtyFld").val(data.qty);
+                $("#sizeSelect").attr("disabled", false);
+                setSizes(data)
+
+                $("#qtyFld").attr("disabled", false);
                 $("#itemIdFld").attr("disabled", true);
                 $("#itemIdFld").removeClass("hover:border-2");
                 $("#itemIdLoadingAnimation").addClass("hidden");
@@ -68,11 +73,18 @@ $("#itemIdFld").on('keypress', function (e) {
         });
     }
 });
+const setSizes = (data) => {
+    $("#sizeSelect").empty()
+    data.forEach(item => {
+        $("#sizeSelect").append(`<option value="${item.size}">${item.size}</option>`)
+    })
+}
 $("#closeAdminVerifyDiv").click(function () {
     $("#adminVerifyDiv").addClass("hidden");
 });
 $("#proceedBtn").click(function () {
     const qty = Number.parseInt($("#qtyFld").val());
+    const size = $("#sizeSelect").val();
     if (!isOrderIdVerified) {
         $("#refundOrderIdFld").addClass("border-red-500 border-2");
     } else {
@@ -89,6 +101,13 @@ $("#proceedBtn").click(function () {
         $("#qtyFld").addClass("border-red-500 border-2");
     } else {
         $("#qtyFld").removeClass("border-red-500 border-2");
+    }
+
+    if(size === null || size === undefined) {
+        $("#sizeSelect").addClass("border-red-500 border-2");
+        return
+    }else {
+        $("#sizeSelect").removeClass("border-red-500 border-2");
     }
 
     if (isOrderIdVerified && isItemIdVerified && qty > 0) {
@@ -142,8 +161,10 @@ const issueARefund = () => {
     const itemId = $('#itemIdFld').val().toString().toLowerCase();
     const qty = Number.parseInt($("#qtyFld").val());
     const size = $("#sizeSelect").val().toString()
+    const orderId = $('#refundOrderIdFld').val().toString().toLowerCase();
 
     let data = {
+        orderId: orderId,
         itemId: itemId,
         qty: qty,
         size: size
