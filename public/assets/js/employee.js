@@ -193,7 +193,7 @@ $("#addEmployeeForm").submit(function (evt) {
     employeeBtnLoadingAnimation.removeClass("hidden")
     employeeBtnLoadingAnimation.addClass("flex")
     addEmployeeBtn.addClass("cursor-not-allowed")
-    if(code === ""){
+    if (code === "") {
         $.ajax({
             url: BASEURL + '/employees',
             type: 'POST',
@@ -232,9 +232,9 @@ $("#addEmployeeForm").submit(function (evt) {
                 setEmployeeAlertMessage(message);
             }
         });
-    }else {
+    } else {
         $.ajax({
-            url: BASEURL + '/employees/'+code.toLowerCase(),
+            url: BASEURL + '/employees/' + code.toLowerCase(),
             type: 'PUT',
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -309,6 +309,7 @@ const setEmployeeTableContent = () => {
         employeeTableBody.append(
             `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
                         <td class="m-1 p-2">${employee.employeeId.toUpperCase()}</td>
+                        <td class="m-1 p-2"><img class="bg-cover rounded-full p-1 shadow-custom w-[8rem] h-[8rem]" src="data:image/jpeg;base64,${employee.image}" alt="employeeImg"></td>
                         <td class="m-1 p-2 capitalize">${employee.name}</td>
                         <td class="m-1 p-2 capitalize">${employee.status}</td>
                         <td class="m-1 p-2 capitalize">${employee.gender}</td>

@@ -72,7 +72,7 @@ $("#inventoryImg").change(
         }
         const reader = new FileReader();
         reader.onload = function (e) {
-            $('#employeeImgPreview')
+            $('#inventoryImgPreview')
                 .attr('src', e.target.result);
         };
         reader.readAsDataURL(this.files[0]);
@@ -243,6 +243,7 @@ const setItemsTableContent = () => {
         $("#inventoryTableBody").append(
             `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light" id="${item.itemId}">
                         <td class="m-1 p-2 uppercase">${item.itemId}</td>
+                        <td class="m-1 p-2"><img class="bg-cover rounded-full p-1 shadow-custom w-[8rem] h-[8rem]" src="data:image/jpeg;base64,${item.image}" alt="employeeImg"></td>
                         <td class="m-1 p-2 capitalize">${item.description}</td>
                         <td class="m-1 p-2 capitalize">${item.category}</td>
                         <td class="m-1 p-2 ">${item.buyingPrice}</td>
