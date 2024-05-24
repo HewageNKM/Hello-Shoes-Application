@@ -4,6 +4,12 @@ const iFld = $(".eFld")
 const inventoryAlertMessage = $("#alert")
 const inventorySuccessMessage = $("#success")
 const inventoryTableLoadingAnimation = $("#inventoryTableLoadingAnimation")
+const sortMenBtn = $("#sortMenBtn")
+const sortWomanBtn = $("#sortWomanBtn")
+const sortAZBtn = $("#sortAZBtn")
+const sortZABtn = $("#sortZABtn")
+const sortHighToLow = $("#sortHighToLowBtn")
+const sortLowToHigh = $("#sortLowToHighBtn")
 let itemsList = []
 
 $("#showInventoryAddForm").click(
@@ -25,6 +31,13 @@ $("#closeInventoryAddForm").click(
     }
 );
 $("#inventoryTableRefreshBtn").click(function () {
+    sortMenBtn.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortMenBtn.removeClass("bg-blue-500")
     loadItemsTable()
 })
 $("#inventorySearchBtn").click(function () {
@@ -387,4 +400,75 @@ $('#inventorySupplierFindBtn').click(function (e) {
         }
     })
 });
+sortMenBtn.click(function () {
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
+    sortMenBtn.removeClass("bg-blue-500")
+    sortMenBtn.addClass("bg-blue-500")
+
+    itemsList = itemsList.filter(item => item.category.toLowerCase().endsWith("m"))
+    setItemsTableContent()
+})
+sortWomanBtn.click(function () {
+    sortMenBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortWomanBtn.addClass("bg-blue-500")
+
+    itemsList = itemsList.filter(item => item.category.toLowerCase().endsWith("w"))
+    setItemsTableContent()
+})
+sortLowToHigh.click(function () {
+    sortMenBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortLowToHigh.addClass("bg-blue-500")
+
+    itemsList = itemsList.sort((a, b) => a.sellingPrice - b.sellingPrice)
+    setItemsTableContent()
+})
+sortHighToLow.click(function () {
+    sortMenBtn.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortHighToLow.addClass("bg-blue-500")
+
+    itemsList = itemsList.sort((a, b) => b.sellingPrice - a.sellingPrice)
+    setItemsTableContent()
+})
+sortAZBtn.click(function () {
+    sortMenBtn.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
+    sortAZBtn.addClass("bg-blue-500")
+
+    itemsList = itemsList.sort((a, b) => a.description.localeCompare(b.description))
+    setItemsTableContent()
+})
+sortZABtn.click(function () {
+    sortMenBtn.removeClass("bg-blue-500")
+    sortLowToHigh.removeClass("bg-blue-500")
+    sortWomanBtn.removeClass("bg-blue-500")
+    sortHighToLow.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+    sortZABtn.addClass("bg-blue-500")
+
+    itemsList = itemsList.sort((a, b) => b.description.localeCompare(a.description))
+    setItemsTableContent()
+})
+
 loadItemsTable()
