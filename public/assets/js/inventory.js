@@ -28,6 +28,14 @@ $("#closeInventoryAddForm").click(
         $("#addInventory").addClass("hidden");
         iFld.val("");
         $("#inventoryImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
+
+        $("#inventoryGenderSelect").attr("disabled", false)
+        $("#inventoryOccasionFld").attr("disabled", false)
+        $("#inventoryVeritiesFld").attr("disabled", false)
+
+        $("#inventoryGenderSelect").addClass("hover:border-2")
+        $("#inventoryOccasionFld").addClass("hover:border-2")
+        $("#inventoryVeritiesFld").addClass("hover:border-2")
     }
 );
 $("#inventoryTableRefreshBtn").click(function () {
@@ -36,7 +44,7 @@ $("#inventoryTableRefreshBtn").click(function () {
     sortWomanBtn.removeClass("bg-blue-500")
     sortHighToLow.removeClass("bg-blue-500")
     sortZABtn.removeClass("bg-blue-500")
-    sortZABtn.removeClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
     sortMenBtn.removeClass("bg-blue-500")
     loadItemsTable()
 })
@@ -60,7 +68,7 @@ $("#inventorySearchBtn").click(function () {
         success: function (response) {
             console.log(response)
             itemsList = response
-            setItemsTableContent()
+            setItemsTableContent(response)
             inventoryTableLoadingAnimation.removeClass("flex")
             inventoryTableLoadingAnimation.addClass("hidden")
         },
@@ -159,9 +167,9 @@ $("#addInventoryForm").submit(function (e) {
             },
             data: formData,
             success: function (response) {
-                console.log(response)
                 loadItemsTable()
                 e.target.reset()
+                $("#inventoryImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
                 inventoryBtnLoadingAnimation.removeClass("flex")
                 inventoryBtnLoadingAnimation.addClass("hidden")
                 iFld.prop("disabled", false)
@@ -200,11 +208,11 @@ $("#addInventoryForm").submit(function (e) {
                 e.target.reset()
                 inventoryBtnLoadingAnimation.removeClass("flex")
                 inventoryBtnLoadingAnimation.addClass("hidden")
+                $("#inventoryImgPreview").attr("src", "../assets/img/default_employee_avatar.png");
                 iFld.prop("disabled", false)
                 iFld.addClass("hover:border-2")
                 addInventoryBtn.removeClass("cursor-not-allowed")
                 setInventorySuccessMessage("Item updated successfully")
-                loadItemsTable()
             },
             error: function (error) {
                 console.log(error)
@@ -234,7 +242,7 @@ const loadItemsTable = () => {
         success: function (response) {
             console.log(response)
             itemsList = response
-            setItemsTableContent()
+            setItemsTableContent(response)
             inventoryTableLoadingAnimation.removeClass("flex")
             inventoryTableLoadingAnimation.addClass("hidden")
         },
@@ -250,9 +258,9 @@ const loadItemsTable = () => {
         }
     })
 }
-const setItemsTableContent = () => {
+const setItemsTableContent = (list) => {
     $("#inventoryTableBody").empty()
-    itemsList.forEach(item => {
+    list.forEach(item => {
         $("#inventoryTableBody").append(
             `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light" id="${item.itemId}">
                         <td class="m-1 p-2 uppercase">${item.itemId}</td>
@@ -302,6 +310,13 @@ $([document]).on("click", "#itemEditBtn", function (e) {
     $("#expectedProfitFld").val(item.expectedProfit)
     $("#pMarginFld").val(item.profitMargin)
 
+    $("#inventoryGenderSelect").attr("disabled", true)
+    $("#inventoryOccasionFld").attr("disabled", true)
+    $("#inventoryVeritiesFld").attr("disabled", true)
+
+    $("#inventoryGenderSelect").removeClass("hover:border-2")
+    $("#inventoryOccasionFld").removeClass("hover:border-2")
+    $("#inventoryVeritiesFld").removeClass("hover:border-2")
 
 })
 
@@ -311,8 +326,8 @@ $([document]).on("click", "#itemDeleteBtn", function (e) {
         setCustomerAlertMessage("You do not have permission to delete item")
         return
     }
-    const  b = confirm("Are you sure you want to delete this item?");
-    if(!b){
+    const b = confirm("Are you sure you want to delete this item?");
+    if (!b) {
         return
     }
     $.ajax({
@@ -409,8 +424,9 @@ sortMenBtn.click(function () {
     sortMenBtn.removeClass("bg-blue-500")
     sortMenBtn.addClass("bg-blue-500")
 
-    itemsList = itemsList.filter(item => item.category.toLowerCase().endsWith("m"))
-    setItemsTableContent()
+    const filterList = itemsList.filter(item => item.category.toLowerCase().endsWith("m"))
+    //itemsList = itemsList.filter(item => item.category.toLowerCase().endsWith("m"))
+    setItemsTableContent(filterList)
 })
 sortWomanBtn.click(function () {
     sortMenBtn.removeClass("bg-blue-500")
@@ -421,8 +437,9 @@ sortWomanBtn.click(function () {
     sortWomanBtn.removeClass("bg-blue-500")
     sortWomanBtn.addClass("bg-blue-500")
 
-    itemsList = itemsList.filter(item => item.category.toLowerCase().endsWith("w"))
-    setItemsTableContent()
+    const filterList = itemsList.filter(item => item.category.toLowerCase().endsWith("w"))
+    //itemsList = itemsList.filter(item => item.category.toLowerCase().endsWith("w"))
+    setItemsTableContent(filterList)
 })
 sortLowToHigh.click(function () {
     sortMenBtn.removeClass("bg-blue-500")
@@ -433,8 +450,9 @@ sortLowToHigh.click(function () {
     sortLowToHigh.removeClass("bg-blue-500")
     sortLowToHigh.addClass("bg-blue-500")
 
-    itemsList = itemsList.sort((a, b) => a.sellingPrice - b.sellingPrice)
-    setItemsTableContent()
+    const filterList = itemsList.sort((a, b) => a.sellingPrice - b.sellingPrice)
+    //itemsList = itemsList.sort((a, b) => a.sellingPrice - b.sellingPrice)
+    setItemsTableContent(filterList)
 })
 sortHighToLow.click(function () {
     sortMenBtn.removeClass("bg-blue-500")
@@ -445,30 +463,34 @@ sortHighToLow.click(function () {
     sortHighToLow.removeClass("bg-blue-500")
     sortHighToLow.addClass("bg-blue-500")
 
-    itemsList = itemsList.sort((a, b) => b.sellingPrice - a.sellingPrice)
-    setItemsTableContent()
+    const filterList = itemsList.sort((a, b) => b.sellingPrice - a.sellingPrice)
+    //itemsList = itemsList.sort((a, b) => b.sellingPrice - a.sellingPrice)
+    setItemsTableContent(filterList)
 })
 sortAZBtn.click(function () {
     sortMenBtn.removeClass("bg-blue-500")
     sortLowToHigh.removeClass("bg-blue-500")
     sortWomanBtn.removeClass("bg-blue-500")
     sortHighToLow.removeClass("bg-blue-500")
-    sortAZBtn.removeClass("bg-blue-500")
+    sortZABtn.removeClass("bg-blue-500")
+
     sortAZBtn.addClass("bg-blue-500")
 
-    itemsList = itemsList.sort((a, b) => a.description.localeCompare(b.description))
-    setItemsTableContent()
+    const filterList = itemsList.sort((a, b) => a.description.localeCompare(b.description))
+    //itemsList = itemsList.sort((a, b) => a.description.localeCompare(b.description))
+    setItemsTableContent(filterList)
 })
 sortZABtn.click(function () {
     sortMenBtn.removeClass("bg-blue-500")
     sortLowToHigh.removeClass("bg-blue-500")
     sortWomanBtn.removeClass("bg-blue-500")
     sortHighToLow.removeClass("bg-blue-500")
-    sortZABtn.removeClass("bg-blue-500")
-    sortZABtn.addClass("bg-blue-500")
+    sortAZBtn.removeClass("bg-blue-500")
 
-    itemsList = itemsList.sort((a, b) => b.description.localeCompare(a.description))
-    setItemsTableContent()
+    sortZABtn.addClass("bg-blue-500")
+    const filterList = itemsList.sort((a, b) => b.description.localeCompare(a.description))
+    //itemsList = itemsList.sort((a, b) => b.description.localeCompare(a.description))
+    setItemsTableContent(filterList)
 })
 
 loadItemsTable()
