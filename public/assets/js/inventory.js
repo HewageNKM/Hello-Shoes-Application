@@ -60,7 +60,7 @@ $("#inventorySearchBtn").click(function () {
     inventoryTableLoadingAnimation.addClass("flex")
 
     $.ajax({
-        url: BASEURL + "/inventory/items/filter/" + value,
+        url: BASEURL + "/inventory/items/filter/" + value+"?availability=true",
         method: "GET",
         headers: {
             "Authorization": "Bearer " + window.localStorage.getItem("token")

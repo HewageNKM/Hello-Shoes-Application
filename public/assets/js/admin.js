@@ -57,9 +57,9 @@ itemTableBody.on("click", "#itemActivateBtn", function (e) {
 const setPopularItem = (res) => {
 
 };
-const getPopularItem = (filter) => {
+const getPopularItem = (range) => {
     $.ajax({
-        url: BASEURL + "/inventory/items/popular?filter="+filter,
+        url: BASEURL + "/inventory/items/popular?range="+range,
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         },
