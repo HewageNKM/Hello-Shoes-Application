@@ -130,7 +130,8 @@
                     <div class="flex-col flex gap-7">
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Sub Total(Rs)</span>
-                            <input class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]" disabled id="cardCheckoutSubTotalFld"
+                            <input class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]" disabled
+                                   id="cardCheckoutSubTotalFld"
                                    type="number">
                         </label>
                         <label class="flex flex-col gap-1">
@@ -147,7 +148,8 @@
                         </label>
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Last 4 Digit of the Card</span>
-                            <input class="bg-slate-200 rounded-md p-2 h-[2.3rem] w-[15rem] hover:border-2 border-blue-500" id="cardNumberFld"
+                            <input class="bg-slate-200 rounded-md p-2 h-[2.3rem] w-[15rem] hover:border-2 border-blue-500"
+                                   id="cardNumberFld"
                                    placeholder="XXXX"
                                    required type="number">
                         </label>
@@ -185,12 +187,14 @@
                     <div class="flex-col flex gap-7">
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Sub Total(Rs)</span>
-                            <input class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]" disabled id="cashCheckoutSubTotalFld"
+                            <input class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem]" disabled
+                                   id="cashCheckoutSubTotalFld"
                                    type="number">
                         </label>
                         <label class="flex flex-col gap-1">
                             <span class="font-bold">Cash(Rs)</span>
-                            <input class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem] hover:border-2 border-blue-500" id="cashFld" placeholder="0.0"
+                            <input class="bg-slate-200 p-2 rounded-md h-[2.3rem] w-[15rem] hover:border-2 border-blue-500"
+                                   id="cashFld" placeholder="0.0"
                                    type="number">
                         </label>
                         <label class="flex flex-col gap-1">
@@ -223,7 +227,9 @@
     <main class="min-h-screen relative flex flex-col gap-3 transition-all ease-in duration-300" id="orderSection">
         <section class="overflow-auto flex flex-col p-2 m-2 relative gap-5">
             <div>
-                <a href="../directory/refund.html" target="_blank" class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md">Refund</a>
+                <a class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md"
+                   href="../directory/refund.html"
+                   target="_blank">Refund</a>
             </div>
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                  id="stockTableLoadingAnimation">
@@ -930,12 +936,36 @@
                 <div class="flex flex-col gap-3 pb-3">
                     <h2 class="font-bold text-2xl">Sort</h2>
                     <ul class="flex flex-row gap-3">
-                        <li><button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500" id="sortHighToLowBtn">High to Low</button></li>
-                        <li><button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500" id="sortLowToHighBtn">Low to High</button></li>
-                        <li><button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500" id="sortMenBtn">Men</button></li>
-                        <li><button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500" id="sortWomanBtn">Woman</button></li>
-                        <li><button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500" id="sortAZBtn">A-Z</button></li>
-                        <li><button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500" id="sortZABtn">Z-A</button></li>
+                        <li>
+                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                    id="sortHighToLowBtn">High to Low
+                            </button>
+                        </li>
+                        <li>
+                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                    id="sortLowToHighBtn">Low to High
+                            </button>
+                        </li>
+                        <li>
+                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                    id="sortMenBtn">Men
+                            </button>
+                        </li>
+                        <li>
+                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                    id="sortWomanBtn">Woman
+                            </button>
+                        </li>
+                        <li>
+                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                    id="sortAZBtn">A-Z
+                            </button>
+                        </li>
+                        <li>
+                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                    id="sortZABtn">Z-A
+                            </button>
+                        </li>
                     </ul>
                 </div>
                 <table class="w-full shadow-md text-md text-left rtl:text-right">
@@ -1212,10 +1242,92 @@
     </main>
 
     <!--Admin Section-->
-    <main class="hidden pt-5 transition-all  ease-in duration-300" id="adminSection">
-        <h1>
-            Admin Panel
-        </h1>
+    <main class="hidden pt-5 transition-all ease-in duration-300" id="adminSection">
+        <div class="flex-row pt-10 flex justify-between ml-16 mr-16">
+            <section class="flex-col flex gap-10">
+                <div class="flex-col flex gap-3">
+                    <label class="flex-row flex gap-2 items-center">
+                        <span class="font-bold">Filter</span>
+                        <select id="filterSelect" class="bg-slate-200 h-[2.7rem] w-fit hover:border-2 border-blue-500 p-2 rounded-md font-medium">
+                            <option class="bg-slate-200 p-2 font-medium" value=0>Today</option>
+                            <option class="bg-slate-200 p-2 font-medium" value=7>Past 7 Days</option>
+                            <option class="bg-slate-200 p-2 font-medium" value=30>Past 30 days</option>
+                            <option class="bg-slate-200 p-2 font-medium" value=365>Past 365 days</option>
+                        </select>
+                    </label>
+                    <div class="rounded-md shadow-custom p-5 flex w-[25vw] flex-col gap-5">
+                        <h2 class="font-bold text-xl">Popular</h2>
+                        <div class="flex flex-row justify-between items-center">
+                            <figure class="rounded-full p-2 shadow-custom">
+                                <img alt="itemImage" id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
+                            </figure>
+                            <div class="flex flex-col gap-3">
+                                <label class="flex-col gap-2 flex">
+                                    <span class="font-bold">Item ID</span>
+                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md"  id="popularItemFld" type="text">
+                                </label>
+                                <label class="flex-col gap-2 flex">
+                                    <span  class="font-bold">Item Name</span>
+                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md"  id="itemName" type="text">
+                                </label>
+                                <label class="flex-col gap-2 flex">
+                                    <span class="font-bold">Item Selling Price(Rs)</span>
+                                    <input disabled placeholder="0.0" class="bg-slate-200 p-2 font-medium rounded-md" id="popularSellingPrice" type="number">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="rounded-md flex-col flex shadow-custom gap-8 p-5">
+                        <h1 class="text-xl font-bold">Overview</h1>
+                        <label class="flex-col flex gap-2">
+                            <span class="font-bold">Total Sale(Rs)</span>
+                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalSale">
+                        </label>
+                        <label class="flex-col flex gap-2">
+                            <span class="font-bold">Total Profit(Rs)</span>
+                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalProfit">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section class="flex-col flex gap-8">
+                <div class="flex flex-col gap-5  w-[40vw] rounded-md shadow-custom p-5">
+                    <h2 class="text-xl font-bold">Deactivated Items</h2>
+                    <div class="flex-col flex gap-3 justify-start">
+                        <label class="flex flex-row gap-3 justify-start items-center">
+                            <span class="font-bold">Search</span>
+                            <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]" type="text" placeholder="Code, Name and ETC.....">
+                            <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
+                        </label>
+                        <div class="overflow-auto h-[60vh]">
+                            <table class="w-full shadow-md text-md text-left rtl:text-right">
+                                <thead>
+                                <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                                    <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                        Code
+                                    </th>
+                                    <th class="px-6 py-3 w-[20vw]" scope="col">
+                                        Name
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Action
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="deactivatedItemTableBody">
+                                <!-- Table body content goes here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </section>
+        </div>
     </main>
 
     <!--Customer Section-->
