@@ -1281,14 +1281,24 @@
                 <div>
                     <div class="rounded-md flex-col flex shadow-custom gap-8 p-5">
                         <h1 class="text-xl font-bold">Overview</h1>
-                        <label class="flex-col flex gap-2">
-                            <span class="font-bold">Total Sale(Rs)</span>
-                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[20rem] bg-slate-200" id="totalSale">
-                        </label>
-                        <label class="flex-col flex gap-2">
-                            <span class="font-bold">Total Profit(Rs)</span>
-                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[20rem] bg-slate-200" id="totalProfit">
-                        </label>
+                        <div class="flex flex-row-reverse items-center justify-evenly gap-3">
+                            <div>
+                                <label class="flex-col flex gap-2">
+                                    <span class="font-bold">Bills</span>
+                                    <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[8rem] bg-slate-200" id="billCountFld">
+                                </label>
+                            </div>
+                            <div class="flex-col flex gap-3">
+                                <label class="flex-col flex gap-2">
+                                    <span class="font-bold">Total Sale(Rs)</span>
+                                    <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalSaleFld">
+                                </label>
+                                <label class="flex-col flex gap-2">
+                                    <span class="font-bold">Total Profit(Rs)</span>
+                                    <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalProfitFld">
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

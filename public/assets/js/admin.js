@@ -90,4 +90,23 @@ $("#dItemsRefreshBtn").click(function (e) {
     loadTable()
 })
 getPopularItem(0)
+const getDayOverView = () => {
+    $.ajax({
+        url: BASEURL + "/sales/overview",
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        },
+        method: "GET",
+        success: function (res) {
+            console.log(res)
+            $("#totalSaleFld").val(res.totalSales)
+            $("#billCountFld").val(res.totalBills)
+            $("#totalProfitFld").val(res.totalProfit)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+};
+getDayOverView()
 loadTable()
