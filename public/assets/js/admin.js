@@ -2,6 +2,7 @@ let disabledItemsList = []
 
 const itemTableBody = $("#deactivatedItemTableBody")
 const loadTable = () => {
+    $("#dItemsTableLoadingAnimation").removeClass("hidden")
     $.ajax({
         url: BASEURL + "/inventory/items?availability=false",
         headers: {
@@ -12,8 +13,10 @@ const loadTable = () => {
             console.log(res)
             disabledItemsList = res
             setItemTableContent(disabledItemsList)
+            $("#dItemsTableLoadingAnimation").addClass("hidden")
         },
         error: function (err) {
+            $("#dItemsTableLoadingAnimation").addClass("hidden")
             console.log(err)
         }
     })
@@ -36,11 +39,11 @@ itemTableBody.on("click", "#itemActivateBtn", function (e) {
     if (!res) {
         return
     }
-    const itemIndex = e.target.value
-    const item = disabledItemsList[itemIndex]
-    console.log(item)
+    const itemId = e.target.value.toString().toLowerCase()
+
+    console.log(itemId)
     $.ajax({
-        url: BASEURL + "/inventory/items/activate/" + item.itemId,
+        url: BASEURL + "/inventory/items/activate/" + itemId,
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         },
@@ -83,5 +86,8 @@ const getPopularItem = (range) => {
 $("#filterSelect").change(function (e) {
     getPopularItem(Number.parseInt(e.target.value))
 });
+$("#dItemsRefreshBtn").click(function (e) {
+    loadTable()
+})
 getPopularItem(0)
 loadTable()
