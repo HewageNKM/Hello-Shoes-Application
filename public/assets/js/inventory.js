@@ -60,7 +60,7 @@ $("#inventorySearchBtn").click(function () {
     inventoryTableLoadingAnimation.addClass("flex")
 
     $.ajax({
-        url: BASEURL + "/inventory/items/filter/" + value,
+        url: BASEURL + "/inventory/items/filter/" + value+"?availability=true",
         method: "GET",
         headers: {
             "Authorization": "Bearer " + window.localStorage.getItem("token")
@@ -158,7 +158,7 @@ $("#addInventoryForm").submit(function (e) {
 
     if (code.trim() === "") {
         $.ajax({
-            url: BASEURL + "/inventory/items",
+            url: BASEURL + "/inventory/items?availability=true",
             method: "POST",
             contentType: false,
             processData: false,
@@ -234,7 +234,7 @@ const loadItemsTable = () => {
     inventoryTableLoadingAnimation.removeClass("hidden")
     inventoryTableLoadingAnimation.addClass("flex")
     $.ajax({
-        url: BASEURL + "/inventory/items",
+        url: BASEURL + "/inventory/items?availability=true",
         method: "GET",
         headers: {
             "Authorization": "Bearer " + window.localStorage.getItem("token")

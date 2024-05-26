@@ -26,6 +26,15 @@ if (role === "USER") {
 
 const navigationOnClick = (value) => {
     switch (value) {
+        case "admin":
+            $("#adminSection").removeClass("hidden");
+
+            $("#inventorySection").addClass("hidden");
+            $("#employeeSection").addClass("hidden");
+            $("#supplierSection").addClass("hidden");
+            $("#customerSection").addClass("hidden");
+            $("#orderSection").addClass("hidden")
+            break;
         case "order":
             $("#orderSection").removeClass("hidden");
 
@@ -33,6 +42,7 @@ const navigationOnClick = (value) => {
             $("#employeeSection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
             $("#customerSection").addClass("hidden");
+            $("#adminSection").addClass("hidden");
             break;
         case "inventory":
             $("#inventorySection").removeClass("hidden");
@@ -41,6 +51,7 @@ const navigationOnClick = (value) => {
             $("#employeeSection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
             $("#customerSection").addClass("hidden");
+            $("#adminSection").addClass("hidden");
             break;
         case "employee":
             $("#employeeSection").removeClass("hidden");
@@ -49,6 +60,7 @@ const navigationOnClick = (value) => {
             $("#inventorySection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
             $("#customerSection").addClass("hidden");
+            $("#adminSection").addClass("hidden");
             break;
         case "supplier":
             $("#supplierSection").removeClass("hidden");
@@ -57,6 +69,7 @@ const navigationOnClick = (value) => {
             $("#inventorySection").addClass("hidden");
             $("#employeeSection").addClass("hidden");
             $("#customerSection").addClass("hidden");
+            $("#adminSection").addClass("hidden");
             break;
         case "customer":
             $("#customerSection").removeClass("hidden");
@@ -65,6 +78,7 @@ const navigationOnClick = (value) => {
             $("#inventorySection").addClass("hidden");
             $("#employeeSection").addClass("hidden");
             $("#supplierSection").addClass("hidden");
+            $("#adminSection").addClass("hidden");
             break;
 
         default:
