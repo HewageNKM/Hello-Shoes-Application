@@ -91,6 +91,7 @@ $("#dItemsRefreshBtn").click(function (e) {
 })
 getPopularItem(0)
 const getDayOverView = () => {
+    $("#overViewRefreshBtn").addClass("animate-spin")
     $.ajax({
         url: BASEURL + "/sales/overview",
         headers: {
@@ -99,14 +100,19 @@ const getDayOverView = () => {
         method: "GET",
         success: function (res) {
             console.log(res)
+            $("#overViewRefreshBtn").removeClass("animate-spin")
             $("#totalSaleFld").val(res.totalSales)
             $("#billCountFld").val(res.totalBills)
             $("#totalProfitFld").val(res.totalProfit)
         },
         error: function (err) {
+            $("#overViewRefreshBtn").removeClass("animate-spin")
             console.log(err)
         }
     })
 };
+$("#overViewRefreshBtn").click(function (e) {
+    getDayOverView()
+})
 getDayOverView()
 loadTable()

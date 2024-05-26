@@ -785,6 +785,10 @@ video {
   height: 58vh;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -896,6 +900,10 @@ video {
 
 .w-\[3vw\] {
   width: 3vw;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .min-w-full {
