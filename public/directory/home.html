@@ -1255,24 +1255,24 @@
                             <option class="bg-slate-200 p-2 font-medium" value=365>Past 365 days</option>
                         </select>
                     </label>
-                    <div class="rounded-md shadow-custom p-5 flex w-[25vw] flex-col gap-5">
+                    <div class="rounded-md shadow-custom p-5 flex w-[30vw] flex-col gap-5">
                         <h2 class="font-bold text-xl">Popular</h2>
                         <div class="flex flex-row justify-between items-center">
-                            <figure class="rounded-full p-2 shadow-custom">
-                                <img alt="itemImage" id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
+                            <figure>
+                                <img class="rounded-md w-[17rem] h-[16rem] bg-cover shadow-custom" alt="itemImage" id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
                             </figure>
                             <div class="flex flex-col gap-3">
                                 <label class="flex-col gap-2 flex">
                                     <span class="font-bold">Item ID</span>
-                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md"  id="popularItemFld" type="text">
+                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md uppercase"  id="popularItemIdFld" type="text">
                                 </label>
                                 <label class="flex-col gap-2 flex">
                                     <span  class="font-bold">Item Name</span>
-                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md"  id="itemName" type="text">
+                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md capitalize"  id="popularItemNameFld" type="text">
                                 </label>
                                 <label class="flex-col gap-2 flex">
                                     <span class="font-bold">Item Selling Price(Rs)</span>
-                                    <input disabled placeholder="0.0" class="bg-slate-200 p-2 font-medium rounded-md" id="popularSellingPrice" type="number">
+                                    <input disabled placeholder="0.0" class="bg-slate-200 p-2 font-medium rounded-md" id="popularItemSellingPriceFld" type="number">
                                 </label>
                             </div>
                         </div>
@@ -1283,17 +1283,17 @@
                         <h1 class="text-xl font-bold">Overview</h1>
                         <label class="flex-col flex gap-2">
                             <span class="font-bold">Total Sale(Rs)</span>
-                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalSale">
+                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[20rem] bg-slate-200" id="totalSale">
                         </label>
                         <label class="flex-col flex gap-2">
                             <span class="font-bold">Total Profit(Rs)</span>
-                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalProfit">
+                            <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[20rem] bg-slate-200" id="totalProfit">
                         </label>
                     </div>
                 </div>
             </section>
-            <section class="flex-col flex gap-8">
-                <div class="flex flex-col gap-5  w-[40vw] rounded-md shadow-custom p-5">
+            <section class="flex-col flex gap-8 pt-12">
+                <div class="flex flex-col gap-5  w-[50vw] rounded-md shadow-custom p-5">
                     <h2 class="text-xl font-bold">Deactivated Items</h2>
                     <div class="flex-col flex gap-3 justify-start">
                         <label class="flex flex-row gap-3 justify-start items-center">
@@ -1301,7 +1301,7 @@
                             <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]" type="text" placeholder="Code, Name and ETC.....">
                             <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
                         </label>
-                        <div class="overflow-auto h-[60vh]">
+                        <div class="overflow-auto h-[58vh]">
                             <table class="w-full shadow-md text-md text-left rtl:text-right">
                                 <thead>
                                 <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
@@ -1311,7 +1311,7 @@
                                     <th class="px-6 py-3 w-[20vw]" scope="col">
                                         Name
                                     </th>
-                                    <th class="px-6 py-3" scope="col">
+                                    <th class="px-6 py-3 w-[3vw]" scope="col">
                                         Action
                                     </th>
                                 </tr>

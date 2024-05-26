@@ -55,7 +55,10 @@ itemTableBody.on("click", "#itemActivateBtn", function (e) {
     })
 })
 const setPopularItem = (res) => {
-
+    $("#popularItemImg").attr("src", "data:image/jpeg;base64,"+res.image)
+    $("#popularItemNameFld").val(res.description)
+    $("#popularItemIdFld").val(res.itemId)
+    $("#popularItemSellingPriceFld").val(res.sellingPrice)
 };
 const getPopularItem = (range) => {
     $.ajax({
@@ -69,9 +72,16 @@ const getPopularItem = (range) => {
             setPopularItem(res)
         },
         error: function (err) {
+            $("#popularItemImg").attr("src", "../assets/img/default_employee_avatar.png")
+            $("#popularItemNameFld").val("")
+            $("#popularItemIdFld").val("")
+            $("#popularItemSellingPriceFld").val("")
             console.log(err)
         }
     })
 };
+$("#filterSelect").change(function (e) {
+    getPopularItem(Number.parseInt(e.target.value))
+});
 getPopularItem(0)
 loadTable()
