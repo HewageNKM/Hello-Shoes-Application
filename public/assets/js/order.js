@@ -322,9 +322,17 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
             $("#balanceFld").val("")
             setInventoryAlertMessage("Order placed successfully")
 
-            const blob = new Blob([res], {type: 'application/pdf'});
-            const objectUrl = URL.createObjectURL(blob);
-            window.open(objectUrl);
+            const binaryString = window.atob(res);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+            for (let i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const newBlob = new Blob([bytes], { type: "application/pdf" });
+            const data = window.URL.createObjectURL(newBlob);
+
+            window.open(data)
         },
         error: function (error) {
             $("#cashFld").prop("disabled", false)
@@ -387,9 +395,18 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
             orderItemIdFld.prop("disabled", false)
             orderItemIdFld.addClass("hover:border-2")
 
-            const blob =  new Blob([res], {type: 'application/pdf'});
-            const objectUrl = URL.createObjectURL(blob);
-            window.open(objectUrl);
+
+            const binaryString = window.atob(res);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+            for (let i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const newBlob = new Blob([bytes], { type: "application/pdf" });
+            const data = window.URL.createObjectURL(newBlob);
+
+            window.open(data)
 
         },
         error: function (error) {
