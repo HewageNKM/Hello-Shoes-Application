@@ -740,7 +740,7 @@
                             id="showInventoryAddForm"
                             type="button">Add Item
                     </button>
-                    <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0" href="./stock.html" id="showInventoryStockForm" target="_blank" type="button">
+                    <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0" href="./stock.html" target="_blank" type="button">
                         Stocks →
                     </a>
                 </div>
@@ -1358,7 +1358,7 @@
                                    placeholder="Code, Name and ETC....." type="text">
                             <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
                         </label>
-                        <div class="overflow-auto h-[58vh] relative">
+                        <div class="flex-col flex gap-3 items-center h-[58vh] relative">
                             <button class="bg-blue-500 hover:bg-blue-600 rounded-md font-medium p-2 mb-3"
                                     id="dItemsRefreshBtn">Refresh
                             </button>
@@ -1378,24 +1378,31 @@
                                     Loading...
                                 </button>
                             </div>
-                            <table class="w-full shadow-md text-md text-left rtl:text-right">
-                                <thead>
-                                <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                                    <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                                        Code
-                                    </th>
-                                    <th class="px-6 py-3 w-[20vw]" scope="col">
-                                        Name
-                                    </th>
-                                    <th class="px-6 py-3 w-[3vw]" scope="col">
-                                        Action
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody id="deactivatedItemTableBody">
-                                <!-- Table body content goes here -->
-                                </tbody>
-                            </table>
+                            <div class="overflow-auto container">
+                                <table class="w-full shadow-md text-md text-left rtl:text-right">
+                                    <thead>
+                                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                            Code
+                                        </th>
+                                        <th class="px-6 py-3 w-[20vw]" scope="col">
+                                            Name
+                                        </th>
+                                        <th class="px-6 py-3 w-[3vw]" scope="col">
+                                            Action
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="deactivatedItemTableBody">
+                                    <!-- Table body content goes here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex-row flex justify-center items-center gap-3">
+                                <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="adminBackwardBtn" value="prev" onclick="navigateAdminTable(this.value)"><</button>
+                                <p id="adminPageCountFld" class="font-medium">1</p>
+                                <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="adminForwardBtn" value="next" onclick="navigateAdminTable(this.value)">></button>
+                            </div>
                         </div>
                     </div>
                 </div>

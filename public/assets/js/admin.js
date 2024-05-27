@@ -1,10 +1,11 @@
 let disabledItemsList = []
+let dPageNumber = 0;
 
 const itemTableBody = $("#deactivatedItemTableBody")
-const loadTable = () => {
+const loadTable = (page,limit) => {
     $("#dItemsTableLoadingAnimation").removeClass("hidden")
     $.ajax({
-        url: BASEURL + "/inventory/items?availability=false",
+        url: BASEURL + "/inventory/items?availability=false&page="+page+"&limit="+limit,
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         },
@@ -50,7 +51,7 @@ itemTableBody.on("click", "#itemActivateBtn", function (e) {
         method: "PUT",
         success: function (res) {
             console.log(res)
-            loadTable()
+            loadTable(dPageNumber,20)
         },
         error: function (err) {
             console.log(err)
@@ -87,7 +88,7 @@ $("#filterSelect").change(function (e) {
     getPopularItem(Number.parseInt(e.target.value))
 });
 $("#dItemsRefreshBtn").click(function (e) {
-    loadTable()
+    loadTable(dPageNumber,20)
 })
 getPopularItem(0)
 const getDayOverView = () => {
@@ -114,5 +115,27 @@ const getDayOverView = () => {
 $("#overViewRefreshBtn").click(function (e) {
     getDayOverView()
 })
+const navigateAdminTable = (where) => {
+    if (where === "next") {
+        dPageNumber ++
+        if(disabledItemsList.length === 0){
+            dPageNumber = 0
+            $("#adminPageCountFld").text(dPageNumber+1)
+            loadTable(dPageNumber,20)
+        }
+        $("#adminPageCountFld").text(dPageNumber+1)
+        loadTable(dPageNumber,20)
+    } else if(where === "prev"){
+        dPageNumber --
+        if(dPageNumber < 0){
+            dPageNumber = 0
+            $("#adminPageCountFld").text(dPageNumber+1)
+            loadTable(dPageNumber,20)
+        }
+        $("#adminPageCountFld").text(dPageNumber+1)
+        loadTable(dPageNumber,20)
+    }
+    loadTable(dPageNumber,20)
+}
 getDayOverView()
-loadTable()
+loadTable(dPageNumber,20)
