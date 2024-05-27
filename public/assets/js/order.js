@@ -293,12 +293,12 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
         method: "POST",
         processData: false,
         contentType: "application/json",
+        responseType: 'blob',
         data: order,
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        success: function (res) {
-            console.log(res);
+        success: async function (res) {
             btnLoadingAnimation.removeClass("flex")
             btnLoadingAnimation.addClass("hidden")
             setInventorySuccessMessage("Order placed successfully")
@@ -321,6 +321,10 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
             customerConfirmMark.addClass("hidden")
             $("#balanceFld").val("")
             setInventoryAlertMessage("Order placed successfully")
+
+            const blob = new Blob([res], {type: 'application/pdf'});
+            const objectUrl = URL.createObjectURL(blob);
+            window.open(objectUrl);
         },
         error: function (error) {
             $("#cashFld").prop("disabled", false)
@@ -354,13 +358,13 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
         url: BASEURL + "/sales",
         method: "POST",
         processData: false,
+        responseType: 'blob',
         contentType: "application/json",
         data: order,
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        success: function (res) {
-            console.log(res);
+        success: async function (res) {
             btnLoadingAnimation.removeClass("flex")
             btnLoadingAnimation.addClass("hidden")
             setInventorySuccessMessage("Order placed successfully")
@@ -382,7 +386,11 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
             orderItemIdFld.val("")
             orderItemIdFld.prop("disabled", false)
             orderItemIdFld.addClass("hover:border-2")
-            setInventoryAlertMessage("Order placed successfully")
+
+            const blob =  new Blob([res], {type: 'application/pdf'});
+            const objectUrl = URL.createObjectURL(blob);
+            window.open(objectUrl);
+
         },
         error: function (error) {
             $("#cardNumberFld").prop("disabled", false)
