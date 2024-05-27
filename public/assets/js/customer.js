@@ -4,7 +4,8 @@ const customerAddBtn = $("#addCustomerBtn");
 const cFld = $(".cFld");
 const customerAlertMessage = $("#alert")
 const customerSuccessMessage = $("#success")
-
+let page = 0;
+$("#customerPageCountFld").text(page + 1)
 
 $("#showCustomerAddForm").click(function () {
     if (window.localStorage.getItem("role") === "USER") {
@@ -201,7 +202,7 @@ $("#addCustomerForm").submit(function (e) {
                 e.target.reset();
 
 
-                loadCustomerTable();
+                loadCustomerTable(page, 20);
                 setCustomerSuccessMessage("Customer updated successfully!")
             }, error: function (response) {
                 console.log(response);
@@ -241,7 +242,7 @@ $("#addCustomerForm").submit(function (e) {
 
                 e.target.reset();
                 $("#addCustomer").addClass("hidden");
-                loadCustomerTable()
+                loadCustomerTable(page, 20)
                 setCustomerSuccessMessage("Customer added successfully!")
             }, error: function (response) {
                 console.log(response);
@@ -262,10 +263,10 @@ $("#addCustomerForm").submit(function (e) {
     }
 });
 
-const loadCustomerTable = () => {
+const loadCustomerTable = (page, limit) => {
     $("#customerTableLoadingAnimation").removeClass("hidden")
     $.ajax({
-        url: BASEURL + "/customers", method: "GET", headers: {
+        url: BASEURL + "/customers?page=" + page + "&limit=" + limit, method: "GET", headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, success: function (response) {
             console.log(response);
@@ -284,7 +285,7 @@ const loadCustomerTable = () => {
     });
 }
 $("#customerTableRefreshBtn").click(function () {
-    loadCustomerTable();
+    loadCustomerTable(page, 20);
 })
 
 $([document]).on("click", "#customerDeleteBtn", function (e) {
@@ -303,7 +304,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
             Authorization: "Bearer " + localStorage.getItem("token")
         }, success: function (response) {
             console.log(response);
-            loadCustomerTable()
+            loadCustomerTable(page, 20)
             setCustomerSuccessMessage("Customer deleted successfully!");
         }, error: function (response) {
             console.log(response);
@@ -311,7 +312,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
             if (response.responseJSON) {
                 message = response.responseJSON.message;
             }
-            loadCustomerTable();
+            loadCustomerTable(page, 20);
             setCustomerAlertMessage(message)
         }
     })
@@ -366,4 +367,27 @@ const setCustomerSuccessMessage = (message) => {
         customerSuccessMessage.removeClass("right-0")
     }, 3000);
 }
-loadCustomerTable();
+const navigateTable = (where) => {
+    if (where === "next") {
+        page += 1;
+        if(customersList.length === 0){
+            page = 0;
+            $("#customerPageCountFld").text(page + 1)
+            loadCustomerTable(page,20)
+            return;
+        }
+        $("#customerPageCountFld").text(page + 1)
+        loadCustomerTable(page, 20)
+    } else if (where === "prev") {
+        page -= 1;
+        if (page < 0) {
+            page = 0;
+            $("#customerPageCountFld").text(page + 1)
+            loadCustomerTable(page,20)
+            return;
+        }
+        $("#customerPageCountFld").text(page + 1)
+        loadCustomerTable(page, 20)
+    }
+}
+loadCustomerTable(page, 20);
