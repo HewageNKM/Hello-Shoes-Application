@@ -65,6 +65,7 @@ const setPopularItem = (res) => {
     $("#popularItemSellingPriceFld").val(res.sellingPrice)
 };
 const getPopularItem = (range) => {
+    $("#popularLoadingBtn").addClass("animate-spin")
     $.ajax({
         url: BASEURL + "/inventory/items/popular?range="+range,
         headers: {
@@ -73,6 +74,7 @@ const getPopularItem = (range) => {
         method: "GET",
         success: function (res) {
             console.log(res)
+            $("#popularLoadingBtn").removeClass("animate-spin")
             setPopularItem(res)
         },
         error: function (err) {
@@ -80,6 +82,7 @@ const getPopularItem = (range) => {
             $("#popularItemNameFld").val("")
             $("#popularItemIdFld").val("")
             $("#popularItemSellingPriceFld").val("")
+            $("#popularLoadingBtn").removeClass("animate-spin")
             console.log(err)
         }
     })

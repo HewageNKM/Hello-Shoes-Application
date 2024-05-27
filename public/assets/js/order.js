@@ -293,12 +293,12 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
         method: "POST",
         processData: false,
         contentType: "application/json",
+        responseType: 'blob',
         data: order,
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        success: function (res) {
-            console.log(res);
+        success: async function (res) {
             btnLoadingAnimation.removeClass("flex")
             btnLoadingAnimation.addClass("hidden")
             setInventorySuccessMessage("Order placed successfully")
@@ -321,6 +321,18 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
             customerConfirmMark.addClass("hidden")
             $("#balanceFld").val("")
             setInventoryAlertMessage("Order placed successfully")
+
+            const binaryString = window.atob(res);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+            for (let i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const newBlob = new Blob([bytes], { type: "application/pdf" });
+            const data = window.URL.createObjectURL(newBlob);
+
+            window.open(data)
         },
         error: function (error) {
             $("#cashFld").prop("disabled", false)
@@ -354,13 +366,13 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
         url: BASEURL + "/sales",
         method: "POST",
         processData: false,
+        responseType: 'blob',
         contentType: "application/json",
         data: order,
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        success: function (res) {
-            console.log(res);
+        success: async function (res) {
             btnLoadingAnimation.removeClass("flex")
             btnLoadingAnimation.addClass("hidden")
             setInventorySuccessMessage("Order placed successfully")
@@ -382,7 +394,20 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
             orderItemIdFld.val("")
             orderItemIdFld.prop("disabled", false)
             orderItemIdFld.addClass("hover:border-2")
-            setInventoryAlertMessage("Order placed successfully")
+
+
+            const binaryString = window.atob(res);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+            for (let i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const newBlob = new Blob([bytes], { type: "application/pdf" });
+            const data = window.URL.createObjectURL(newBlob);
+
+            window.open(data)
+
         },
         error: function (error) {
             $("#cardNumberFld").prop("disabled", false)
