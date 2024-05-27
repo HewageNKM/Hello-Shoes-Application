@@ -110,7 +110,7 @@ otpSendBtn.click(function () {
         success: function (response) {
             console.log(response)
             setSuccessMessage("OTP sent successfully")
-           otpSendBtn.text("Wait " + countdown + " seconds");
+            otpSendBtn.text("Wait " + countdown + " seconds");
 
             const interval = setInterval(function () {
                 countdown--;
@@ -167,7 +167,7 @@ otpFld.keyup(function (event) {
     console.log("OTP: " + otp);
     if (/^\d{4}$/.test(otp)) {
         $(this).prop("disabled", true)
-        $.ajax(BASEURL + "/auth/mail/otp/verify/" + otp, {
+        $.ajax(BASEURL + "/auth/users/otp/verify/" + otp, {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {

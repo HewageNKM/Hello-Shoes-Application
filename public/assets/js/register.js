@@ -111,7 +111,7 @@ otpSendBtn.click(function () {
     // Disable the button
     otpFld.prop("disabled", false)
 
-    $.ajax(BASEURL + "/auth/mail/otp/send/" + emailFld.val().trim(), {
+    $.ajax(BASEURL + "/auth/users/otp/" + emailFld.val().trim(), {
         method: "GET",
         success: function (response) {
             let count = 60;
@@ -171,7 +171,7 @@ otpFld.keyup(function (event) {
     console.log("OTP: " + otp);
     if (/^\d{4}$/.test(otp)) {
         $(this).prop("disabled", true)
-        $.ajax(BASEURL + "/auth/mail/otp/verify/" + otp, {
+        $.ajax(BASEURL + "/auth/users/otp/verify/" + otp, {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {
