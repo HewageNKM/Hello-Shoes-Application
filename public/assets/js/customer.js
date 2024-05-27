@@ -4,8 +4,8 @@ const customerAddBtn = $("#addCustomerBtn");
 const cFld = $(".cFld");
 const customerAlertMessage = $("#alert")
 const customerSuccessMessage = $("#success")
-let page = 0;
-$("#customerPageCountFld").text(page + 1)
+let customerPageNumber = 0;
+$("#customerPageCountFld").text(customerPageNumber + 1)
 
 $("#showCustomerAddForm").click(function () {
     if (window.localStorage.getItem("role") === "USER") {
@@ -202,7 +202,7 @@ $("#addCustomerForm").submit(function (e) {
                 e.target.reset();
 
 
-                loadCustomerTable(page, 20);
+                loadCustomerTable(customerPageNumber, 20);
                 setCustomerSuccessMessage("Customer updated successfully!")
             }, error: function (response) {
                 console.log(response);
@@ -242,7 +242,7 @@ $("#addCustomerForm").submit(function (e) {
 
                 e.target.reset();
                 $("#addCustomer").addClass("hidden");
-                loadCustomerTable(page, 20)
+                loadCustomerTable(customerPageNumber, 20)
                 setCustomerSuccessMessage("Customer added successfully!")
             }, error: function (response) {
                 console.log(response);
@@ -285,7 +285,7 @@ const loadCustomerTable = (page, limit) => {
     });
 }
 $("#customerTableRefreshBtn").click(function () {
-    loadCustomerTable(page, 20);
+    loadCustomerTable(customerPageNumber, 20);
 })
 
 $([document]).on("click", "#customerDeleteBtn", function (e) {
@@ -304,7 +304,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
             Authorization: "Bearer " + localStorage.getItem("token")
         }, success: function (response) {
             console.log(response);
-            loadCustomerTable(page, 20)
+            loadCustomerTable(customerPageNumber, 20)
             setCustomerSuccessMessage("Customer deleted successfully!");
         }, error: function (response) {
             console.log(response);
@@ -312,7 +312,7 @@ $([document]).on("click", "#customerDeleteBtn", function (e) {
             if (response.responseJSON) {
                 message = response.responseJSON.message;
             }
-            loadCustomerTable(page, 20);
+            loadCustomerTable(customerPageNumber, 20);
             setCustomerAlertMessage(message)
         }
     })
@@ -367,27 +367,27 @@ const setCustomerSuccessMessage = (message) => {
         customerSuccessMessage.removeClass("right-0")
     }, 3000);
 }
-const navigateTable = (where) => {
+const navigateCustomerTable = (where) => {
     if (where === "next") {
-        page += 1;
-        if(customersList.length === 0){
-            page = 0;
-            $("#customerPageCountFld").text(page + 1)
-            loadCustomerTable(page,20)
+        customerPageNumber++;
+        if (customersList.length === 0) {
+            customerPageNumber = 0;
+            $("#customerPageCountFld").text(customerPageNumber + 1)
+            loadCustomerTable(customerPageNumber, 20)
             return;
         }
-        $("#customerPageCountFld").text(page + 1)
-        loadCustomerTable(page, 20)
+        $("#customerPageCountFld").text(customerPageNumber + 1)
+        loadCustomerTable(customerPageNumber, 20)
     } else if (where === "prev") {
-        page -= 1;
-        if (page < 0) {
-            page = 0;
-            $("#customerPageCountFld").text(page + 1)
-            loadCustomerTable(page,20)
+        customerPageNumber--;
+        if (customerPageNumber < 0) {
+            customerPageNumber = 0;
+            $("#customerPageCountFld").text(customerPageNumber + 1)
+            loadCustomerTable(customerPageNumber, 20)
             return;
         }
-        $("#customerPageCountFld").text(page + 1)
-        loadCustomerTable(page, 20)
+        $("#customerPageCountFld").text(customerPageNumber + 1)
+        loadCustomerTable(customerPageNumber, 20)
     }
 }
-loadCustomerTable(page, 20);
+loadCustomerTable(customerPageNumber, 20);
