@@ -894,6 +894,22 @@ video {
   width: 100%;
 }
 
+.w-\[80vw\] {
+  width: 80vw;
+}
+
+.w-\[100vw\] {
+  width: 100vw;
+}
+
+.w-\[95vw\] {
+  width: 95vw;
+}
+
+.w-\[97vw\] {
+  width: 97vw;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -1000,6 +1016,10 @@ video {
 
 .overflow-auto {
   overflow: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-y-auto {
