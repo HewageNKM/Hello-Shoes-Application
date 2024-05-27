@@ -2,11 +2,12 @@ const stockTableLoadingAnimation = $("#stockTableLoadingAnimation");
 const stockSuccessMessage = $("#success");
 const stockAlertMessage = $("#alert");
 
+let stockPageNumber = 0;
 let stocksList = [];
 console.log(window.localStorage.getItem("token"))
 
 $('#stockSearchFld').on('keypress', function (e) {
-    if(e.which === 13){
+    if (e.which === 13) {
         searchStocks()
     }
 });
@@ -15,7 +16,7 @@ $("#stockSearchBtn").click(function (e) {
 })
 
 $("#stocksRefreshBtn").click(function (e) {
-    loadStockTable()
+    loadStockTable(stockPageNumber, 20)
 })
 
 const searchStocks = () => {
@@ -46,11 +47,11 @@ const searchStocks = () => {
         }
     })
 }
-const loadStockTable = () => {
+const loadStockTable = (page, limit) => {
     stockTableLoadingAnimation.removeClass("hidden");
     stockTableLoadingAnimation.addClass("flex");
     $.ajax({
-        url: BASEURL + "/inventory/items/stocks",
+        url: BASEURL + "/inventory/items/stocks" + `?page=${page}&limit=${limit}`,
         method: "GET",
         processData: false,
         contentType: false,
@@ -90,7 +91,6 @@ const setStockTableContent = () => {
                             <button value="${stock.stockId}" id="stockEditBtn" class="text-blue-600 font-bold m-1 p-1 hover:border-b-2 border-blue-600">Update</button>
                         </td>
             </tr>`
-
         )
     })
 
@@ -135,7 +135,7 @@ $([document]).on("click", "#stockEditBtn", function (e) {
         data: data,
         success: function (response) {
             console.log(response)
-            loadStockTable()
+            loadStockTable(stockPageNumber, 20)
             stockTableLoadingAnimation.removeClass("flex")
             stockTableLoadingAnimation.addClass("hidden")
             setStockSuccessMessage("Stock updated successfully")
@@ -172,5 +172,27 @@ const setStockAlertMessage = (message) => {
         stockAlertMessage.removeClass("right-[0]")
     }, 5000)
 }
-
-loadStockTable();
+const navigateStockTable = (where) => {
+    if (where === "next") {
+        stockPageNumber++
+        if (stocksList.length === 0) {
+            stockPageNumber = 0
+            $("#stockPageNumber").text(stockPageNumber)
+            loadStockTable(stockPageNumber, 20)
+            return
+        }
+        $("#stockPageNumber").text(stockPageNumber)
+        loadStockTable(stockPageNumber, 20)
+    } else if (where === "prev") {
+        stockPageNumber--
+        if (stockPageNumber < 0) {
+            stockPageNumber = 0
+            $("#stockPageNumber").text(stockPageNumber)
+            loadStockTable(stockPageNumber, 20)
+            return
+        }
+        $("#stockPageNumber").text(stockPageNumber)
+        loadStockTable(stockPageNumber, 20)
+    }
+}
+loadStockTable(stockPageNumber, 20);
