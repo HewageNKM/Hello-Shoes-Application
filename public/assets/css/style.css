@@ -554,6 +554,40 @@ video {
   --tw-contain-style:  ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
 .fixed {
   position: fixed;
 }
@@ -606,24 +640,24 @@ video {
   top: 50%;
 }
 
+.top-24 {
+  top: 6rem;
+}
+
 .top-4 {
   top: 1rem;
 }
 
-.top-5 {
-  top: 1.25rem;
+.top-16 {
+  top: 4rem;
+}
+
+.top-12 {
+  top: 3rem;
 }
 
 .top-10 {
   top: 2.5rem;
-}
-
-.top-20 {
-  top: 5rem;
-}
-
-.top-24 {
-  top: 6rem;
 }
 
 .-z-10 {
@@ -658,6 +692,10 @@ video {
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .me-2 {
@@ -700,10 +738,6 @@ video {
   margin-top: 1.25rem;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
 .inline {
   display: inline;
 }
@@ -736,6 +770,10 @@ video {
   height: 120px;
 }
 
+.h-\[16rem\] {
+  height: 16rem;
+}
+
 .h-\[2\.3rem\] {
   height: 2.3rem;
 }
@@ -752,8 +790,12 @@ video {
   height: 2rem;
 }
 
-.h-\[60vh\] {
-  height: 60vh;
+.h-\[40vh\] {
+  height: 40vh;
+}
+
+.h-\[58vh\] {
+  height: 58vh;
 }
 
 .h-\[8rem\] {
@@ -765,24 +807,28 @@ video {
   height: fit-content;
 }
 
-.h-\[15rem\] {
-  height: 15rem;
+.h-\[30vh\] {
+  height: 30vh;
 }
 
-.h-\[20rem\] {
-  height: 20rem;
+.h-\[50vh\] {
+  height: 50vh;
 }
 
-.h-\[16rem\] {
-  height: 16rem;
+.h-\[45vh\] {
+  height: 45vh;
 }
 
-.h-\[55vh\] {
-  height: 55vh;
+.max-h-\[50vh\] {
+  max-height: 50vh;
 }
 
-.h-\[58vh\] {
-  height: 58vh;
+.max-h-\[30vh\] {
+  max-height: 30vh;
+}
+
+.max-h-\[45vh\] {
+  max-height: 45vh;
 }
 
 .min-h-screen {
@@ -821,6 +867,10 @@ video {
   width: 15rem;
 }
 
+.w-\[17rem\] {
+  width: 17rem;
+}
+
 .w-\[20rem\] {
   width: 20rem;
 }
@@ -833,20 +883,28 @@ video {
   width: 25rem;
 }
 
-.w-\[25vw\] {
-  width: 25vw;
-}
-
 .w-\[30rem\] {
   width: 30rem;
+}
+
+.w-\[30vw\] {
+  width: 30vw;
 }
 
 .w-\[3rem\] {
   width: 3rem;
 }
 
+.w-\[3vw\] {
+  width: 3vw;
+}
+
 .w-\[40vw\] {
   width: 40vw;
+}
+
+.w-\[50vw\] {
+  width: 50vw;
 }
 
 .w-\[5rem\] {
@@ -870,32 +928,20 @@ video {
   width: 100%;
 }
 
-.w-\[50vw\] {
-  width: 50vw;
+.w-\[80vw\] {
+  width: 80vw;
 }
 
-.w-\[30vw\] {
-  width: 30vw;
+.w-\[100vw\] {
+  width: 100vw;
 }
 
-.w-\[16rem\] {
-  width: 16rem;
+.w-\[95vw\] {
+  width: 95vw;
 }
 
-.w-\[17rem\] {
-  width: 17rem;
-}
-
-.w-\[5vw\] {
-  width: 5vw;
-}
-
-.w-\[4vw\] {
-  width: 4vw;
-}
-
-.w-\[3vw\] {
-  width: 3vw;
+.w-\[97vw\] {
+  width: 97vw;
 }
 
 .min-w-full {
@@ -940,10 +986,6 @@ video {
 
 .flex-col {
   flex-direction: column;
-}
-
-.flex-col-reverse {
-  flex-direction: column-reverse;
 }
 
 .items-start {
@@ -1008,6 +1050,10 @@ video {
 
 .overflow-auto {
   overflow: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-y-auto {
@@ -1264,6 +1310,10 @@ video {
   padding-top: 2.5rem;
 }
 
+.pt-12 {
+  padding-top: 3rem;
+}
+
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -1272,16 +1322,20 @@ video {
   padding-top: 1.25rem;
 }
 
-.pt-11 {
-  padding-top: 2.75rem;
+.pt-36 {
+  padding-top: 9rem;
 }
 
-.pt-12 {
-  padding-top: 3rem;
+.pt-40 {
+  padding-top: 10rem;
 }
 
-.pt-20 {
-  padding-top: 5rem;
+.pt-48 {
+  padding-top: 12rem;
+}
+
+.pt-44 {
+  padding-top: 11rem;
 }
 
 .text-left {
@@ -1329,6 +1383,11 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-black {
@@ -1565,20 +1624,8 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .lg\:block {
-    display: block;
-  }
-
-  .lg\:inline {
-    display: inline;
-  }
-
   .lg\:flex {
     display: flex;
-  }
-
-  .lg\:hidden {
-    display: none;
   }
 
   .lg\:h-\[2\.5rem\] {
@@ -1607,10 +1654,6 @@ video {
 
   .lg\:flex-row {
     flex-direction: row;
-  }
-
-  .lg\:flex-col {
-    flex-direction: column;
   }
 
   .lg\:gap-12 {

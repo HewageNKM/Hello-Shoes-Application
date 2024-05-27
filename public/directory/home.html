@@ -621,7 +621,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
+            <div class="flex flex-col items-center gap-5 mt-3 relative">
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                      id="employeeTableLoadingAnimation">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
@@ -640,72 +640,79 @@
                 <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="employeeTableRefreshBtn">
                     Refresh
                 </button>
-                <table class="w-full shadow-md text-md text-left rtl:text-right">
-                    <thead>
-                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                            Code
-                        </th>
-                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                            Image
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Name
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Civil Status
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Gender
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Birthday
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Lane
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            City
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            State
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Zip
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Contact
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Email
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Attach Branch
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Date of Joined
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Designation
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Access Level
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Emergency Guardian's Name
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Emergency Contact
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="employeeTableBody">
-                    <!-- Table body content goes here -->
-                    </tbody>
-                </table>
+                <div class="overflow-auto w-[97vw]">
+                    <table class="w-full shadow-md text-md text-left rtl:text-right">
+                        <thead>
+                        <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                Code
+                            </th>
+                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                Image
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Name
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Civil Status
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Gender
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Birthday
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Lane
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                City
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                State
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Zip
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Contact
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Email
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Attach Branch
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Date of Joined
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Designation
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Access Level
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Emergency Guardian's Name
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Emergency Contact
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
+                                Action
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        <!-- Table body content goes here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-row flex justify-center items-center gap-3">
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="employeeBackwardBtn" value="prev" onclick="navigateEmployeeTable(this.value)"><</button>
+                    <p id="employeePageCountFld" class="font-medium">1</p>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="employeeForwardBtn" value="next" onclick="navigateEmployeeTable(this.value)">></button>
+                </div>
             </div>
         </section>
     </main>
@@ -733,11 +740,8 @@
                             id="showInventoryAddForm"
                             type="button">Add Item
                     </button>
-                    <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0"
-                       href="./stock.html"
-                       id="showInventoryStockForm"
-                       target="_blank"
-                       type="button">Stocks →
+                    <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0" href="./stock.html" target="_blank" type="button">
+                        Stocks →
                     </a>
                 </div>
             </div>
@@ -914,7 +918,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
+            <div class="flex flex-col items-center gap-5 mt-3 relative">
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                      id="inventoryTableLoadingAnimation">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
@@ -930,89 +934,98 @@
                         Loading...
                     </button>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="inventoryTableRefreshBtn">
-                    Refresh
-                </button>
-                <div class="flex flex-col gap-3 pb-3">
-                    <h2 class="font-bold text-2xl">Sort</h2>
-                    <ul class="flex flex-row gap-3">
-                        <li>
-                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
-                                    id="sortHighToLowBtn">High to Low
-                            </button>
-                        </li>
-                        <li>
-                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
-                                    id="sortLowToHighBtn">Low to High
-                            </button>
-                        </li>
-                        <li>
-                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
-                                    id="sortMenBtn">Men
-                            </button>
-                        </li>
-                        <li>
-                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
-                                    id="sortWomanBtn">Woman
-                            </button>
-                        </li>
-                        <li>
-                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
-                                    id="sortAZBtn">A-Z
-                            </button>
-                        </li>
-                        <li>
-                            <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
-                                    id="sortZABtn">Z-A
-                            </button>
-                        </li>
-                    </ul>
+                <div class="absolute left-0 flex flex-col gap-3">
+                    <button class="bg-blue-500 w-20 hover:bg-blue-600 rounded-md p-2" id="inventoryTableRefreshBtn">
+                        Refresh
+                    </button>
+                    <div class="flex flex-col gap-3 pb-3">
+                        <h2 class="font-bold text-2xl">Sort</h2>
+                        <ul class="flex flex-row gap-3">
+                            <li>
+                                <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                        id="sortHighToLowBtn">High to Low
+                                </button>
+                            </li>
+                            <li>
+                                <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                        id="sortLowToHighBtn">Low to High
+                                </button>
+                            </li>
+                            <li>
+                                <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                        id="sortMenBtn">Men
+                                </button>
+                            </li>
+                            <li>
+                                <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                        id="sortWomanBtn">Woman
+                                </button>
+                            </li>
+                            <li>
+                                <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                        id="sortAZBtn">A-Z
+                                </button>
+                            </li>
+                            <li>
+                                <button class="p-2 font-medium rounded-md border-blue-500 border-2 hover:bg-blue-500"
+                                        id="sortZABtn">Z-A
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <table class="w-full shadow-md text-md text-left rtl:text-right">
-                    <thead>
-                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                            Code
-                        </th>
-                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                            Image
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Name
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Category
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Buying Price(Rs)
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Selling Price(Rs)
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Expected Profit(Rs)
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Profit Margin(%)
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Quantity
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Supplier ID
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Supplier Name
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="inventoryTableBody">
-                    <!-- Table body content goes here -->
-                    </tbody>
-                </table>
+                <div class="pt-44 w-[97vw] overflow-auto">
+                    <table class="w-full text-md text-left rtl:text-right max-h-[45vh]">
+                        <thead>
+                        <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                Code
+                            </th>
+                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                Image
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Name
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Category
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Buying Price(Rs)
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Selling Price(Rs)
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Expected Profit(Rs)
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Profit Margin(%)
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Quantity
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Supplier ID
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Supplier Name
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
+                                Action
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="inventoryTableBody">
+                        <!-- Table body content goes here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-row flex justify-center items-center gap-3">
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="inventoryBackwardBtn" value="prev" onclick="navigateInventoryTable(this.value)"><</button>
+                    <p id="inventoryPageCountFld" class="font-medium">1</p>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="inventoryForwardBtn" value="next" onclick="navigateInventoryTable(this.value)">></button>
+                </div>
             </div>
         </section>
     </main>
@@ -1176,7 +1189,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
+            <div class="flex flex-col items-center gap-5 mt-3 relative">
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                      id="supplierTableLoadingAnimation">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
@@ -1195,48 +1208,55 @@
                 <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="supplierTableRefreshBtn">
                     Refresh
                 </button>
-                <table class="w-full shadow-md text-md text-left rtl:text-right">
-                    <thead>
-                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                            Code
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Name
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Lane
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            City
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            State
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Zip
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Country
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Contact
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Contact
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Email
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="supplierTableBody">
-                    <!-- Table body content goes here -->
-                    </tbody>
-                </table>
+                <div class="overflow-auto w-[97vw]">
+                    <table class="w-full shadow-md text-md text-left rtl:text-right max-h-[50vh]">
+                        <thead>
+                        <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                Code
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Name
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Lane
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                City
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                State
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Zip
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Country
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Contact
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Contact
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Email
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
+                                Action
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="supplierTableBody">
+                        <!-- Table body content goes here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-row flex justify-center items-center gap-3">
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="supplierBackwardBtn" value="prev" onclick="navigateSupplierTable(this.value)"><</button>
+                    <p id="supplierPageCountFld" class="font-medium">1</p>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="supplierForwardBtn" value="next" onclick="navigateSupplierTable(this.value)">></button>
+                </div>
             </div>
         </section>
     </main>
@@ -1248,7 +1268,8 @@
                 <div class="flex-col flex gap-3">
                     <label class="flex-row flex gap-2 items-center">
                         <span class="font-bold">Filter</span>
-                        <select id="filterSelect" class="bg-slate-200 h-[2.7rem] w-fit hover:border-2 border-blue-500 p-2 rounded-md font-medium">
+                        <select class="bg-slate-200 h-[2.7rem] w-fit hover:border-2 border-blue-500 p-2 rounded-md font-medium"
+                                id="filterSelect">
                             <option class="bg-slate-200 p-2 font-medium" value=0>Today</option>
                             <option class="bg-slate-200 p-2 font-medium" value=7>Past 7 Days</option>
                             <option class="bg-slate-200 p-2 font-medium" value=30>Past 30 days</option>
@@ -1259,20 +1280,26 @@
                         <h2 class="font-bold text-xl">Popular</h2>
                         <div class="flex flex-row justify-between items-center">
                             <figure>
-                                <img class="rounded-md w-[17rem] h-[16rem] bg-cover shadow-custom" alt="itemImage" id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
+                                <img alt="itemImage" class="rounded-md w-[17rem] h-[16rem] bg-cover shadow-custom"
+                                     id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
                             </figure>
                             <div class="flex flex-col gap-3">
                                 <label class="flex-col gap-2 flex">
                                     <span class="font-bold">Item ID</span>
-                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md uppercase"  id="popularItemIdFld" type="text">
+                                    <input class="bg-slate-200 p-2 font-medium rounded-md uppercase" disabled
+                                           id="popularItemIdFld"
+                                           placeholder="XXXXX" type="text">
                                 </label>
                                 <label class="flex-col gap-2 flex">
-                                    <span  class="font-bold">Item Name</span>
-                                    <input disabled placeholder="XXXXX" class="bg-slate-200 p-2 font-medium rounded-md capitalize"  id="popularItemNameFld" type="text">
+                                    <span class="font-bold">Item Name</span>
+                                    <input class="bg-slate-200 p-2 font-medium rounded-md capitalize" disabled
+                                           id="popularItemNameFld"
+                                           placeholder="XXXXX" type="text">
                                 </label>
                                 <label class="flex-col gap-2 flex">
                                     <span class="font-bold">Item Selling Price(Rs)</span>
-                                    <input disabled placeholder="0.0" class="bg-slate-200 p-2 font-medium rounded-md" id="popularItemSellingPriceFld" type="number">
+                                    <input class="bg-slate-200 p-2 font-medium rounded-md" disabled id="popularItemSellingPriceFld"
+                                           placeholder="0.0" type="number">
                                 </label>
                             </div>
                         </div>
@@ -1280,22 +1307,41 @@
                 </div>
                 <div>
                     <div class="rounded-md flex-col flex shadow-custom gap-8 p-5">
-                        <h1 class="text-xl font-bold">Overview</h1>
+                        <div class="flex flex-row justify-between items-center">
+                            <h1 class="text-xl font-bold">Overview</h1>
+                            <button class="transition-all duration-500" id="overViewRefreshBtn">
+                                <svg fill="#000000" height="20px"
+                                     viewBox="0 0 489.645 489.645"
+                                     width="20px" xml:space="preserve"
+                                     xmlns="http://www.w3.org/2000/svg"><g>
+	                                    <path d="M460.656,132.911c-58.7-122.1-212.2-166.5-331.8-104.1c-9.4,5.2-13.5,16.6-8.3,27c5.2,9.4,16.6,13.5,27,8.3
+                                            c99.9-52,227.4-14.9,276.7,86.3c65.4,134.3-19,236.7-87.4,274.6c-93.1,51.7-211.2,17.4-267.6-70.7l69.3,14.5
+		                                    c10.4,2.1,21.8-4.2,23.9-15.6c2.1-10.4-4.2-21.8-15.6-23.9l-122.8-25c-20.6-2-25,16.6-23.9,22.9l15.6,123.8
+		                                    c1,10.4,9.4,17.7,19.8,17.7c12.8,0,20.8-12.5,19.8-23.9l-6-50.5c57.4,70.8,170.3,131.2,307.4,68.2
+		                                    C414.856,432.511,548.256,314.811,460.656,132.911z"/>
+                                        </g>
+                                </svg>
+                            </button>
+                        </div>
                         <div class="flex flex-row-reverse items-center justify-evenly gap-3">
                             <div>
                                 <label class="flex-col flex gap-2">
                                     <span class="font-bold">Bills</span>
-                                    <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[8rem] bg-slate-200" id="billCountFld">
+                                    <input class="p-2 font-medium rounded-md w-[8rem] bg-slate-200" disabled id="billCountFld"
+                                           placeholder="0.0" type="number">
                                 </label>
                             </div>
                             <div class="flex-col flex gap-3">
                                 <label class="flex-col flex gap-2">
                                     <span class="font-bold">Total Sale(Rs)</span>
-                                    <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalSaleFld">
+                                    <input class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" disabled id="totalSaleFld"
+                                           placeholder="0.0" type="number">
                                 </label>
                                 <label class="flex-col flex gap-2">
                                     <span class="font-bold">Total Profit(Rs)</span>
-                                    <input type="number" placeholder="0.0" disabled class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" id="totalProfitFld">
+                                    <input class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" disabled id="totalProfitFld"
+                                           placeholder="0.0"
+                                           type="number">
                                 </label>
                             </div>
                         </div>
@@ -1308,17 +1354,21 @@
                     <div class="flex-col flex gap-3 justify-start">
                         <label class="flex flex-row gap-3 justify-start items-center">
                             <span class="font-bold">Search</span>
-                            <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]" type="text" placeholder="Code, Name and ETC.....">
+                            <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]"
+                                   placeholder="Code, Name and ETC....." type="text">
                             <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
                         </label>
-                        <div class="overflow-auto h-[58vh] relative">
-                            <button class="bg-blue-500 hover:bg-blue-600 rounded-md font-medium p-2 mb-3" id="dItemsRefreshBtn">Refresh</button>
+                        <div class="flex-col flex gap-3 items-center h-[58vh] relative">
+                            <button class="bg-blue-500 hover:bg-blue-600 rounded-md font-medium p-2 mb-3"
+                                    id="dItemsRefreshBtn">Refresh
+                            </button>
                             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                                  id="dItemsTableLoadingAnimation">
                                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
                                         disabled
                                         type="button">
-                                    <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin" fill="none"
+                                    <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin"
+                                         fill="none"
                                          role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                                               fill="#E5E7EB"/>
@@ -1328,24 +1378,31 @@
                                     Loading...
                                 </button>
                             </div>
-                            <table class="w-full shadow-md text-md text-left rtl:text-right">
-                                <thead>
-                                <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                                    <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                                        Code
-                                    </th>
-                                    <th class="px-6 py-3 w-[20vw]" scope="col">
-                                        Name
-                                    </th>
-                                    <th class="px-6 py-3 w-[3vw]" scope="col">
-                                        Action
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody id="deactivatedItemTableBody">
-                                <!-- Table body content goes here -->
-                                </tbody>
-                            </table>
+                            <div class="overflow-auto container">
+                                <table class="w-full shadow-md text-md text-left rtl:text-right">
+                                    <thead>
+                                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                            Code
+                                        </th>
+                                        <th class="px-6 py-3 w-[20vw]" scope="col">
+                                            Name
+                                        </th>
+                                        <th class="px-6 py-3 w-[3vw]" scope="col">
+                                            Action
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="deactivatedItemTableBody">
+                                    <!-- Table body content goes here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex-row flex justify-center items-center gap-3">
+                                <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="adminBackwardBtn" value="prev" onclick="navigateAdminTable(this.value)"><</button>
+                                <p id="adminPageCountFld" class="font-medium">1</p>
+                                <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="adminForwardBtn" value="next" onclick="navigateAdminTable(this.value)">></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1550,7 +1607,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col items-start gap-5 overflow-auto mt-3 relative">
+            <div class="flex flex-col items-center gap-5 mt-3 relative">
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                      id="customerTableLoadingAnimation">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
@@ -1569,57 +1626,64 @@
                 <button class="bg-blue-500 hover:bg-blue-600 rounded-md p-2" id="customerTableRefreshBtn">
                     Refresh
                 </button>
-                <table class="w-full shadow-md text-md text-left rtl:text-right">
-                    <thead>
-                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                            Code
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Name
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Gender
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Lane
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            City
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            State
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Zip
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Contact
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Email
-                        </th>
-                        <th class="px-6 py-3" scope="col">
-                            Date of Joined
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Total Points
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Level
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3" scope="col">
-                            Recent Purchase
-                        </th>
-                        <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="customerTableBody">
-                    <!-- Table body content goes here -->
-                    </tbody>
-                </table>
+                <div class="overflow-auto w-[97vw]">
+                    <table class="w-full shadow-md text-md text-left rtl:text-right max-h-[50vh]">
+                        <thead>
+                        <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                Code
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Name
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Gender
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Lane
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                City
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                State
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Zip
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Contact
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Email
+                            </th>
+                            <th class="px-6 py-3" scope="col">
+                                Date of Joined
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Total Points
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Level
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3" scope="col">
+                                Recent Purchase
+                            </th>
+                            <th class="px-6 rounded-e-lg py-3 w-[10vw]" scope="col">
+                                Action
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="customerTableBody">
+                        <!-- Table body content goes here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-row flex justify-center items-center gap-3">
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="customerBackwardBtn" value="prev" onclick="navigateCustomerTable(this.value)"><</button>
+                    <p id="customerPageCountFld" class="font-medium">1</p>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="customerForwardBtn" value="next" onclick="navigateCustomerTable(this.value)">></button>
+                </div>
             </div>
         </section>
     </main>

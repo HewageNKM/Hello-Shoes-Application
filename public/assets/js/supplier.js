@@ -3,7 +3,9 @@ const supplierSuccessMessage = $("#success")
 const supplierBtnLoadingAnimation = $("#supplierBtnLoadingAnimation")
 const sFld = $(".sFld")
 const addSupplierBtn = $("#addSupplierBtn")
+let supplierPageNumber = 0;
 
+$("#supplierPageCountFld").text(supplierPageNumber + 1)
 
 let suppliersList = [];
 
@@ -184,7 +186,7 @@ $("#addSupplierForm").submit(function (e) {
                 supplierBtnLoadingAnimation.removeClass("flex")
                 addSupplierBtn.removeClass("cursor-not-allowed")
 
-                loadSupplierTable();
+                loadSupplierTable(supplierPageNumber, 20);
                 setSupplierSuccessMessage("Supplier added successfully")
             },
             error: function (error) {
@@ -221,7 +223,7 @@ $("#addSupplierForm").submit(function (e) {
             success: function (data) {
                 console.log(data);
                 e.target.reset();
-                loadSupplierTable();
+                loadSupplierTable(supplierPageNumber, 20);
                 setSupplierSuccessMessage("Supplier updated successfully")
             },
             error: function (error) {
@@ -236,10 +238,10 @@ $("#addSupplierForm").submit(function (e) {
     }
 })
 
-const loadSupplierTable = () => {
+const loadSupplierTable = (page, limit) => {
     const tableLoadingAnimation = $("#supplierTableLoadingAnimation")
     tableLoadingAnimation.removeClass("hidden");
-    $.ajax(BASEURL + "/suppliers", {
+    $.ajax(BASEURL + "/suppliers?page=" + page + "&limit=" + limit, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -282,7 +284,7 @@ $([document]).on("click", "#supplierDeleteBtn", function (e) {
             success: function (data) {
                 console.log(data);
                 setSupplierSuccessMessage("Supplier deleted successfully");
-                loadSupplierTable()
+                loadSupplierTable(supplierPageNumber, 20)
             },
             error: function (error) {
                 console.log(error);
@@ -360,6 +362,30 @@ const setSupplierSuccessMessage = (message) => {
     }, 3000);
 }
 $("#supplierTableRefreshBtn").click(function () {
-    loadSupplierTable();
+    loadSupplierTable(supplierPageNumber, 20);
 });
-loadSupplierTable()
+const navigateSupplierTable = (where) => {
+    if (where === "next") {
+        supplierPageNumber++;
+        if (suppliersList.length === 0) {
+            supplierPageNumber = 0;
+            $("#supplierPageCountFld").text(supplierPageNumber + 1)
+            loadSupplierTable(supplierPageNumber, 20)
+            return;
+        }
+        $("#supplierPageCountFld").text(supplierPageNumber + 1)
+        loadSupplierTable(supplierPageNumber, 20)
+    } else if (where === "prev") {
+        supplierPageNumber--;
+        if (supplierPageNumber < 0) {
+            supplierPageNumber = 0;
+            $("#supplierPageCountFld").text(supplierPageNumber + 1)
+            loadSupplierTable(supplierPageNumber, 20)
+            return;
+        }
+        loadSupplierTable(supplierPageNumber, 20)
+    }
+    $("#supplierPageCountFld").text(supplierPageNumber + 1)
+    loadSupplierTable(supplierPageNumber, 20)
+}
+loadSupplierTable(supplierPageNumber, 20)
