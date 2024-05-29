@@ -170,7 +170,8 @@ const issueARefund = () => {
         size: size
     }
     data = JSON.stringify(data);
-
+    $("#refundConfirmBtnLoadingAnimation").removeClass("hidden");
+    $("#refundConfirmBtnLoadingAnimation").addClass("flex");
     $(".dFld").attr("disabled", true);
     $(".fld").removeClass("hover:border-2");
     $.ajax({
@@ -186,6 +187,9 @@ const issueARefund = () => {
             $(".fld").attr("disabled", false);
             $(".fld").addClass("hover:border-2");
             $("#refundSuccessDiv").removeClass("hidden");
+            $("#refundConfirmBtnLoadingAnimation").addClass("hidden");
+            $("#refundConfirmBtnLoadingAnimation").removeClass("flex");
+            $("#userVerifyForm").addClass("hidden");
 
             setSuccessAlert("Refund issued successfully!")
             setInterval(() => {
@@ -194,6 +198,8 @@ const issueARefund = () => {
         },
         error: function (err) {
             $(".fld").attr("disabled", false);
+            $("#refundConfirmBtnLoadingAnimation").addClass("hidden");
+            $("#refundConfirmBtnLoadingAnimation").removeClass("flex");
             setAlert("Error while issuing refund!")
             console.log(err);
         }
