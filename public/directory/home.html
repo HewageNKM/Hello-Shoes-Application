@@ -226,10 +226,12 @@
     <!--Order Section-->
     <main class="min-h-screen relative flex flex-col gap-3 transition-all ease-in duration-300" id="orderSection">
         <section class="overflow-auto flex flex-col p-2 m-2 relative gap-5">
-            <div>
+            <div class="flex flex-row gap-3">
                 <a class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md"
                    href="../directory/refund.html"
                    target="_blank">Refund</a>
+                <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md" id="lastInvoiceBtn">Last Invoice</button>
+                <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md" id="invoiceBtn">Invoices</button>
             </div>
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                  id="stockTableLoadingAnimation">

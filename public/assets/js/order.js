@@ -329,7 +329,7 @@ $("#cashCheckoutConfirmBtn").click(function (e) {
                 bytes[i] = binaryString.charCodeAt(i);
             }
 
-            const newBlob = new Blob([bytes], { type: "application/pdf" });
+            const newBlob = new Blob([bytes], {type: "application/pdf"});
             const data = window.URL.createObjectURL(newBlob);
 
             window.open(data)
@@ -403,7 +403,7 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
                 bytes[i] = binaryString.charCodeAt(i);
             }
 
-            const newBlob = new Blob([bytes], { type: "application/pdf" });
+            const newBlob = new Blob([bytes], {type: "application/pdf"});
             const data = window.URL.createObjectURL(newBlob);
 
             window.open(data)
@@ -414,6 +414,32 @@ $("#cardCheckoutConfirmBtn").click(function (e) {
             btnLoadingAnimation.removeClass("flex")
             btnLoadingAnimation.addClass("hidden")
             console.log(error);
+        }
+    })
+})
+$("#lastInvoiceBtn").click(function (e) {
+    $.ajax({
+        url: BASEURL + "/sales/invoices/last",
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        success: function (res) {
+            const binaryString = window.atob(res);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+            for (let i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const newBlob = new Blob([bytes], {type: "application/pdf"});
+            const data = window.URL.createObjectURL(newBlob);
+
+            window.open(data)
+        },
+        error: function (error) {
+            console.log(error);
+            setInventoryAlertMessage("Invoice not found")
         }
     })
 })
