@@ -207,6 +207,31 @@ const navigateOrderTable = (where) => {
     }
     loadOrderTable(orderTablePageNumber, 20)
 }
+$("#orderSearchBtn").click(function (e) {
+    const searchValue = $("#orderSearchFld").val().toString().toLowerCase()
+    if(searchValue.trim().length < 1){
+        setAlert("Search field cannot be empty")
+        return
+    }
+    $("#adminOrderTableLoadingAnimation").removeClass("hidden")
+    $.ajax({
+        url: BASEURL + "/sales?search=" + searchValue,
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        method: "GET",
+        success: function (res) {
+            console.log(res)
+            orderList = res
+            $("#adminOrderTableLoadingAnimation").addClass("hidden")
+            setOrderTableContent(orderList)
+        },
+        error: function (err) {
+            $("#adminOrderTableLoadingAnimation").addClass("hidden")
+            console.log(err)
+        }
+    })
+})
 getDayOverView()
 loadOrderTable(orderTablePageNumber, 20)
 loadDisabledItemsTable(disabledItemTablePageNumber, 20)
