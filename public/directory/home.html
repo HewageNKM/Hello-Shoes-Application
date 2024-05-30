@@ -186,7 +186,8 @@
                 <div class="flex flex-col gap-3 items-center">
                     <label class="flex-col flex gap-3">
                         <span class="font-medium">Order ID</span>
-                        <input type="text" id="invoiceOrderIdFld" placeholder="SALXXXXXXX" class="bg-slate-200 uppercase rounded-md p-2 h-[2.3rem] w-[15rem] font-medium">
+                        <input type="text" id="invoiceOrderIdFld" placeholder="SALXXXXXXX"
+                               class="bg-slate-200 uppercase rounded-md p-2 h-[2.3rem] w-[15rem] font-medium">
                     </label>
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
                             id="getInvoiceBtn" type="button">
@@ -264,8 +265,12 @@
                 <a class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md"
                    href="../directory/refund.html"
                    target="_blank">Refund</a>
-                <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md" id="lastInvoiceBtn">Last Invoice</button>
-                <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md" id="invoiceBtn">Invoices</button>
+                <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md" id="lastInvoiceBtn">
+                    Last Invoice
+                </button>
+                <button class="p-2 bg-blue-500 rounded-md hover:bg-blue-600 font-medium shadow-md" id="invoiceBtn">
+                    Invoices
+                </button>
             </div>
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
                  id="stockTableLoadingAnimation">
@@ -507,20 +512,6 @@
                                                    type="date"
                                             >
                                         </label>
-                                        <label class="flex flex-col gap-2">
-                                            <span class="text-blue-600 font-bold">Civil Status</span>
-                                            <select class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                                    id="civilStatusSelect"
-                                                    name="status"
-                                                    required
-                                                    type="text"
-                                            >
-                                                <option value="SINGLE">SINGLE</option>
-                                                <option value="MARRIED">MARRIED</option>
-                                                <option value="DIVORCED">DIVORCED</option>
-                                                <option class="WIDOWED">WIDOWED</option>
-                                            </select>
-                                        </label>
                                     </div>
                                     <div class="flex flex-col gap-3">
                                         <label class="flex flex-col gap-2">
@@ -563,28 +554,22 @@
                                                    type="number"
                                             >
                                         </label>
-                                        <label class="flex flex-col gap-2">
-                                            <span class="text-blue-600 font-bold">Contact No</span>
-                                            <input class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                                   id="employeeContactFld"
-                                                   name="contact"
-                                                   placeholder="Contact No"
-                                                   required
-                                                   type="text"
-                                            >
-                                        </label>
-                                        <label class="flex flex-col gap-2">
-                                            <span class="text-blue-600 font-bold">Email</span>
-                                            <input class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
-                                                   id="employeeEmailFld"
-                                                   name="email"
-                                                   placeholder="Email"
-                                                   required
-                                                   type="text"
-                                            >
-                                        </label>
                                     </div>
                                     <div class="flex flex-col gap-3">
+                                        <label class="flex flex-col gap-2">
+                                            <span class="text-blue-600 font-bold">Civil Status</span>
+                                            <select class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                                    id="civilStatusSelect"
+                                                    name="status"
+                                                    required
+                                                    type="text"
+                                            >
+                                                <option value="SINGLE">SINGLE</option>
+                                                <option value="MARRIED">MARRIED</option>
+                                                <option value="DIVORCED">DIVORCED</option>
+                                                <option class="WIDOWED">WIDOWED</option>
+                                            </select>
+                                        </label>
                                         <label class="flex flex-col gap-2">
                                             <span class="text-blue-600 font-bold">Designation</span>
                                             <input class="eFld rounded bg-slate-100 capitalize p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
@@ -616,6 +601,28 @@
                                                 <option value="ADMIN">ADMIN</option>
                                                 <option value="USER">USER</option>
                                             </select>
+                                        </label>
+                                    </div>
+                                    <div class="flex flex-col gap-3">
+                                        <label class="flex flex-col gap-2">
+                                            <span class="text-blue-600 font-bold">Contact No</span>
+                                            <input class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                                   id="employeeContactFld"
+                                                   name="contact"
+                                                   placeholder="Contact No"
+                                                   required
+                                                   type="text"
+                                            >
+                                        </label>
+                                        <label class="flex flex-col gap-2">
+                                            <span class="text-blue-600 font-bold">Email</span>
+                                            <input class="eFld rounded bg-slate-100 p-1 font-light border-blue-600 hover:border-2 lg:h-[2.5rem]  lg:w-[16rem]"
+                                                   id="employeeEmailFld"
+                                                   name="email"
+                                                   placeholder="Email"
+                                                   required
+                                                   type="text"
+                                            >
                                         </label>
                                         <label class="flex flex-col gap-2">
                                             <span class="text-blue-600 font-bold">Guardian</span>
@@ -745,9 +752,13 @@
                     </table>
                 </div>
                 <div class="flex-row flex justify-center items-center gap-3">
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="employeeBackwardBtn" value="prev" onclick="navigateEmployeeTable(this.value)"><</button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="employeeBackwardBtn"
+                            value="prev" onclick="navigateEmployeeTable(this.value)"><
+                    </button>
                     <p id="employeePageCountFld" class="font-medium">1</p>
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="employeeForwardBtn" value="next" onclick="navigateEmployeeTable(this.value)">></button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="employeeForwardBtn"
+                            value="next" onclick="navigateEmployeeTable(this.value)">>
+                    </button>
                 </div>
             </div>
         </section>
@@ -776,7 +787,8 @@
                             id="showInventoryAddForm"
                             type="button">Add Item
                     </button>
-                    <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0" href="./stock.html" target="_blank" type="button">
+                    <a class="text-xl border-blue-500 hover:text-blue-500 hover:scale-110 transition-all duration-300 pb-0"
+                       href="./stock.html" target="_blank" type="button">
                         Stocks →
                     </a>
                 </div>
@@ -1058,9 +1070,13 @@
                     </table>
                 </div>
                 <div class="flex-row flex justify-center items-center gap-3">
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="inventoryBackwardBtn" value="prev" onclick="navigateInventoryTable(this.value)"><</button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="inventoryBackwardBtn"
+                            value="prev" onclick="navigateInventoryTable(this.value)"><
+                    </button>
                     <p id="inventoryPageCountFld" class="font-medium">1</p>
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="inventoryForwardBtn" value="next" onclick="navigateInventoryTable(this.value)">></button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="inventoryForwardBtn"
+                            value="next" onclick="navigateInventoryTable(this.value)">>
+                    </button>
                 </div>
             </div>
         </section>
@@ -1289,9 +1305,13 @@
                     </table>
                 </div>
                 <div class="flex-row flex justify-center items-center gap-3">
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="supplierBackwardBtn" value="prev" onclick="navigateSupplierTable(this.value)"><</button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="supplierBackwardBtn"
+                            value="prev" onclick="navigateSupplierTable(this.value)"><
+                    </button>
                     <p id="supplierPageCountFld" class="font-medium">1</p>
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="supplierForwardBtn" value="next" onclick="navigateSupplierTable(this.value)">></button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="supplierForwardBtn"
+                            value="next" onclick="navigateSupplierTable(this.value)">>
+                    </button>
                 </div>
             </div>
         </section>
@@ -1299,166 +1319,240 @@
 
     <!--Admin Section-->
     <main class="hidden pt-5 transition-all ease-in duration-300" id="adminSection">
-        <div class="flex-row pt-10 flex justify-between ml-16 mr-16">
-            <section class="flex-col flex gap-10">
-                <div class="flex-col flex gap-3">
-                    <label class="flex-row flex gap-2 items-center">
-                        <span class="font-bold">Filter</span>
-                        <select class="bg-slate-200 h-[2.7rem] w-fit hover:border-2 border-blue-500 p-2 rounded-md font-medium"
-                                id="filterSelect">
-                            <option class="bg-slate-200 p-2 font-medium" value=0>Today</option>
-                            <option class="bg-slate-200 p-2 font-medium" value=7>Past 7 Days</option>
-                            <option class="bg-slate-200 p-2 font-medium" value=30>Past 30 days</option>
-                            <option class="bg-slate-200 p-2 font-medium" value=365>Past 365 days</option>
-                        </select>
-                    </label>
-                    <div class="rounded-md shadow-custom p-5 flex w-[30vw] flex-col gap-5">
-                        <div class="flex-row flex justify-between">
-                            <h2 class="font-bold text-xl">Popular</h2>
-                            <button class="transition-all duration-500" id="popularLoadingBtn" disabled>
-                                <svg fill="#000000" height="20px"
-                                     viewBox="0 0 489.645 489.645"
-                                     width="20px" xml:space="preserve"
-                                     xmlns="http://www.w3.org/2000/svg"><g>
-	                                    <path d="M460.656,132.911c-58.7-122.1-212.2-166.5-331.8-104.1c-9.4,5.2-13.5,16.6-8.3,27c5.2,9.4,16.6,13.5,27,8.3
-                                            c99.9-52,227.4-14.9,276.7,86.3c65.4,134.3-19,236.7-87.4,274.6c-93.1,51.7-211.2,17.4-267.6-70.7l69.3,14.5
-		                                    c10.4,2.1,21.8-4.2,23.9-15.6c2.1-10.4-4.2-21.8-15.6-23.9l-122.8-25c-20.6-2-25,16.6-23.9,22.9l15.6,123.8
-		                                    c1,10.4,9.4,17.7,19.8,17.7c12.8,0,20.8-12.5,19.8-23.9l-6-50.5c57.4,70.8,170.3,131.2,307.4,68.2
-		                                    C414.856,432.511,548.256,314.811,460.656,132.911z"/>
-                                        </g>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="flex flex-row justify-between items-center">
-                            <figure>
-                                <img alt="itemImage" class="rounded-md w-[17rem] h-[16rem] bg-cover shadow-custom"
-                                     id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
-                            </figure>
-                            <div class="flex flex-col gap-3">
-                                <label class="flex-col gap-2 flex">
-                                    <span class="font-bold">Item ID</span>
-                                    <input class="bg-slate-200 p-2 font-medium rounded-md uppercase" disabled
-                                           id="popularItemIdFld"
-                                           placeholder="XXXXX" type="text">
-                                </label>
-                                <label class="flex-col gap-2 flex">
-                                    <span class="font-bold">Item Name</span>
-                                    <input class="bg-slate-200 p-2 font-medium rounded-md capitalize" disabled
-                                           id="popularItemNameFld"
-                                           placeholder="XXXXX" type="text">
-                                </label>
-                                <label class="flex-col gap-2 flex">
-                                    <span class="font-bold">Item Selling Price(Rs)</span>
-                                    <input class="bg-slate-200 p-2 font-medium rounded-md" disabled id="popularItemSellingPriceFld"
-                                           placeholder="0.0" type="number">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="rounded-md flex-col flex shadow-custom gap-8 p-5">
-                        <div class="flex flex-row justify-between items-center">
-                            <h1 class="text-xl font-bold">Overview</h1>
-                            <button class="transition-all duration-500" id="overViewRefreshBtn">
-                                <svg fill="#000000" height="20px"
-                                     viewBox="0 0 489.645 489.645"
-                                     width="20px" xml:space="preserve"
-                                     xmlns="http://www.w3.org/2000/svg"><g>
-	                                    <path d="M460.656,132.911c-58.7-122.1-212.2-166.5-331.8-104.1c-9.4,5.2-13.5,16.6-8.3,27c5.2,9.4,16.6,13.5,27,8.3
-                                            c99.9-52,227.4-14.9,276.7,86.3c65.4,134.3-19,236.7-87.4,274.6c-93.1,51.7-211.2,17.4-267.6-70.7l69.3,14.5
-		                                    c10.4,2.1,21.8-4.2,23.9-15.6c2.1-10.4-4.2-21.8-15.6-23.9l-122.8-25c-20.6-2-25,16.6-23.9,22.9l15.6,123.8
-		                                    c1,10.4,9.4,17.7,19.8,17.7c12.8,0,20.8-12.5,19.8-23.9l-6-50.5c57.4,70.8,170.3,131.2,307.4,68.2
-		                                    C414.856,432.511,548.256,314.811,460.656,132.911z"/>
-                                        </g>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="flex flex-row-reverse items-center justify-evenly gap-3">
-                            <div>
-                                <label class="flex-col flex gap-2">
-                                    <span class="font-bold">Bills</span>
-                                    <input class="p-2 font-medium rounded-md w-[8rem] bg-slate-200" disabled id="billCountFld"
-                                           placeholder="0.0" type="number">
-                                </label>
-                            </div>
-                            <div class="flex-col flex gap-3">
-                                <label class="flex-col flex gap-2">
-                                    <span class="font-bold">Total Sale(Rs)</span>
-                                    <input class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" disabled id="totalSaleFld"
-                                           placeholder="0.0" type="number">
-                                </label>
-                                <label class="flex-col flex gap-2">
-                                    <span class="font-bold">Total Profit(Rs)</span>
-                                    <input class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" disabled id="totalProfitFld"
-                                           placeholder="0.0"
-                                           type="number">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="flex-col flex gap-8 pt-12">
-                <div class="flex flex-col gap-5  w-[50vw] rounded-md shadow-custom p-5">
-                    <h2 class="text-xl font-bold">Deactivated Items</h2>
-                    <div class="flex-col flex gap-3 justify-start">
-                        <label class="flex flex-row gap-3 justify-start items-center">
-                            <span class="font-bold">Search</span>
-                            <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]"
-                                   placeholder="Code, Name and ETC....." type="text">
-                            <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
+        <div class="flex-col gap-5 flex justify-between">
+            <div class="flex-row flex justify-evenly gap-20 ml-12 mr-12">
+                <section class="flex-col flex gap-16">
+                    <div class="flex-col flex gap-3">
+                        <label class="flex-row flex gap-2 items-center">
+                            <span class="font-bold">Filter</span>
+                            <select class="bg-slate-200 h-[2.7rem] w-fit hover:border-2 border-blue-500 p-2 rounded-md font-medium"
+                                    id="filterSelect">
+                                <option class="bg-slate-200 p-2 font-medium" value=0>Today</option>
+                                <option class="bg-slate-200 p-2 font-medium" value=7>Past 7 Days</option>
+                                <option class="bg-slate-200 p-2 font-medium" value=30>Past 30 days</option>
+                                <option class="bg-slate-200 p-2 font-medium" value=365>Past 365 days</option>
+                            </select>
                         </label>
-                        <div class="flex-col flex gap-3 items-center h-[58vh] relative">
-                            <button class="bg-blue-500 hover:bg-blue-600 rounded-md font-medium p-2 mb-3"
-                                    id="dItemsRefreshBtn">Refresh
-                            </button>
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
-                                 id="dItemsTableLoadingAnimation">
-                                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
-                                        disabled
-                                        type="button">
-                                    <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin"
-                                         fill="none"
-                                         role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                              fill="#E5E7EB"/>
-                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                              fill="currentColor"/>
-                                    </svg>
-                                    Loading...
+                        <div class="rounded-md shadow-custom p-5 flex w-[30vw] flex-col gap-5">
+                            <div class="flex-row flex justify-between">
+                                <h2 class="font-bold text-xl">Popular</h2>
+                                <button class="transition-all duration-500" id="popularLoadingBtn" disabled>
+                                    <svg fill="#000000" height="20px"
+                                         viewBox="0 0 489.645 489.645"
+                                         width="20px" xml:space="preserve"
+                                         xmlns="http://www.w3.org/2000/svg"><g>
+	                                    <path d="M460.656,132.911c-58.7-122.1-212.2-166.5-331.8-104.1c-9.4,5.2-13.5,16.6-8.3,27c5.2,9.4,16.6,13.5,27,8.3
+                                            c99.9-52,227.4-14.9,276.7,86.3c65.4,134.3-19,236.7-87.4,274.6c-93.1,51.7-211.2,17.4-267.6-70.7l69.3,14.5
+		                                    c10.4,2.1,21.8-4.2,23.9-15.6c2.1-10.4-4.2-21.8-15.6-23.9l-122.8-25c-20.6-2-25,16.6-23.9,22.9l15.6,123.8
+		                                    c1,10.4,9.4,17.7,19.8,17.7c12.8,0,20.8-12.5,19.8-23.9l-6-50.5c57.4,70.8,170.3,131.2,307.4,68.2
+		                                    C414.856,432.511,548.256,314.811,460.656,132.911z"/>
+                                        </g>
+                                </svg>
                                 </button>
                             </div>
-                            <div class="overflow-auto container">
-                                <table class="w-full shadow-md text-md text-left rtl:text-right">
-                                    <thead>
-                                    <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
-                                        <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
-                                            Code
-                                        </th>
-                                        <th class="px-6 py-3 w-[20vw]" scope="col">
-                                            Name
-                                        </th>
-                                        <th class="px-6 py-3 w-[3vw]" scope="col">
-                                            Action
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="deactivatedItemTableBody">
-                                    <!-- Table body content goes here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="flex-row flex justify-center items-center gap-3">
-                                <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="adminBackwardBtn" value="prev" onclick="navigateAdminTable(this.value)"><</button>
-                                <p id="adminPageCountFld" class="font-medium">1</p>
-                                <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="adminForwardBtn" value="next" onclick="navigateAdminTable(this.value)">></button>
+                            <div class="flex flex-row justify-between items-center">
+                                <figure>
+                                    <img alt="itemImage" class="rounded-md w-[12.7rem] h-[15rem] bg-cover shadow-custom"
+                                         id="popularItemImg" src="../assets/img/default_employee_avatar.png"/>
+                                </figure>
+                                <div class="flex flex-col gap-3">
+                                    <label class="flex-col gap-2 flex">
+                                        <span class="font-bold">Item ID</span>
+                                        <input class="bg-slate-200 p-2 font-medium rounded-md uppercase" disabled
+                                               id="popularItemIdFld"
+                                               placeholder="XXXXX" type="text">
+                                    </label>
+                                    <label class="flex-col gap-2 flex">
+                                        <span class="font-bold">Item Name</span>
+                                        <input class="bg-slate-200 p-2 font-medium rounded-md capitalize" disabled
+                                               id="popularItemNameFld"
+                                               placeholder="XXXXX" type="text">
+                                    </label>
+                                    <label class="flex-col gap-2 flex">
+                                        <span class="font-bold">Item Selling Price(Rs)</span>
+                                        <input class="bg-slate-200 p-2 font-medium rounded-md" disabled
+                                               id="popularItemSellingPriceFld"
+                                               placeholder="0.0" type="number">
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-
+                    <div>
+                        <div class="rounded-md flex-col flex shadow-custom gap-8 p-5">
+                            <div class="flex flex-row justify-between items-center">
+                                <h1 class="text-xl font-bold">Overview</h1>
+                                <button class="transition-all duration-500" id="overViewRefreshBtn">
+                                    <svg fill="#000000" height="20px"
+                                         viewBox="0 0 489.645 489.645"
+                                         width="20px" xml:space="preserve"
+                                         xmlns="http://www.w3.org/2000/svg"><g>
+	                                    <path d="M460.656,132.911c-58.7-122.1-212.2-166.5-331.8-104.1c-9.4,5.2-13.5,16.6-8.3,27c5.2,9.4,16.6,13.5,27,8.3
+                                            c99.9-52,227.4-14.9,276.7,86.3c65.4,134.3-19,236.7-87.4,274.6c-93.1,51.7-211.2,17.4-267.6-70.7l69.3,14.5
+		                                    c10.4,2.1,21.8-4.2,23.9-15.6c2.1-10.4-4.2-21.8-15.6-23.9l-122.8-25c-20.6-2-25,16.6-23.9,22.9l15.6,123.8
+		                                    c1,10.4,9.4,17.7,19.8,17.7c12.8,0,20.8-12.5,19.8-23.9l-6-50.5c57.4,70.8,170.3,131.2,307.4,68.2
+		                                    C414.856,432.511,548.256,314.811,460.656,132.911z"/>
+                                        </g>
+                                </svg>
+                                </button>
+                            </div>
+                            <div class="flex flex-row-reverse items-center justify-evenly gap-3">
+                                <div>
+                                    <label class="flex-col flex gap-2">
+                                        <span class="font-bold">Bills</span>
+                                        <input class="p-2 font-medium rounded-md w-[8rem] bg-slate-200" disabled
+                                               id="billCountFld"
+                                               placeholder="0.0" type="number">
+                                    </label>
+                                </div>
+                                <div class="flex-col flex gap-3">
+                                    <label class="flex-col flex gap-2">
+                                        <span class="font-bold">Total Sale(Rs)</span>
+                                        <input class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" disabled
+                                               id="totalSaleFld"
+                                               placeholder="0.0" type="number">
+                                    </label>
+                                    <label class="flex-col flex gap-2">
+                                        <span class="font-bold">Total Profit(Rs)</span>
+                                        <input class="p-2 font-medium rounded-md w-[15rem] bg-slate-200" disabled
+                                               id="totalProfitFld"
+                                               placeholder="0.0"
+                                               type="number">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="flex-col flex gap-8 pt-12 min-h-screen">
+                    <div class="flex flex-col gap-5 rounded-md shadow-custom p-5 h-[90vh]">
+                        <h2 class="text-xl font-bold">Deactivated Items</h2>
+                        <div class="flex-col flex gap-3 justify-start">
+                            <label class="flex flex-row gap-3 justify-start items-center">
+                                <span class="font-bold">Search</span>
+                                <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]"
+                                       placeholder="Code, Name and ETC....." type="text">
+                                <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
+                            </label>
+                            <div class="flex-col flex gap-3 items-center h-[58vh] relative">
+                                <button class="bg-blue-500 hover:bg-blue-600 rounded-md font-medium p-2 mb-3"
+                                        id="dItemsRefreshBtn">Refresh
+                                </button>
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
+                                     id="dItemsTableLoadingAnimation">
+                                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                                            disabled
+                                            type="button">
+                                        <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin"
+                                             fill="none"
+                                             role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                                  fill="#E5E7EB"/>
+                                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                                  fill="currentColor"/>
+                                        </svg>
+                                        Loading...
+                                    </button>
+                                </div>
+                                <div class="overflow-auto container">
+                                    <table class="w-full shadow-md text-md text-left rtl:text-right">
+                                        <thead>
+                                        <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                                            <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                                Code
+                                            </th>
+                                            <th class="px-6 py-3 w-[20vw]" scope="col">
+                                                Name
+                                            </th>
+                                            <th class="px-6 py-3 w-[3vw]" scope="col">
+                                                Action
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="deactivatedItemTableBody">
+                                        <!-- Table body content goes here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="flex-row flex justify-center items-center gap-3">
+                                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl"
+                                            id="adminBackwardBtn" value="prev" onclick="navigateDisabledItemTable(this.value)"><
+                                    </button>
+                                    <p id="adminPageCountFld" class="font-medium">1</p>
+                                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl"
+                                            id="adminForwardBtn" value="next" onclick="navigateDisabledItemTable(this.value)">>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class="flex flex-col gap-5 rounded-md max-h-[300rem] shadow-custom ml-12 mr-12 mb-2 p-5">
+                <h2 class="text-xl font-bold">Orders</h2>
+                <div class="flex-col flex gap-3 justify-start">
+                    <label class="flex flex-row gap-3 justify-start items-center">
+                        <span class="font-bold">Search</span>
+                        <input class="bg-slate-200 h-[2.3rem] hover:border-2 border-blue-500 font-medium rounded-md p-2 w-[25rem]"
+                               placeholder="Code, Name and ETC....." type="text">
+                        <button class="bg-blue-500 p-1.5 rounded-md">Search</button>
+                    </label>
+                    <div class="flex-col flex gap-3 items-center relative">
+                        <button class="bg-blue-500 hover:bg-blue-600 rounded-md font-medium p-2 mb-3"
+                                id="adminOrderRefreshBtn">Refresh
+                        </button>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden"
+                             id="adminOrderTableLoadingAnimation">
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                                    disabled
+                                    type="button">
+                                <svg aria-hidden="true" class="inline w-4 h-4 me-3 text-white animate-spin"
+                                     fill="none"
+                                     role="status" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                          fill="#E5E7EB"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                          fill="currentColor"/>
+                                </svg>
+                                Loading...
+                            </button>
+                        </div>
+                        <div class="overflow-auto container">
+                            <table class="w-full shadow-md text-md text-left rtl:text-right">
+                                <thead>
+                                <tr class="text-left text-sm text-gray-700 uppercase bg-gray-50">
+                                    <th class="px-6 rounded-s-lg py-3w-[15vw]" scope="col">
+                                        Code
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Payment
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Cashier Name
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Customer Name
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Date and Time
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="adminOrderTableBody">
+                                <!-- Table body content goes here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="flex-row flex justify-center items-center gap-3">
+                            <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl"
+                                    id="adminOrderBackwardBtn" value="prev" onclick="navigateOrderTable(this.value)"><
+                            </button>
+                            <p id="adminOrderPageCountFld" class="font-medium">1</p>
+                            <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl"
+                                    id="adminOrderForwardBtn" value="next" onclick="navigateOrderTable(this.value)">>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -1731,9 +1825,13 @@
                     </table>
                 </div>
                 <div class="flex-row flex justify-center items-center gap-3">
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="customerBackwardBtn" value="prev" onclick="navigateCustomerTable(this.value)"><</button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="customerBackwardBtn"
+                            value="prev" onclick="navigateCustomerTable(this.value)"><
+                    </button>
                     <p id="customerPageCountFld" class="font-medium">1</p>
-                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="customerForwardBtn" value="next" onclick="navigateCustomerTable(this.value)">></button>
+                    <button class="font-bold text-blue-500 hover:text-blue-600 text-2xl" id="customerForwardBtn"
+                            value="next" onclick="navigateCustomerTable(this.value)">>
+                    </button>
                 </div>
             </div>
         </section>
