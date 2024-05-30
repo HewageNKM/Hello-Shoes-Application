@@ -172,8 +172,7 @@ $("#addOrderBtn").click(function (e) {
     } else {
         quantityFld.removeClass("border-2 border-red-500")
     }
-
-    if (quantity > stock[size]) {
+    if (quantity > stock["size"+size]) {
         setInventoryAlertMessage("Not enough stock")
         quantityFld.addClass("border-2 border-red-500")
         return;
@@ -183,7 +182,7 @@ $("#addOrderBtn").click(function (e) {
 
     const total = item.sellingPrice * quantity;
     orderTotal += total;
-    stock[size] -= quantity;
+    stock["size"+size] -= quantity;
     const number = Math.round(orderTotal * 100) / 100;
     const orderCartItem = {
         id: number,
