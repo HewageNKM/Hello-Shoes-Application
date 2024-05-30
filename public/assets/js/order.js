@@ -211,7 +211,7 @@ const addToCartTable = (orderCartItem) => {
     const table = $("#orderTableBody");
     table.append
     (
-        `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light" id="">
+        `<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">
             <td class="m-1 p-2 uppercase">${orderCartItem.itemId}</td>
             <td class="m-1 p-2 capitalize">${orderCartItem.description}</td>
             <td class="m-1 p-2 capitalize">${orderCartItem.size}</td>
