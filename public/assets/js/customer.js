@@ -83,6 +83,7 @@ $("#searchCustomerBtn").click(function () {
 const setCustomerTable = () => {
     $("#customerTableBody").empty();
     customersList.forEach(customer => {
+        console.log(customer)
         const doj = customer.doj[0] + "-" + customer.doj[1] + "-" + customer.doj[2]
         const recentDateAndTime = customer.recentPurchaseDateAndTime[0] + "-" + customer.recentPurchaseDateAndTime[1] + "-" + customer.recentPurchaseDateAndTime[2] + " " + customer.recentPurchaseDateAndTime[3] + ":" + customer.recentPurchaseDateAndTime[4]
         $("#customerTableBody").append(`<tr class="odd:bg-white even:bg-gray-50 hover:bg-blue-200 font-light">

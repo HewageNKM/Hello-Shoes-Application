@@ -9,10 +9,11 @@
     <link rel="icon" type="image/x-icon" href="./public/assets/img/logo.ico">
 </head>
 
-<body class="flex justify-center items-center min-h-screen overflow-x-hidden">
+<body class="flex justify-center items-center min-h-screen overflow-x-hidden font-Roboto">
 <div class="flex xl:hidden m-1 gap-5 flex-row items-center w-[30rem] rounded-xl bg-orange-100 text-red-700 p-4">
     <h2 class="font-bold text-3xl flex justify-center items-center text-center">Your Screen Size is No Supported</h2>
 </div>
+
 <div class="flex m-1 gap-5 flex-row items-center justify-centers transition-all duration-300 absolute top-0 right-[-100%] bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
      id="alert"
      role="alert">
@@ -22,26 +23,38 @@
     </div>
     <button class="font-black hover:cursor-hand" id="alertCloseBtn">X</button>
 </div>
-<main class="xl:flex hidden justify-center items-center container transition-all duration-500 relative ">
-    <section class="flex-col flex rounded-xl items-center bg-blue-100 shadow mx-auto my-auto relative w-fit h-fit lg:h-[35rem] justify-between">
-        <h1 class="p-1 mt-3 text-4xl font-bold"><span class="text-blue-500">Welcome, </span>Login</h1>
-        <div class="mt-2">
-            <img alt="logo" class="rounded-full" src="./public/assets/img/logo.jpg" width="200px">
+<main class="xl:flex relative hidden justify-center items-center container transition-all duration-500">
+    <section>
+        <figure class="h-[100vh]">
+            <img src="./public/assets/img/pos_bg.jpg" class="bg-center h-[100vh] bg-cover" alt="pos-bg-img">
+        </figure>
+    </section>
+    <section class="flex-col flex rounded-xl items-center mx-auto my-auto relative w-fit h-fit gap-5 justify-evenly">
+        <div class="mt-2 flex flex-col items-center relative">
+            <div class="flex flex-row items-center">
+                <img alt="logo" class="rounded-full" src="./public/assets/img/logo.jpg" width="100px">
+                <h1 class="p-1 text-4xl font-bold">Hello Shoes PVT LTD.</h1>
+            </div>
+            <p class="absolute left-28 top-20 font-bold text-sm text-slate-400">Manage Your Store More Efficiently</p>
         </div>
-        <form class="flex flex-col justify-evenly p-4 gap-5 w-fit h-fit items-center" id="loginForm">
+        <form class="flex shadow-custom rounded-xl flex-col p-8 gap-5 w-fit h-fit justify-start" id="loginForm">
+            <h2 class="font-bold text-3xl">Login</h2>
             <label class="flex justify-evenly flex-col gap-1">
-                <span class="text-blue-500 font-bold">Email</span>
-                <input class="fld rounded focus:border-2 bg-slate-50 p-1 w-fit h-fit lg:h-[2.5rem] lg:w-[25rem] font-semibold hover:border-2 border-blue-500"
+                <span class="text-blue-600 font-bold">Email</span>
+                <input class="fld rounded focus:border-2 bg-slate-100 p-1 w-fit h-fit lg:h-[2.5rem] lg:w-[22rem] font-semibold hover:border-2 border-blue-500"
                        id="emailFld"
-                       name="email" required type="email">
+                       name="email" required type="email"
+                       placeholder="Email"
+                >
             </label>
             <label class="flex justify-evenly gap-1 flex-col">
-                <span class="text-blue-500 font-bold">Password</span>
-                <input class="fld rounded focus:border-2 bg-slate-50 p-1 w-fit h-fit lg:h-[2.5rem] lg:w-[25rem] border-blue-500 font-semibold hover:border-2"
+                <span class="text-blue-600 font-bold">Password</span>
+                <input class="fld rounded focus:border-2 bg-slate-100 p-1 w-fit h-fit lg:h-[2.5rem] lg:w-[22rem] border-blue-500 font-semibold hover:border-2"
                        id="passwordFld"
+                       placeholder="Password"
                        name="password" required type="password">
             </label>
-            <button id="loginBtn" class="w-[10rem] flex bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded text-sm px-5 py-2.5  mr-2 items-center text-center justify-center font-bold text-white"
+            <button id="loginBtn" class="flex font-bold bg-gradient-to-r from-cyan-500 to-blue-500 hover:blur-[0.5px] hover:shadow-custom transition-all duration-300 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded text-sm px-5 py-2.5  items-center text-center justify-center font-bold text-white"
                     type="submit">
                 <svg id="btnLoadingAnimation" aria-hidden="true" class="hidden mr-3 w-4 h-4 text-white animate-spin"
                      fill="none" role="status"
@@ -58,8 +71,8 @@
                 <a class="text-md font-medium hover:text-blue-500" href="./public/directory/forgot-password.html">Forgot
                     Password?</a>
             </div>
+            <p class="font-light text-sm">V1.0.0</p>
         </form>
-        <p class="absolute font-light text-sm left-0 bottom-0 p-1 m-1">V1.0.0</p>
     </section>
 </main>
 <script src="./public/assets/js/constant.js"></script>
