@@ -142,6 +142,8 @@ otpSendBtn.click(function () {
         error: function (error) {
             console.log(error)
 
+            emailFld.prop("disabled", false)
+            emailFld.addClass("hover:border-2")
             otpSendBtn.prop("disabled", false);
             otpSendBtn.addClass("hover:bg-red-500")
 
