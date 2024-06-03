@@ -17,6 +17,11 @@ The project has the following features:
 
 ## 4. Screenshots
 Here are some screenshots of the project:
+![Login](https://github.com/HewageNKM/Hello-Shoes-Application/assets/107237482/7af4186e-2bbd-422a-9e7a-e8e62ee77d0d)
+
+![signup](https://github.com/HewageNKM/Hello-Shoes-Application/assets/107237482/60e4a2cd-755c-4c07-a3cf-e961d42f2937)
+
+![reset](https://github.com/HewageNKM/Hello-Shoes-Application/assets/107237482/1237ff16-cb07-4eb6-a4d8-c097fc8f343f)
 
 
 ## 5. Conclusion
