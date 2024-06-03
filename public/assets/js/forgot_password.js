@@ -110,38 +110,24 @@ otpSendBtn.click(function () {
         success: function (response) {
             console.log(response)
             setSuccessMessage("OTP sent successfully")
-            otpSendBtn.text("Wait " + countdown + " seconds");
-
             const interval = setInterval(function () {
                 countdown--;
-
-                if (countdown === 0 && isEmailVerified === false) {
+                $("#timerFld").text("Wait " + countdown + " seconds");
+                if (countdown === 0) {
+                    $("#timerFld").text("")
                     otpSendBtn.prop("disabled", false);
                     $("#otpFld").prop("disabled", false)
                     otpSendBtn.text("Resend OTP");
                     otpSendBtn.addClass("hover:bg-red-500")
                     clearInterval(interval);
-                } else if (countdown === 0 && isEmailVerified === true) {
+                }else if(isEmailVerified){
+                    $("#timerFld").text("")
+                    otpSendBtn.text("Verified")
                     otpSendBtn.prop("disabled", true)
+                    otpSendBtn.removeClass("hover:bg-red-500")
                     otpFld.prop("disabled", true)
                     otpFld.removeClass("hover:border-2")
-                    otpSendBtn.removeClass("hover:bg-red-500")
-                    otpSendBtn.text("Verified");
-                    clearInterval(interval);
-                } else if (countdown > 0 && isEmailVerified === false) {
-                    otpFld.prop("disabled", false)
-                    otpSendBtn.prop("disabled", false);
-                    otpSendBtn.text("Wait " + countdown + " seconds");
-                } else if (countdown > 0 && isEmailVerified === true) {
-                    otpSendBtn.prop("disabled", true)
-                    otpFld.prop("disabled", true)
-                    otpFld.removeClass("hover:border-2")
-                    otpSendBtn.removeClass("hover:bg-red-500")
-                    otpSendBtn.text("Verified");
-                    clearInterval(interval);
-                } else if (countdown > 0) {
-                    otpSendBtn.prop("disabled", false);
-                    otpSendBtn.text("Wait " + countdown + " seconds");
+                    clearInterval(interval)
                 }
             }, 1000);
         },
@@ -171,10 +157,21 @@ otpFld.keyup(function (event) {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {
+                    $("#otpFld").removeClass("border-2 border-red-500")
                     isEmailVerified = true;
+                    otpSendBtn.text("Verified")
+                    otpSendBtn.prop("disabled", true)
+                    otpSendBtn.removeClass("hover:bg-red-500")
+                    otpFld.prop("disabled", true)
+                    otpFld.removeClass("hover:border-2")
+                    $("#timerFld").text("")
                     console.log(response)
                 } else {
                     isEmailVerified = false;
+                    $("#otpFld").addClass("border-2 border-red-500")
+                    otpFld.prop("disabled", false)
+                    otpFld.addClass("hover:border-2")
+
                     console.log(response)
                 }
             },

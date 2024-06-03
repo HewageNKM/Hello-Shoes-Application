@@ -457,7 +457,7 @@ $("#invoiceFormDivCloseBtn").click(function (evt) {
 })
 
 $("#getInvoiceBtn").click(function (evt) {
-    const orderId = $("#invoiceOrderIdFld").val().toString().trim()
+    const orderId = $("#invoiceOrderIdFld").val().toString().toLowerCase().trim()
 
     if (!/^sal\d{8,10}$/.test(orderId)) {
         $("#invoiceOrderIdFld").addClass("border-2 border-red-500")

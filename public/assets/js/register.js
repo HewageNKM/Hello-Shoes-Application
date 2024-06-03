@@ -5,7 +5,9 @@ const successAlert = $("#success")
 const fld = $(".fld");
 const otpFld = $("#otpFld");
 const btnLoadingAnimation = $("#btnLoadingAnimation");
-
+let i = 0;
+let slideTime = 2000;
+const slides = ["../assets/img/slides/slide%201.jpeg", "../assets/img/slides/slide%202.jpeg", "../assets/img/slides/slide%203.jpeg", "../assets/img/slides/slide%204.jpeg"]
 otpSendBtn.prop("disabled", true)
 otpSendBtn.removeClass("hover:bg-red-500")
 otpFld.prop("disabled", true)
@@ -115,41 +117,23 @@ otpSendBtn.click(function () {
         method: "GET",
         success: function (response) {
             let count = 60;
-            // Update the button text with the remaining time
-            $("#otpSendBtn").text("Wait " + count + " seconds");
             const interval = setInterval(function () {
                 count--;
-
-                // Update the button text
-
-                // Check if countdown is finished
-                if (count === 0 && isEmailVerified === false) {
-                    otpSendBtn.prop("disabled", false);
-                    $("#otpFld").prop("disabled", false)
-                    otpSendBtn.text("Resend OTP");
+                $("#timerFld").text("Wait " + count + " seconds");
+                if (count === 0) {
+                    otpSendBtn.prop("disabled", false)
                     otpSendBtn.addClass("hover:bg-red-500")
-                    clearInterval(interval);
-                } else if (count === 0 && isEmailVerified === true) {
+                    otpSendBtn.text("Send OTP")
+                    $("#timerFld").text("")
+                    clearInterval(interval)
+                }else  if(isEmailVerified){
+                    otpSendBtn.text("Verified")
                     otpSendBtn.prop("disabled", true)
+                    otpSendBtn.removeClass("hover:bg-red-500")
                     otpFld.prop("disabled", true)
                     otpFld.removeClass("hover:border-2")
-                    otpSendBtn.removeClass("hover:bg-red-500")
-                    otpSendBtn.text("Verified");
-                    clearInterval(interval);
-                } else if (count > 0 && isEmailVerified === false) {
-                    $("#otpFld").prop("disabled", false)
-                    otpSendBtn.prop("disabled", false);
-                    otpSendBtn.text("Wait " + count + " seconds");
-                } else if (count > 0 && isEmailVerified === true) {
-                    otpSendBtn.prop("disabled", true);
-                    otpFld.prop("disabled", true);
-                    otpFld.removeClass("hover:border-2")
-                    otpSendBtn.removeClass("hover:bg-red-500")
-                    otpSendBtn.text("Verified");
-                    clearInterval(interval);
-                } else if (count > 0) {
-                    otpSendBtn.prop("disabled", false);
-                    otpSendBtn.text("Wait " + count + " seconds");
+                    $("#timerFld").text("")
+                    clearInterval(interval)
                 }
             }, 1000);
             console.log(response)
@@ -158,8 +142,10 @@ otpSendBtn.click(function () {
         error: function (error) {
             console.log(error)
 
-            $(this).prop("disabled", false);
-            $(this).addClass("hover:bg-red-500")
+            emailFld.prop("disabled", false)
+            emailFld.addClass("hover:border-2")
+            otpSendBtn.prop("disabled", false);
+            otpSendBtn.addClass("hover:bg-red-500")
 
             setAlertMessage("Error sending OTP")
         }
@@ -175,9 +161,19 @@ otpFld.keyup(function (event) {
             method: "GET",
             success: function (response) {
                 if (response === "verified") {
+                    $("#otpFld").removeClass("border-2 border-red-500")
                     isEmailVerified = true;
+                    otpSendBtn.text("Verified")
+                    otpSendBtn.prop("disabled", true)
+                    otpSendBtn.removeClass("hover:bg-red-500")
+                    otpFld.prop("disabled", true)
+                    otpFld.removeClass("hover:border-2")
+                    $("#timerFld").text("")
                     console.log(response)
                 } else {
+                    $("#otpFld").addClass("border-2 border-red-500")
+                    otpFld.prop("disabled", false)
+                    otpFld.addClass("hover:border-2")
                     isEmailVerified = false;
                     console.log(response)
                 }
@@ -225,9 +221,34 @@ const setAlertMessage = (message) => {
             alertMessage.addClass("right-[-100%]")
             clearInterval(setAlertTimer);
         }
-    }, 1000);
+    }, slideTime);
 }
 
+const showSlides = () => {
+    setInterval(() => {
+        if (i === slides.length) {
+            i = 0;
+        }
+        setSlide()
+        i++;
+    }, 2000)
+
+}
+const setSlide = () => {
+    $("#slide").attr("src", slides[i])
+
+    let id = "#" + i;
+    $(".slide").removeClass("bg-slate-400")
+    $(".slide").addClass("bg-black")
+
+    $(id).removeClass("bg-slate-400")
+    $(id).addClass("bg-slate-400")
+}
+const changeSlide = (value) => {
+    i = Number.parseInt(value);
+    setSlide()
+}
+showSlides()
 $("#alertCloseBtn").click(function () {
     alertMessage.removeClass("right-0")
     alertMessage.addClass("right-[-100%]")
