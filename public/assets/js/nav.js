@@ -10,7 +10,7 @@ $("#logoutBtn").click(function (evt) {
 $("#logoutConfirmBtn").click(function (evt) {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("role");
-    window.location.replace("/Hello-Shoes-Application");
+    window.location.href = "/"
 })
 $("#logoutCancelBtn").click(function (evt) {
     $("#logOutDialog").addClass("hidden");
