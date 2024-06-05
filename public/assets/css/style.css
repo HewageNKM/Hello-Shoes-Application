@@ -608,10 +608,6 @@ video {
   bottom: 0px;
 }
 
-.bottom-24 {
-  bottom: 6rem;
-}
-
 .left-0 {
   left: 0px;
 }
@@ -662,6 +658,30 @@ video {
 
 .top-4 {
   top: 1rem;
+}
+
+.bottom-10 {
+  bottom: 2.5rem;
+}
+
+.bottom-12 {
+  bottom: 3rem;
+}
+
+.bottom-\[10vh\] {
+  bottom: 10vh;
+}
+
+.bottom-\[8vh\] {
+  bottom: 8vh;
+}
+
+.bottom-\[6vh\] {
+  bottom: 6vh;
+}
+
+.right-6 {
+  right: 1.5rem;
 }
 
 .z-10 {
@@ -750,6 +770,10 @@ video {
   margin-top: 1.25rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .inline {
   display: inline;
 }
@@ -786,10 +810,6 @@ video {
   height: 1rem;
 }
 
-.h-\[100\%\] {
-  height: 100%;
-}
-
 .h-\[100vh\] {
   height: 100vh;
 }
@@ -818,12 +838,12 @@ video {
   height: 2rem;
 }
 
-.h-\[35rem\] {
-  height: 35rem;
-}
-
 .h-\[58vh\] {
   height: 58vh;
+}
+
+.h-\[60vh\] {
+  height: 60vh;
 }
 
 .h-\[8rem\] {
@@ -837,6 +857,18 @@ video {
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-\[95vh\] {
+  height: 95vh;
 }
 
 .max-h-\[300rem\] {
@@ -1339,10 +1371,6 @@ video {
   padding-top: 3rem;
 }
 
-.pt-16 {
-  padding-top: 4rem;
-}
-
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -1556,6 +1584,12 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\:border-2:hover {
   border-width: 2px;
 }
@@ -1627,6 +1661,16 @@ video {
 
 .hover\:blur-\[0\.5px\]:hover {
   --tw-blur: blur(0.5px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.hover\:blur-\[0\.8px\]:hover {
+  --tw-blur: blur(0.8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.hover\:blur-sm:hover {
+  --tw-blur: blur(4px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
