@@ -16,7 +16,7 @@ The project has the following features:
 - Invoicing
 
 ## 4. Screenshots
-Here are some screenshots of the project:
+
 ![Login](https://github.com/HewageNKM/Hello-Shoes-Application/assets/107237482/7af4186e-2bbd-422a-9e7a-e8e62ee77d0d)
 
 ![signup](https://github.com/HewageNKM/Hello-Shoes-Application/assets/107237482/60e4a2cd-755c-4c07-a3cf-e961d42f2937)
